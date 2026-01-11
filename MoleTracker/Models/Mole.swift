@@ -23,6 +23,10 @@ final class Mole {
     @Relationship(deleteRule: .cascade)
     var images: [MoleImage]
     
+    // Location markers linking this mole to overview images
+    @Relationship(deleteRule: .cascade)
+    var locationMarkers: [MoleLocationMarker]
+    
     init(bodyRegion: String = "Unbekannt", bodySide: String = "Mitte") {
         self.id = UUID()
         self.createdAt = Date()
@@ -32,6 +36,7 @@ final class Mole {
         self.notes = ""
         self.referenceImageID = nil
         self.images = []
+        self.locationMarkers = []
     }
     
     var imageCount: Int {

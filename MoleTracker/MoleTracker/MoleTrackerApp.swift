@@ -14,6 +14,6 @@ struct MoleTrackerApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: [Mole.self, MoleImage.self, BodyRegionOverview.self])
+        .modelContainer(for: [Mole.self, MoleImage.self, BodyRegionOverview.self, MoleLocationMarker.self])
     }
 }

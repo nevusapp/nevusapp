@@ -16,6 +16,7 @@ struct ContentView: View {
     @State private var showingAddMole = false
     @State private var showingCamera = false
     @State private var selectedMole: Mole?
+    @State private var newlyCreatedMole: Mole?
     @State private var showingExportSheet = false
     @State private var exportURL: URL?
     @State private var isExporting = false
@@ -83,7 +84,12 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $showingAddMole) {
-                AddMoleView()
+                AddMoleView(onMoleCreated: { mole in
+                    newlyCreatedMole = mole
+                })
+            }
+            .navigationDestination(item: $newlyCreatedMole) { mole in
+                MoleDetailView(mole: mole)
             }
             .sheet(item: $exportURL) { url in
                 ShareSheet(items: [url])
@@ -349,10 +355,16 @@ struct AddMoleView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     
+    let onMoleCreated: ((Mole) -> Void)?
+    
     @State private var selectedRegion = BodyRegion.head
     @State private var selectedSide = BodySide.headFront
     @State private var showingCamera = false
     @State private var capturedImage: UIImage?
+    
+    init(onMoleCreated: ((Mole) -> Void)? = nil) {
+        self.onMoleCreated = onMoleCreated
+    }
     
     var body: some View {
         NavigationStack {
@@ -434,6 +446,9 @@ struct AddMoleView: View {
         
         modelContext.insert(newMole)
         dismiss()
+        
+        // Notify parent that mole was created
+        onMoleCreated?(newMole)
     }
 }
 

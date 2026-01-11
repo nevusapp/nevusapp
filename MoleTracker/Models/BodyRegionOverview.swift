@@ -26,6 +26,10 @@ final class BodyRegionOverview {
     var barometricPressure: Double?
     var altitude: Double?
     
+    // Location markers for moles on this overview image
+    @Relationship(deleteRule: .cascade)
+    var locationMarkers: [MoleLocationMarker]
+    
     init(bodyRegion: String, image: UIImage) {
         self.id = UUID()
         self.bodyRegion = bodyRegion
@@ -39,6 +43,7 @@ final class BodyRegionOverview {
         self.yaw = 0
         self.barometricPressure = nil
         self.altitude = nil
+        self.locationMarkers = []
     }
     
     var uiImage: UIImage? {

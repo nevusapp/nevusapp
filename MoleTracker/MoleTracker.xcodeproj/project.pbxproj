@@ -20,6 +20,8 @@
 		6B817DDB2F0D378300EB1030 /* RegionOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B817DD22F0D378300EB1030 /* RegionOverviewView.swift */; };
 		6B817DDC2F0D378400EB1030 /* SessionCleanupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B817DD32F0D378400EB1030 /* SessionCleanupView.swift */; };
 		6B817DDD2F0D378500EB1030 /* AllRegionsOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B817DD42F0D378500EB1030 /* AllRegionsOverviewView.swift */; };
+		6B817DDE2F0D378600EB1030 /* MoleLocationMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B817DD92F0D378600EB1030 /* MoleLocationMarker.swift */; };
+		6B817DDF2F0D378700EB1030 /* MoleLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B817DD52F0D378700EB1030 /* MoleLocationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,8 @@
 		6B817DD62F0D37C100EB1030 /* Mole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mole.swift; sourceTree = "<group>"; };
 		6B817DD72F0D37C100EB1030 /* MoleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoleImage.swift; sourceTree = "<group>"; };
 		6B817DD82F0D37C200EB1030 /* BodyRegionOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyRegionOverview.swift; sourceTree = "<group>"; };
+		6B817DD92F0D378600EB1030 /* MoleLocationMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoleLocationMarker.swift; sourceTree = "<group>"; };
+		6B817DD52F0D378700EB1030 /* MoleLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoleLocationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -83,6 +87,7 @@
 				6B817DD62F0D37C100EB1030 /* Mole.swift */,
 				6B817DD72F0D37C100EB1030 /* MoleImage.swift */,
 				6B817DD82F0D37C200EB1030 /* BodyRegionOverview.swift */,
+				6B817DD92F0D378600EB1030 /* MoleLocationMarker.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -95,6 +100,7 @@
 				6B817DCF2F0D378200EB1030 /* ComparisonView.swift */,
 				6B817DD02F0D378200EB1030 /* ContentView.swift */,
 				6B817DD12F0D378200EB1030 /* MoleDetailView.swift */,
+				6B817DD52F0D378700EB1030 /* MoleLocationView.swift */,
 				6B817DD22F0D378300EB1030 /* RegionOverviewView.swift */,
 				6B817DD32F0D378400EB1030 /* SessionCleanupView.swift */,
 			);
@@ -197,6 +203,8 @@
 				6B817DD82F0D37C100EB1030 /* Mole.swift in Sources */,
 				6B817DD92F0D37C100EB1030 /* MoleImage.swift in Sources */,
 				6B817DDA2F0D37C200EB1030 /* BodyRegionOverview.swift in Sources */,
+				6B817DDE2F0D378600EB1030 /* MoleLocationMarker.swift in Sources */,
+				6B817DDF2F0D378700EB1030 /* MoleLocationView.swift in Sources */,
 				6B817DCC2F0D373600EB1030 /* CameraService.swift in Sources */,
 				6B817DCE2F0D373800EB1030 /* CleanupService.swift in Sources */,
 				6B817DCD2F0D373700EB1030 /* ExportService.swift in Sources */,

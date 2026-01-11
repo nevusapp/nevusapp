@@ -99,6 +99,82 @@ struct MoleDetailView: View {
                 }
             }
             
+            // Location on Overview Section
+            Section {
+                if mole.locationMarkers.isEmpty {
+                    // Show link to add location markers when none exist
+                    NavigationLink(destination: MoleLocationView(mole: mole)) {
+                        Label(String(localized: "location_manage_action"), systemImage: "mappin.and.ellipse")
+                    }
+                } else {
+                    // Show thumbnails of linked overview images
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 12) {
+                            ForEach(mole.locationMarkers) { marker in
+                                if let overview = marker.overviewImage {
+                                    NavigationLink(destination: MoleLocationView(mole: mole)) {
+                                        VStack(spacing: 4) {
+                                            if let thumbnail = overview.thumbnailImage {
+                                                ZStack(alignment: .center) {
+                                                    Image(uiImage: thumbnail)
+                                                        .resizable()
+                                                        .scaledToFill()
+                                                        .frame(width: 100, height: 100)
+                                                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                                                    
+                                                    // Show marker position indicator
+                                                    Circle()
+                                                        .fill(Color.red)
+                                                        .frame(width: 12, height: 12)
+                                                        .overlay(
+                                                            Circle()
+                                                                .stroke(Color.white, lineWidth: 2)
+                                                        )
+                                                        .offset(
+                                                            x: (marker.normalizedX - 0.5) * 100,
+                                                            y: (marker.normalizedY - 0.5) * 100
+                                                        )
+                                                }
+                                            }
+                                            
+                                            Text(overview.captureDate.formatted(date: .abbreviated, time: .omitted))
+                                                .font(.caption2)
+                                                .foregroundColor(.secondary)
+                                                .lineLimit(1)
+                                        }
+                                        .frame(width: 100)
+                                    }
+                                    .buttonStyle(.plain)
+                                }
+                            }
+                            
+                            // Add button to link more overviews
+                            NavigationLink(destination: MoleLocationView(mole: mole)) {
+                                VStack(spacing: 8) {
+                                    Image(systemName: "plus.circle.fill")
+                                        .font(.system(size: 30))
+                                        .foregroundColor(.accentColor)
+                                    
+                                    Text(String(localized: "location_add_more"))
+                                        .font(.caption2)
+                                        .foregroundColor(.secondary)
+                                }
+                                .frame(width: 100, height: 100)
+                                .background(Color.gray.opacity(0.1))
+                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                            }
+                            .buttonStyle(.plain)
+                        }
+                        .padding(.vertical, 8)
+                    }
+                }
+            } header: {
+                Text(String(localized: "section_location_overview"))
+            } footer: {
+                Text(String(localized: "location_section_footer"))
+                    .font(.caption)
+            }
+            
             // Details Section
             Section(String(localized: "section_details")) {
                 Picker(String(localized: "label_region"), selection: $selectedRegion) {
