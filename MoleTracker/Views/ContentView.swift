@@ -317,7 +317,7 @@ struct AddMoleView: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var selectedRegion = BodyRegion.head
-    @State private var selectedSide = BodySide.center
+    @State private var selectedSide = BodySide.headFront
     @State private var showingCamera = false
     @State private var capturedImage: UIImage?
     
@@ -331,10 +331,19 @@ struct AddMoleView: View {
                         }
                     }
                     .pickerStyle(.menu)
+                    .onChange(of: selectedRegion) { _, newValue in
+                        // Update available sides for new region
+                        let availableSides = BodySide.availableSides(for: newValue)
+                        
+                        // If current side is not available for new region, use default
+                        if !availableSides.contains(selectedSide) {
+                            selectedSide = BodySide.defaultSide(for: newValue)
+                        }
+                    }
                     
                     Picker("Seite", selection: $selectedSide) {
-                        ForEach(BodySide.allCases) { side in
-                            Text(side.rawValue).tag(side)
+                        ForEach(BodySide.availableSides(for: selectedRegion)) { side in
+                            Text(side.displayText).tag(side)
                         }
                     }
                     .pickerStyle(.menu)

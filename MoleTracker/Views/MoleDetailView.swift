@@ -26,8 +26,13 @@ struct MoleDetailView: View {
     
     init(mole: Mole) {
         self.mole = mole
-        _selectedRegion = State(initialValue: BodyRegion.allCases.first { $0.rawValue == mole.bodyRegion } ?? .head)
-        _selectedSide = State(initialValue: BodySide.allCases.first { $0.rawValue == mole.bodySide } ?? .center)
+        let region = BodyRegion.allCases.first { $0.rawValue == mole.bodyRegion } ?? .head
+        _selectedRegion = State(initialValue: region)
+        
+        // Find matching side or use default for region
+        let availableSides = BodySide.availableSides(for: region)
+        let matchingSide = availableSides.first { $0.rawValue == mole.bodySide }
+        _selectedSide = State(initialValue: matchingSide ?? BodySide.defaultSide(for: region))
     }
     
     var body: some View {
@@ -100,12 +105,21 @@ struct MoleDetailView: View {
                 }
                 .onChange(of: selectedRegion) { _, newValue in
                     mole.bodyRegion = newValue.rawValue
+                    
+                    // Update available sides for new region
+                    let availableSides = BodySide.availableSides(for: newValue)
+                    
+                    // If current side is not available for new region, use default
+                    if !availableSides.contains(selectedSide) {
+                        selectedSide = BodySide.defaultSide(for: newValue)
+                    }
+                    
                     mole.updateModifiedDate()
                 }
                 
                 Picker("Seite", selection: $selectedSide) {
-                    ForEach(BodySide.allCases) { side in
-                        Text(side.rawValue).tag(side)
+                    ForEach(BodySide.availableSides(for: selectedRegion)) { side in
+                        Text(side.displayText).tag(side)
                     }
                 }
                 .onChange(of: selectedSide) { _, newValue in
