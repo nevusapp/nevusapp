@@ -26,15 +26,11 @@ struct MoleDetailView: View {
     
     init(mole: Mole) {
         self.mole = mole
-        // Try to match by legacy rawValue for backward compatibility
-        let region = BodyRegion.allCases.first { $0.legacyRawValue == mole.bodyRegion } ??
-                     BodyRegion.allCases.first { $0.rawValue == mole.bodyRegion } ?? .head
+        let region = BodyRegion.from(value: mole.bodyRegion)
         _selectedRegion = State(initialValue: region)
         
         // Find matching side or use default for region
-        let availableSides = BodySide.availableSides(for: region)
-        let matchingSide = availableSides.first { $0.legacyRawValue == mole.bodySide } ??
-                          availableSides.first { $0.rawValue == mole.bodySide }
+        let matchingSide = BodySide.from(value: mole.bodySide)
         _selectedSide = State(initialValue: matchingSide ?? BodySide.defaultSide(for: region))
     }
     
@@ -175,7 +171,7 @@ struct MoleDetailView: View {
                     }
                 }
                 .onChange(of: selectedRegion) { _, newValue in
-                    mole.bodyRegion = newValue.legacyRawValue
+                    mole.bodyRegion = newValue.rawValue
                     
                     // Update available sides for new region
                     let availableSides = BodySide.availableSides(for: newValue)
@@ -194,7 +190,7 @@ struct MoleDetailView: View {
                     }
                 }
                 .onChange(of: selectedSide) { _, newValue in
-                    mole.bodySide = newValue.legacyRawValue
+                    mole.bodySide = newValue.rawValue
                     mole.updateModifiedDate()
                 }
                 

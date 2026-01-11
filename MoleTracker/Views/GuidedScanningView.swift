@@ -445,15 +445,12 @@ struct GuidedScanningView: View {
     
     // MARK: - Helper Functions
     private func localizedRegion(for mole: Mole) -> String {
-        if let region = BodyRegion.allCases.first(where: { $0.legacyRawValue == mole.bodyRegion || $0.rawValue == mole.bodyRegion }) {
-            return region.localizedName
-        }
-        return mole.bodyRegion
+        let region = BodyRegion.from(value: mole.bodyRegion)
+        return region.localizedName
     }
     
     private func localizedSide(for mole: Mole) -> String {
-        if let region = BodyRegion.allCases.first(where: { $0.legacyRawValue == mole.bodyRegion || $0.rawValue == mole.bodyRegion }),
-           let side = BodySide.availableSides(for: region).first(where: { $0.legacyRawValue == mole.bodySide || $0.rawValue == mole.bodySide }) {
+        if let side = BodySide.from(value: mole.bodySide) {
             return side.displayText
         }
         return mole.bodySide

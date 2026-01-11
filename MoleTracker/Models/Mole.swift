@@ -111,47 +111,9 @@ enum BodyRegion: String, CaseIterable, Identifiable {
         }
     }
     
-    // Legacy rawValue for backward compatibility with stored data
-    var legacyRawValue: String {
-        switch self {
-        case .head: return "Kopf"
-        case .neck: return "Hals"
-        case .armLeft: return "Arm/Hand links"
-        case .armRight: return "Arm/Hand rechts"
-        case .chest: return "Brust"
-        case .abdomen: return "Bauch"
-        case .pelvis: return "Becken"
-        case .backUpper: return "Rücken oben (BWS)"
-        case .backMiddle: return "Rücken Mitte (LWS)"
-        case .backLower: return "Rücken unten (Kreuz/Gesäss)"
-        case .legLeft: return "Bein/Fuss links"
-        case .legRight: return "Bein/Fuss rechts"
-        }
-    }
-    
-    // Initialize from legacy string value or enum rawValue
-    static func from(legacyValue: String) -> BodyRegion {
-        // First try to match enum rawValue (new format)
-        if let region = BodyRegion(rawValue: legacyValue) {
-            return region
-        }
-        
-        // Fall back to legacy string matching
-        switch legacyValue {
-        case "Kopf": return .head
-        case "Hals": return .neck
-        case "Arm/Hand links": return .armLeft
-        case "Arm/Hand rechts": return .armRight
-        case "Brust": return .chest
-        case "Bauch": return .abdomen
-        case "Becken": return .pelvis
-        case "Rücken oben (BWS)": return .backUpper
-        case "Rücken Mitte (LWS)": return .backMiddle
-        case "Rücken unten (Kreuz/Gesäss)": return .backLower
-        case "Bein/Fuss links": return .legLeft
-        case "Bein/Fuss rechts": return .legRight
-        default: return .head
-        }
+    // Initialize from string value
+    static func from(value: String) -> BodyRegion {
+        return BodyRegion(rawValue: value) ?? .head
     }
     
     // Order for display in grouped list
@@ -254,73 +216,9 @@ enum BodySide: String, CaseIterable, Identifiable {
         }
     }
     
-    // Legacy rawValue for backward compatibility with stored data
-    var legacyRawValue: String {
-        switch self {
-        case .headTop: return "Kopf: Oben"
-        case .headFront: return "Kopf: Vorne/Gesicht"
-        case .headLeft: return "Kopf: Links"
-        case .headRight: return "Kopf: Rechts"
-        case .headBack: return "Kopf: Hinten"
-        case .neckFront: return "Hals: Vorne"
-        case .neckLeft: return "Hals: Links"
-        case .neckRight: return "Hals: Rechts"
-        case .neckBack: return "Hals: Hinten"
-        case .torsoLeft: return "Links"
-        case .torsoCenter: return "Mitte"
-        case .torsoRight: return "Rechts"
-        case .armUpperFront: return "Oberarm-Vorne (Bizeps)"
-        case .armUpperBack: return "Oberarm-Hinten (Trizeps)"
-        case .armLowerInner: return "Unterarm-Innen"
-        case .armLowerOuter: return "Unterarm-Aussen"
-        case .handInner: return "Hand-Innen"
-        case .handOuter: return "Hand-Aussen"
-        case .legThighFront: return "Oberschenkel-Vorne"
-        case .legThighBack: return "Oberschenkel-Hinten"
-        case .legThighInner: return "Oberschenkel-Innen"
-        case .legThighOuter: return "Oberschenkel-Aussen"
-        case .legCalfFront: return "Unterschenkel-Vorne (Schienbein)"
-        case .legCalfBack: return "Unterschenkel-Hinten (Wade)"
-        case .legCalfInner: return "Unterschenkel-Innen"
-        case .legCalfOuter: return "Unterschenkel-Aussen"
-        case .footTop: return "Fuss-Oben"
-        case .footSole: return "Fusssohle"
-        }
-    }
-    
-    // Initialize from legacy string value
-    static func from(legacyValue: String) -> BodySide? {
-        switch legacyValue {
-        case "Kopf: Oben": return .headTop
-        case "Kopf: Vorne/Gesicht": return .headFront
-        case "Kopf: Links": return .headLeft
-        case "Kopf: Rechts": return .headRight
-        case "Kopf: Hinten": return .headBack
-        case "Hals: Vorne": return .neckFront
-        case "Hals: Links": return .neckLeft
-        case "Hals: Rechts": return .neckRight
-        case "Hals: Hinten": return .neckBack
-        case "Links": return .torsoLeft
-        case "Mitte": return .torsoCenter
-        case "Rechts": return .torsoRight
-        case "Oberarm-Vorne (Bizeps)": return .armUpperFront
-        case "Oberarm-Hinten (Trizeps)": return .armUpperBack
-        case "Unterarm-Innen": return .armLowerInner
-        case "Unterarm-Aussen": return .armLowerOuter
-        case "Hand-Innen": return .handInner
-        case "Hand-Aussen": return .handOuter
-        case "Oberschenkel-Vorne": return .legThighFront
-        case "Oberschenkel-Hinten": return .legThighBack
-        case "Oberschenkel-Innen": return .legThighInner
-        case "Oberschenkel-Aussen": return .legThighOuter
-        case "Unterschenkel-Vorne (Schienbein)": return .legCalfFront
-        case "Unterschenkel-Hinten (Wade)": return .legCalfBack
-        case "Unterschenkel-Innen": return .legCalfInner
-        case "Unterschenkel-Aussen": return .legCalfOuter
-        case "Fuss-Oben": return .footTop
-        case "Fusssohle": return .footSole
-        default: return nil
-        }
+    // Initialize from string value
+    static func from(value: String) -> BodySide? {
+        return BodySide(rawValue: value)
     }
     
     // Get available sides for a specific body region

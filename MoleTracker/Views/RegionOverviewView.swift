@@ -19,12 +19,10 @@ struct RegionOverviewView: View {
     
     init(region: BodyRegion) {
         self.region = region
-        // Filter overviews for this region - check both legacy and new format
-        let legacyName = region.legacyRawValue
-        let newName = region.rawValue
+        let regionName = region.rawValue
         _overviews = Query(
             filter: #Predicate<BodyRegionOverview> { overview in
-                overview.bodyRegion == legacyName || overview.bodyRegion == newName
+                overview.bodyRegion == regionName
             },
             sort: \BodyRegionOverview.captureDate,
             order: .reverse
@@ -126,7 +124,7 @@ struct RegionOverviewView: View {
     }
     
     private func addOverviewImage(_ image: UIImage) {
-        let overview = BodyRegionOverview(bodyRegion: region.legacyRawValue, image: image)
+        let overview = BodyRegionOverview(bodyRegion: region.rawValue, image: image)
         
         // Note: Sensor data collection could be added in future
         // For now, initialize with default values

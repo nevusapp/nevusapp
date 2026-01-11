@@ -30,9 +30,7 @@ struct ContentView: View {
     // Group moles by body region
     var groupedMoles: [(region: BodyRegion, moles: [Mole])] {
         let grouped = Dictionary(grouping: moles) { mole -> BodyRegion in
-            // Try to match by legacy rawValue for backward compatibility
-            BodyRegion.allCases.first { $0.legacyRawValue == mole.bodyRegion } ??
-            BodyRegion.allCases.first { $0.rawValue == mole.bodyRegion } ?? .head
+            BodyRegion.from(value: mole.bodyRegion)
         }
         
         return BodyRegion.displayOrder.compactMap { region in
@@ -44,7 +42,7 @@ struct ContentView: View {
     
     // Get overviews for a specific region
     func overviews(for region: BodyRegion) -> [BodyRegionOverview] {
-        allOverviews.filter { $0.bodyRegion == region.legacyRawValue || $0.bodyRegion == region.rawValue }
+        allOverviews.filter { $0.bodyRegion == region.rawValue }
     }
     
     var body: some View {
@@ -308,16 +306,14 @@ struct MoleRowView: View {
     
     // Get localized region name
     private var localizedRegion: String {
-        if let region = BodyRegion.allCases.first(where: { $0.legacyRawValue == mole.bodyRegion || $0.rawValue == mole.bodyRegion }) {
-            return region.localizedName
-        }
-        return mole.bodyRegion
+        let region = BodyRegion.from(value: mole.bodyRegion)
+        return region.localizedName
     }
     
     // Get localized side name
     private var localizedSide: String {
-        if let region = BodyRegion.allCases.first(where: { $0.legacyRawValue == mole.bodyRegion || $0.rawValue == mole.bodyRegion }),
-           let side = BodySide.availableSides(for: region).first(where: { $0.legacyRawValue == mole.bodySide || $0.rawValue == mole.bodySide }) {
+        let region = BodyRegion.from(value: mole.bodyRegion)
+        if let side = BodySide.from(value: mole.bodySide) {
             return side.displayText
         }
         return mole.bodySide

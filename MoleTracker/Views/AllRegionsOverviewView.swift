@@ -17,7 +17,7 @@ struct AllRegionsOverviewView: View {
     
     // Group overviews by body region
     private func overviews(for region: BodyRegion) -> [BodyRegionOverview] {
-        allOverviews.filter { $0.bodyRegion == region.legacyRawValue || $0.bodyRegion == region.rawValue }
+        allOverviews.filter { $0.bodyRegion == region.rawValue }
     }
     
     var body: some View {

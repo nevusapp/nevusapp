@@ -32,19 +32,9 @@ struct MoleLocationView: View {
     private var regionOverviews: [BodyRegionOverview] {
         allOverviews.filter { overview in
             // Match by exact string or by BodyRegion enum
-            if overview.bodyRegion == mole.bodyRegion {
-                return true
-            }
-            // Also check if they match by BodyRegion enum (handles both legacy and new formats)
-            if let overviewRegion = BodyRegion.allCases.first(where: {
-                $0.legacyRawValue == overview.bodyRegion || $0.rawValue == overview.bodyRegion
-            }),
-               let moleRegion = BodyRegion.allCases.first(where: {
-                $0.legacyRawValue == mole.bodyRegion || $0.rawValue == mole.bodyRegion
-            }) {
-                return overviewRegion == moleRegion
-            }
-            return false
+            let overviewRegion = BodyRegion.from(value: overview.bodyRegion)
+            let moleRegion = BodyRegion.from(value: mole.bodyRegion)
+            return overviewRegion == moleRegion
         }.sorted(by: { $0.captureDate > $1.captureDate })
     }
     

@@ -47,8 +47,8 @@ class GuidedScanningService: ObservableObject {
     func startScanning(moles: [Mole]) {
         // Sort moles from top to bottom of body based on body region
         self.molesToScan = moles.sorted { mole1, mole2 in
-            let region1 = BodyRegion.from(legacyValue: mole1.bodyRegion)
-            let region2 = BodyRegion.from(legacyValue: mole2.bodyRegion)
+            let region1 = BodyRegion.from(value: mole1.bodyRegion)
+            let region2 = BodyRegion.from(value: mole2.bodyRegion)
             
             // Primary sort: by body region (top to bottom)
             if region1.sortOrder != region2.sortOrder {
