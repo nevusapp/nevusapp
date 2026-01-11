@@ -154,24 +154,51 @@ struct OverviewImageDetailView: View {
     @State private var lastScale: CGFloat = 1.0
     @State private var isEditingNotes = false
     @State private var showingDeleteConfirmation = false
+    @State private var showMoleMarkers = true
+    @State private var selectedMole: Mole?
     
     var body: some View {
         VStack(spacing: 0) {
-            // Image with zoom
+            // Image with zoom and mole markers
             if let uiImage = overview.uiImage {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFit()
-                    .scaleEffect(scale)
-                    .gesture(
-                        MagnificationGesture()
-                            .onChanged { value in
-                                scale = lastScale * value
+                GeometryReader { geometry in
+                    ZStack {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFit()
+                            .scaleEffect(scale)
+                            .gesture(
+                                MagnificationGesture()
+                                    .onChanged { value in
+                                        scale = lastScale * value
+                                    }
+                                    .onEnded { _ in
+                                        lastScale = scale
+                                    }
+                            )
+                        
+                        // Mole location markers overlay
+                        if showMoleMarkers {
+                            ForEach(overview.locationMarkers) { marker in
+                                Button(action: {
+                                    if let mole = marker.mole {
+                                        selectedMole = mole
+                                    }
+                                }) {
+                                    MoleMarkerView(marker: marker)
+                                }
+                                .buttonStyle(.plain)
+                                .position(
+                                    x: geometry.size.width * marker.normalizedX,
+                                    y: geometry.size.height * marker.normalizedY
+                                )
+                                .scaleEffect(scale)
                             }
-                            .onEnded { _ in
-                                lastScale = scale
-                            }
-                    )
+                        }
+                    }
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                }
+                .aspectRatio(uiImage.size.width / uiImage.size.height, contentMode: .fit)
             }
             
             // Image info
@@ -217,6 +244,17 @@ struct OverviewImageDetailView: View {
         .navigationTitle(String(localized: "overview_image_title", defaultValue: "Overview Image", comment: "Title for overview image detail view"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                if !overview.locationMarkers.isEmpty {
+                    Button(action: { showMoleMarkers.toggle() }) {
+                        Label(
+                            showMoleMarkers ? String(localized: "hide_mole_markers", defaultValue: "Hide Markers", comment: "Hide mole markers button") : String(localized: "show_mole_markers", defaultValue: "Show Markers", comment: "Show mole markers button"),
+                            systemImage: showMoleMarkers ? "eye.slash.fill" : "eye.fill"
+                        )
+                    }
+                }
+            }
+            
             ToolbarItem(placement: .navigationBarTrailing) {
                 Menu {
                     Button(isEditingNotes ? String(localized: "action_done") : String(localized: "action_edit", defaultValue: "Edit", comment: "Edit button")) {
@@ -239,11 +277,39 @@ struct OverviewImageDetailView: View {
         } message: {
             Text(String(localized: "delete_overview_message", defaultValue: "Do you really want to delete this overview image? This action cannot be undone.", comment: "Delete confirmation message"))
         }
+        .navigationDestination(item: $selectedMole) { mole in
+            MoleDetailView(mole: mole)
+        }
     }
     
     private func deleteOverview() {
         modelContext.delete(overview)
         dismiss()
+    }
+}
+
+// MARK: - Mole Marker View
+struct MoleMarkerView: View {
+    let marker: MoleLocationMarker
+    
+    var body: some View {
+        ZStack {
+            // Outer circle (white border)
+            Circle()
+                .stroke(Color.white, lineWidth: 3)
+                .frame(width: 30, height: 30)
+                .shadow(color: .black.opacity(0.3), radius: 2, x: 0, y: 1)
+            
+            // Inner circle (colored fill)
+            Circle()
+                .fill(Color.red.opacity(0.7))
+                .frame(width: 24, height: 24)
+            
+            // Center dot
+            Circle()
+                .fill(Color.white)
+                .frame(width: 6, height: 6)
+        }
     }
 }
 

@@ -2374,6 +2374,42 @@
         }
       }
     },
+    "hide_mole_markers" : {
+      "comment" : "Hide mole markers button",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Markierungen ausblenden"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide Markers"
+          }
+        }
+      }
+    },
+    "show_mole_markers" : {
+      "comment" : "Show mole markers button",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Markierungen anzeigen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Markers"
+          }
+        }
+      }
+    },
     "overview_images" : {
       "extractionState" : "manual",
       "localizations" : {
