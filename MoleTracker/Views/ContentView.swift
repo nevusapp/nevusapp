@@ -24,6 +24,7 @@ struct ContentView: View {
     @State private var showingCleanup = false
     @State private var moleToDelete: Mole?
     @State private var showingDeleteConfirmation = false
+    @State private var showingGuidedScanning = false
     
     // Group moles by body region
     var groupedMoles: [(region: BodyRegion, moles: [Mole])] {
@@ -65,6 +66,12 @@ struct ContentView: View {
                         if !moles.isEmpty {
                             Divider()
                             
+                            Button(action: { showingGuidedScanning = true }) {
+                                Label("Geführtes Scannen", systemImage: "camera.metering.center.weighted")
+                            }
+                            
+                            Divider()
+                            
                             Button(action: { exportAllMoles() }) {
                                 Label(String(localized: "action_export_all"), systemImage: "square.and.arrow.up")
                             }
@@ -98,6 +105,9 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showingCleanup) {
                 SessionCleanupView()
+            }
+            .sheet(isPresented: $showingGuidedScanning) {
+                GuidedScanningView(moles: moles)
             }
             .overlay {
                 if isExporting {
