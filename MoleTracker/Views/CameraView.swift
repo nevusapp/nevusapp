@@ -43,7 +43,7 @@ struct CameraView: View {
                         .multilineTextAlignment(.center)
                         .padding()
 
-                    Button("Einstellungen öffnen") {
+                    Button(String(localized: "camera_open_settings")) {
                         if let url = URL(string: UIApplication.openSettingsURLString) {
                             UIApplication.shared.open(url)
                         }
@@ -52,13 +52,13 @@ struct CameraView: View {
                 }
                 .padding()
             } else {
-                ProgressView("Kamera wird vorbereitet...")
+                ProgressView(String(localized: "camera_preparing"))
             }
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button("Abbrechen") {
+                Button(String(localized: "action_cancel")) {
                     dismiss()
                 }
             }
@@ -144,7 +144,7 @@ struct CameraContentView: View {
                             // Opacity slider (only when overlay is visible)
                             if showOverlay {
                                 HStack(spacing: 8) {
-                                    Text("Transparenz:")
+                                    Text(String(localized: "camera_transparency"))
                                         .font(.subheadline)
                                         .foregroundColor(.white)
 
@@ -174,7 +174,7 @@ struct CameraContentView: View {
 
                 // Info text when overlay is active
                 if referenceImage != nil && showOverlay {
-                    Text("Richte die Kamera aus, bis das Overlay passt")
+                    Text(String(localized: "camera_align_overlay"))
                         .font(.subheadline)
                         .foregroundColor(.white)
                         .padding(.horizontal, 20)

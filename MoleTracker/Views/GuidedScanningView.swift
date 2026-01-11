@@ -35,11 +35,11 @@ struct GuidedScanningView: View {
                     completionView
                 }
             }
-            .navigationTitle("Geführtes Scannen")
+            .navigationTitle(String(localized: "guided_scanning_title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Abbrechen") {
+                    Button(String(localized: "action_cancel")) {
                         showingCancelConfirmation = true
                     }
                 }
@@ -51,14 +51,14 @@ struct GuidedScanningView: View {
                     }
                 }
             }
-            .alert("Scannen abbrechen?", isPresented: $showingCancelConfirmation) {
-                Button("Fortsetzen", role: .cancel) { }
-                Button("Abbrechen", role: .destructive) {
+            .alert(String(localized: "scanning_cancel_title"), isPresented: $showingCancelConfirmation) {
+                Button(String(localized: "action_continue"), role: .cancel) { }
+                Button(String(localized: "action_cancel"), role: .destructive) {
                     scanningService.cancelScanning()
                     dismiss()
                 }
             } message: {
-                Text("Möchten Sie das geführte Scannen wirklich abbrechen? Ihr Fortschritt geht verloren.")
+                Text(String(localized: "scanning_cancel_message"))
             }
             .sheet(isPresented: $showingCompletionSheet) {
                 completionSummarySheet
@@ -133,7 +133,7 @@ struct GuidedScanningView: View {
                     if let latestImage = mole.latestImage,
                        let thumbnail = latestImage.thumbnailImage {
                         VStack(spacing: 8) {
-                            Text("Letztes Foto:")
+                            Text(String(localized: "scanning_last_photo"))
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                             
@@ -167,7 +167,7 @@ struct GuidedScanningView: View {
                     Button(action: {
                         showingCamera = true
                     }) {
-                        Label("Foto aufnehmen", systemImage: "camera.fill")
+                        Label(String(localized: "action_take_photo_short"), systemImage: "camera.fill")
                             .font(.headline)
                             .frame(maxWidth: .infinity)
                             .padding()
@@ -181,7 +181,7 @@ struct GuidedScanningView: View {
                     Button(action: {
                         scanningService.skipCurrent()
                     }) {
-                        Label("Überspringen", systemImage: "forward.fill")
+                        Label(String(localized: "action_skip"), systemImage: "forward.fill")
                             .font(.subheadline)
                             .frame(maxWidth: .infinity)
                             .padding()
@@ -196,7 +196,7 @@ struct GuidedScanningView: View {
                         Button(action: {
                             scanningService.goToPrevious()
                         }) {
-                            Label("Zurück", systemImage: "arrow.left")
+                            Label(String(localized: "action_back"), systemImage: "arrow.left")
                                 .font(.subheadline)
                                 .frame(maxWidth: .infinity)
                                 .padding()
@@ -212,7 +212,7 @@ struct GuidedScanningView: View {
                 if isProcessingImage {
                     HStack(spacing: 12) {
                         ProgressView()
-                        Text("Bild wird verarbeitet...")
+                        Text(String(localized: "image_processing"))
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
@@ -222,7 +222,7 @@ struct GuidedScanningView: View {
                 // Overview Images - NEW SECTION
                 if !mole.locationMarkers.isEmpty {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Verknüpfte Übersichtsbilder:")
+                        Text(String(localized: "linked_overview_images"))
                             .font(.headline)
                             .foregroundColor(.primary)
                         
@@ -273,14 +273,14 @@ struct GuidedScanningView: View {
                 
                 // Instructions
                 VStack(alignment: .leading, spacing: 12) {
-                    Label("Anleitung", systemImage: "info.circle.fill")
+                    Label(String(localized: "instructions_title"), systemImage: "info.circle.fill")
                         .font(.headline)
                         .foregroundColor(.accentColor)
                     
                     VStack(alignment: .leading, spacing: 8) {
-                        instructionRow(number: 1, text: "Positionieren Sie sich vor dem Leberfleck")
-                        instructionRow(number: 2, text: "Nutzen Sie das Overlay zur Ausrichtung")
-                        instructionRow(number: 3, text: "Nehmen Sie ein neues Foto auf")
+                        instructionRow(number: 1, text: String(localized: "instruction_position_mole"))
+                        instructionRow(number: 2, text: String(localized: "instruction_use_overlay"))
+                        instructionRow(number: 3, text: String(localized: "instruction_take_new_photo"))
                     }
                 }
                 .padding()
@@ -303,16 +303,16 @@ struct GuidedScanningView: View {
                 .font(.system(size: 80))
                 .foregroundColor(.green)
             
-            Text("Scannen abgeschlossen!")
+            Text(String(localized: "scanning_complete"))
                 .font(.title)
                 .fontWeight(.bold)
             
             VStack(spacing: 8) {
-                Text("\(scanningService.scannedCount) Leberflecke gescannt")
+                Text(String(localized: "moles_scanned_count", defaultValue: "\(scanningService.scannedCount) Moles Scanned"))
                     .font(.headline)
                 
                 if scanningService.skippedMoles.count > 0 {
-                    Text("\(scanningService.skippedMoles.count) übersprungen")
+                    Text(String(localized: "count_skipped", defaultValue: "\(scanningService.skippedMoles.count) Skipped"))
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -321,7 +321,7 @@ struct GuidedScanningView: View {
             Button(action: {
                 showingCompletionSheet = true
             }) {
-                Text("Zusammenfassung anzeigen")
+                Text(String(localized: "action_show_summary"))
                     .font(.headline)
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -334,7 +334,7 @@ struct GuidedScanningView: View {
             Button(action: {
                 dismiss()
             }) {
-                Text("Fertig")
+                Text(String(localized: "action_done"))
                     .font(.headline)
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -354,14 +354,14 @@ struct GuidedScanningView: View {
     private var completionSummarySheet: some View {
         NavigationStack {
             List {
-                Section("Statistik") {
-                    LabeledContent("Gescannt", value: "\(scanningService.scannedCount)")
-                    LabeledContent("Übersprungen", value: "\(scanningService.skippedMoles.count)")
-                    LabeledContent("Gesamt", value: "\(scanningService.totalMoles)")
+                Section(String(localized: "section_statistics")) {
+                    LabeledContent(String(localized: "label_scanned"), value: "\(scanningService.scannedCount)")
+                    LabeledContent(String(localized: "label_skipped"), value: "\(scanningService.skippedMoles.count)")
+                    LabeledContent(String(localized: "label_total"), value: "\(scanningService.totalMoles)")
                 }
                 
                 if scanningService.scannedCount > 0 {
-                    Section("Gescannte Leberflecke") {
+                    Section(String(localized: "section_scanned_moles")) {
                         ForEach(moles.filter { scanningService.scannedMoles.contains($0.id) }) { mole in
                             HStack {
                                 if let thumbnail = mole.latestImage?.thumbnailImage {
@@ -385,7 +385,7 @@ struct GuidedScanningView: View {
                 }
                 
                 if scanningService.skippedMoles.count > 0 {
-                    Section("Übersprungene Leberflecke") {
+                    Section(String(localized: "section_skipped_moles")) {
                         ForEach(moles.filter { scanningService.skippedMoles.contains($0.id) }) { mole in
                             HStack {
                                 if let thumbnail = mole.latestImage?.thumbnailImage {
@@ -408,11 +408,11 @@ struct GuidedScanningView: View {
                     }
                 }
             }
-            .navigationTitle("Zusammenfassung")
+            .navigationTitle(String(localized: "title_summary"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Fertig") {
+                    Button(String(localized: "action_done")) {
                         showingCompletionSheet = false
                         dismiss()
                     }

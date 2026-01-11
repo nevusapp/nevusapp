@@ -35,23 +35,23 @@ struct GuidedComparisonView: View {
                     completionView
                 }
             }
-            .navigationTitle("Geführter Vergleich")
+            .navigationTitle(String(localized: "guided_comparison_title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Abbrechen") {
+                    Button(String(localized: "action_cancel")) {
                         showingCancelConfirmation = true
                     }
                 }
             }
-            .alert("Vergleich abbrechen?", isPresented: $showingCancelConfirmation) {
-                Button("Fortsetzen", role: .cancel) { }
-                Button("Abbrechen", role: .destructive) {
+            .alert(String(localized: "comparison_cancel_title"), isPresented: $showingCancelConfirmation) {
+                Button(String(localized: "action_continue"), role: .cancel) { }
+                Button(String(localized: "action_cancel"), role: .destructive) {
                     comparisonService.cancelComparison()
                     dismiss()
                 }
             } message: {
-                Text("Möchten Sie den geführten Vergleich wirklich abbrechen? Ihr Fortschritt geht verloren.")
+                Text(String(localized: "comparison_cancel_message"))
             }
             .sheet(isPresented: $showingCompletionSheet) {
                 completionSummarySheet
@@ -139,7 +139,7 @@ struct GuidedComparisonView: View {
                    referenceImage.id != latestImage.id {
                     VStack(spacing: 0) {
                         // Header
-                        Text("Bildvergleich")
+                        Text(String(localized: "title_image_comparison"))
                             .font(.headline)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal)
@@ -161,10 +161,10 @@ struct GuidedComparisonView: View {
                             .font(.largeTitle)
                             .foregroundColor(.orange)
                         
-                        Text("Nicht genügend Bilder für Vergleich")
+                        Text(String(localized: "not_enough_images"))
                             .font(.headline)
                         
-                        Text("Mindestens 2 Bilder erforderlich")
+                        Text(String(localized: "minimum_images_required"))
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
@@ -178,7 +178,7 @@ struct GuidedComparisonView: View {
                 // Notes Section
                 VStack(alignment: .leading, spacing: 12) {
                     HStack {
-                        Label("Notizen", systemImage: "note.text")
+                        Label(String(localized: "label_notes"), systemImage: "note.text")
                             .font(.headline)
                         
                         Spacer()
@@ -188,7 +188,7 @@ struct GuidedComparisonView: View {
                                 editedNotes = mole.notes
                                 isEditingNotes = true
                             }) {
-                                Text("Bearbeiten")
+                                Text(String(localized: "action_edit"))
                                     .font(.subheadline)
                                     .foregroundColor(.accentColor)
                             }
@@ -208,7 +208,7 @@ struct GuidedComparisonView: View {
                                     isEditingNotes = false
                                     editedNotes = ""
                                 }) {
-                                    Text("Abbrechen")
+                                    Text(String(localized: "action_cancel"))
                                         .frame(maxWidth: .infinity)
                                         .padding()
                                         .background(Color.gray.opacity(0.2))
@@ -221,7 +221,7 @@ struct GuidedComparisonView: View {
                                     mole.updateModifiedDate()
                                     isEditingNotes = false
                                 }) {
-                                    Text("Speichern")
+                                    Text(String(localized: "action_save"))
                                         .frame(maxWidth: .infinity)
                                         .padding()
                                         .background(Color.accentColor)
@@ -232,7 +232,7 @@ struct GuidedComparisonView: View {
                         }
                     } else {
                         if mole.notes.isEmpty {
-                            Text("Keine Notizen vorhanden")
+                            Text(String(localized: "no_notes_available"))
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                                 .italic()
@@ -260,7 +260,7 @@ struct GuidedComparisonView: View {
                         }
                         comparisonService.markCurrentAsCompared()
                     }) {
-                        Label("Verglichen", systemImage: "checkmark.circle.fill")
+                        Label(String(localized: "action_compared"), systemImage: "checkmark.circle.fill")
                             .font(.headline)
                             .frame(maxWidth: .infinity)
                             .padding()
@@ -277,7 +277,7 @@ struct GuidedComparisonView: View {
                         }
                         comparisonService.skipCurrent()
                     }) {
-                        Label("Überspringen", systemImage: "forward.fill")
+                        Label(String(localized: "action_skip"), systemImage: "forward.fill")
                             .font(.subheadline)
                             .frame(maxWidth: .infinity)
                             .padding()
@@ -295,7 +295,7 @@ struct GuidedComparisonView: View {
                             }
                             comparisonService.goToPrevious()
                         }) {
-                            Label("Zurück", systemImage: "arrow.left")
+                            Label(String(localized: "action_back"), systemImage: "arrow.left")
                                 .font(.subheadline)
                                 .frame(maxWidth: .infinity)
                                 .padding()
@@ -309,7 +309,7 @@ struct GuidedComparisonView: View {
                 // Overview Images - NEW SECTION
                 if !mole.locationMarkers.isEmpty {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Verknüpfte Übersichtsbilder:")
+                        Text(String(localized: "linked_overview_images"))
                             .font(.headline)
                             .foregroundColor(.primary)
                         
@@ -360,15 +360,15 @@ struct GuidedComparisonView: View {
                 
                 // Instructions
                 VStack(alignment: .leading, spacing: 12) {
-                    Label("Anleitung", systemImage: "info.circle.fill")
+                    Label(String(localized: "instructions_title"), systemImage: "info.circle.fill")
                         .font(.headline)
                         .foregroundColor(.accentColor)
                     
                     VStack(alignment: .leading, spacing: 8) {
-                        instructionRow(number: 1, text: "Vergleichen Sie das Referenzbild mit dem neuesten Foto")
-                        instructionRow(number: 2, text: "Nutzen Sie die Vergleichsmodi (Nebeneinander/Überlagert)")
-                        instructionRow(number: 3, text: "Aktualisieren Sie bei Bedarf die Notizen")
-                        instructionRow(number: 4, text: "Markieren Sie als verglichen oder überspringen Sie")
+                        instructionRow(number: 1, text: String(localized: "instruction_compare_images"))
+                        instructionRow(number: 2, text: String(localized: "instruction_use_comparison_modes"))
+                        instructionRow(number: 3, text: String(localized: "instruction_update_notes"))
+                        instructionRow(number: 4, text: String(localized: "instruction_mark_or_skip"))
                     }
                 }
                 .padding()
@@ -391,16 +391,16 @@ struct GuidedComparisonView: View {
                 .font(.system(size: 80))
                 .foregroundColor(.green)
             
-            Text("Vergleich abgeschlossen!")
+            Text(String(localized: "comparison_complete"))
                 .font(.title)
                 .fontWeight(.bold)
             
             VStack(spacing: 8) {
-                Text("\(comparisonService.comparedCount) Leberflecke verglichen")
+                Text(String(localized: "moles_compared_count", defaultValue: "\(comparisonService.comparedCount) Moles Compared"))
                     .font(.headline)
                 
                 if comparisonService.skippedMoles.count > 0 {
-                    Text("\(comparisonService.skippedMoles.count) übersprungen")
+                    Text(String(localized: "count_skipped", defaultValue: "\(comparisonService.skippedMoles.count) Skipped"))
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -409,7 +409,7 @@ struct GuidedComparisonView: View {
             Button(action: {
                 showingCompletionSheet = true
             }) {
-                Text("Zusammenfassung anzeigen")
+                Text(String(localized: "action_show_summary"))
                     .font(.headline)
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -422,7 +422,7 @@ struct GuidedComparisonView: View {
             Button(action: {
                 dismiss()
             }) {
-                Text("Fertig")
+                Text(String(localized: "action_done"))
                     .font(.headline)
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -442,14 +442,14 @@ struct GuidedComparisonView: View {
     private var completionSummarySheet: some View {
         NavigationStack {
             List {
-                Section("Statistik") {
-                    LabeledContent("Verglichen", value: "\(comparisonService.comparedCount)")
-                    LabeledContent("Übersprungen", value: "\(comparisonService.skippedMoles.count)")
-                    LabeledContent("Gesamt", value: "\(comparisonService.totalMoles)")
+                Section(String(localized: "section_statistics")) {
+                    LabeledContent(String(localized: "action_compared"), value: "\(comparisonService.comparedCount)")
+                    LabeledContent(String(localized: "label_skipped"), value: "\(comparisonService.skippedMoles.count)")
+                    LabeledContent(String(localized: "label_total"), value: "\(comparisonService.totalMoles)")
                 }
                 
                 if comparisonService.comparedCount > 0 {
-                    Section("Verglicene Leberflecke") {
+                    Section(String(localized: "section_compared_moles")) {
                         ForEach(moles.filter { comparisonService.comparedMoles.contains($0.id) }) { mole in
                             HStack {
                                 if let thumbnail = mole.latestImage?.thumbnailImage {
@@ -473,7 +473,7 @@ struct GuidedComparisonView: View {
                 }
                 
                 if comparisonService.skippedMoles.count > 0 {
-                    Section("Übersprungene Leberflecke") {
+                    Section(String(localized: "section_skipped_moles")) {
                         ForEach(moles.filter { comparisonService.skippedMoles.contains($0.id) }) { mole in
                             HStack {
                                 if let thumbnail = mole.latestImage?.thumbnailImage {
@@ -496,11 +496,11 @@ struct GuidedComparisonView: View {
                     }
                 }
             }
-            .navigationTitle("Zusammenfassung")
+            .navigationTitle(String(localized: "title_summary"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Fertig") {
+                    Button(String(localized: "action_done")) {
                         showingCompletionSheet = false
                         dismiss()
                     }

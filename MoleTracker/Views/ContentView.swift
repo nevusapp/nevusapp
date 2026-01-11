@@ -68,11 +68,11 @@ struct ContentView: View {
                             Divider()
                             
                             Button(action: { showingGuidedScanning = true }) {
-                                Label("Geführtes Scannen", systemImage: "camera.metering.center.weighted")
+                                Label(String(localized: "guided_scanning_title"), systemImage: "camera.metering.center.weighted")
                             }
                             
                             Button(action: { showingGuidedComparison = true }) {
-                                Label("Geführter Vergleich", systemImage: "arrow.left.and.right.square")
+                                Label(String(localized: "guided_comparison_title"), systemImage: "arrow.left.and.right.square")
                             }
                             
                             Divider()

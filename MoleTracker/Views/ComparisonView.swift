@@ -19,8 +19,15 @@ struct ComparisonView: View {
     @State private var lastOffset: CGSize = .zero
     
     enum ComparisonMode: String, CaseIterable {
-        case sideBySide = "Nebeneinander"
-        case overlay = "Überlagert"
+        case sideBySide
+        case overlay
+        
+        var localizedName: String {
+            switch self {
+            case .sideBySide: return String(localized: "comparison_mode_side_by_side")
+            case .overlay: return String(localized: "comparison_mode_overlay")
+            }
+        }
         
         var icon: String {
             switch self {
@@ -56,9 +63,9 @@ struct ComparisonView: View {
             
             // Mode Picker - overlay on top
             VStack {
-                Picker("Vergleichsmodus", selection: $comparisonMode) {
+                Picker(String(localized: "comparison_mode_label"), selection: $comparisonMode) {
                     ForEach(ComparisonMode.allCases, id: \.self) { mode in
-                        Label(mode.rawValue, systemImage: mode.icon)
+                        Label(mode.localizedName, systemImage: mode.icon)
                             .tag(mode)
                     }
                 }
@@ -69,7 +76,7 @@ struct ComparisonView: View {
                 Spacer()
             }
         }
-        .navigationTitle("Bildvergleich")
+        .navigationTitle(String(localized: "title_image_comparison"))
         .navigationBarTitleDisplayMode(.inline)
         .onChange(of: comparisonMode) { _, _ in
             // Reset zoom and offset when switching modes
@@ -262,7 +269,7 @@ struct ComparisonView: View {
         VStack(spacing: 12) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Älteres Bild")
+                    Text(String(localized: "label_older_image"))
                         .font(.caption)
                         .foregroundColor(.secondary)
                     Text(image1.captureDate.formatted(date: .long, time: .shortened))
@@ -278,7 +285,7 @@ struct ComparisonView: View {
                 Spacer()
                 
                 VStack(alignment: .trailing, spacing: 4) {
-                    Text("Neueres Bild")
+                    Text(String(localized: "label_newer_image"))
                         .font(.caption)
                         .foregroundColor(.secondary)
                     Text(image2.captureDate.formatted(date: .long, time: .shortened))
@@ -289,7 +296,7 @@ struct ComparisonView: View {
             
             // Time difference
             if let daysDifference = Calendar.current.dateComponents([.day], from: image1.captureDate, to: image2.captureDate).day {
-                Text("Zeitunterschied: \(daysDifference) Tage")
+                Text(String(localized: "time_difference_days", defaultValue: "Time Difference: \(daysDifference) Days"))
                     .font(.caption)
                     .foregroundColor(.secondary)
             }

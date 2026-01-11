@@ -50,22 +50,6 @@
     "%lld Fotos" : {
 
     },
-    "%lld Leberflecke gescannt" : {
-
-    },
-    "%lld Leberflecke verglichen" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%lld Leberflecke verglichen"
-          }
-        }
-      }
-    },
-    "%lld übersprungen" : {
-
-    },
     "%lld von %lld gescannt" : {
       "localizations" : {
         "de" : {
@@ -92,9 +76,6 @@
     "+%lld" : {
 
     },
-    "Abbrechen" : {
-
-    },
     "action_add" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -108,6 +89,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Add"
+          }
+        }
+      }
+    },
+    "action_back" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zurück"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back"
           }
         }
       }
@@ -142,6 +140,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Compare Images"
+          }
+        }
+      }
+    },
+    "action_compared" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verglichen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compared"
+          }
+        }
+      }
+    },
+    "action_continue" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fortsetzen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
           }
         }
       }
@@ -317,6 +349,40 @@
         }
       }
     },
+    "action_show_summary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zusammenfassung anzeigen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Summary"
+          }
+        }
+      }
+    },
+    "action_skip" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Überspringen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip"
+          }
+        }
+      }
+    },
     "action_take_new_photo" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -335,6 +401,23 @@
       }
     },
     "action_take_photo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Foto aufnehmen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take Photo"
+          }
+        }
+      }
+    },
+    "action_take_photo_short" : {
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
@@ -384,21 +467,6 @@
           }
         }
       }
-    },
-    "Älteres Bild" : {
-
-    },
-    "Anleitung" : {
-
-    },
-    "Bearbeiten" : {
-
-    },
-    "Bild wird verarbeitet..." : {
-
-    },
-    "Bildvergleich" : {
-
     },
     "body_region_abdomen" : {
       "extractionState" : "manual",
@@ -1080,6 +1148,74 @@
         }
       }
     },
+    "camera_align_overlay" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Richte die Kamera aus, bis das Overlay passt"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Align the camera until the overlay matches"
+          }
+        }
+      }
+    },
+    "camera_open_settings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen öffnen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Settings"
+          }
+        }
+      }
+    },
+    "camera_preparing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kamera wird vorbereitet..."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preparing camera..."
+          }
+        }
+      }
+    },
+    "camera_transparency" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transparenz:"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transparency:"
+          }
+        }
+      }
+    },
     "cleanup_confirm_delete" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1420,6 +1556,125 @@
         }
       }
     },
+    "comparison_cancel_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Möchten Sie den geführten Vergleich wirklich abbrechen? Ihr Fortschritt geht verloren."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you really want to cancel guided comparison? Your progress will be lost."
+          }
+        }
+      }
+    },
+    "comparison_cancel_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vergleich abbrechen?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel Comparison?"
+          }
+        }
+      }
+    },
+    "comparison_complete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vergleich abgeschlossen!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comparison Complete!"
+          }
+        }
+      }
+    },
+    "comparison_mode_label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vergleichsmodus"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comparison Mode"
+          }
+        }
+      }
+    },
+    "comparison_mode_overlay" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Überlagert"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Overlay"
+          }
+        }
+      }
+    },
+    "comparison_mode_side_by_side" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nebeneinander"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Side by Side"
+          }
+        }
+      }
+    },
+    "count_skipped" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld übersprungen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Skipped"
+          }
+        }
+      }
+    },
     "delete_confirmation_image" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1523,9 +1778,6 @@
           }
         }
       }
-    },
-    "Einstellungen öffnen" : {
-
     },
     "empty_images_message" : {
       "extractionState" : "manual",
@@ -1682,29 +1934,22 @@
         }
       }
     },
-    "Fertig" : {
-
-    },
-    "Fortsetzen" : {
-
-    },
-    "Foto aufnehmen" : {
-
-    },
-    "Geführter Vergleich" : {
-
-    },
-    "Geführtes Scannen" : {
-
-    },
-    "Gesamt" : {
-
-    },
-    "Gescannt" : {
-
-    },
-    "Gescannte Leberflecke" : {
-
+    "guided_comparison_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geführter Vergleich"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guided Comparison"
+          }
+        }
+      }
     },
     "guided_scanning_back" : {
       "extractionState" : "manual",
@@ -2217,11 +2462,158 @@
         }
       }
     },
-    "Kamera wird vorbereitet..." : {
-
+    "image_processing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bild wird verarbeitet..."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Processing image..."
+          }
+        }
+      }
     },
-    "Keine Notizen vorhanden" : {
-
+    "instruction_compare_images" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vergleichen Sie das Referenzbild mit dem neuesten Foto"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compare the reference image with the latest photo"
+          }
+        }
+      }
+    },
+    "instruction_mark_or_skip" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Markieren Sie als verglichen oder überspringen Sie"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mark as compared or skip"
+          }
+        }
+      }
+    },
+    "instruction_position_mole" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Positionieren Sie sich vor dem Leberfleck"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Position yourself in front of the mole"
+          }
+        }
+      }
+    },
+    "instruction_take_new_photo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nehmen Sie ein neues Foto auf"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take a new photo"
+          }
+        }
+      }
+    },
+    "instruction_update_notes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktualisieren Sie bei Bedarf die Notizen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update notes if needed"
+          }
+        }
+      }
+    },
+    "instruction_use_comparison_modes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nutzen Sie die Vergleichsmodi (Nebeneinander/Überlagert)"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use the comparison modes (Side-by-Side/Overlay)"
+          }
+        }
+      }
+    },
+    "instruction_use_overlay" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nutzen Sie das Overlay zur Ausrichtung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use the overlay for alignment"
+          }
+        }
+      }
+    },
+    "instructions_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anleitung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instructions"
+          }
+        }
+      }
     },
     "label_body_region" : {
       "extractionState" : "manual",
@@ -2308,6 +2700,23 @@
         }
       }
     },
+    "label_newer_image" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neueres Bild"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Newer Image"
+          }
+        }
+      }
+    },
     "label_no_notes" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2321,6 +2730,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No Notes"
+          }
+        }
+      }
+    },
+    "label_notes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notizen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notes"
+          }
+        }
+      }
+    },
+    "label_older_image" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Älteres Bild"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Older Image"
           }
         }
       }
@@ -2376,6 +2819,23 @@
         }
       }
     },
+    "label_scanned" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gescannt"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scanned"
+          }
+        }
+      }
+    },
     "label_side" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2393,6 +2853,40 @@
         }
       }
     },
+    "label_skipped" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Übersprungen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skipped"
+          }
+        }
+      }
+    },
+    "label_total" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gesamt"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total"
+          }
+        }
+      }
+    },
     "Leberfleck %lld von %lld" : {
       "localizations" : {
         "de" : {
@@ -2403,8 +2897,22 @@
         }
       }
     },
-    "Letztes Foto:" : {
-
+    "linked_overview_images" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verknüpfte Übersichtsbilder:"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Linked Overview Images:"
+          }
+        }
+      }
     },
     "location_add_more" : {
       "extractionState" : "manual",
@@ -2780,14 +3288,22 @@
         }
       }
     },
-    "Mindestens 2 Bilder erforderlich" : {
-
-    },
-    "Möchten Sie das geführte Scannen wirklich abbrechen? Ihr Fortschritt geht verloren." : {
-
-    },
-    "Möchten Sie den geführten Vergleich wirklich abbrechen? Ihr Fortschritt geht verloren." : {
-
+    "minimum_images_required" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mindestens 2 Bilder erforderlich"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "At least 2 images required"
+          }
+        }
+      }
     },
     "mole_delete_action" : {
       "extractionState" : "manual",
@@ -2802,6 +3318,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Delete Mole"
+          }
+        }
+      }
+    },
+    "moles_compared_count" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Leberflecke verglichen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Moles Compared"
+          }
+        }
+      }
+    },
+    "moles_scanned_count" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Leberflecke gescannt"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Moles Scanned"
           }
         }
       }
@@ -2823,11 +3373,22 @@
         }
       }
     },
-    "Neueres Bild" : {
-
-    },
-    "Nicht genügend Bilder für Vergleich" : {
-
+    "no_notes_available" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Notizen vorhanden"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No notes available"
+          }
+        }
+      }
     },
     "no_overview_images" : {
       "extractionState" : "manual",
@@ -2846,8 +3407,56 @@
         }
       }
     },
-    "Notizen" : {
-
+    "not_enough_images" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nicht genügend Bilder für Vergleich"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not Enough Images for Comparison"
+          }
+        }
+      }
+    },
+    "notification_reminder_body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es ist ein Monat seit Ihrem letzten geführten Scan vergangen. Führen Sie jetzt einen neuen Scan durch, um Ihre Leberflecke zu überwachen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It's been a month since your last guided scan. Perform a new scan now to monitor your moles."
+          }
+        }
+      }
+    },
+    "notification_reminder_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeit für einen neuen Scan"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time for a New Scan"
+          }
+        }
+      }
     },
     "overlay_add_button" : {
       "extractionState" : "manual",
@@ -3073,14 +3682,90 @@
         }
       }
     },
-    "Richte die Kamera aus, bis das Overlay passt" : {
-
+    "scanning_cancel_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Möchten Sie das geführte Scannen wirklich abbrechen? Ihr Fortschritt geht verloren."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you really want to cancel guided scanning? Your progress will be lost."
+          }
+        }
+      }
     },
-    "Scannen abbrechen?" : {
-
+    "scanning_cancel_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scannen abbrechen?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel Scanning?"
+          }
+        }
+      }
     },
-    "Scannen abgeschlossen!" : {
-
+    "scanning_complete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scannen abgeschlossen!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scanning Complete!"
+          }
+        }
+      }
+    },
+    "scanning_last_photo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Letztes Foto:"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last Photo:"
+          }
+        }
+      }
+    },
+    "section_compared_moles" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verglichene Leberflecke"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compared Moles"
+          }
+        }
+      }
     },
     "section_comparison" : {
       "extractionState" : "manual",
@@ -3184,6 +3869,57 @@
         }
       }
     },
+    "section_scanned_moles" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gescannte Leberflecke"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scanned Moles"
+          }
+        }
+      }
+    },
+    "section_skipped_moles" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Übersprungene Leberflecke"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skipped Moles"
+          }
+        }
+      }
+    },
+    "section_statistics" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statistik"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statistics"
+          }
+        }
+      }
+    },
     "select_two_images" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3219,12 +3955,6 @@
         }
       }
     },
-    "Speichern" : {
-
-    },
-    "Statistik" : {
-
-    },
     "take_first_photo" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3259,6 +3989,23 @@
         }
       }
     },
+    "time_difference_days" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeitunterschied: %lld Tage"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time Difference: %lld Days"
+          }
+        }
+      }
+    },
     "title_add_mole" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3289,6 +4036,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Image"
+          }
+        }
+      }
+    },
+    "title_image_comparison" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bildvergleich"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image Comparison"
           }
         }
       }
@@ -3361,38 +4125,22 @@
         }
       }
     },
-    "Transparenz:" : {
-
-    },
-    "Überspringen" : {
-
-    },
-    "Übersprungen" : {
-
-    },
-    "Übersprungene Leberflecke" : {
-
-    },
-    "Vergleich abbrechen?" : {
-
-    },
-    "Vergleich abgeschlossen!" : {
-
-    },
-    "Vergleichsmodus" : {
-
-    },
-    "Verglicene Leberflecke" : {
-
-    },
-    "Verglichen" : {
-
-    },
-    "Verknüpfte Übersichtsbilder:" : {
-
-    },
-    "Zeitunterschied: %lld Tage" : {
-
+    "title_summary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zusammenfassung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summary"
+          }
+        }
+      }
     },
     "zoom_level" : {
       "extractionState" : "manual",
@@ -3424,49 +4172,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reset"
-          }
-        }
-      }
-    },
-    "Zurück" : {
-
-    },
-    "Zusammenfassung" : {
-
-    },
-    "Zusammenfassung anzeigen" : {
-
-    },
-    "notification_reminder_title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zeit für einen neuen Scan"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Time for a New Scan"
-          }
-        }
-      }
-    },
-    "notification_reminder_body" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Es ist ein Monat seit Ihrem letzten geführten Scan vergangen. Führen Sie jetzt einen neuen Scan durch, um Ihre Leberflecke zu überwachen."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "It's been a month since your last guided scan. Perform a new scan now to monitor your moles."
           }
         }
       }
