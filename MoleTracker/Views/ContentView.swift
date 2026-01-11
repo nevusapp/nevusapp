@@ -25,6 +25,7 @@ struct ContentView: View {
     @State private var moleToDelete: Mole?
     @State private var showingDeleteConfirmation = false
     @State private var showingGuidedScanning = false
+    @State private var showingGuidedComparison = false
     
     // Group moles by body region
     var groupedMoles: [(region: BodyRegion, moles: [Mole])] {
@@ -70,6 +71,10 @@ struct ContentView: View {
                                 Label("Geführtes Scannen", systemImage: "camera.metering.center.weighted")
                             }
                             
+                            Button(action: { showingGuidedComparison = true }) {
+                                Label("Geführter Vergleich", systemImage: "arrow.left.and.right.square")
+                            }
+                            
                             Divider()
                             
                             Button(action: { exportAllMoles() }) {
@@ -108,6 +113,9 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showingGuidedScanning) {
                 GuidedScanningView(moles: moles)
+            }
+            .sheet(isPresented: $showingGuidedComparison) {
+                GuidedComparisonView(moles: moles)
             }
             .overlay {
                 if isExporting {

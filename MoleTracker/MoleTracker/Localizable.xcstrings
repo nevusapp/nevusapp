@@ -53,6 +53,16 @@
     "%lld Leberflecke gescannt" : {
 
     },
+    "%lld Leberflecke verglichen" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%lld Leberflecke verglichen"
+          }
+        }
+      }
+    },
     "%lld übersprungen" : {
 
     },
@@ -62,6 +72,16 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$lld von %2$lld gescannt"
+          }
+        }
+      }
+    },
+    "%lld von %lld verglichen" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld von %2$lld verglichen"
           }
         }
       }
@@ -369,6 +389,9 @@
 
     },
     "Anleitung" : {
+
+    },
+    "Bearbeiten" : {
 
     },
     "Bild wird verarbeitet..." : {
@@ -1668,6 +1691,9 @@
     "Foto aufnehmen" : {
 
     },
+    "Geführter Vergleich" : {
+
+    },
     "Geführtes Scannen" : {
 
     },
@@ -2192,6 +2218,9 @@
       }
     },
     "Kamera wird vorbereitet..." : {
+
+    },
+    "Keine Notizen vorhanden" : {
 
     },
     "label_body_region" : {
@@ -2751,7 +2780,13 @@
         }
       }
     },
+    "Mindestens 2 Bilder erforderlich" : {
+
+    },
     "Möchten Sie das geführte Scannen wirklich abbrechen? Ihr Fortschritt geht verloren." : {
+
+    },
+    "Möchten Sie den geführten Vergleich wirklich abbrechen? Ihr Fortschritt geht verloren." : {
 
     },
     "mole_delete_action" : {
@@ -2791,6 +2826,9 @@
     "Neueres Bild" : {
 
     },
+    "Nicht genügend Bilder für Vergleich" : {
+
+    },
     "no_overview_images" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2807,6 +2845,9 @@
           }
         }
       }
+    },
+    "Notizen" : {
+
     },
     "overlay_add_button" : {
       "extractionState" : "manual",
@@ -3178,6 +3219,9 @@
         }
       }
     },
+    "Speichern" : {
+
+    },
     "Statistik" : {
 
     },
@@ -3329,7 +3373,19 @@
     "Übersprungene Leberflecke" : {
 
     },
+    "Vergleich abbrechen?" : {
+
+    },
+    "Vergleich abgeschlossen!" : {
+
+    },
     "Vergleichsmodus" : {
+
+    },
+    "Verglichene Leberflecke" : {
+
+    },
+    "Verglichen" : {
 
     },
     "Verknüpfte Übersichtsbilder:" : {
