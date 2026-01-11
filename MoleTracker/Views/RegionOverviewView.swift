@@ -19,8 +19,8 @@ struct RegionOverviewView: View {
     
     init(region: BodyRegion) {
         self.region = region
-        // Filter overviews for this region
-        let regionName = region.rawValue
+        // Filter overviews for this region - use legacyRawValue for backward compatibility
+        let regionName = region.legacyRawValue
         _overviews = Query(
             filter: #Predicate<BodyRegionOverview> { overview in
                 overview.bodyRegion == regionName
@@ -39,18 +39,18 @@ struct RegionOverviewView: View {
                     overviewsGridView
                 }
             } header: {
-                Text("Übersichtsbilder")
+                Text(String(localized: "overview_images"))
             } footer: {
-                Text("Erfassen Sie Übersichtsbilder, in denen alle Leberflecke dieser Region gleichzeitig sichtbar sind.")
+                Text(String(localized: "overview_footer_description", defaultValue: "Capture overview images showing all moles in this region simultaneously.", comment: "Footer text for overview images section"))
                     .font(.caption)
             }
         }
-        .navigationTitle(region.rawValue)
+        .navigationTitle(region.localizedName)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: { showingCamera = true }) {
-                    Label("Foto aufnehmen", systemImage: "camera.fill")
+                    Label(String(localized: "action_take_photo"), systemImage: "camera.fill")
                 }
             }
         }
@@ -72,10 +72,10 @@ struct RegionOverviewView: View {
                 .font(.system(size: 60))
                 .foregroundColor(.gray)
             
-            Text("Keine Übersichtsbilder")
+            Text(String(localized: "empty_overview_title", defaultValue: "No Overview Images", comment: "Empty state title for overview images"))
                 .font(.headline)
             
-            Text("Tippen Sie auf das Kamera-Symbol, um ein Übersichtsbild zu erfassen")
+            Text(String(localized: "empty_overview_message", defaultValue: "Tap the camera icon to capture an overview image", comment: "Empty state message for overview images"))
                 .font(.caption)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -116,7 +116,7 @@ struct RegionOverviewView: View {
                     Button(role: .destructive) {
                         deleteOverview(overview)
                     } label: {
-                        Label("Löschen", systemImage: "trash")
+                        Label(String(localized: "action_delete"), systemImage: "trash")
                     }
                 }
             }
@@ -125,7 +125,7 @@ struct RegionOverviewView: View {
     }
     
     private func addOverviewImage(_ image: UIImage) {
-        let overview = BodyRegionOverview(bodyRegion: region.rawValue, image: image)
+        let overview = BodyRegionOverview(bodyRegion: region.legacyRawValue, image: image)
         
         // Note: Sensor data collection could be added in future
         // For now, initialize with default values
@@ -177,7 +177,7 @@ struct OverviewImageDetailView: View {
             // Image info
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
-                    Text("Aufgenommen:")
+                    Text("\(String(localized: "label_captured")):")
                         .font(.caption)
                         .foregroundColor(.secondary)
                     Text(overview.captureDate.formatted(date: .long, time: .shortened))
@@ -186,7 +186,7 @@ struct OverviewImageDetailView: View {
                 
                 // Notes section
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Notizen:")
+                    Text("\(String(localized: "section_notes")):")
                         .font(.caption)
                         .foregroundColor(.secondary)
                     
@@ -197,7 +197,7 @@ struct OverviewImageDetailView: View {
                             .background(Color(.systemGray6))
                             .clipShape(RoundedRectangle(cornerRadius: 8))
                     } else {
-                        Text(overview.notes.isEmpty ? "Keine Notizen" : overview.notes)
+                        Text(overview.notes.isEmpty ? String(localized: "label_no_notes") : overview.notes)
                             .font(.body)
                             .foregroundColor(overview.notes.isEmpty ? .secondary : .primary)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -214,30 +214,30 @@ struct OverviewImageDetailView: View {
             .padding()
             .background(.ultraThinMaterial)
         }
-        .navigationTitle("Übersichtsbild")
+        .navigationTitle(String(localized: "overview_image_title", defaultValue: "Overview Image", comment: "Title for overview image detail view"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Menu {
-                    Button(isEditingNotes ? "Fertig" : "Bearbeiten") {
+                    Button(isEditingNotes ? String(localized: "action_done") : String(localized: "action_edit", defaultValue: "Edit", comment: "Edit button")) {
                         isEditingNotes.toggle()
                     }
                     
                     Button(role: .destructive, action: { showingDeleteConfirmation = true }) {
-                        Label("Löschen", systemImage: "trash")
+                        Label(String(localized: "action_delete"), systemImage: "trash")
                     }
                 } label: {
                     Image(systemName: "ellipsis.circle")
                 }
             }
         }
-        .alert("Übersichtsbild löschen?", isPresented: $showingDeleteConfirmation) {
-            Button("Abbrechen", role: .cancel) { }
-            Button("Löschen", role: .destructive) {
+        .alert(String(localized: "delete_overview_title", defaultValue: "Delete Overview Image?", comment: "Delete confirmation title"), isPresented: $showingDeleteConfirmation) {
+            Button(String(localized: "action_cancel"), role: .cancel) { }
+            Button(String(localized: "action_delete"), role: .destructive) {
                 deleteOverview()
             }
         } message: {
-            Text("Möchten Sie dieses Übersichtsbild wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.")
+            Text(String(localized: "delete_overview_message", defaultValue: "Do you really want to delete this overview image? This action cannot be undone.", comment: "Delete confirmation message"))
         }
     }
     

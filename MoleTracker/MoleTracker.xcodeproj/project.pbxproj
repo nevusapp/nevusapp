@@ -13,10 +13,10 @@
 		6B817DD32F0D378200EB1030 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B817DD02F0D378200EB1030 /* ContentView.swift */; };
 		6B817DD42F0D378200EB1030 /* MoleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B817DD12F0D378200EB1030 /* MoleDetailView.swift */; };
 		6B817DD52F0D378200EB1030 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B817DCE2F0D378200EB1030 /* CameraView.swift */; };
-		6B817DDB2F0D378300EB1030 /* RegionOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B817DD22F0D378300EB1030 /* RegionOverviewView.swift */; };
 		6B817DD82F0D37C100EB1030 /* Mole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B817DD62F0D37C100EB1030 /* Mole.swift */; };
 		6B817DD92F0D37C100EB1030 /* MoleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B817DD72F0D37C100EB1030 /* MoleImage.swift */; };
 		6B817DDA2F0D37C200EB1030 /* BodyRegionOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B817DD82F0D37C200EB1030 /* BodyRegionOverview.swift */; };
+		6B817DDB2F0D378300EB1030 /* RegionOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B817DD22F0D378300EB1030 /* RegionOverviewView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,8 +29,8 @@
 		6B817DD12F0D378200EB1030 /* MoleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoleDetailView.swift; sourceTree = "<group>"; };
 		6B817DD22F0D378300EB1030 /* RegionOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionOverviewView.swift; sourceTree = "<group>"; };
 		6B817DD62F0D37C100EB1030 /* Mole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mole.swift; sourceTree = "<group>"; };
-		6B817DD82F0D37C200EB1030 /* BodyRegionOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyRegionOverview.swift; sourceTree = "<group>"; };
 		6B817DD72F0D37C100EB1030 /* MoleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoleImage.swift; sourceTree = "<group>"; };
+		6B817DD82F0D37C200EB1030 /* BodyRegionOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyRegionOverview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -144,10 +144,11 @@
 				};
 			};
 			buildConfigurationList = 6B817DB32F0D36AB00EB1030 /* Build configuration list for PBXProject "MoleTracker" */;
-			developmentRegion = en;
+			developmentRegion = de;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				de,
 				Base,
 			);
 			mainGroup = 6B817DAF2F0D36AB00EB1030;

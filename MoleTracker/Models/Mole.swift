@@ -73,20 +73,75 @@ final class Mole {
 
 // MARK: - Body Region Enum
 enum BodyRegion: String, CaseIterable, Identifiable {
-    case head = "Kopf"
-    case neck = "Hals"
-    case armLeft = "Arm/Hand links"
-    case armRight = "Arm/Hand rechts"
-    case chest = "Brust"
-    case abdomen = "Bauch"
-    case pelvis = "Becken"
-    case backUpper = "Rücken oben (BWS)"
-    case backMiddle = "Rücken Mitte (LWS)"
-    case backLower = "Rücken unten (Kreuz/Gesäss)"
-    case legLeft = "Bein/Fuss links"
-    case legRight = "Bein/Fuss rechts"
+    case head
+    case neck
+    case armLeft
+    case armRight
+    case chest
+    case abdomen
+    case pelvis
+    case backUpper
+    case backMiddle
+    case backLower
+    case legLeft
+    case legRight
     
     var id: String { rawValue }
+    
+    // Localized display name
+    var localizedName: String {
+        switch self {
+        case .head: return String(localized: "body_region_head")
+        case .neck: return String(localized: "body_region_neck")
+        case .armLeft: return String(localized: "body_region_arm_left")
+        case .armRight: return String(localized: "body_region_arm_right")
+        case .chest: return String(localized: "body_region_chest")
+        case .abdomen: return String(localized: "body_region_abdomen")
+        case .pelvis: return String(localized: "body_region_pelvis")
+        case .backUpper: return String(localized: "body_region_back_upper")
+        case .backMiddle: return String(localized: "body_region_back_middle")
+        case .backLower: return String(localized: "body_region_back_lower")
+        case .legLeft: return String(localized: "body_region_leg_left")
+        case .legRight: return String(localized: "body_region_leg_right")
+        }
+    }
+    
+    // Legacy rawValue for backward compatibility with stored data
+    var legacyRawValue: String {
+        switch self {
+        case .head: return "Kopf"
+        case .neck: return "Hals"
+        case .armLeft: return "Arm/Hand links"
+        case .armRight: return "Arm/Hand rechts"
+        case .chest: return "Brust"
+        case .abdomen: return "Bauch"
+        case .pelvis: return "Becken"
+        case .backUpper: return "Rücken oben (BWS)"
+        case .backMiddle: return "Rücken Mitte (LWS)"
+        case .backLower: return "Rücken unten (Kreuz/Gesäss)"
+        case .legLeft: return "Bein/Fuss links"
+        case .legRight: return "Bein/Fuss rechts"
+        }
+    }
+    
+    // Initialize from legacy string value
+    static func from(legacyValue: String) -> BodyRegion {
+        switch legacyValue {
+        case "Kopf": return .head
+        case "Hals": return .neck
+        case "Arm/Hand links": return .armLeft
+        case "Arm/Hand rechts": return .armRight
+        case "Brust": return .chest
+        case "Bauch": return .abdomen
+        case "Becken": return .pelvis
+        case "Rücken oben (BWS)": return .backUpper
+        case "Rücken Mitte (LWS)": return .backMiddle
+        case "Rücken unten (Kreuz/Gesäss)": return .backLower
+        case "Bein/Fuss links": return .legLeft
+        case "Bein/Fuss rechts": return .legRight
+        default: return .head
+        }
+    }
     
     // Order for display in grouped list
     static var displayOrder: [BodyRegion] {
@@ -97,58 +152,145 @@ enum BodyRegion: String, CaseIterable, Identifiable {
 // MARK: - Body Side Enum
 enum BodySide: String, CaseIterable, Identifiable {
     // Head specific
-    case headTop = "Kopf: Oben"
-    case headFront = "Kopf: Vorne/Gesicht"
-    case headLeft = "Kopf: Links"
-    case headRight = "Kopf: Rechts"
-    case headBack = "Kopf: Hinten"
+    case headTop
+    case headFront
+    case headLeft
+    case headRight
+    case headBack
     
     // Neck specific
-    case neckFront = "Hals: Vorne"
-    case neckLeft = "Hals: Links"
-    case neckRight = "Hals: Rechts"
-    case neckBack = "Hals: Hinten"
+    case neckFront
+    case neckLeft
+    case neckRight
+    case neckBack
     
     // Torso (Chest, Abdomen, Pelvis, Back, Buttocks)
-    case torsoLeft = "Links"
-    case torsoCenter = "Mitte"
-    case torsoRight = "Rechts"
+    case torsoLeft
+    case torsoCenter
+    case torsoRight
     
     // Arms
-    case armUpperFront = "Oberarm-Vorne (Bizeps)"
-    case armUpperBack = "Oberarm-Hinten (Trizeps)"
-    case armLowerInner = "Unterarm-Innen"
-    case armLowerOuter = "Unterarm-Aussen"
-    case handInner = "Hand-Innen"
-    case handOuter = "Hand-Aussen"
+    case armUpperFront
+    case armUpperBack
+    case armLowerInner
+    case armLowerOuter
+    case handInner
+    case handOuter
     
     // Legs
-    case legThighFront = "Oberschenkel-Vorne"
-    case legThighBack = "Oberschenkel-Hinten"
-    case legThighInner = "Oberschenkel-Innen"
-    case legThighOuter = "Oberschenkel-Aussen"
-    case legCalfFront = "Unterschenkel-Vorne (Schienbein)"
-    case legCalfBack = "Unterschenkel-Hinten (Wade)"
-    case legCalfInner = "Unterschenkel-Innen"
-    case legCalfOuter = "Unterschenkel-Aussen"
-    case footTop = "Fuss-Oben"
-    case footSole = "Fusssohle"
+    case legThighFront
+    case legThighBack
+    case legThighInner
+    case legThighOuter
+    case legCalfFront
+    case legCalfBack
+    case legCalfInner
+    case legCalfOuter
+    case footTop
+    case footSole
     
     var id: String { rawValue }
     
-    // Display text without region prefix for cleaner UI
+    // Localized display text
     var displayText: String {
         switch self {
-        case .headTop: return "Oben"
-        case .headFront: return "Vorne/Gesicht"
-        case .headLeft: return "Links"
-        case .headRight: return "Rechts"
-        case .headBack: return "Hinten"
-        case .neckFront: return "Vorne"
-        case .neckLeft: return "Links"
-        case .neckRight: return "Rechts"
-        case .neckBack: return "Hinten"
-        default: return rawValue
+        case .headTop: return String(localized: "body_side_head_top")
+        case .headFront: return String(localized: "body_side_head_front")
+        case .headLeft: return String(localized: "body_side_head_left")
+        case .headRight: return String(localized: "body_side_head_right")
+        case .headBack: return String(localized: "body_side_head_back")
+        case .neckFront: return String(localized: "body_side_neck_front")
+        case .neckLeft: return String(localized: "body_side_neck_left")
+        case .neckRight: return String(localized: "body_side_neck_right")
+        case .neckBack: return String(localized: "body_side_neck_back")
+        case .torsoLeft: return String(localized: "body_side_torso_left")
+        case .torsoCenter: return String(localized: "body_side_torso_center")
+        case .torsoRight: return String(localized: "body_side_torso_right")
+        case .armUpperFront: return String(localized: "body_side_arm_upper_front")
+        case .armUpperBack: return String(localized: "body_side_arm_upper_back")
+        case .armLowerInner: return String(localized: "body_side_arm_lower_inner")
+        case .armLowerOuter: return String(localized: "body_side_arm_lower_outer")
+        case .handInner: return String(localized: "body_side_hand_inner")
+        case .handOuter: return String(localized: "body_side_hand_outer")
+        case .legThighFront: return String(localized: "body_side_leg_thigh_front")
+        case .legThighBack: return String(localized: "body_side_leg_thigh_back")
+        case .legThighInner: return String(localized: "body_side_leg_thigh_inner")
+        case .legThighOuter: return String(localized: "body_side_leg_thigh_outer")
+        case .legCalfFront: return String(localized: "body_side_leg_calf_front")
+        case .legCalfBack: return String(localized: "body_side_leg_calf_back")
+        case .legCalfInner: return String(localized: "body_side_leg_calf_inner")
+        case .legCalfOuter: return String(localized: "body_side_leg_calf_outer")
+        case .footTop: return String(localized: "body_side_foot_top")
+        case .footSole: return String(localized: "body_side_foot_sole")
+        }
+    }
+    
+    // Legacy rawValue for backward compatibility with stored data
+    var legacyRawValue: String {
+        switch self {
+        case .headTop: return "Kopf: Oben"
+        case .headFront: return "Kopf: Vorne/Gesicht"
+        case .headLeft: return "Kopf: Links"
+        case .headRight: return "Kopf: Rechts"
+        case .headBack: return "Kopf: Hinten"
+        case .neckFront: return "Hals: Vorne"
+        case .neckLeft: return "Hals: Links"
+        case .neckRight: return "Hals: Rechts"
+        case .neckBack: return "Hals: Hinten"
+        case .torsoLeft: return "Links"
+        case .torsoCenter: return "Mitte"
+        case .torsoRight: return "Rechts"
+        case .armUpperFront: return "Oberarm-Vorne (Bizeps)"
+        case .armUpperBack: return "Oberarm-Hinten (Trizeps)"
+        case .armLowerInner: return "Unterarm-Innen"
+        case .armLowerOuter: return "Unterarm-Aussen"
+        case .handInner: return "Hand-Innen"
+        case .handOuter: return "Hand-Aussen"
+        case .legThighFront: return "Oberschenkel-Vorne"
+        case .legThighBack: return "Oberschenkel-Hinten"
+        case .legThighInner: return "Oberschenkel-Innen"
+        case .legThighOuter: return "Oberschenkel-Aussen"
+        case .legCalfFront: return "Unterschenkel-Vorne (Schienbein)"
+        case .legCalfBack: return "Unterschenkel-Hinten (Wade)"
+        case .legCalfInner: return "Unterschenkel-Innen"
+        case .legCalfOuter: return "Unterschenkel-Aussen"
+        case .footTop: return "Fuss-Oben"
+        case .footSole: return "Fusssohle"
+        }
+    }
+    
+    // Initialize from legacy string value
+    static func from(legacyValue: String) -> BodySide? {
+        switch legacyValue {
+        case "Kopf: Oben": return .headTop
+        case "Kopf: Vorne/Gesicht": return .headFront
+        case "Kopf: Links": return .headLeft
+        case "Kopf: Rechts": return .headRight
+        case "Kopf: Hinten": return .headBack
+        case "Hals: Vorne": return .neckFront
+        case "Hals: Links": return .neckLeft
+        case "Hals: Rechts": return .neckRight
+        case "Hals: Hinten": return .neckBack
+        case "Links": return .torsoLeft
+        case "Mitte": return .torsoCenter
+        case "Rechts": return .torsoRight
+        case "Oberarm-Vorne (Bizeps)": return .armUpperFront
+        case "Oberarm-Hinten (Trizeps)": return .armUpperBack
+        case "Unterarm-Innen": return .armLowerInner
+        case "Unterarm-Aussen": return .armLowerOuter
+        case "Hand-Innen": return .handInner
+        case "Hand-Aussen": return .handOuter
+        case "Oberschenkel-Vorne": return .legThighFront
+        case "Oberschenkel-Hinten": return .legThighBack
+        case "Oberschenkel-Innen": return .legThighInner
+        case "Oberschenkel-Aussen": return .legThighOuter
+        case "Unterschenkel-Vorne (Schienbein)": return .legCalfFront
+        case "Unterschenkel-Hinten (Wade)": return .legCalfBack
+        case "Unterschenkel-Innen": return .legCalfInner
+        case "Unterschenkel-Aussen": return .legCalfOuter
+        case "Fuss-Oben": return .footTop
+        case "Fusssohle": return .footSole
+        default: return nil
         }
     }
     

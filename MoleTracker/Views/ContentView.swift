@@ -24,6 +24,8 @@ struct ContentView: View {
     // Group moles by body region
     var groupedMoles: [(region: BodyRegion, moles: [Mole])] {
         let grouped = Dictionary(grouping: moles) { mole -> BodyRegion in
+            // Try to match by legacy rawValue for backward compatibility
+            BodyRegion.allCases.first { $0.legacyRawValue == mole.bodyRegion } ??
             BodyRegion.allCases.first { $0.rawValue == mole.bodyRegion } ?? .head
         }
         
@@ -36,7 +38,7 @@ struct ContentView: View {
     
     // Get overviews for a specific region
     func overviews(for region: BodyRegion) -> [BodyRegionOverview] {
-        allOverviews.filter { $0.bodyRegion == region.rawValue }
+        allOverviews.filter { $0.bodyRegion == region.legacyRawValue || $0.bodyRegion == region.rawValue }
     }
     
     var body: some View {
@@ -48,16 +50,16 @@ struct ContentView: View {
                     moleListView
                 }
             }
-            .navigationTitle("Meine Leberflecke")
+            .navigationTitle(String(localized: "title_mole_list"))
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     if !moles.isEmpty {
                         Menu {
                             Button(action: { exportAllMoles() }) {
-                                Label("Alle exportieren", systemImage: "square.and.arrow.up")
+                                Label(String(localized: "action_export_all"), systemImage: "square.and.arrow.up")
                             }
                         } label: {
-                            Label("Export", systemImage: "square.and.arrow.up")
+                            Label(String(localized: "export_label"), systemImage: "square.and.arrow.up")
                         }
                         .disabled(isExporting)
                     }
@@ -65,7 +67,7 @@ struct ContentView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { showingAddMole = true }) {
-                        Label("Hinzufügen", systemImage: "plus")
+                        Label(String(localized: "action_add"), systemImage: "plus")
                     }
                 }
             }
@@ -84,7 +86,7 @@ struct ContentView: View {
                         VStack(spacing: 16) {
                             ProgressView()
                                 .scaleEffect(1.5)
-                            Text("Exportiere Daten...")
+                            Text(String(localized: "exporting_data"))
                                 .font(.headline)
                         }
                         .padding(32)
@@ -102,18 +104,18 @@ struct ContentView: View {
                 .font(.system(size: 80))
                 .foregroundColor(.gray)
             
-            Text("Keine Leberflecke erfasst")
+            Text(String(localized: "empty_moles_title"))
                 .font(.title2)
                 .fontWeight(.semibold)
             
-            Text("Tippen Sie auf +, um Ihren ersten Leberfleck zu erfassen")
+            Text(String(localized: "empty_moles_message"))
                 .font(.body)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
             
             Button(action: { showingAddMole = true }) {
-                Label("Ersten Leberfleck hinzufügen", systemImage: "plus.circle.fill")
+                Label(String(localized: "empty_moles_button"), systemImage: "plus.circle.fill")
                     .font(.headline)
             }
             .buttonStyle(.borderedProminent)
@@ -131,12 +133,12 @@ struct ContentView: View {
                     if !regionOverviews.isEmpty {
                         VStack(alignment: .leading, spacing: 8) {
                             HStack {
-                                Text("Übersichtsbilder")
+                                Text(String(localized: "overview_images"))
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
                                 Spacer()
                                 NavigationLink(destination: RegionOverviewView(region: group.region)) {
-                                    Text("Alle anzeigen")
+                                    Text(String(localized: "action_show_all"))
                                         .font(.caption)
                                 }
                             }
@@ -172,7 +174,7 @@ struct ContentView: View {
                                                     Image(systemName: "plus.circle.fill")
                                                         .font(.title2)
                                                         .foregroundColor(.accentColor)
-                                                    Text("Hinzufügen")
+                                                    Text(String(localized: "overlay_add_button"))
                                                         .font(.caption2)
                                                         .foregroundColor(.secondary)
                                                 }
@@ -189,7 +191,7 @@ struct ContentView: View {
                             HStack {
                                 Image(systemName: "photo.on.rectangle.angled")
                                     .foregroundColor(.accentColor)
-                                Text("Übersichtsbilder hinzufügen")
+                                Text(String(localized: "overlay_add_overview"))
                                     .foregroundColor(.accentColor)
                                 Spacer()
                             }
@@ -206,7 +208,7 @@ struct ContentView: View {
                         deleteMoles(offsets: offsets, from: group.moles)
                     }
                 } header: {
-                    Text(group.region.rawValue)
+                    Text(group.region.localizedName)
                 }
             }
         }
@@ -262,6 +264,23 @@ extension URL: @retroactive Identifiable {
 struct MoleRowView: View {
     let mole: Mole
     
+    // Get localized region name
+    private var localizedRegion: String {
+        if let region = BodyRegion.allCases.first(where: { $0.legacyRawValue == mole.bodyRegion || $0.rawValue == mole.bodyRegion }) {
+            return region.localizedName
+        }
+        return mole.bodyRegion
+    }
+    
+    // Get localized side name
+    private var localizedSide: String {
+        if let region = BodyRegion.allCases.first(where: { $0.legacyRawValue == mole.bodyRegion || $0.rawValue == mole.bodyRegion }),
+           let side = BodySide.availableSides(for: region).first(where: { $0.legacyRawValue == mole.bodySide || $0.rawValue == mole.bodySide }) {
+            return side.displayText
+        }
+        return mole.bodySide
+    }
+    
     var body: some View {
         HStack(spacing: 12) {
             // Thumbnail
@@ -284,7 +303,7 @@ struct MoleRowView: View {
             
             // Info
             VStack(alignment: .leading, spacing: 4) {
-                Text("\(mole.bodyRegion) - \(mole.bodySide)")
+                Text("\(localizedRegion) - \(localizedSide)")
                     .font(.headline)
                 
                 HStack(spacing: 12) {
@@ -324,10 +343,10 @@ struct AddMoleView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Körperregion") {
-                    Picker("Region", selection: $selectedRegion) {
+                Section(String(localized: "label_body_region")) {
+                    Picker(String(localized: "label_region"), selection: $selectedRegion) {
                         ForEach(BodyRegion.allCases) { region in
-                            Text(region.rawValue).tag(region)
+                            Text(region.localizedName).tag(region)
                         }
                     }
                     .pickerStyle(.menu)
@@ -341,7 +360,7 @@ struct AddMoleView: View {
                         }
                     }
                     
-                    Picker("Seite", selection: $selectedSide) {
+                    Picker(String(localized: "label_side"), selection: $selectedSide) {
                         ForEach(BodySide.availableSides(for: selectedRegion)) { side in
                             Text(side.displayText).tag(side)
                         }
@@ -349,34 +368,34 @@ struct AddMoleView: View {
                     .pickerStyle(.menu)
                 }
                 
-                Section("Foto") {
+                Section(String(localized: "label_photo")) {
                     if let image = capturedImage {
                         Image(uiImage: image)
                             .resizable()
                             .scaledToFit()
                             .frame(maxHeight: 200)
                         
-                        Button("Neues Foto aufnehmen") {
+                        Button(String(localized: "action_take_new_photo")) {
                             showingCamera = true
                         }
                     } else {
                         Button(action: { showingCamera = true }) {
-                            Label("Foto aufnehmen", systemImage: "camera.fill")
+                            Label(String(localized: "action_take_photo"), systemImage: "camera.fill")
                         }
                     }
                 }
             }
-            .navigationTitle("Neuer Leberfleck")
+            .navigationTitle(String(localized: "title_add_mole"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Abbrechen") {
+                    Button(String(localized: "action_cancel")) {
                         dismiss()
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Speichern") {
+                    Button(String(localized: "action_save")) {
                         saveMole()
                     }
                     .disabled(capturedImage == nil)

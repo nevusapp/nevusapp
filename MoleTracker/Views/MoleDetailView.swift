@@ -26,12 +26,15 @@ struct MoleDetailView: View {
     
     init(mole: Mole) {
         self.mole = mole
-        let region = BodyRegion.allCases.first { $0.rawValue == mole.bodyRegion } ?? .head
+        // Try to match by legacy rawValue for backward compatibility
+        let region = BodyRegion.allCases.first { $0.legacyRawValue == mole.bodyRegion } ??
+                     BodyRegion.allCases.first { $0.rawValue == mole.bodyRegion } ?? .head
         _selectedRegion = State(initialValue: region)
         
         // Find matching side or use default for region
         let availableSides = BodySide.availableSides(for: region)
-        let matchingSide = availableSides.first { $0.rawValue == mole.bodySide }
+        let matchingSide = availableSides.first { $0.legacyRawValue == mole.bodySide } ??
+                          availableSides.first { $0.rawValue == mole.bodySide }
         _selectedSide = State(initialValue: matchingSide ?? BodySide.defaultSide(for: region))
     }
     
@@ -44,7 +47,7 @@ struct MoleDetailView: View {
                         Spacer()
                         VStack(spacing: 12) {
                             ProgressView()
-                            Text("Bild wird verarbeitet...")
+                            Text(String(localized: "image_being_processed"))
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -58,10 +61,10 @@ struct MoleDetailView: View {
                 }
             } header: {
                 HStack {
-                    Text("Bilder (\(mole.imageCount))")
+                    Text(String(localized: "section_images_count", defaultValue: "Images (\(mole.imageCount))", comment: "Section header with image count"))
                     Spacer()
                     Button(action: { showingCamera = true }) {
-                        Label("Foto", systemImage: "camera.fill")
+                        Label(String(localized: "label_photo"), systemImage: "camera.fill")
                             .font(.caption)
                     }
                     .disabled(isProcessingImage)
@@ -69,7 +72,7 @@ struct MoleDetailView: View {
             }
             
             // Notes Section
-            Section("Notizen") {
+            Section(String(localized: "section_notes")) {
                 if isEditingNotes {
                     TextEditor(text: $mole.notes)
                         .frame(minHeight: 100)
@@ -80,7 +83,7 @@ struct MoleDetailView: View {
                             .frame(minHeight: 60)
                         
                         if mole.notes.isEmpty {
-                            Text("Keine Notizen")
+                            Text(String(localized: "label_no_notes"))
                                 .foregroundColor(.secondary)
                                 .italic()
                                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -97,14 +100,14 @@ struct MoleDetailView: View {
             }
             
             // Details Section
-            Section("Details") {
-                Picker("Region", selection: $selectedRegion) {
+            Section(String(localized: "section_details")) {
+                Picker(String(localized: "label_region"), selection: $selectedRegion) {
                     ForEach(BodyRegion.allCases) { region in
-                        Text(region.rawValue).tag(region)
+                        Text(region.localizedName).tag(region)
                     }
                 }
                 .onChange(of: selectedRegion) { _, newValue in
-                    mole.bodyRegion = newValue.rawValue
+                    mole.bodyRegion = newValue.legacyRawValue
                     
                     // Update available sides for new region
                     let availableSides = BodySide.availableSides(for: newValue)
@@ -117,18 +120,18 @@ struct MoleDetailView: View {
                     mole.updateModifiedDate()
                 }
                 
-                Picker("Seite", selection: $selectedSide) {
+                Picker(String(localized: "label_side"), selection: $selectedSide) {
                     ForEach(BodySide.availableSides(for: selectedRegion)) { side in
                         Text(side.displayText).tag(side)
                     }
                 }
                 .onChange(of: selectedSide) { _, newValue in
-                    mole.bodySide = newValue.rawValue
+                    mole.bodySide = newValue.legacyRawValue
                     mole.updateModifiedDate()
                 }
                 
-                LabeledContent("Erstellt", value: mole.createdAt.formatted(date: .long, time: .shortened))
-                LabeledContent("Zuletzt geändert", value: mole.lastModified.formatted(date: .long, time: .shortened))
+                LabeledContent(String(localized: "label_created"), value: mole.createdAt.formatted(date: .long, time: .shortened))
+                LabeledContent(String(localized: "label_last_modified"), value: mole.lastModified.formatted(date: .long, time: .shortened))
             }
             
             // Reference Image Section
@@ -145,7 +148,7 @@ struct MoleDetailView: View {
                             }
                             
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("Referenzbild für Overlay")
+                                Text(String(localized: "overlay_reference_for"))
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
                                 Text(refImage.captureDate.formatted(date: .abbreviated, time: .omitted))
@@ -156,7 +159,7 @@ struct MoleDetailView: View {
                             Spacer()
                             
                             if mole.referenceImageID != nil {
-                                Button("Zurücksetzen") {
+                                Button(String(localized: "reference_reset_action")) {
                                     mole.clearReferenceImage()
                                 }
                                 .font(.caption)
@@ -166,39 +169,39 @@ struct MoleDetailView: View {
                     
                     if mole.images.count >= 2 {
                         NavigationLink(destination: ReferenceImageSelectionView(mole: mole)) {
-                            Label("Referenzbild ändern", systemImage: "photo.on.rectangle.angled")
+                            Label(String(localized: "reference_change_action"), systemImage: "photo.on.rectangle.angled")
                         }
                     }
                 } header: {
-                    Text("Overlay-Einstellungen")
+                    Text(String(localized: "section_overlay_settings"))
                 } footer: {
-                    Text("Das Referenzbild wird beim Fotografieren als halbtransparentes Overlay angezeigt. Standard: Ältestes Bild (erste Aufnahme).")
+                    Text(String(localized: "overlay_footer_text"))
                         .font(.caption)
                 }
             }
             
             // Comparison Section
             if mole.images.count >= 2 {
-                Section("Vergleich") {
+                Section(String(localized: "section_comparison")) {
                     Button(action: { showingComparison = true }) {
-                        Label("Bilder vergleichen", systemImage: "arrow.left.and.right.square")
+                        Label(String(localized: "action_compare"), systemImage: "arrow.left.and.right.square")
                     }
                 }
             }
         }
-        .navigationTitle("Leberfleck Details")
+        .navigationTitle(String(localized: "title_mole_detail"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Menu {
                     Button(action: { exportMole() }) {
-                        Label("Exportieren", systemImage: "square.and.arrow.up")
+                        Label(String(localized: "action_export"), systemImage: "square.and.arrow.up")
                     }
                     
                     Divider()
                     
                     Button(role: .destructive, action: { showingDeleteConfirmation = true }) {
-                        Label("Leberfleck löschen", systemImage: "trash")
+                        Label(String(localized: "mole_delete_action"), systemImage: "trash")
                     }
                 } label: {
                     Image(systemName: "ellipsis.circle")
@@ -206,13 +209,13 @@ struct MoleDetailView: View {
                 .disabled(isExporting)
             }
         }
-        .alert("Leberfleck löschen?", isPresented: $showingDeleteConfirmation) {
-            Button("Abbrechen", role: .cancel) { }
-            Button("Löschen", role: .destructive) {
+        .alert(String(localized: "delete_title_mole"), isPresented: $showingDeleteConfirmation) {
+            Button(String(localized: "action_cancel"), role: .cancel) { }
+            Button(String(localized: "action_delete"), role: .destructive) {
                 deleteMole()
             }
         } message: {
-            Text("Möchten Sie diesen Leberfleck mit allen \(mole.imageCount) Bildern wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.")
+            Text(String(localized: "delete_confirmation_mole", defaultValue: "Do you really want to delete this mole with all \(mole.imageCount) images? This action cannot be undone.", comment: "Delete confirmation message with image count"))
         }
         .sheet(isPresented: $showingCamera) {
             CameraView(referenceImage: mole.referenceImage?.uiImage) { image in
@@ -236,7 +239,7 @@ struct MoleDetailView: View {
                     VStack(spacing: 16) {
                         ProgressView()
                             .scaleEffect(1.5)
-                        Text("Exportiere Leberfleck...")
+                        Text(String(localized: "exporting_mole"))
                             .font(.headline)
                     }
                     .padding(32)
@@ -253,12 +256,12 @@ struct MoleDetailView: View {
                 .font(.system(size: 40))
                 .foregroundColor(.gray)
             
-            Text("Noch keine Bilder")
+            Text(String(localized: "empty_images_message"))
                 .font(.subheadline)
                 .foregroundColor(.secondary)
             
             Button(action: { showingCamera = true }) {
-                Label("Erstes Foto aufnehmen", systemImage: "camera.fill")
+                Label(String(localized: "take_first_photo"), systemImage: "camera.fill")
             }
             .buttonStyle(.borderedProminent)
         }
@@ -428,9 +431,9 @@ struct ImageDetailView: View {
             
             // Image info
             VStack(alignment: .leading, spacing: 8) {
-                Text("Aufgenommen: \(image.captureDate.formatted(date: .long, time: .shortened))")
+                Text("\(String(localized: "label_captured")): \(image.captureDate.formatted(date: .long, time: .shortened))")
                     .font(.caption)
-                Text("Auflösung: \(image.imageWidth) × \(image.imageHeight)")
+                Text("\(String(localized: "label_resolution")): \(image.imageWidth) × \(image.imageHeight)")
                     .font(.caption)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -440,7 +443,7 @@ struct ImageDetailView: View {
             // Compare button (only show if mole has more than 1 image)
             if let mole = image.mole, mole.images.count >= 2 {
                 Button(action: { showingComparison = true }) {
-                    Label("Mit anderem Bild vergleichen", systemImage: "arrow.left.and.right.square")
+                    Label(String(localized: "label_compare_with_other"), systemImage: "arrow.left.and.right.square")
                         .font(.headline)
                         .frame(maxWidth: .infinity)
                         .padding()
@@ -451,31 +454,31 @@ struct ImageDetailView: View {
                 .padding()
             }
         }
-        .navigationTitle("Bild")
+        .navigationTitle(String(localized: "title_image"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Menu {
                     Button(action: exportImage) {
-                        Label("Teilen", systemImage: "square.and.arrow.up")
+                        Label(String(localized: "action_share"), systemImage: "square.and.arrow.up")
                     }
                     .disabled(isExporting)
                     
                     Button(role: .destructive, action: { showingDeleteConfirmation = true }) {
-                        Label("Löschen", systemImage: "trash")
+                        Label(String(localized: "action_delete"), systemImage: "trash")
                     }
                 } label: {
                     Image(systemName: "ellipsis.circle")
                 }
             }
         }
-        .alert("Bild löschen?", isPresented: $showingDeleteConfirmation) {
-            Button("Abbrechen", role: .cancel) { }
-            Button("Löschen", role: .destructive) {
+        .alert(String(localized: "delete_title_image"), isPresented: $showingDeleteConfirmation) {
+            Button(String(localized: "action_cancel"), role: .cancel) { }
+            Button(String(localized: "action_delete"), role: .destructive) {
                 deleteImage()
             }
         } message: {
-            Text("Möchten Sie dieses Bild wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.")
+            Text(String(localized: "delete_confirmation_image"))
         }
         .sheet(isPresented: $showingComparison) {
             if let mole = image.mole {
@@ -537,7 +540,7 @@ struct ComparisonSelectionView: View {
         VStack(spacing: 0) {
             // Single list with numbered selection
             List {
-                Section("Zwei Bilder zum Vergleichen auswählen") {
+                Section(String(localized: "select_two_images")) {
                     ForEach(sortedImages) { image in
                         ImageSelectionRow(
                             image: image,
@@ -554,7 +557,7 @@ struct ComparisonSelectionView: View {
             // Compare button
             if selectedImage1 != nil && selectedImage2 != nil {
                 NavigationLink(destination: ComparisonView(image1: selectedImage1!, image2: selectedImage2!)) {
-                    Text("Bilder vergleichen")
+                    Text(String(localized: "action_compare"))
                         .font(.headline)
                         .frame(maxWidth: .infinity)
                         .padding()
@@ -565,11 +568,11 @@ struct ComparisonSelectionView: View {
                 .padding()
             }
         }
-        .navigationTitle("Bilder auswählen")
+        .navigationTitle(String(localized: "title_select_images"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Fertig") {
+                Button(String(localized: "action_done")) {
                     dismiss()
                 }
             }
@@ -685,7 +688,7 @@ struct ReferenceImageSelectionView: View {
                                     .font(.subheadline)
                                 
                                 if sortedImages.first?.id == image.id {
-                                    Text("Erste Aufnahme (Standard)")
+                                    Text(String(localized: "reference_first_capture"))
                                         .font(.caption)
                                         .foregroundColor(.secondary)
                                 }
@@ -708,17 +711,17 @@ struct ReferenceImageSelectionView: View {
                     .buttonStyle(.plain)
                 }
             } header: {
-                Text("Wähle ein Referenzbild")
+                Text(String(localized: "reference_select_header"))
             } footer: {
-                Text("Das ausgewählte Bild wird beim Fotografieren als halbtransparentes Overlay angezeigt. Die erste Aufnahme ist standardmäßig ausgewählt für langfristige Vergleichbarkeit.")
+                Text(String(localized: "reference_footer_text"))
                     .font(.caption)
             }
         }
-        .navigationTitle("Referenzbild")
+        .navigationTitle(String(localized: "title_reference_image"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Fertig") {
+                Button(String(localized: "action_done")) {
                     dismiss()
                 }
             }
