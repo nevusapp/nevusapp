@@ -20,6 +20,7 @@ struct ContentView: View {
     @State private var exportURL: URL?
     @State private var isExporting = false
     @State private var selectedOverview: BodyRegionOverview?
+    @State private var showingCleanup = false
     
     // Group moles by body region
     var groupedMoles: [(region: BodyRegion, moles: [Mole])] {
@@ -58,8 +59,12 @@ struct ContentView: View {
                             Button(action: { exportAllMoles() }) {
                                 Label(String(localized: "action_export_all"), systemImage: "square.and.arrow.up")
                             }
+                            
+                            Button(action: { showingCleanup = true }) {
+                                Label(String(localized: "cleanup_menu_item"), systemImage: "trash")
+                            }
                         } label: {
-                            Label(String(localized: "export_label"), systemImage: "square.and.arrow.up")
+                            Label(String(localized: "export_label"), systemImage: "ellipsis.circle")
                         }
                         .disabled(isExporting)
                     }
@@ -76,6 +81,9 @@ struct ContentView: View {
             }
             .sheet(item: $exportURL) { url in
                 ShareSheet(items: [url])
+            }
+            .sheet(isPresented: $showingCleanup) {
+                SessionCleanupView()
             }
             .overlay {
                 if isExporting {
