@@ -60,15 +60,7 @@ struct MoleDetailView: View {
                     imagesGridView
                 }
             } header: {
-                HStack {
-                    Text(String(localized: "section_images_count", defaultValue: "Images (\(mole.imageCount))", comment: "Section header with image count"))
-                    Spacer()
-                    Button(action: { showingCamera = true }) {
-                        Label(String(localized: "label_photo"), systemImage: "camera.fill")
-                            .font(.caption)
-                    }
-                    .disabled(isProcessingImage)
-                }
+                Text(String(localized: "section_images_count", defaultValue: "Images (\(mole.imageCount))", comment: "Section header with image count"))
             }
             
             // Notes Section
@@ -268,6 +260,13 @@ struct MoleDetailView: View {
         .navigationTitle(String(localized: "title_mole_detail"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: { showingCamera = true }) {
+                    Label(String(localized: "label_photo"), systemImage: "camera.fill")
+                }
+                .disabled(isProcessingImage)
+            }
+            
             ToolbarItem(placement: .navigationBarTrailing) {
                 Menu {
                     Button(action: { exportMole() }) {
@@ -632,7 +631,11 @@ struct ComparisonSelectionView: View {
             
             // Compare button
             if selectedImage1 != nil && selectedImage2 != nil {
-                NavigationLink(destination: ComparisonView(image1: selectedImage1!, image2: selectedImage2!)) {
+                // Ensure older image is passed as image1, newer as image2
+                let olderImage = selectedImage1!.captureDate < selectedImage2!.captureDate ? selectedImage1! : selectedImage2!
+                let newerImage = selectedImage1!.captureDate < selectedImage2!.captureDate ? selectedImage2! : selectedImage1!
+                
+                NavigationLink(destination: ComparisonView(image1: olderImage, image2: newerImage)) {
                     Text(String(localized: "action_compare"))
                         .font(.headline)
                         .frame(maxWidth: .infinity)
