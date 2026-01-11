@@ -22,6 +22,17 @@ class ExportService {
         
         let exportDir = documentsDir.appendingPathComponent("MoleExport_\(UUID().uuidString)")
         
+        // Ensure cleanup always happens, even on error
+        defer {
+            do {
+                if fileManager.fileExists(atPath: exportDir.path) {
+                    try fileManager.removeItem(at: exportDir)
+                }
+            } catch {
+                print("⚠️ Cleanup failed for \(exportDir.path): \(error.localizedDescription)")
+            }
+        }
+        
         do {
             try fileManager.createDirectory(at: exportDir, withIntermediateDirectories: true)
             
@@ -49,12 +60,9 @@ class ExportService {
             let zipURL = documentsDir.appendingPathComponent("MoleExport_\(mole.id.uuidString).zip")
             try zipDirectory(at: exportDir, to: zipURL)
             
-            // Clean up temp directory
-            try? fileManager.removeItem(at: exportDir)
-            
             return zipURL
         } catch {
-            print("Export error: \(error)")
+            print("❌ Export error: \(error.localizedDescription)")
             return nil
         }
     }
@@ -69,6 +77,17 @@ class ExportService {
         }
         
         let exportDir = documentsDir.appendingPathComponent("AllMolesExport_\(UUID().uuidString)")
+        
+        // Ensure cleanup always happens, even on error
+        defer {
+            do {
+                if fileManager.fileExists(atPath: exportDir.path) {
+                    try fileManager.removeItem(at: exportDir)
+                }
+            } catch {
+                print("⚠️ Cleanup failed for \(exportDir.path): \(error.localizedDescription)")
+            }
+        }
         
         do {
             try fileManager.createDirectory(at: exportDir, withIntermediateDirectories: true)
@@ -107,12 +126,9 @@ class ExportService {
             let zipURL = documentsDir.appendingPathComponent("AllMoles_\(Date().formatted(date: .numeric, time: .omitted)).zip")
             try zipDirectory(at: exportDir, to: zipURL)
             
-            // Clean up temp directory
-            try? fileManager.removeItem(at: exportDir)
-            
             return zipURL
         } catch {
-            print("Export error: \(error)")
+            print("❌ Export error: \(error.localizedDescription)")
             return nil
         }
     }
