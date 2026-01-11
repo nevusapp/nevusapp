@@ -59,9 +59,7 @@ class CameraService: NSObject, ObservableObject {
     private func setupCamera() {
         // Only setup once
         guard !isSetupComplete else {
-            DispatchQueue.main.async {
-                self.isCameraReady = true
-            }
+            isCameraReady = true
             return
         }
         
@@ -100,10 +98,7 @@ class CameraService: NSObject, ObservableObject {
         
         captureSession.commitConfiguration()
         isSetupComplete = true
-        
-        DispatchQueue.main.async {
-            self.isCameraReady = true
-        }
+        isCameraReady = true
     }
     
     func startSession() {

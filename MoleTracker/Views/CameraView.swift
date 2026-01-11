@@ -177,10 +177,8 @@ struct CameraView: View {
                 }
             }
 
-            // Small delay to ensure preview layer is ready
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                cameraService.startSession()
-            }
+            // Start session immediately - no delay needed
+            cameraService.startSession()
         }
         .onDisappear {
             cameraService.stopSession()
