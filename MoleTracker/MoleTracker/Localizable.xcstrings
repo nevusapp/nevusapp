@@ -3436,6 +3436,40 @@
     },
     "Zusammenfassung anzeigen" : {
 
+    },
+    "notification_reminder_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeit für einen neuen Scan"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time for a New Scan"
+          }
+        }
+      }
+    },
+    "notification_reminder_body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es ist ein Monat seit Ihrem letzten geführten Scan vergangen. Führen Sie jetzt einen neuen Scan durch, um Ihre Leberflecke zu überwachen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It's been a month since your last guided scan. Perform a new scan now to monitor your moles."
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

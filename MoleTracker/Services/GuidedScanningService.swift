@@ -96,6 +96,9 @@ class GuidedScanningService: ObservableObject {
         currentMoleIndex = 0
         molesToScan.removeAll()
         // Keep originalTotalCount for summary display
+        
+        // Record completion date and schedule notifications
+        NotificationService.shared.recordGuidedScanCompletion()
     }
     
     /// Cancel scanning session
