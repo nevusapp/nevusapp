@@ -19,11 +19,12 @@ struct RegionOverviewView: View {
     
     init(region: BodyRegion) {
         self.region = region
-        // Filter overviews for this region - use legacyRawValue for backward compatibility
-        let regionName = region.legacyRawValue
+        // Filter overviews for this region - check both legacy and new format
+        let legacyName = region.legacyRawValue
+        let newName = region.rawValue
         _overviews = Query(
             filter: #Predicate<BodyRegionOverview> { overview in
-                overview.bodyRegion == regionName
+                overview.bodyRegion == legacyName || overview.bodyRegion == newName
             },
             sort: \BodyRegionOverview.captureDate,
             order: .reverse

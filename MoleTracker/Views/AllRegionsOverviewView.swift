@@ -13,6 +13,7 @@ struct AllRegionsOverviewView: View {
     @Query(sort: \BodyRegionOverview.captureDate, order: .reverse)
     private var allOverviews: [BodyRegionOverview]
     @State private var selectedRegion: BodyRegion?
+    @State private var selectedOverview: BodyRegionOverview?
     
     // Group overviews by body region
     private func overviews(for region: BodyRegion) -> [BodyRegionOverview] {
@@ -75,7 +76,9 @@ struct AllRegionsOverviewView: View {
                                 GridItem(.flexible(), spacing: 8)
                             ], spacing: 8) {
                                 ForEach(regionOverviews.prefix(6)) { overview in
-                                    NavigationLink(destination: RegionOverviewView(region: region)) {
+                                    Button(action: {
+                                        selectedOverview = overview
+                                    }) {
                                         if let thumbnail = overview.thumbnailImage {
                                             Image(uiImage: thumbnail)
                                                 .resizable()
@@ -125,6 +128,11 @@ struct AllRegionsOverviewView: View {
         }
         .navigationTitle(String(localized: "all_regions_overview_title"))
         .navigationBarTitleDisplayMode(.large)
+        .sheet(item: $selectedOverview) { overview in
+            NavigationStack {
+                OverviewImageDetailView(overview: overview)
+            }
+        }
     }
 }
 
