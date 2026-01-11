@@ -106,6 +106,52 @@ struct MoleDetailView: View {
                 LabeledContent("Zuletzt geändert", value: mole.lastModified.formatted(date: .long, time: .shortened))
             }
             
+            // Reference Image Section
+            if mole.images.count >= 1 {
+                Section {
+                    if let refImage = mole.referenceImage {
+                        HStack {
+                            if let thumbnail = refImage.thumbnailImage {
+                                Image(uiImage: thumbnail)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 60, height: 60)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                            }
+                            
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Referenzbild für Overlay")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                Text(refImage.captureDate.formatted(date: .abbreviated, time: .omitted))
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                            
+                            Spacer()
+                            
+                            if mole.referenceImageID != nil {
+                                Button("Zurücksetzen") {
+                                    mole.clearReferenceImage()
+                                }
+                                .font(.caption)
+                            }
+                        }
+                    }
+                    
+                    if mole.images.count >= 2 {
+                        NavigationLink(destination: ReferenceImageSelectionView(mole: mole)) {
+                            Label("Referenzbild ändern", systemImage: "photo.on.rectangle.angled")
+                        }
+                    }
+                } header: {
+                    Text("Overlay-Einstellungen")
+                } footer: {
+                    Text("Das Referenzbild wird beim Fotografieren als halbtransparentes Overlay angezeigt. Standard: Ältestes Bild (erste Aufnahme).")
+                        .font(.caption)
+                }
+            }
+            
             // Comparison Section
             if mole.images.count >= 2 {
                 Section("Vergleich") {
@@ -130,7 +176,7 @@ struct MoleDetailView: View {
             }
         }
         .sheet(isPresented: $showingCamera) {
-            CameraView { image in
+            CameraView(referenceImage: mole.referenceImage?.uiImage) { image in
                 addImage(image)
             }
         }
@@ -191,20 +237,33 @@ struct MoleDetailView: View {
                     Button(action: {
                         selectedImageForDetail = image
                     }) {
-                        if let thumbnail = image.thumbnailImage {
-                            Image(uiImage: thumbnail)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 100, height: 100)
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                                .overlay(alignment: .bottomTrailing) {
-                                    Text(image.captureDate.formatted(date: .abbreviated, time: .omitted))
-                                        .font(.caption2)
-                                        .padding(4)
-                                        .background(.ultraThinMaterial)
-                                        .clipShape(RoundedRectangle(cornerRadius: 4))
-                                        .padding(4)
-                                }
+                        ZStack(alignment: .topLeading) {
+                            if let thumbnail = image.thumbnailImage {
+                                Image(uiImage: thumbnail)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 100, height: 100)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                                    .overlay(alignment: .bottomTrailing) {
+                                        Text(image.captureDate.formatted(date: .abbreviated, time: .omitted))
+                                            .font(.caption2)
+                                            .padding(4)
+                                            .background(.ultraThinMaterial)
+                                            .clipShape(RoundedRectangle(cornerRadius: 4))
+                                            .padding(4)
+                                    }
+                            }
+                            
+                            // Reference image indicator
+                            if mole.referenceImage?.id == image.id {
+                                Image(systemName: "star.fill")
+                                    .font(.caption)
+                                    .foregroundColor(.yellow)
+                                    .padding(4)
+                                    .background(Color.black.opacity(0.6))
+                                    .clipShape(Circle())
+                                    .padding(4)
+                            }
                         }
                     }
                     .buttonStyle(.plain)
@@ -295,11 +354,14 @@ struct MoleDetailView: View {
 // MARK: - Image Detail View
 struct ImageDetailView: View {
     let image: MoleImage
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
     @State private var scale: CGFloat = 1.0
     @State private var lastScale: CGFloat = 1.0
     @State private var showingComparison = false
     @State private var exportURL: URL?
     @State private var isExporting = false
+    @State private var showingDeleteConfirmation = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -349,15 +411,27 @@ struct ImageDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: exportImage) {
-                    if isExporting {
-                        ProgressView()
-                    } else {
-                        Image(systemName: "square.and.arrow.up")
+                Menu {
+                    Button(action: exportImage) {
+                        Label("Teilen", systemImage: "square.and.arrow.up")
                     }
+                    .disabled(isExporting)
+                    
+                    Button(role: .destructive, action: { showingDeleteConfirmation = true }) {
+                        Label("Löschen", systemImage: "trash")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
                 }
-                .disabled(isExporting)
             }
+        }
+        .alert("Bild löschen?", isPresented: $showingDeleteConfirmation) {
+            Button("Abbrechen", role: .cancel) { }
+            Button("Löschen", role: .destructive) {
+                deleteImage()
+            }
+        } message: {
+            Text("Möchten Sie dieses Bild wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.")
         }
         .sheet(isPresented: $showingComparison) {
             if let mole = image.mole {
@@ -386,6 +460,14 @@ struct ImageDetailView: View {
                 }
             }
         }
+    }
+    
+    private func deleteImage() {
+        if let mole = image.mole {
+            mole.updateModifiedDate()
+        }
+        modelContext.delete(image)
+        dismiss()
     }
 }
 
@@ -523,6 +605,80 @@ struct ImageSelectionRow: View {
             }
         }
         .padding(.vertical, 4)
+    }
+}
+
+// MARK: - Reference Image Selection View
+struct ReferenceImageSelectionView: View {
+    @Bindable var mole: Mole
+    @Environment(\.dismiss) private var dismiss
+    
+    var sortedImages: [MoleImage] {
+        mole.images.sorted(by: { $0.captureDate < $1.captureDate }) // Oldest first
+    }
+    
+    var body: some View {
+        List {
+            Section {
+                ForEach(sortedImages) { image in
+                    Button(action: {
+                        mole.setReferenceImage(image)
+                        dismiss()
+                    }) {
+                        HStack(spacing: 12) {
+                            // Thumbnail
+                            if let thumbnail = image.thumbnailImage {
+                                Image(uiImage: thumbnail)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 80, height: 80)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                            }
+                            
+                            // Info
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(image.captureDate.formatted(date: .long, time: .shortened))
+                                    .font(.subheadline)
+                                
+                                if sortedImages.first?.id == image.id {
+                                    Text("Erste Aufnahme (Standard)")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                                
+                                Text("\(image.imageWidth) × \(image.imageHeight)")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                            
+                            Spacer()
+                            
+                            // Selection indicator
+                            if mole.referenceImage?.id == image.id {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.accentColor)
+                                    .font(.title2)
+                            }
+                        }
+                    }
+                    .buttonStyle(.plain)
+                }
+            } header: {
+                Text("Wähle ein Referenzbild")
+            } footer: {
+                Text("Das ausgewählte Bild wird beim Fotografieren als halbtransparentes Overlay angezeigt. Die erste Aufnahme ist standardmäßig ausgewählt für langfristige Vergleichbarkeit.")
+                    .font(.caption)
+            }
+        }
+        .navigationTitle("Referenzbild")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Fertig") {
+                    dismiss()
+                }
+            }
+        }
     }
 }
 

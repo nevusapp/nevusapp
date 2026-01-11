@@ -17,6 +17,9 @@ final class Mole {
     var bodySide: String
     var notes: String
     
+    // Reference image ID for overlay mode (defaults to oldest image)
+    var referenceImageID: UUID?
+    
     @Relationship(deleteRule: .cascade)
     var images: [MoleImage]
     
@@ -27,6 +30,7 @@ final class Mole {
         self.bodyRegion = bodyRegion
         self.bodySide = bodySide
         self.notes = ""
+        self.referenceImageID = nil
         self.images = []
     }
     
@@ -36,6 +40,30 @@ final class Mole {
     
     var latestImage: MoleImage? {
         images.sorted(by: { $0.captureDate > $1.captureDate }).first
+    }
+    
+    // Get the reference image for overlay mode
+    var referenceImage: MoleImage? {
+        // If a specific reference is set, use it
+        if let refID = referenceImageID,
+           let image = images.first(where: { $0.id == refID }) {
+            return image
+        }
+        
+        // Otherwise, default to the oldest image (first captured)
+        return images.sorted(by: { $0.captureDate < $1.captureDate }).first
+    }
+    
+    // Set a specific image as reference for overlay
+    func setReferenceImage(_ image: MoleImage) {
+        self.referenceImageID = image.id
+        updateModifiedDate()
+    }
+    
+    // Clear reference image (will default to oldest)
+    func clearReferenceImage() {
+        self.referenceImageID = nil
+        updateModifiedDate()
     }
     
     func updateModifiedDate() {

@@ -2,14 +2,6 @@
 //  MoleTrackerApp.swift
 //  MoleTracker
 //
-//  Created by Wolfram Richter on 06.01.26.
-//
-
-
-//
-//  MoleTrackerApp.swift
-//  MoleTracker
-//
 //  Created on 06.01.2026.
 //
 
@@ -22,6 +14,6 @@ struct MoleTrackerApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: [Mole.self, MoleImage.self])
+        .modelContainer(for: [Mole.self, MoleImage.self, BodyRegionOverview.self])
     }
 }

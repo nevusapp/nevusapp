@@ -11,12 +11,15 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var moles: [Mole]
+    @Query(sort: \BodyRegionOverview.captureDate, order: .reverse)
+    private var allOverviews: [BodyRegionOverview]
     @State private var showingAddMole = false
     @State private var showingCamera = false
     @State private var selectedMole: Mole?
     @State private var showingExportSheet = false
     @State private var exportURL: URL?
     @State private var isExporting = false
+    @State private var selectedOverview: BodyRegionOverview?
     
     // Group moles by body region
     var groupedMoles: [(region: BodyRegion, moles: [Mole])] {
@@ -29,6 +32,11 @@ struct ContentView: View {
             let sortedMoles = molesInRegion.sorted { $0.lastModified > $1.lastModified }
             return (region: region, moles: sortedMoles)
         }
+    }
+    
+    // Get overviews for a specific region
+    func overviews(for region: BodyRegion) -> [BodyRegionOverview] {
+        allOverviews.filter { $0.bodyRegion == region.rawValue }
     }
     
     var body: some View {
@@ -117,7 +125,78 @@ struct ContentView: View {
     private var moleListView: some View {
         List {
             ForEach(groupedMoles, id: \.region) { group in
-                Section(header: Text(group.region.rawValue)) {
+                Section {
+                    // Overview images horizontal scroll
+                    let regionOverviews = overviews(for: group.region)
+                    if !regionOverviews.isEmpty {
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack {
+                                Text("Übersichtsbilder")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                Spacer()
+                                NavigationLink(destination: RegionOverviewView(region: group.region)) {
+                                    Text("Alle anzeigen")
+                                        .font(.caption)
+                                }
+                            }
+                            
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 12) {
+                                    ForEach(regionOverviews.prefix(5)) { overview in
+                                        Button(action: {
+                                            selectedOverview = overview
+                                        }) {
+                                            if let thumbnail = overview.thumbnailImage {
+                                                Image(uiImage: thumbnail)
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 100, height: 100)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                                                    .overlay(
+                                                        RoundedRectangle(cornerRadius: 8)
+                                                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                                                    )
+                                            }
+                                        }
+                                        .buttonStyle(.plain)
+                                    }
+                                    
+                                    // Add button
+                                    NavigationLink(destination: RegionOverviewView(region: group.region)) {
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .fill(Color.gray.opacity(0.1))
+                                            .frame(width: 100, height: 100)
+                                            .overlay {
+                                                VStack(spacing: 4) {
+                                                    Image(systemName: "plus.circle.fill")
+                                                        .font(.title2)
+                                                        .foregroundColor(.accentColor)
+                                                    Text("Hinzufügen")
+                                                        .font(.caption2)
+                                                        .foregroundColor(.secondary)
+                                                }
+                                            }
+                                    }
+                                }
+                                .padding(.vertical, 4)
+                            }
+                        }
+                        .padding(.vertical, 4)
+                    } else {
+                        // Show button if no overviews exist
+                        NavigationLink(destination: RegionOverviewView(region: group.region)) {
+                            HStack {
+                                Image(systemName: "photo.on.rectangle.angled")
+                                    .foregroundColor(.accentColor)
+                                Text("Übersichtsbilder hinzufügen")
+                                    .foregroundColor(.accentColor)
+                                Spacer()
+                            }
+                        }
+                    }
+                    
+                    // Individual moles
                     ForEach(group.moles) { mole in
                         NavigationLink(destination: MoleDetailView(mole: mole)) {
                             MoleRowView(mole: mole)
@@ -126,7 +205,14 @@ struct ContentView: View {
                     .onDelete { offsets in
                         deleteMoles(offsets: offsets, from: group.moles)
                     }
+                } header: {
+                    Text(group.region.rawValue)
                 }
+            }
+        }
+        .sheet(item: $selectedOverview) { overview in
+            NavigationStack {
+                OverviewImageDetailView(overview: overview)
             }
         }
     }
