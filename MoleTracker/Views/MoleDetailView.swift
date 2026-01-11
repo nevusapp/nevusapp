@@ -67,17 +67,26 @@ struct MoleDetailView: View {
                     TextEditor(text: $mole.notes)
                         .frame(minHeight: 100)
                 } else {
-                    if mole.notes.isEmpty {
-                        Text("Keine Notizen")
-                            .foregroundColor(.secondary)
-                            .italic()
-                    } else {
-                        Text(mole.notes)
+                    ZStack(alignment: .topLeading) {
+                        // Invisible background to make entire area tappable
+                        Color.clear
+                            .frame(minHeight: 60)
+                        
+                        if mole.notes.isEmpty {
+                            Text("Keine Notizen")
+                                .foregroundColor(.secondary)
+                                .italic()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        } else {
+                            Text(mole.notes)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        isEditingNotes.toggle()
                     }
                 }
-            }
-            .onTapGesture {
-                isEditingNotes.toggle()
             }
             
             // Details Section
