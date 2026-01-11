@@ -129,8 +129,14 @@ enum BodyRegion: String, CaseIterable, Identifiable {
         }
     }
     
-    // Initialize from legacy string value
+    // Initialize from legacy string value or enum rawValue
     static func from(legacyValue: String) -> BodyRegion {
+        // First try to match enum rawValue (new format)
+        if let region = BodyRegion(rawValue: legacyValue) {
+            return region
+        }
+        
+        // Fall back to legacy string matching
         switch legacyValue {
         case "Kopf": return .head
         case "Hals": return .neck
@@ -151,6 +157,24 @@ enum BodyRegion: String, CaseIterable, Identifiable {
     // Order for display in grouped list
     static var displayOrder: [BodyRegion] {
         [.head, .neck, .armLeft, .armRight, .chest, .abdomen, .pelvis, .backUpper, .backMiddle, .backLower, .legLeft, .legRight]
+    }
+    
+    // Sorting order from top to bottom of body (for guided scanning/comparison)
+    var sortOrder: Int {
+        switch self {
+        case .head: return 0
+        case .neck: return 1
+        case .armLeft: return 2
+        case .armRight: return 3
+        case .chest: return 4
+        case .abdomen: return 5
+        case .pelvis: return 6
+        case .backUpper: return 7
+        case .backMiddle: return 8
+        case .backLower: return 9
+        case .legLeft: return 10
+        case .legRight: return 11
+        }
     }
 }
 

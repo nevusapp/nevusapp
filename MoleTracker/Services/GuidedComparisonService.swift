@@ -49,8 +49,19 @@ class GuidedComparisonService: ObservableObject {
         // Filter moles that have at least 2 images for comparison
         let comparableMoles = moles.filter { $0.imageCount >= 2 }
         
-        // Sort by last modified (oldest first)
-        self.molesToCompare = comparableMoles.sorted { $0.lastModified < $1.lastModified }
+        // Sort moles from top to bottom of body based on body region
+        self.molesToCompare = comparableMoles.sorted { mole1, mole2 in
+            let region1 = BodyRegion.from(legacyValue: mole1.bodyRegion)
+            let region2 = BodyRegion.from(legacyValue: mole2.bodyRegion)
+            
+            // Primary sort: by body region (top to bottom)
+            if region1.sortOrder != region2.sortOrder {
+                return region1.sortOrder < region2.sortOrder
+            }
+            
+            // Secondary sort: by last modified (oldest first) within same region
+            return mole1.lastModified < mole2.lastModified
+        }
         self.originalTotalCount = comparableMoles.count
         self.currentMoleIndex = 0
         self.comparedMoles.removeAll()

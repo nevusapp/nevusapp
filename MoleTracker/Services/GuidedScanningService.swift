@@ -45,7 +45,19 @@ class GuidedScanningService: ObservableObject {
     
     /// Start guided scanning session with given moles
     func startScanning(moles: [Mole]) {
-        self.molesToScan = moles.sorted { $0.lastModified < $1.lastModified } // Oldest first
+        // Sort moles from top to bottom of body based on body region
+        self.molesToScan = moles.sorted { mole1, mole2 in
+            let region1 = BodyRegion.from(legacyValue: mole1.bodyRegion)
+            let region2 = BodyRegion.from(legacyValue: mole2.bodyRegion)
+            
+            // Primary sort: by body region (top to bottom)
+            if region1.sortOrder != region2.sortOrder {
+                return region1.sortOrder < region2.sortOrder
+            }
+            
+            // Secondary sort: by last modified (oldest first) within same region
+            return mole1.lastModified < mole2.lastModified
+        }
         self.originalTotalCount = moles.count
         self.currentMoleIndex = 0
         self.scannedMoles.removeAll()
