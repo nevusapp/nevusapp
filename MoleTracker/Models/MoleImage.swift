@@ -22,13 +22,6 @@ final class MoleImage {
     var imageWidth: Int
     var imageHeight: Int
     
-    // Sensor data (for future use)
-    var pitch: Double
-    var roll: Double
-    var yaw: Double
-    var barometricPressure: Double?
-    var altitude: Double?
-    
     // Relationship
     var mole: Mole?
     
@@ -39,9 +32,6 @@ final class MoleImage {
         self.thumbnailData = thumbnailData
         self.imageWidth = width
         self.imageHeight = height
-        self.pitch = 0
-        self.roll = 0
-        self.yaw = 0
     }
     
     // Convenience initializer from UIImage (synchronous - use for immediate creation)

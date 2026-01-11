@@ -181,13 +181,6 @@ class ExportService {
                 "width": image.imageWidth,
                 "height": image.imageHeight
             ],
-            "sensorData": [
-                "pitch": image.pitch,
-                "roll": image.roll,
-                "yaw": image.yaw,
-                "barometricPressure": image.barometricPressure ?? 0,
-                "altitude": image.altitude ?? 0
-            ],
             "moleInfo": [
                 "bodyRegion": mole.bodyRegion,
                 "bodySide": mole.bodySide,
