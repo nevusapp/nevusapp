@@ -54,8 +54,14 @@ struct ContentView: View {
             .navigationTitle(String(localized: "title_mole_list"))
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    if !moles.isEmpty {
-                        Menu {
+                    Menu {
+                        NavigationLink(destination: AllRegionsOverviewView()) {
+                            Label(String(localized: "all_regions_overview_menu"), systemImage: "square.grid.2x2")
+                        }
+                        
+                        if !moles.isEmpty {
+                            Divider()
+                            
                             Button(action: { exportAllMoles() }) {
                                 Label(String(localized: "action_export_all"), systemImage: "square.and.arrow.up")
                             }
@@ -63,11 +69,11 @@ struct ContentView: View {
                             Button(action: { showingCleanup = true }) {
                                 Label(String(localized: "cleanup_menu_item"), systemImage: "trash")
                             }
-                        } label: {
-                            Label(String(localized: "export_label"), systemImage: "ellipsis.circle")
                         }
-                        .disabled(isExporting)
+                    } label: {
+                        Label(String(localized: "menu_label"), systemImage: "ellipsis.circle")
                     }
+                    .disabled(isExporting)
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
