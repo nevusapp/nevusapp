@@ -345,7 +345,7 @@ struct MoleRowView: View {
             
             // Info
             VStack(alignment: .leading, spacing: 4) {
-                Text("\(localizedRegion) - \(localizedSide)")
+                Text(localizedSide)
                     .font(.headline)
                 
                 HStack(spacing: 12) {

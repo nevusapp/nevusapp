@@ -1,16 +1,6 @@
 {
   "sourceLanguage" : "de",
   "strings" : {
-    "%@ - %@" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ - %2$@"
-          }
-        }
-      }
-    },
     "%@:" : {
 
     },
@@ -1539,23 +1529,6 @@
         }
       }
     },
-    "cleanup_total_storage" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gesamtgröße"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Total Size"
-          }
-        }
-      }
-    },
     "cleanup_summary" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1586,6 +1559,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clean Up Storage"
+          }
+        }
+      }
+    },
+    "cleanup_total_storage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gesamtgröße"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total Size"
           }
         }
       }
