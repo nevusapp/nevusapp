@@ -22,6 +22,8 @@ struct ContentView: View {
     @State private var isExporting = false
     @State private var selectedOverview: BodyRegionOverview?
     @State private var showingCleanup = false
+    @State private var moleToDelete: Mole?
+    @State private var showingDeleteConfirmation = false
     
     // Group moles by body region
     var groupedMoles: [(region: BodyRegion, moles: [Mole])] {
@@ -225,7 +227,7 @@ struct ContentView: View {
                         }
                     }
                     .onDelete { offsets in
-                        deleteMoles(offsets: offsets, from: group.moles)
+                        confirmDeleteMoles(offsets: offsets, from: group.moles)
                     }
                 } header: {
                     Text(group.region.localizedName)
@@ -237,11 +239,30 @@ struct ContentView: View {
                 OverviewImageDetailView(overview: overview)
             }
         }
+        .alert(
+            String(localized: "action_delete"),
+            isPresented: $showingDeleteConfirmation,
+            presenting: moleToDelete
+        ) { mole in
+            Button(String(localized: "action_cancel"), role: .cancel) {
+                moleToDelete = nil
+            }
+            Button(String(localized: "action_delete"), role: .destructive) {
+                if let mole = moleToDelete {
+                    modelContext.delete(mole)
+                    moleToDelete = nil
+                }
+            }
+        } message: { mole in
+            Text(String(localized: "delete_confirmation_mole", defaultValue: "Do you really want to delete this mole with all \(mole.imageCount) images? This action cannot be undone."))
+        }
     }
     
-    private func deleteMoles(offsets: IndexSet, from moles: [Mole]) {
-        for index in offsets {
-            modelContext.delete(moles[index])
+    private func confirmDeleteMoles(offsets: IndexSet, from moles: [Mole]) {
+        // For swipe to delete, we only handle single item deletion
+        if let index = offsets.first {
+            moleToDelete = moles[index]
+            showingDeleteConfirmation = true
         }
     }
     
