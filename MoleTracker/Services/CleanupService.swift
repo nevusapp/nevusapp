@@ -10,12 +10,22 @@ class CleanupService {
         let date: Date
         var photoCount: Int
         var deletablePhotoCount: Int
+        var totalStorageBytes: Int64
+        var deletableStorageBytes: Int64
         
         var dateString: String {
             let formatter = DateFormatter()
             formatter.dateStyle = .medium
             formatter.timeStyle = .none
             return formatter.string(from: date)
+        }
+        
+        var totalStorageString: String {
+            formatBytes(totalStorageBytes)
+        }
+        
+        var deletableStorageString: String {
+            formatBytes(deletableStorageBytes)
         }
         
         func hash(into hasher: inout Hasher) {
@@ -28,9 +38,9 @@ class CleanupService {
     }
     
     /// Get all recording sessions grouped by calendar date
-    /// Overview images are included in the count but NOT marked as deletable
+    /// Overview images and reference images are included in the count but NOT marked as deletable
     static func getRecordingSessions(from moles: [Mole], overviews: [BodyRegionOverview]) -> [RecordingSession] {
-        var sessionDict: [Date: (total: Int, deletable: Int)] = [:]
+        var sessionDict: [Date: (total: Int, deletable: Int, totalBytes: Int64, deletableBytes: Int64)] = [:]
         let calendar = Calendar.current
         
         // Process mole images
@@ -48,16 +58,33 @@ class CleanupService {
             // Count total and deletable images per date
             for (date, images) in imagesByDate {
                 let totalCount = images.count
-                // All images except the last one (most recent) can be deleted
-                let deletableCount = max(0, totalCount - 1)
+                let totalBytes = images.reduce(Int64(0)) { $0 + Int64($1.imageData.count) }
+                
+                // Sort images by timestamp to identify deletable ones
+                let sortedImages = images.sorted { $0.captureDate < $1.captureDate }
+                let candidatesForDeletion = sortedImages.dropLast()
+                
+                // Filter out reference image from deletable candidates
+                let deletableImages = candidatesForDeletion.filter { image in
+                    // Keep reference image (don't mark as deletable)
+                    if let refID = mole.referenceImageID, image.id == refID {
+                        return false
+                    }
+                    return true
+                }
+                
+                let deletableCount = deletableImages.count
+                let deletableBytes = deletableImages.reduce(Int64(0)) { $0 + Int64($1.imageData.count) }
                 
                 if let existing = sessionDict[date] {
                     sessionDict[date] = (
                         total: existing.total + totalCount,
-                        deletable: existing.deletable + deletableCount
+                        deletable: existing.deletable + deletableCount,
+                        totalBytes: existing.totalBytes + totalBytes,
+                        deletableBytes: existing.deletableBytes + deletableBytes
                     )
                 } else {
-                    sessionDict[date] = (total: totalCount, deletable: deletableCount)
+                    sessionDict[date] = (total: totalCount, deletable: deletableCount, totalBytes: totalBytes, deletableBytes: deletableBytes)
                 }
             }
         }
@@ -66,13 +93,17 @@ class CleanupService {
         for overview in overviews {
             let dateComponents = calendar.dateComponents([.year, .month, .day], from: overview.captureDate)
             if let normalizedDate = calendar.date(from: dateComponents) {
+                let overviewBytes = Int64(overview.imageData?.count ?? 0)
+                
                 if let existing = sessionDict[normalizedDate] {
                     sessionDict[normalizedDate] = (
                         total: existing.total + 1,
-                        deletable: existing.deletable // Don't add to deletable count
+                        deletable: existing.deletable, // Don't add to deletable count
+                        totalBytes: existing.totalBytes + overviewBytes,
+                        deletableBytes: existing.deletableBytes // Don't add to deletable bytes
                     )
                 } else {
-                    sessionDict[normalizedDate] = (total: 1, deletable: 0)
+                    sessionDict[normalizedDate] = (total: 1, deletable: 0, totalBytes: overviewBytes, deletableBytes: 0)
                 }
             }
         }
@@ -82,12 +113,14 @@ class CleanupService {
             RecordingSession(
                 date: date,
                 photoCount: counts.total,
-                deletablePhotoCount: counts.deletable
+                deletablePhotoCount: counts.deletable,
+                totalStorageBytes: counts.totalBytes,
+                deletableStorageBytes: counts.deletableBytes
             )
         }.sorted { $0.date > $1.date }
     }
     
-    /// Delete photos from selected sessions, keeping the last photo of each mole
+    /// Delete photos from selected sessions, keeping the last photo of each mole and reference images
     static func deletePhotosFromSessions(
         _ sessions: Set<RecordingSession>,
         moles: inout [Mole]
@@ -99,7 +132,7 @@ class CleanupService {
         var freedSpace: Int64 = 0
         
         for moleIndex in moles.indices {
-            var mole = moles[moleIndex]
+            let mole = moles[moleIndex]
             
             // Group images by calendar date
             var imagesByDate: [Date: [MoleImage]] = [:]
@@ -120,7 +153,16 @@ class CleanupService {
                     let sortedImages = images.sorted { $0.captureDate < $1.captureDate }
                     
                     // Mark all except the last one for deletion
-                    imagesToDelete.append(contentsOf: sortedImages.dropLast())
+                    let candidatesForDeletion = sortedImages.dropLast()
+                    
+                    // Filter out reference image (never delete it)
+                    for candidate in candidatesForDeletion {
+                        // Skip if this is the reference image
+                        if let refID = mole.referenceImageID, candidate.id == refID {
+                            continue
+                        }
+                        imagesToDelete.append(candidate)
+                    }
                 }
             }
             

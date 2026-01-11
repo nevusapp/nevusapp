@@ -109,6 +109,17 @@ struct SessionCleanupView: View {
             }
             
             Section {
+                HStack {
+                    Text(String(localized: "cleanup_total_storage"))
+                        .font(.subheadline)
+                    Spacer()
+                    Text(allSessionsStorageString)
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                }
+            }
+            
+            Section {
                 ForEach(sessions) { session in
                     SessionRowView(
                         session: session,
@@ -122,8 +133,8 @@ struct SessionCleanupView: View {
                     Text(String(localized: "cleanup_sessions_header"))
                     Spacer()
                     if !selectedSessions.isEmpty {
-                        Button(selectedSessions.count == sessions.count ? 
-                               String(localized: "cleanup_deselect_all") : 
+                        Button(selectedSessions.count == sessions.count ?
+                               String(localized: "cleanup_deselect_all") :
                                String(localized: "cleanup_select_all")) {
                             if selectedSessions.count == sessions.count {
                                 selectedSessions.removeAll()
@@ -147,9 +158,24 @@ struct SessionCleanupView: View {
                     }
                     
                     HStack {
+                        Text(String(localized: "cleanup_total_storage"))
+                        Spacer()
+                        Text(totalSelectedStorageString)
+                            .fontWeight(.semibold)
+                    }
+                    
+                    HStack {
                         Text(String(localized: "cleanup_photos_to_delete"))
                         Spacer()
                         Text("\(totalDeletablePhotos)")
+                            .fontWeight(.semibold)
+                            .foregroundColor(.red)
+                    }
+                    
+                    HStack {
+                        Text(String(localized: "cleanup_storage_to_free"))
+                        Spacer()
+                        Text(totalDeletableStorageString)
                             .fontWeight(.semibold)
                             .foregroundColor(.red)
                     }
@@ -162,6 +188,30 @@ struct SessionCleanupView: View {
     
     private var totalDeletablePhotos: Int {
         selectedSessions.reduce(0) { $0 + $1.deletablePhotoCount }
+    }
+    
+    private var allSessionsStorage: Int64 {
+        sessions.reduce(0) { $0 + $1.totalStorageBytes }
+    }
+    
+    private var allSessionsStorageString: String {
+        CleanupService.formatBytes(allSessionsStorage)
+    }
+    
+    private var totalSelectedStorage: Int64 {
+        selectedSessions.reduce(0) { $0 + $1.totalStorageBytes }
+    }
+    
+    private var totalSelectedStorageString: String {
+        CleanupService.formatBytes(totalSelectedStorage)
+    }
+    
+    private var totalDeletableStorage: Int64 {
+        selectedSessions.reduce(0) { $0 + $1.deletableStorageBytes }
+    }
+    
+    private var totalDeletableStorageString: String {
+        CleanupService.formatBytes(totalDeletableStorage)
     }
     
     private func loadSessions() {
@@ -179,26 +229,26 @@ struct SessionCleanupView: View {
     private func performCleanup() {
         isDeleting = true
         
-        Task.detached(priority: .userInitiated) {
+        Task { @MainActor in
             // Create a mutable copy of moles array
-            var mutableMoles = await MainActor.run { moles }
+            var mutableMoles = moles
+            
+            // Convert selectedSessions to array to avoid Sendable issues
+            let sessionsToDelete = Array(selectedSessions)
             
             // Perform deletion
             let result = CleanupService.deletePhotosFromSessions(
-                selectedSessions,
+                Set(sessionsToDelete),
                 moles: &mutableMoles
             )
             
-            // Update the model context on main actor
-            await MainActor.run {
-                // The changes are already reflected in the SwiftData context
-                // since we're working with reference types
-                try? modelContext.save()
-                
-                deletionResult = result
-                isDeleting = false
-                showingResult = true
-            }
+            // The changes are already reflected in the SwiftData context
+            // since we're working with reference types
+            try? modelContext.save()
+            
+            deletionResult = result
+            isDeleting = false
+            showingResult = true
         }
     }
 }
@@ -226,16 +276,26 @@ struct SessionRowView: View {
                             .font(.caption)
                             .foregroundColor(.secondary)
                         
-                        if session.deletablePhotoCount > 0 {
-                            Label(String(localized: "cleanup_deletable_\(session.deletablePhotoCount)"), 
+                        Label(session.totalStorageString, systemImage: "internaldrive")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    if session.deletablePhotoCount > 0 {
+                        HStack(spacing: 16) {
+                            Label(String(localized: "cleanup_deletable_\(session.deletablePhotoCount)"),
                                   systemImage: "trash")
                                 .font(.caption)
                                 .foregroundColor(.red)
-                        } else {
-                            Text(String(localized: "cleanup_no_deletable"))
+                            
+                            Label(session.deletableStorageString, systemImage: "trash")
                                 .font(.caption)
-                                .foregroundColor(.secondary)
+                                .foregroundColor(.red)
                         }
+                    } else {
+                        Text(String(localized: "cleanup_no_deletable"))
+                            .font(.caption)
+                            .foregroundColor(.secondary)
                     }
                 }
                 

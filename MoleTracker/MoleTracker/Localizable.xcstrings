@@ -1324,13 +1324,13 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wählen Sie Aufnahmedaten aus, um ältere Fotos zu löschen. Das letzte Foto jedes Leberflecks wird beibehalten."
+            "value" : "Wählen Sie Aufnahmedaten aus, um ältere Fotos zu löschen. Das letzte Foto jedes Leberflecks, Referenzfotos (⭐) und Übersichtsbilder werden beibehalten."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select recording dates to delete older photos. The last photo of each mole will be kept."
+            "value" : "Select recording dates to delete older photos. The last photo of each mole, reference images (⭐), and overview images will be kept."
           }
         }
       }
@@ -1518,6 +1518,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Recording Dates"
+          }
+        }
+      }
+    },
+    "cleanup_storage_to_free" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Freizugebender Speicher"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Storage to Free"
+          }
+        }
+      }
+    },
+    "cleanup_total_storage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gesamtgröße"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total Size"
           }
         }
       }

@@ -3,8 +3,11 @@
 ## Overview
 A new storage cleanup feature has been implemented that allows users to select recording sessions (calendar dates) and delete older photos while keeping the most recent photo of each mole. This helps reduce storage space usage.
 
+**Protected Images:** The cleanup feature automatically protects reference images (used for overlay comparisons) and overview images from deletion.
+
 ## Implementation Date
 January 11, 2026
+Last Updated: January 11, 2026 (Added reference image protection)
 
 ## Files Created
 
@@ -21,6 +24,7 @@ January 11, 2026
 - Groups images by calendar date (ignoring time)
 - For each mole and each date, keeps only the most recent photo
 - **Overview images (BodyRegionOverview) are counted but NEVER marked as deletable**
+- **Reference images (used for overlay comparisons) are NEVER marked as deletable**
 - Calculates storage space freed by deletion
 - Returns statistics about deleted photos and freed space
 - Shows all dates even if they have 0 deletable photos (displayed as disabled/grayed out)
@@ -90,8 +94,10 @@ All strings are fully localized in German and English:
 
 ### Data Preservation
 - **Always keeps**: The most recent photo of each mole for each selected date
-- **Never deletes**: Overview images (BodyRegionOverview) - these are completely excluded from deletion
-- **Deletes**: All older photos from the same mole on the same date
+- **Never deletes**:
+  - Overview images (BodyRegionOverview) - these are completely excluded from deletion
+  - Reference images (marked with ⭐ star) - used for overlay comparisons, never deleted
+- **Deletes**: All older photos from the same mole on the same date (except reference images)
 - **Safe**: Uses SwiftData's model context for data integrity
 
 ### Performance
@@ -110,6 +116,7 @@ All strings are fully localized in German and English:
    - Verify that sessions are correctly grouped by date
    - Confirm that only older photos are deleted
    - **Verify overview images are never deleted**
+   - **Verify reference images (marked with ⭐) are never deleted**
 
 2. **Edge Cases**:
    - Single photo per mole per date (should show 0 deletable, grayed out)
@@ -117,6 +124,8 @@ All strings are fully localized in German and English:
    - Photos taken at different times on same calendar date
    - **Date with only overview images (should show 0 deletable, grayed out)**
    - **Date with mix of mole photos and overview images**
+   - **Reference image is older than newest photo on same date (reference should be kept)**
+   - **Reference image is the only photo on a date (should show 0 deletable)**
 
 3. **UI/UX**:
    - Empty state when no recordings exist
