@@ -75,18 +75,22 @@ final class Mole {
 enum BodyRegion: String, CaseIterable, Identifiable {
     case head = "Kopf"
     case neck = "Hals"
-    case arms = "Arme/Hände"
-    case torsoChest = "Torso-Brust"
-    case torsoAbdomen = "Torso-Bauch"
-    case torsoBack = "Torso-Rücken"
-    case torsoPelvis = "Torso-Becken"
-    case legs = "Beine/Füße"
+    case armLeft = "Arm/Hand links"
+    case armRight = "Arm/Hand rechts"
+    case chest = "Brust"
+    case abdomen = "Bauch"
+    case pelvis = "Becken"
+    case backUpper = "Rücken oben (BWS)"
+    case backMiddle = "Rücken Mitte (LWS)"
+    case backLower = "Rücken unten (Kreuz/Gesäss)"
+    case legLeft = "Bein/Fuss links"
+    case legRight = "Bein/Fuss rechts"
     
     var id: String { rawValue }
     
     // Order for display in grouped list
     static var displayOrder: [BodyRegion] {
-        [.head, .neck, .arms, .torsoChest, .torsoAbdomen, .torsoBack, .torsoPelvis, .legs]
+        [.head, .neck, .armLeft, .armRight, .chest, .abdomen, .pelvis, .backUpper, .backMiddle, .backLower, .legLeft, .legRight]
     }
 }
 

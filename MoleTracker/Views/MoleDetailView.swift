@@ -11,6 +11,7 @@ import SwiftData
 struct MoleDetailView: View {
     @Bindable var mole: Mole
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
     @State private var showingCamera = false
     @State private var showingComparison = false
     @State private var selectedImageForComparison: MoleImage?
@@ -21,6 +22,7 @@ struct MoleDetailView: View {
     @State private var isProcessingImage = false
     @State private var exportURL: URL?
     @State private var isExporting = false
+    @State private var showingDeleteConfirmation = false
     
     init(mole: Mole) {
         self.mole = mole
@@ -178,11 +180,25 @@ struct MoleDetailView: View {
                     Button(action: { exportMole() }) {
                         Label("Exportieren", systemImage: "square.and.arrow.up")
                     }
+                    
+                    Divider()
+                    
+                    Button(role: .destructive, action: { showingDeleteConfirmation = true }) {
+                        Label("Leberfleck löschen", systemImage: "trash")
+                    }
                 } label: {
                     Image(systemName: "ellipsis.circle")
                 }
                 .disabled(isExporting)
             }
+        }
+        .alert("Leberfleck löschen?", isPresented: $showingDeleteConfirmation) {
+            Button("Abbrechen", role: .cancel) { }
+            Button("Löschen", role: .destructive) {
+                deleteMole()
+            }
+        } message: {
+            Text("Möchten Sie diesen Leberfleck mit allen \(mole.imageCount) Bildern wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.")
         }
         .sheet(isPresented: $showingCamera) {
             CameraView(referenceImage: mole.referenceImage?.uiImage) { image in
@@ -357,6 +373,11 @@ struct MoleDetailView: View {
                 }
             }
         }
+    }
+    
+    private func deleteMole() {
+        modelContext.delete(mole)
+        dismiss()
     }
 }
 
