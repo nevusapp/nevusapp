@@ -203,23 +203,6 @@ struct ContentView: View {
                                         }
                                         .buttonStyle(.plain)
                                     }
-                                    
-                                    // Add button
-                                    NavigationLink(destination: RegionOverviewView(region: group.region)) {
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .fill(Color.gray.opacity(0.1))
-                                            .frame(width: 100, height: 100)
-                                            .overlay {
-                                                VStack(spacing: 4) {
-                                                    Image(systemName: "plus.circle.fill")
-                                                        .font(.title2)
-                                                        .foregroundColor(.accentColor)
-                                                    Text(String(localized: "overlay_add_button"))
-                                                        .font(.caption2)
-                                                        .foregroundColor(.secondary)
-                                                }
-                                            }
-                                    }
                                 }
                                 .padding(.vertical, 4)
                             }
