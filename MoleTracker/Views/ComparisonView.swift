@@ -11,10 +11,12 @@ struct ComparisonView: View {
     let image1: MoleImage
     let image2: MoleImage
     
-    @State private var comparisonMode: ComparisonMode = .sideBySide
+    @State private var comparisonMode: ComparisonMode = .overlay
     @State private var sliderPosition: CGFloat = 0.5
-    @State private var scale1: CGFloat = 1.0
-    @State private var scale2: CGFloat = 1.0
+    @State private var scale: CGFloat = 1.0
+    @State private var offset: CGSize = .zero
+    @State private var lastScale: CGFloat = 1.0
+    @State private var lastOffset: CGSize = .zero
     
     enum ComparisonMode: String, CaseIterable {
         case sideBySide = "Nebeneinander"
@@ -29,35 +31,53 @@ struct ComparisonView: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            // Mode Picker
-            Picker("Vergleichsmodus", selection: $comparisonMode) {
-                ForEach(ComparisonMode.allCases, id: \.self) { mode in
-                    Label(mode.rawValue, systemImage: mode.icon)
-                        .tag(mode)
-                }
-            }
-            .pickerStyle(.segmented)
-            .padding()
-            
-            // Comparison Area
-            GeometryReader { geometry in
-                ZStack {
-                    if comparisonMode == .sideBySide {
-                        sideBySideView(geometry: geometry)
-                    } else {
-                        overlayView(geometry: geometry)
+        ZStack {
+            VStack(spacing: 0) {
+                // Spacer for picker
+                Color.clear
+                    .frame(height: 60)
+                
+                // Comparison Area
+                GeometryReader { geometry in
+                    ZStack {
+                        if comparisonMode == .sideBySide {
+                            sideBySideView(geometry: geometry)
+                        } else {
+                            overlayView(geometry: geometry)
+                        }
                     }
                 }
+                
+                // Image Info
+                imageInfoView
+                    .padding()
+                    .background(.ultraThinMaterial)
             }
             
-            // Image Info
-            imageInfoView
+            // Mode Picker - overlay on top
+            VStack {
+                Picker("Vergleichsmodus", selection: $comparisonMode) {
+                    ForEach(ComparisonMode.allCases, id: \.self) { mode in
+                        Label(mode.rawValue, systemImage: mode.icon)
+                            .tag(mode)
+                    }
+                }
+                .pickerStyle(.segmented)
                 .padding()
                 .background(.ultraThinMaterial)
+                
+                Spacer()
+            }
         }
         .navigationTitle("Bildvergleich")
         .navigationBarTitleDisplayMode(.inline)
+        .onChange(of: comparisonMode) { _, _ in
+            // Reset zoom and offset when switching modes
+            scale = 1.0
+            lastScale = 1.0
+            offset = .zero
+            lastOffset = .zero
+        }
     }
     
     private func sideBySideView(geometry: GeometryProxy) -> some View {
@@ -68,13 +88,11 @@ struct ComparisonView: View {
                     Image(uiImage: uiImage1)
                         .resizable()
                         .scaledToFit()
-                        .scaleEffect(scale1)
-                        .gesture(
-                            MagnificationGesture()
-                                .onChanged { value in
-                                    scale1 = value
-                                }
-                        )
+                        .frame(width: geometry.size.width / 2)
+                        .scaleEffect(scale)
+                        .offset(offset)
+                        .frame(width: geometry.size.width / 2)
+                        .clipped()
                     
                     Text(image1.captureDate.formatted(date: .abbreviated, time: .omitted))
                         .font(.caption)
@@ -93,13 +111,11 @@ struct ComparisonView: View {
                     Image(uiImage: uiImage2)
                         .resizable()
                         .scaledToFit()
-                        .scaleEffect(scale2)
-                        .gesture(
-                            MagnificationGesture()
-                                .onChanged { value in
-                                    scale2 = value
-                                }
-                        )
+                        .frame(width: geometry.size.width / 2)
+                        .scaleEffect(scale)
+                        .offset(offset)
+                        .frame(width: geometry.size.width / 2)
+                        .clipped()
                     
                     Text(image2.captureDate.formatted(date: .abbreviated, time: .omitted))
                         .font(.caption)
@@ -110,56 +126,134 @@ struct ComparisonView: View {
                 .frame(width: geometry.size.width / 2)
             }
         }
+        .gesture(
+            MagnificationGesture()
+                .onChanged { value in
+                    scale = lastScale * value
+                }
+                .onEnded { _ in
+                    // Limit scale between 1x and 5x
+                    scale = min(max(scale, 1.0), 5.0)
+                    lastScale = scale
+                }
+        )
+        .simultaneousGesture(
+            DragGesture()
+                .onChanged { value in
+                    let newOffset = CGSize(
+                        width: lastOffset.width + value.translation.width,
+                        height: lastOffset.height + value.translation.height
+                    )
+                    // Limit vertical offset to prevent covering the picker
+                    let maxVerticalOffset = (geometry.size.height * (scale - 1)) / 2
+                    offset = CGSize(
+                        width: newOffset.width,
+                        height: min(newOffset.height, maxVerticalOffset)
+                    )
+                }
+                .onEnded { _ in
+                    lastOffset = offset
+                }
+        )
     }
     
     private func overlayView(geometry: GeometryProxy) -> some View {
         ZStack {
-            // Base image (older)
-            if let uiImage1 = image1.uiImage {
-                Image(uiImage: uiImage1)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: geometry.size.width)
-            }
-            
-            // Overlay image (newer) with slider
-            GeometryReader { geo in
+            // Images with zoom and pan gestures
+            ZStack {
+                // Base image (older)
+                if let uiImage1 = image1.uiImage {
+                    Image(uiImage: uiImage1)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: geometry.size.width)
+                        .scaleEffect(scale)
+                        .offset(offset)
+                }
+                
+                // Overlay image (newer) with mask
                 if let uiImage2 = image2.uiImage {
-                    HStack(spacing: 0) {
+                    GeometryReader { geo in
                         Image(uiImage: uiImage2)
                             .resizable()
                             .scaledToFit()
                             .frame(width: geometry.size.width)
+                            .scaleEffect(scale)
+                            .offset(offset)
                             .mask(
                                 Rectangle()
                                     .frame(width: geo.size.width * sliderPosition)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             )
-                        
-                        Spacer()
                     }
                 }
+            }
+            .clipped()
+            .contentShape(Rectangle())
+            .gesture(
+                MagnificationGesture()
+                    .onChanged { value in
+                        scale = lastScale * value
+                    }
+                    .onEnded { _ in
+                        // Limit scale between 1x and 5x
+                        scale = min(max(scale, 1.0), 5.0)
+                        lastScale = scale
+                    }
+            )
+            .simultaneousGesture(
+                DragGesture(minimumDistance: 10)
+                    .onChanged { value in
+                        let newOffset = CGSize(
+                            width: lastOffset.width + value.translation.width,
+                            height: lastOffset.height + value.translation.height
+                        )
+                        // Limit vertical offset to prevent covering the picker
+                        let maxVerticalOffset = (geometry.size.height * (scale - 1)) / 2
+                        offset = CGSize(
+                            width: newOffset.width,
+                            height: min(newOffset.height, maxVerticalOffset)
+                        )
+                    }
+                    .onEnded { _ in
+                        lastOffset = offset
+                    }
+            )
+            
+            // Slider line overlay - separate layer with high priority gesture
+            GeometryReader { geo in
+                HStack(spacing: 0) {
+                    // Invisible touch area for slider
+                    Rectangle()
+                        .fill(Color.clear)
+                        .frame(width: max(44, geo.size.width * sliderPosition + 22))
+                        .contentShape(Rectangle())
+                        .gesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged { value in
+                                    let newPosition = value.location.x / geo.size.width
+                                    sliderPosition = min(max(newPosition, 0), 1)
+                                }
+                        )
+                    
+                    Spacer()
+                }
                 
-                // Slider line
+                // Visual slider line
                 Rectangle()
                     .fill(Color.white)
                     .frame(width: 3)
                     .shadow(radius: 2)
                     .offset(x: geo.size.width * sliderPosition - 1.5)
-                    .overlay(
-                        Circle()
-                            .fill(Color.white)
-                            .frame(width: 30, height: 30)
-                            .shadow(radius: 3)
-                            .offset(x: geo.size.width * sliderPosition - 15)
-                    )
-                    .gesture(
-                        DragGesture()
-                            .onChanged { value in
-                                let newPosition = value.location.x / geo.size.width
-                                sliderPosition = min(max(newPosition, 0), 1)
-                            }
-                    )
+                    .allowsHitTesting(false)
+                
+                // Visual slider handle
+                Circle()
+                    .fill(Color.white)
+                    .frame(width: 30, height: 30)
+                    .shadow(radius: 3)
+                    .offset(x: geo.size.width * sliderPosition - 15)
+                    .allowsHitTesting(false)
             }
         }
     }
