@@ -115,6 +115,9 @@ struct ContentView: View {
             .navigationDestination(item: $newlyCreatedMole) { mole in
                 MoleDetailView(mole: mole)
             }
+            .navigationDestination(item: $selectedMole) { mole in
+                MoleDetailView(mole: mole)
+            }
             .sheet(item: $exportURL) { url in
                 ShareSheet(items: [url])
             }
