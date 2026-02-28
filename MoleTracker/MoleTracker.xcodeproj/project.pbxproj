@@ -61,9 +61,22 @@
 		6B817DE32F0D380400EB1030 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6B5A84982F538F0000E4751C /* Exceptions for "MoleTracker" folder in "MoleTracker" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 6B817DB72F0D36AB00EB1030 /* MoleTracker */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		6B817DBA2F0D36AB00EB1030 /* MoleTracker */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6B5A84982F538F0000E4751C /* Exceptions for "MoleTracker" folder in "MoleTracker" target */,
+			);
 			path = MoleTracker;
 			sourceTree = "<group>";
 		};
@@ -383,6 +396,7 @@
 				DEVELOPMENT_TEAM = Q3U88T33CV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MoleTracker/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "MoleTracker benötigt Zugriff auf die Kamera, um Fotos von Leberflecken aufzunehmen.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "MoleTracker nutzt Bewegungssensoren, um die Aufnahmeposition zu bestimmen.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "MoleTracker benötigt Zugriff auf die Fotobibliothek, um Bilder zu speichern.";
@@ -423,6 +437,7 @@
 				DEVELOPMENT_TEAM = Q3U88T33CV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MoleTracker/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "MoleTracker benötigt Zugriff auf die Kamera, um Fotos von Leberflecken aufzunehmen.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "MoleTracker nutzt Bewegungssensoren, um die Aufnahmeposition zu bestimmen.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "MoleTracker benötigt Zugriff auf die Fotobibliothek, um Bilder zu speichern.";
