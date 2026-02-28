@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import UniformTypeIdentifiers
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
@@ -27,6 +28,9 @@ struct ContentView: View {
     @State private var showingGuidedScanning = false
     @State private var showingGuidedComparison = false
     @State private var showingSync = false
+    @State private var showingFileImporter = false
+    @State private var importURL: URL?
+    @State private var showingImportConfirmation = false
     
     // Group moles by body region
     var groupedMoles: [(region: BodyRegion, moles: [Mole])] {
@@ -80,6 +84,10 @@ struct ContentView: View {
                                 Label(String(localized: "sync_menu_item", defaultValue: "Sync to Device"), systemImage: "arrow.triangle.2.circlepath")
                             }
                             
+                            Button(action: { showingFileImporter = true }) {
+                                Label(String(localized: "import_sync_package", defaultValue: "Import Sync Package"), systemImage: "square.and.arrow.down")
+                            }
+                            
                             Button(action: { exportAllMoles() }) {
                                 Label(String(localized: "action_export_all"), systemImage: "square.and.arrow.up")
                             }
@@ -122,6 +130,26 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showingSync) {
                 SyncView()
+            }
+            .fileImporter(
+                isPresented: $showingFileImporter,
+                allowedContentTypes: [UTType(filenameExtension: "moletracker") ?? .data],
+                allowsMultipleSelection: false
+            ) { result in
+                switch result {
+                case .success(let urls):
+                    if let url = urls.first {
+                        importURL = url
+                        showingImportConfirmation = true
+                    }
+                case .failure(let error):
+                    print("❌ File import error: \(error)")
+                }
+            }
+            .sheet(isPresented: $showingImportConfirmation) {
+                if let url = importURL {
+                    ImportConfirmationView(fileURL: url)
+                }
             }
             .overlay {
                 if isExporting {

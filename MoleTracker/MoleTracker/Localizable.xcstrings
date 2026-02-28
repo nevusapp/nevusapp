@@ -2756,6 +2756,17 @@
         }
       }
     },
+    "import_sync_package" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Import Sync Package"
+          }
+        }
+      }
+    },
     "import_title" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
