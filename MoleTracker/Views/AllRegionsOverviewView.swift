@@ -10,10 +10,21 @@ import SwiftData
 
 struct AllRegionsOverviewView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Query(sort: \BodyRegionOverview.captureDate, order: .reverse)
     private var allOverviews: [BodyRegionOverview]
     @State private var selectedRegion: BodyRegion?
     @State private var selectedOverview: BodyRegionOverview?
+    
+    // iPad detection
+    private var isIPad: Bool {
+        horizontalSizeClass == .regular
+    }
+    
+    // Adaptive column count
+    private var columnCount: Int {
+        isIPad ? 5 : 3
+    }
     
     // Group overviews by body region
     private func overviews(for region: BodyRegion) -> [BodyRegionOverview] {
@@ -69,13 +80,9 @@ struct AllRegionsOverviewView: View {
                                 }
                             }
                             
-                            // Grid of overview images
-                            LazyVGrid(columns: [
-                                GridItem(.flexible(), spacing: 8),
-                                GridItem(.flexible(), spacing: 8),
-                                GridItem(.flexible(), spacing: 8)
-                            ], spacing: 8) {
-                                ForEach(regionOverviews.prefix(6)) { overview in
+                            // Grid of overview images - adaptive columns
+                            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: columnCount), spacing: 8) {
+                                ForEach(regionOverviews.prefix(isIPad ? 10 : 6)) { overview in
                                     Button(action: {
                                         selectedOverview = overview
                                     }) {
@@ -98,15 +105,16 @@ struct AllRegionsOverviewView: View {
                                     .buttonStyle(.plain)
                                 }
                                 
-                                // Show "more" indicator if there are more than 6 images
-                                if regionOverviews.count > 6 {
+                                // Show "more" indicator if there are more images than displayed
+                                let maxDisplayed = isIPad ? 10 : 6
+                                if regionOverviews.count > maxDisplayed {
                                     NavigationLink(destination: RegionOverviewView(region: region)) {
                                         RoundedRectangle(cornerRadius: 8)
                                             .fill(Color.gray.opacity(0.1))
                                             .frame(height: 100)
                                             .overlay {
                                                 VStack(spacing: 4) {
-                                                    Text("+\(regionOverviews.count - 6)")
+                                                    Text("+\(regionOverviews.count - maxDisplayed)")
                                                         .font(.title2)
                                                         .fontWeight(.semibold)
                                                     Text(String(localized: "more_images"))

@@ -4208,6 +4208,17 @@
         }
       }
     },
+    "select_mole_to_view" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Select a mole to view details"
+          }
+        }
+      }
+    },
     "select_two_images" : {
       "extractionState" : "manual",
       "localizations" : {

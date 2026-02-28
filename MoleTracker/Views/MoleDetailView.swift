@@ -12,6 +12,7 @@ struct MoleDetailView: View {
     @Bindable var mole: Mole
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var showingCamera = false
     @State private var showingComparison = false
     @State private var selectedImageForComparison: MoleImage?
@@ -23,6 +24,11 @@ struct MoleDetailView: View {
     @State private var exportURL: URL?
     @State private var isExporting = false
     @State private var showingDeleteConfirmation = false
+    
+    // iPad detection
+    private var isIPad: Bool {
+        horizontalSizeClass == .regular
+    }
     
     init(mole: Mole) {
         self.mole = mole
@@ -341,50 +347,100 @@ struct MoleDetailView: View {
     }
     
     private var imagesGridView: some View {
-        ScrollView(.horizontal, showsIndicators: true) {
-            LazyHGrid(rows: [
-                GridItem(.fixed(100), spacing: 12),
-                GridItem(.fixed(100), spacing: 12)
-            ], spacing: 12) {
-                ForEach(mole.images.sorted(by: { $0.captureDate > $1.captureDate }), id: \.id) { image in
-                    Button(action: {
-                        selectedImageForDetail = image
-                    }) {
-                        ZStack(alignment: .topLeading) {
-                            if let thumbnail = image.thumbnailImage {
-                                Image(uiImage: thumbnail)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 100, height: 100)
-                                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                                    .overlay(alignment: .bottomTrailing) {
-                                        Text(image.captureDate.formatted(date: .abbreviated, time: .omitted))
-                                            .font(.caption2)
-                                            .padding(4)
-                                            .background(.ultraThinMaterial)
-                                            .clipShape(RoundedRectangle(cornerRadius: 4))
-                                            .padding(4)
-                                    }
-                            }
-                            
-                            // Reference image indicator
-                            if mole.referenceImage?.id == image.id {
-                                Image(systemName: "star.fill")
-                                    .font(.caption)
-                                    .foregroundColor(.yellow)
-                                    .padding(4)
-                                    .background(Color.black.opacity(0.6))
-                                    .clipShape(Circle())
-                                    .padding(4)
+        Group {
+            if isIPad {
+                // iPad: Vertical grid with 3-4 columns
+                LazyVGrid(columns: [
+                    GridItem(.flexible(), spacing: 12),
+                    GridItem(.flexible(), spacing: 12),
+                    GridItem(.flexible(), spacing: 12),
+                    GridItem(.flexible(), spacing: 12)
+                ], spacing: 12) {
+                    ForEach(mole.images.sorted(by: { $0.captureDate > $1.captureDate }), id: \.id) { image in
+                        Button(action: {
+                            selectedImageForDetail = image
+                        }) {
+                            ZStack(alignment: .topLeading) {
+                                if let thumbnail = image.thumbnailImage {
+                                    Image(uiImage: thumbnail)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(height: 120)
+                                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                                        .overlay(alignment: .bottomTrailing) {
+                                            Text(image.captureDate.formatted(date: .abbreviated, time: .omitted))
+                                                .font(.caption2)
+                                                .padding(4)
+                                                .background(.ultraThinMaterial)
+                                                .clipShape(RoundedRectangle(cornerRadius: 4))
+                                                .padding(4)
+                                        }
+                                }
+                                
+                                // Reference image indicator
+                                if mole.referenceImage?.id == image.id {
+                                    Image(systemName: "star.fill")
+                                        .font(.caption)
+                                        .foregroundColor(.yellow)
+                                        .padding(4)
+                                        .background(Color.black.opacity(0.6))
+                                        .clipShape(Circle())
+                                        .padding(4)
+                                }
                             }
                         }
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
                 }
+                .padding(.vertical, 8)
+            } else {
+                // iPhone: Horizontal scroll with 2 rows
+                ScrollView(.horizontal, showsIndicators: true) {
+                    LazyHGrid(rows: [
+                        GridItem(.fixed(100), spacing: 12),
+                        GridItem(.fixed(100), spacing: 12)
+                    ], spacing: 12) {
+                        ForEach(mole.images.sorted(by: { $0.captureDate > $1.captureDate }), id: \.id) { image in
+                            Button(action: {
+                                selectedImageForDetail = image
+                            }) {
+                                ZStack(alignment: .topLeading) {
+                                    if let thumbnail = image.thumbnailImage {
+                                        Image(uiImage: thumbnail)
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 100, height: 100)
+                                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                                            .overlay(alignment: .bottomTrailing) {
+                                                Text(image.captureDate.formatted(date: .abbreviated, time: .omitted))
+                                                    .font(.caption2)
+                                                    .padding(4)
+                                                    .background(.ultraThinMaterial)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 4))
+                                                    .padding(4)
+                                            }
+                                    }
+                                    
+                                    // Reference image indicator
+                                    if mole.referenceImage?.id == image.id {
+                                        Image(systemName: "star.fill")
+                                            .font(.caption)
+                                            .foregroundColor(.yellow)
+                                            .padding(4)
+                                            .background(Color.black.opacity(0.6))
+                                            .clipShape(Circle())
+                                            .padding(4)
+                                    }
+                                }
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .padding(.vertical, 8)
+                }
+                .frame(height: 224) // Fixed height for 2 rows: (100 + 12) * 2
             }
-            .padding(.vertical, 8)
         }
-        .frame(height: 224) // Fixed height for 2 rows: (100 + 12) * 2
         .sheet(item: $selectedImageForDetail) { image in
             NavigationStack {
                 ImageDetailView(image: image)

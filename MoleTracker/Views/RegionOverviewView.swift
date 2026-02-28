@@ -12,10 +12,21 @@ struct RegionOverviewView: View {
     let region: BodyRegion
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Query private var overviews: [BodyRegionOverview]
     @State private var showingCamera = false
     @State private var selectedOverview: BodyRegionOverview?
     @State private var showingImageDetail = false
+    
+    // iPad detection
+    private var isIPad: Bool {
+        horizontalSizeClass == .regular
+    }
+    
+    // Adaptive column count
+    private var columnCount: Int {
+        isIPad ? 4 : 2
+    }
     
     init(region: BodyRegion) {
         self.region = region
@@ -84,10 +95,7 @@ struct RegionOverviewView: View {
     }
     
     private var overviewsGridView: some View {
-        LazyVGrid(columns: [
-            GridItem(.flexible(), spacing: 12),
-            GridItem(.flexible(), spacing: 12)
-        ], spacing: 12) {
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: columnCount), spacing: 12) {
             ForEach(overviews) { overview in
                 Button(action: {
                     selectedOverview = overview
