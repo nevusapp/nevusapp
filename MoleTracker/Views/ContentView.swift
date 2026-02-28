@@ -268,7 +268,7 @@ struct ContentView: View {
     private func exportAllMoles() {
         isExporting = true
         
-        Task.detached(priority: .userInitiated) {
+        Task(priority: .userInitiated) {
             if let url = ExportService.exportAllMoles(moles) {
                 await MainActor.run {
                     exportURL = url
@@ -312,7 +312,7 @@ struct MoleRowView: View {
     
     // Get localized side name
     private var localizedSide: String {
-        let region = BodyRegion.from(value: mole.bodyRegion)
+        _ = BodyRegion.from(value: mole.bodyRegion)
         if let side = BodySide.from(value: mole.bodySide) {
             return side.displayText
         }

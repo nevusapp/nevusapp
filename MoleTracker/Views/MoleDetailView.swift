@@ -449,7 +449,7 @@ struct MoleDetailView: View {
     private func exportMole() {
         isExporting = true
         
-        Task.detached(priority: .userInitiated) {
+        Task(priority: .userInitiated) {
             if let url = ExportService.exportMole(mole) {
                 await MainActor.run {
                     exportURL = url
@@ -566,7 +566,7 @@ struct ImageDetailView: View {
     private func exportImage() {
         isExporting = true
         
-        Task.detached(priority: .userInitiated) {
+        Task(priority: .userInitiated) {
             if let url = ExportService.exportImage(image) {
                 await MainActor.run {
                     exportURL = url

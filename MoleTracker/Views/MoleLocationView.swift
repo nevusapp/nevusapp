@@ -173,21 +173,17 @@ struct MoleLocationView: View {
         isProcessingImage = true
         
         Task {
-            // Create overview on background thread
-            let overview = await Task.detached {
-                return BodyRegionOverview(bodyRegion: mole.bodyRegion, image: uiImage)
-            }.value
+            // Create overview on main actor (SwiftData models must be created on main actor)
+            let overview = BodyRegionOverview(bodyRegion: mole.bodyRegion, image: uiImage)
             
-            await MainActor.run {
-                modelContext.insert(overview)
-                
-                // Automatically select the new overview for marker placement
-                selectedMarker = nil
-                isEditingExisting = false
-                selectedOverview = overview
-                
-                isProcessingImage = false
-            }
+            modelContext.insert(overview)
+            
+            // Automatically select the new overview for marker placement
+            selectedMarker = nil
+            isEditingExisting = false
+            selectedOverview = overview
+            
+            isProcessingImage = false
         }
     }
 }
