@@ -22,7 +22,7 @@ class CameraService: NSObject, ObservableObject {
     // Direct callback for immediate response
     var onPhotoCaptured: ((UIImage) -> Void)?
     
-    private let captureSession = AVCaptureSession()
+    let captureSession = AVCaptureSession()
     private var photoOutput = AVCapturePhotoOutput()
     private var currentPhotoSettings: AVCapturePhotoSettings?
     private var isSetupComplete = false

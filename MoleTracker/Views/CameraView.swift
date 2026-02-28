@@ -27,7 +27,7 @@ struct CameraView: View {
         Group {
             if cameraService.isAuthorized && cameraService.isCameraReady {
                 CameraContentView(
-                    session: cameraService.previewLayer.session!,
+                    session: cameraService.captureSession,
                     referenceImage: referenceImage,
                     overlayOpacity: $overlayOpacity,
                     showOverlay: $showOverlay,
