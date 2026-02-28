@@ -117,6 +117,17 @@
         }
       }
     },
+    "action_close" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Close"
+          }
+        }
+      }
+    },
     "action_compare" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1907,6 +1918,17 @@
         }
       }
     },
+    "error_title" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Error"
+          }
+        }
+      }
+    },
     "export_label" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2499,6 +2521,248 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Processing image..."
+          }
+        }
+      }
+    },
+    "import_behavior_header" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Import Behavior"
+          }
+        }
+      }
+    },
+    "import_confirm_button" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Import Data"
+          }
+        }
+      }
+    },
+    "import_error_message" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The sync package could not be read. It may be corrupted or from an incompatible version."
+          }
+        }
+      }
+    },
+    "import_error_title" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cannot Read Package"
+          }
+        }
+      }
+    },
+    "import_errors_header" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Errors"
+          }
+        }
+      }
+    },
+    "import_info_duplicates" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Duplicate items will be skipped"
+          }
+        }
+      }
+    },
+    "import_info_exported" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Exported"
+          }
+        }
+      }
+    },
+    "import_info_images" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Images"
+          }
+        }
+      }
+    },
+    "import_info_merge" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "New data will be merged with existing"
+          }
+        }
+      }
+    },
+    "import_info_moles" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Moles"
+          }
+        }
+      }
+    },
+    "import_info_safe" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Your existing data will not be deleted"
+          }
+        }
+      }
+    },
+    "import_info_since" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Since"
+          }
+        }
+      }
+    },
+    "import_loading" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Reading package..."
+          }
+        }
+      }
+    },
+    "import_no_new_data" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "No new data to import"
+          }
+        }
+      }
+    },
+    "import_package_info_header" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Package Information"
+          }
+        }
+      }
+    },
+    "import_result_header" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Import Results"
+          }
+        }
+      }
+    },
+    "import_result_images_imported" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Images imported"
+          }
+        }
+      }
+    },
+    "import_result_images_skipped" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Images skipped"
+          }
+        }
+      }
+    },
+    "import_result_moles_imported" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Moles imported"
+          }
+        }
+      }
+    },
+    "import_result_moles_skipped" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Moles skipped"
+          }
+        }
+      }
+    },
+    "import_success" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Import completed successfully"
+          }
+        }
+      }
+    },
+    "import_title" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Import Data"
           }
         }
       }
@@ -3975,6 +4239,215 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Show Markers"
+          }
+        }
+      }
+    },
+    "sync_confirm_button" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Export"
+          }
+        }
+      }
+    },
+    "sync_confirm_message" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Export %1$lld mole(s) with %2$lld image(s) created since %3$@?"
+          }
+        }
+      }
+    },
+    "sync_confirm_title" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Export Data?"
+          }
+        }
+      }
+    },
+    "sync_date_picker_label" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Export data since"
+          }
+        }
+      }
+    },
+    "sync_date_section_footer" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Only moles and images created or modified since this date will be exported."
+          }
+        }
+      }
+    },
+    "sync_date_section_header" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Select Date"
+          }
+        }
+      }
+    },
+    "sync_export_failed" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Failed to create export package. Please try again."
+          }
+        }
+      }
+    },
+    "sync_export_section_footer" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Preview what will be exported before sharing."
+          }
+        }
+      }
+    },
+    "sync_export_section_header" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Export"
+          }
+        }
+      }
+    },
+    "sync_exporting" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Preparing export..."
+          }
+        }
+      }
+    },
+    "sync_menu_item" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sync to Device"
+          }
+        }
+      }
+    },
+    "sync_no_data_error" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "No new data to export since the selected date."
+          }
+        }
+      }
+    },
+    "sync_preview_button" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Preview Export"
+          }
+        }
+      }
+    },
+    "sync_preview_section_header" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Export Preview"
+          }
+        }
+      }
+    },
+    "sync_share_button" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Share via AirDrop"
+          }
+        }
+      }
+    },
+    "sync_stats_images" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Images"
+          }
+        }
+      }
+    },
+    "sync_stats_moles" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Moles"
+          }
+        }
+      }
+    },
+    "sync_stats_since" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Since"
+          }
+        }
+      }
+    },
+    "sync_title" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sync Data"
           }
         }
       }

@@ -26,6 +26,7 @@ struct ContentView: View {
     @State private var showingDeleteConfirmation = false
     @State private var showingGuidedScanning = false
     @State private var showingGuidedComparison = false
+    @State private var showingSync = false
     
     // Group moles by body region
     var groupedMoles: [(region: BodyRegion, moles: [Mole])] {
@@ -75,6 +76,10 @@ struct ContentView: View {
                             
                             Divider()
                             
+                            Button(action: { showingSync = true }) {
+                                Label(String(localized: "sync_menu_item", defaultValue: "Sync to Device"), systemImage: "arrow.triangle.2.circlepath")
+                            }
+                            
                             Button(action: { exportAllMoles() }) {
                                 Label(String(localized: "action_export_all"), systemImage: "square.and.arrow.up")
                             }
@@ -114,6 +119,9 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showingGuidedComparison) {
                 GuidedComparisonView(moles: moles)
+            }
+            .sheet(isPresented: $showingSync) {
+                SyncView()
             }
             .overlay {
                 if isExporting {

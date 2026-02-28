@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import UniformTypeIdentifiers
+import SwiftData
 
 class ExportService {
     
@@ -257,5 +258,132 @@ class ExportService {
         if let error = error {
             throw error
         }
+    }
+    
+    // MARK: - Delta Sync Export
+    
+    /// Export moles and images created/modified since a specific date
+    static func exportDeltaSync(moles: [Mole], sinceDate: Date) -> URL? {
+        let fileManager = FileManager.default
+        
+        guard let documentsDir = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return nil
+        }
+        
+        let exportDir = documentsDir.appendingPathComponent("SyncExport_\(UUID().uuidString)")
+        
+        defer {
+            do {
+                if fileManager.fileExists(atPath: exportDir.path) {
+                    try fileManager.removeItem(at: exportDir)
+                }
+            } catch {
+                print("⚠️ Cleanup failed for \(exportDir.path): \(error.localizedDescription)")
+            }
+        }
+        
+        do {
+            try fileManager.createDirectory(at: exportDir, withIntermediateDirectories: true)
+            
+            // Filter moles and images by date
+            let filteredData = filterDataSinceDate(moles: moles, sinceDate: sinceDate)
+            
+            guard !filteredData.moles.isEmpty || !filteredData.images.isEmpty else {
+                print("ℹ️ No new data to sync since \(sinceDate)")
+                return nil
+            }
+            
+            // Create sync package metadata
+            let syncPackage = SyncPackage.create(
+                moles: filteredData.moles,
+                images: filteredData.images,
+                sinceDate: sinceDate
+            )
+            
+            // Write manifest
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            encoder.outputFormatting = .prettyPrinted
+            let manifestData = try encoder.encode(syncPackage)
+            let manifestURL = exportDir.appendingPathComponent("manifest.json")
+            try manifestData.write(to: manifestURL)
+            
+            // Create images directory
+            let imagesDir = exportDir.appendingPathComponent("images")
+            try fileManager.createDirectory(at: imagesDir, withIntermediateDirectories: true)
+            
+            // Export image files
+            for imageData in filteredData.images {
+                if let mole = moles.first(where: { $0.id.uuidString == imageData.moleID }),
+                   let image = mole.images.first(where: { $0.id.uuidString == imageData.id }),
+                   let uiImage = image.uiImage {
+                    
+                    let imageURL = imagesDir.appendingPathComponent(imageData.filename)
+                    if let jpegData = uiImage.jpegData(compressionQuality: 0.9) {
+                        try jpegData.write(to: imageURL)
+                    }
+                }
+            }
+            
+            // Create ZIP archive
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let dateString = dateFormatter.string(from: sinceDate)
+            let zipURL = documentsDir.appendingPathComponent("MoleSync_since_\(dateString).moletracker")
+            try zipDirectory(at: exportDir, to: zipURL)
+            
+            return zipURL
+        } catch {
+            print("❌ Delta sync export error: \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
+    /// Filter moles and images by date
+    private static func filterDataSinceDate(moles: [Mole], sinceDate: Date) -> (moles: [MoleExportData], images: [ImageExportData]) {
+        var exportMoles: [MoleExportData] = []
+        var exportImages: [ImageExportData] = []
+        var processedMoleIDs = Set<String>()
+        
+        for mole in moles {
+            // Get images created/modified since date
+            let newImages = mole.images.filter { $0.captureDate >= sinceDate }
+            
+            if !newImages.isEmpty {
+                // Include mole if it has new images
+                let moleID = mole.id.uuidString
+                
+                // Only add mole once
+                if !processedMoleIDs.contains(moleID) {
+                    let moleData = MoleExportData(
+                        id: moleID,
+                        createdAt: mole.createdAt,
+                        lastModified: mole.lastModified,
+                        bodyRegion: mole.bodyRegion,
+                        bodySide: mole.bodySide,
+                        notes: mole.notes,
+                        referenceImageID: mole.referenceImageID?.uuidString,
+                        imageIDs: mole.images.map { $0.id.uuidString }
+                    )
+                    exportMoles.append(moleData)
+                    processedMoleIDs.insert(moleID)
+                }
+                
+                // Add new images
+                for image in newImages {
+                    let imageData = ImageExportData(
+                        id: image.id.uuidString,
+                        captureDate: image.captureDate,
+                        imageWidth: image.imageWidth,
+                        imageHeight: image.imageHeight,
+                        moleID: moleID,
+                        filename: "\(image.id.uuidString).jpg"
+                    )
+                    exportImages.append(imageData)
+                }
+            }
+        }
+        
+        return (moles: exportMoles, images: exportImages)
     }
 }
