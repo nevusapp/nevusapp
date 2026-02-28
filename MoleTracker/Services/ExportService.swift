@@ -262,8 +262,8 @@ class ExportService {
     
     // MARK: - Delta Sync Export
     
-    /// Export moles and images created/modified since a specific date
-    static func exportDeltaSync(moles: [Mole], sinceDate: Date) -> URL? {
+    /// Export moles, images, and overviews created/modified since a specific date
+    static func exportDeltaSync(moles: [Mole], overviews: [BodyRegionOverview], sinceDate: Date) -> URL? {
         let fileManager = FileManager.default
         
         guard let documentsDir = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
@@ -272,23 +272,13 @@ class ExportService {
         
         let exportDir = documentsDir.appendingPathComponent("SyncExport_\(UUID().uuidString)")
         
-        defer {
-            do {
-                if fileManager.fileExists(atPath: exportDir.path) {
-                    try fileManager.removeItem(at: exportDir)
-                }
-            } catch {
-                print("⚠️ Cleanup failed for \(exportDir.path): \(error.localizedDescription)")
-            }
-        }
-        
         do {
             try fileManager.createDirectory(at: exportDir, withIntermediateDirectories: true)
             
-            // Filter moles and images by date
-            let filteredData = filterDataSinceDate(moles: moles, sinceDate: sinceDate)
+            // Filter moles, images, and overviews by date
+            let filteredData = filterDataSinceDate(moles: moles, overviews: overviews, sinceDate: sinceDate)
             
-            guard !filteredData.moles.isEmpty || !filteredData.images.isEmpty else {
+            guard !filteredData.moles.isEmpty || !filteredData.images.isEmpty || !filteredData.overviews.isEmpty else {
                 print("ℹ️ No new data to sync since \(sinceDate)")
                 return nil
             }
@@ -297,6 +287,7 @@ class ExportService {
             let syncPackage = SyncPackage.create(
                 moles: filteredData.moles,
                 images: filteredData.images,
+                overviews: filteredData.overviews,
                 sinceDate: sinceDate
             )
             
@@ -312,7 +303,7 @@ class ExportService {
             let imagesDir = exportDir.appendingPathComponent("images")
             try fileManager.createDirectory(at: imagesDir, withIntermediateDirectories: true)
             
-            // Export image files
+            // Export mole image files
             for imageData in filteredData.images {
                 if let mole = moles.first(where: { $0.id.uuidString == imageData.moleID }),
                    let image = mole.images.first(where: { $0.id.uuidString == imageData.id }),
@@ -325,26 +316,52 @@ class ExportService {
                 }
             }
             
-            // Create ZIP archive
+            // Create overviews directory
+            let overviewsDir = exportDir.appendingPathComponent("overviews")
+            try fileManager.createDirectory(at: overviewsDir, withIntermediateDirectories: true)
+            
+            // Export overview image files
+            for overviewData in filteredData.overviews {
+                if let overview = overviews.first(where: { $0.id.uuidString == overviewData.id }),
+                   let uiImage = overview.uiImage {
+                    
+                    let imageURL = overviewsDir.appendingPathComponent(overviewData.filename)
+                    if let jpegData = uiImage.jpegData(compressionQuality: 0.9) {
+                        try jpegData.write(to: imageURL)
+                    }
+                }
+            }
+            
+            // Create package bundle (directory with .moletracker extension)
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let dateString = dateFormatter.string(from: sinceDate)
-            let zipURL = documentsDir.appendingPathComponent("MoleSync_since_\(dateString).moletracker")
-            try zipDirectory(at: exportDir, to: zipURL)
+            let packageURL = documentsDir.appendingPathComponent("MoleSync_since_\(dateString).moletracker")
             
-            return zipURL
+            // Remove existing package if it exists
+            if fileManager.fileExists(atPath: packageURL.path) {
+                try fileManager.removeItem(at: packageURL)
+            }
+            
+            // Move the export directory to the package URL
+            // This creates a directory bundle that iOS treats as a single file
+            try fileManager.moveItem(at: exportDir, to: packageURL)
+            
+            return packageURL
         } catch {
             print("❌ Delta sync export error: \(error.localizedDescription)")
             return nil
         }
     }
     
-    /// Filter moles and images by date
-    private static func filterDataSinceDate(moles: [Mole], sinceDate: Date) -> (moles: [MoleExportData], images: [ImageExportData]) {
+    /// Filter moles, images, and overviews by date
+    private static func filterDataSinceDate(moles: [Mole], overviews: [BodyRegionOverview], sinceDate: Date) -> (moles: [MoleExportData], images: [ImageExportData], overviews: [OverviewExportData]) {
         var exportMoles: [MoleExportData] = []
         var exportImages: [ImageExportData] = []
+        var exportOverviews: [OverviewExportData] = []
         var processedMoleIDs = Set<String>()
         
+        // Filter moles and images
         for mole in moles {
             // Get images created/modified since date
             let newImages = mole.images.filter { $0.captureDate >= sinceDate }
@@ -384,6 +401,34 @@ class ExportService {
             }
         }
         
-        return (moles: exportMoles, images: exportImages)
+        // Filter overviews
+        for overview in overviews where overview.captureDate >= sinceDate {
+            let markers = overview.locationMarkers.compactMap { marker -> LocationMarkerExportData? in
+                guard let mole = marker.mole else { return nil }
+                return LocationMarkerExportData(
+                    id: marker.id.uuidString,
+                    moleID: mole.id.uuidString,
+                    x: marker.normalizedX,
+                    y: marker.normalizedY
+                )
+            }
+            
+            let overviewData = OverviewExportData(
+                id: overview.id.uuidString,
+                bodyRegion: overview.bodyRegion,
+                captureDate: overview.captureDate,
+                notes: overview.notes,
+                pitch: overview.pitch,
+                roll: overview.roll,
+                yaw: overview.yaw,
+                barometricPressure: overview.barometricPressure,
+                altitude: overview.altitude,
+                filename: "\(overview.id.uuidString).jpg",
+                locationMarkers: markers
+            )
+            exportOverviews.append(overviewData)
+        }
+        
+        return (moles: exportMoles, images: exportImages, overviews: exportOverviews)
     }
 }

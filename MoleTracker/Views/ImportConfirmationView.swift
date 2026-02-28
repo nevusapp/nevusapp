@@ -26,10 +26,13 @@ struct ImportConfirmationView: View {
         let sinceDate: Date
         let moleCount: Int
         let imageCount: Int
+        let overviewCount: Int
     }
     
     var body: some View {
-        NavigationStack {
+        let _ = print("🎬 ImportConfirmationView body rendered for: \(fileURL.lastPathComponent)")
+        
+        return NavigationStack {
             Group {
                 if isLoading {
                     loadingView
@@ -63,7 +66,14 @@ struct ImportConfirmationView: View {
             } message: { message in
                 Text(message)
             }
+            .onAppear {
+                print("👀 ImportConfirmationView appeared")
+                Task {
+                    await loadPackageInfo()
+                }
+            }
             .task {
+                print("🚀 ImportConfirmationView .task triggered")
                 await loadPackageInfo()
             }
         }
@@ -93,6 +103,13 @@ struct ImportConfirmationView: View {
                     Text(String(localized: "import_info_images", defaultValue: "Images"))
                     Spacer()
                     Text("\(info.imageCount)")
+                        .foregroundColor(.secondary)
+                }
+                
+                HStack {
+                    Text(String(localized: "import_info_overviews", defaultValue: "Overviews"))
+                    Spacer()
+                    Text("\(info.overviewCount)")
                         .foregroundColor(.secondary)
                 }
                 
@@ -275,57 +292,36 @@ struct ImportConfirmationView: View {
     }
     
     private func loadPackageInfo() async {
+        print("📦 Loading package info from: \(fileURL)")
+        
         do {
-            // Read package manifest to show preview
-            let fileManager = FileManager.default
-            let tempDir = fileManager.temporaryDirectory.appendingPathComponent(UUID().uuidString)
-            try fileManager.createDirectory(at: tempDir, withIntermediateDirectories: true)
+            // The .moletracker file is a directory bundle - read manifest directly
+            let manifestURL = fileURL.appendingPathComponent("manifest.json")
+            print("📄 Reading manifest from: \(manifestURL)")
             
-            defer {
-                try? fileManager.removeItem(at: tempDir)
-            }
-            
-            // Unzip to read manifest
-            var coordinatorError: NSError?
-            try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-                NSFileCoordinator().coordinate(readingItemAt: fileURL, options: [.forUploading], error: &coordinatorError) { zipURL in
-                    do {
-                        let contents = try fileManager.contentsOfDirectory(at: zipURL, includingPropertiesForKeys: nil)
-                        for item in contents {
-                            let destItem = tempDir.appendingPathComponent(item.lastPathComponent)
-                            try fileManager.copyItem(at: item, to: destItem)
-                        }
-                        continuation.resume()
-                    } catch {
-                        continuation.resume(throwing: error)
-                    }
-                }
-                
-                if let error = coordinatorError {
-                    continuation.resume(throwing: error)
-                }
-            }
-            
-            // Read manifest
-            let manifestURL = tempDir.appendingPathComponent("manifest.json")
             let manifestData = try Data(contentsOf: manifestURL)
+            print("✅ Manifest loaded, size: \(manifestData.count) bytes")
             
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
             let syncPackage = try decoder.decode(SyncPackage.self, from: manifestData)
+            print("✅ Package decoded: \(syncPackage.moles.count) moles, \(syncPackage.images.count) images, \(syncPackage.overviews.count) overviews")
             
             await MainActor.run {
                 packageInfo = PackageInfo(
                     exportDate: syncPackage.exportDate,
                     sinceDate: syncPackage.sinceDate,
                     moleCount: syncPackage.moles.count,
-                    imageCount: syncPackage.images.count
+                    imageCount: syncPackage.images.count,
+                    overviewCount: syncPackage.overviews.count
                 )
                 isLoading = false
+                print("✅ Package info loaded successfully")
             }
         } catch {
+            print("❌ Load package error: \(error)")
             await MainActor.run {
-                errorMessage = error.localizedDescription
+                errorMessage = "Failed to read package: \(error.localizedDescription)"
                 showingError = true
                 isLoading = false
             }

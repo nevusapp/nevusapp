@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import UniformTypeIdentifiers
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
@@ -53,193 +54,101 @@ struct ContentView: View {
     }
     
     var body: some View {
-        Group {
-            if isIPad {
-                // iPad: Use NavigationSplitView for master-detail layout
-                NavigationSplitView {
-                    sidebarContent
-                } detail: {
-                    if let mole = selectedMole {
-                        MoleDetailView(mole: mole)
-                    } else {
-                        emptyDetailView
+        NavigationStack {
+            Group {
+                if moles.isEmpty {
+                    emptyStateView
+                } else {
+                    moleListView
+                }
+            }
+            .navigationTitle(String(localized: "title_mole_list"))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Menu {
+                        NavigationLink(destination: AllRegionsOverviewView()) {
+                            Label(String(localized: "all_regions_overview_menu"), systemImage: "square.grid.2x2")
+                        }
+                        
+                        if !moles.isEmpty {
+                            Divider()
+                            
+                            Button(action: { showingGuidedScanning = true }) {
+                                Label(String(localized: "guided_scanning_title"), systemImage: "camera.metering.center.weighted")
+                            }
+                            
+                            Button(action: { showingGuidedComparison = true }) {
+                                Label(String(localized: "guided_comparison_title"), systemImage: "arrow.left.and.right.square")
+                            }
+                            
+                            Divider()
+                            
+                            Button(action: { showingSync = true }) {
+                                Label(String(localized: "sync_menu_item", defaultValue: "Sync to Device"), systemImage: "arrow.triangle.2.circlepath")
+                            }
+                            
+                            Button(action: { exportAllMoles() }) {
+                                Label(String(localized: "action_export_all"), systemImage: "square.and.arrow.up")
+                            }
+                            
+                            Button(action: { showingCleanup = true }) {
+                                Label(String(localized: "cleanup_menu_item"), systemImage: "trash")
+                            }
+                        }
+                    } label: {
+                        Label(String(localized: "menu_label"), systemImage: "ellipsis.circle")
+                    }
+                    .disabled(isExporting)
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { showingAddMole = true }) {
+                        Label(String(localized: "action_add"), systemImage: "plus")
                     }
                 }
-            } else {
-                // iPhone: Use NavigationStack
-                NavigationStack {
-                    mainContent
-                }
             }
-        }
-        .sheet(isPresented: $showingAddMole) {
-            AddMoleView(onMoleCreated: { mole in
-                newlyCreatedMole = mole
-            })
-        }
-        .sheet(item: $exportURL) { url in
-            ShareSheet(items: [url])
-        }
-        .sheet(isPresented: $showingCleanup) {
-            SessionCleanupView()
-        }
-        .sheet(isPresented: $showingGuidedScanning) {
-            GuidedScanningView(moles: moles)
-        }
-        .sheet(isPresented: $showingGuidedComparison) {
-            GuidedComparisonView(moles: moles)
-        }
-        .sheet(isPresented: $showingSync) {
-            SyncView()
-        }
-        .overlay {
-            if isExporting {
-                ZStack {
-                    Color.black.opacity(0.3)
-                        .ignoresSafeArea()
-                    
-                    VStack(spacing: 16) {
-                        ProgressView()
-                            .scaleEffect(1.5)
-                        Text(String(localized: "exporting_data"))
-                            .font(.headline)
+            .sheet(isPresented: $showingAddMole) {
+                AddMoleView(onMoleCreated: { mole in
+                    newlyCreatedMole = mole
+                })
+            }
+            .navigationDestination(item: $newlyCreatedMole) { mole in
+                MoleDetailView(mole: mole)
+            }
+            .sheet(item: $exportURL) { url in
+                ShareSheet(items: [url])
+            }
+            .sheet(isPresented: $showingCleanup) {
+                SessionCleanupView()
+            }
+            .sheet(isPresented: $showingGuidedScanning) {
+                GuidedScanningView(moles: moles)
+            }
+            .sheet(isPresented: $showingGuidedComparison) {
+                GuidedComparisonView(moles: moles)
+            }
+            .sheet(isPresented: $showingSync) {
+                SyncView()
+            }
+            .overlay {
+                if isExporting {
+                    ZStack {
+                        Color.black.opacity(0.3)
+                            .ignoresSafeArea()
+                        
+                        VStack(spacing: 16) {
+                            ProgressView()
+                                .scaleEffect(1.5)
+                            Text(String(localized: "exporting_data"))
+                                .font(.headline)
+                        }
+                        .padding(32)
+                        .background(.ultraThinMaterial)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
                     }
-                    .padding(32)
-                    .background(.ultraThinMaterial)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
                 }
             }
         }
-    }
-    
-    // MARK: - iPad Sidebar Content
-    private var sidebarContent: some View {
-        Group {
-            if moles.isEmpty {
-                emptyStateView
-            } else {
-                moleListView
-            }
-        }
-        .navigationTitle(String(localized: "title_mole_list"))
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Menu {
-                    NavigationLink(destination: AllRegionsOverviewView()) {
-                        Label(String(localized: "all_regions_overview_menu"), systemImage: "square.grid.2x2")
-                    }
-                    
-                    if !moles.isEmpty {
-                        Divider()
-                        
-                        Button(action: { showingGuidedScanning = true }) {
-                            Label(String(localized: "guided_scanning_title"), systemImage: "camera.metering.center.weighted")
-                        }
-                        
-                        Button(action: { showingGuidedComparison = true }) {
-                            Label(String(localized: "guided_comparison_title"), systemImage: "arrow.left.and.right.square")
-                        }
-                        
-                        Divider()
-                        
-                        Button(action: { showingSync = true }) {
-                            Label(String(localized: "sync_menu_item", defaultValue: "Sync to Device"), systemImage: "arrow.triangle.2.circlepath")
-                        }
-                        
-                        Button(action: { exportAllMoles() }) {
-                            Label(String(localized: "action_export_all"), systemImage: "square.and.arrow.up")
-                        }
-                        
-                        Button(action: { showingCleanup = true }) {
-                            Label(String(localized: "cleanup_menu_item"), systemImage: "trash")
-                        }
-                    }
-                } label: {
-                    Label(String(localized: "menu_label"), systemImage: "ellipsis.circle")
-                }
-                .disabled(isExporting)
-            }
-            
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: { showingAddMole = true }) {
-                    Label(String(localized: "action_add"), systemImage: "plus")
-                }
-            }
-        }
-    }
-    
-    // MARK: - iPhone Main Content
-    private var mainContent: some View {
-        Group {
-            if moles.isEmpty {
-                emptyStateView
-            } else {
-                moleListView
-            }
-        }
-        .navigationTitle(String(localized: "title_mole_list"))
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Menu {
-                    NavigationLink(destination: AllRegionsOverviewView()) {
-                        Label(String(localized: "all_regions_overview_menu"), systemImage: "square.grid.2x2")
-                    }
-                    
-                    if !moles.isEmpty {
-                        Divider()
-                        
-                        Button(action: { showingGuidedScanning = true }) {
-                            Label(String(localized: "guided_scanning_title"), systemImage: "camera.metering.center.weighted")
-                        }
-                        
-                        Button(action: { showingGuidedComparison = true }) {
-                            Label(String(localized: "guided_comparison_title"), systemImage: "arrow.left.and.right.square")
-                        }
-                        
-                        Divider()
-                        
-                        Button(action: { showingSync = true }) {
-                            Label(String(localized: "sync_menu_item", defaultValue: "Sync to Device"), systemImage: "arrow.triangle.2.circlepath")
-                        }
-                        
-                        Button(action: { exportAllMoles() }) {
-                            Label(String(localized: "action_export_all"), systemImage: "square.and.arrow.up")
-                        }
-                        
-                        Button(action: { showingCleanup = true }) {
-                            Label(String(localized: "cleanup_menu_item"), systemImage: "trash")
-                        }
-                    }
-                } label: {
-                    Label(String(localized: "menu_label"), systemImage: "ellipsis.circle")
-                }
-                .disabled(isExporting)
-            }
-            
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: { showingAddMole = true }) {
-                    Label(String(localized: "action_add"), systemImage: "plus")
-                }
-            }
-        }
-        .navigationDestination(item: $newlyCreatedMole) { mole in
-            MoleDetailView(mole: mole)
-        }
-    }
-    
-    // MARK: - Empty Detail View (iPad)
-    private var emptyDetailView: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "photo.on.rectangle.angled")
-                .font(.system(size: 80))
-                .foregroundColor(.gray)
-            
-            Text(String(localized: "select_mole_to_view", defaultValue: "Select a mole to view details"))
-                .font(.title2)
-                .foregroundColor(.secondary)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.systemGroupedBackground))
     }
     
     private var emptyStateView: some View {

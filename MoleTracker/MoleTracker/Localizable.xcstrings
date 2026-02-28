@@ -1929,6 +1929,9 @@
         }
       }
     },
+    "Error: No file to import" : {
+
+    },
     "export_label" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2631,6 +2634,17 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Moles"
+          }
+        }
+      }
+    },
+    "import_info_overviews" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Overviews"
           }
         }
       }
@@ -4204,17 +4218,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Statistics"
-          }
-        }
-      }
-    },
-    "select_mole_to_view" : {
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Select a mole to view details"
           }
         }
       }

@@ -16,12 +16,14 @@ class ImportService {
     struct ImportResult {
         let molesImported: Int
         let imagesImported: Int
+        let overviewsImported: Int
         let molesSkipped: Int
         let imagesSkipped: Int
+        let overviewsSkipped: Int
         let errors: [String]
         
         var hasNewData: Bool {
-            molesImported > 0 || imagesImported > 0
+            molesImported > 0 || imagesImported > 0 || overviewsImported > 0
         }
         
         var summary: String {
@@ -32,11 +34,17 @@ class ImportService {
             if imagesImported > 0 {
                 parts.append("\(imagesImported) image(s)")
             }
+            if overviewsImported > 0 {
+                parts.append("\(overviewsImported) overview(s)")
+            }
             if molesSkipped > 0 {
                 parts.append("\(molesSkipped) duplicate mole(s) skipped")
             }
             if imagesSkipped > 0 {
                 parts.append("\(imagesSkipped) duplicate image(s) skipped")
+            }
+            if overviewsSkipped > 0 {
+                parts.append("\(overviewsSkipped) duplicate overview(s) skipped")
             }
             return parts.joined(separator: ", ")
         }
@@ -44,21 +52,9 @@ class ImportService {
     
     /// Import a sync package from a URL
     static func importSyncPackage(from url: URL, modelContext: ModelContext) async throws -> ImportResult {
-        let fileManager = FileManager.default
-        
-        // Create temporary directory for extraction
-        let tempDir = fileManager.temporaryDirectory.appendingPathComponent(UUID().uuidString)
-        try fileManager.createDirectory(at: tempDir, withIntermediateDirectories: true)
-        
-        defer {
-            try? fileManager.removeItem(at: tempDir)
-        }
-        
-        // Unzip the package
-        try await unzipPackage(from: url, to: tempDir)
-        
-        // Read manifest
-        let manifestURL = tempDir.appendingPathComponent("manifest.json")
+        // The .moletracker file is actually a directory bundle
+        // Read manifest directly from it
+        let manifestURL = url.appendingPathComponent("manifest.json")
         let manifestData = try Data(contentsOf: manifestURL)
         
         let decoder = JSONDecoder()
@@ -70,44 +66,20 @@ class ImportService {
             throw ImportError.unsupportedVersion(syncPackage.version)
         }
         
-        // Import data
-        return try await importData(syncPackage: syncPackage, imagesDir: tempDir.appendingPathComponent("images"), modelContext: modelContext)
+        // Import data - images and overviews are in subdirectories
+        let imagesDir = url.appendingPathComponent("images")
+        let overviewsDir = url.appendingPathComponent("overviews")
+        return try await importData(syncPackage: syncPackage, imagesDir: imagesDir, overviewsDir: overviewsDir, modelContext: modelContext)
     }
     
-    /// Unzip package to temporary directory
-    private static func unzipPackage(from sourceURL: URL, to destinationURL: URL) async throws {
-        let fileManager = FileManager.default
-        
-        // Use NSFileCoordinator for safe file access
-        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-            var coordinatorError: NSError?
-            NSFileCoordinator().coordinate(readingItemAt: sourceURL, options: [.forUploading], error: &coordinatorError) { zipURL in
-                do {
-                    // The zipURL is actually a directory created by the system
-                    // Copy its contents to our destination
-                    let contents = try fileManager.contentsOfDirectory(at: zipURL, includingPropertiesForKeys: nil)
-                    for item in contents {
-                        let destItem = destinationURL.appendingPathComponent(item.lastPathComponent)
-                        try fileManager.copyItem(at: item, to: destItem)
-                    }
-                    continuation.resume()
-                } catch {
-                    continuation.resume(throwing: error)
-                }
-            }
-            
-            if let error = coordinatorError {
-                continuation.resume(throwing: error)
-            }
-        }
-    }
-    
-    /// Import moles and images from sync package
-    private static func importData(syncPackage: SyncPackage, imagesDir: URL, modelContext: ModelContext) async throws -> ImportResult {
+    /// Import moles, images, and overviews from sync package
+    private static func importData(syncPackage: SyncPackage, imagesDir: URL, overviewsDir: URL, modelContext: ModelContext) async throws -> ImportResult {
         var molesImported = 0
         var imagesImported = 0
+        var overviewsImported = 0
         var molesSkipped = 0
         var imagesSkipped = 0
+        var overviewsSkipped = 0
         var errors: [String] = []
         
         // Fetch existing moles and images to check for duplicates
@@ -196,14 +168,65 @@ class ImportService {
             imagesImported += 1
         }
         
+        // Import overviews
+        let existingOverviews = try modelContext.fetch(FetchDescriptor<BodyRegionOverview>())
+        let existingOverviewIDs = Set(existingOverviews.map { $0.id.uuidString })
+        
+        for overviewData in syncPackage.overviews {
+            if existingOverviewIDs.contains(overviewData.id) {
+                overviewsSkipped += 1
+                continue
+            }
+            
+            // Load overview image file
+            let imageURL = overviewsDir.appendingPathComponent(overviewData.filename)
+            guard let imageFileData = try? Data(contentsOf: imageURL),
+                  let uiImage = UIImage(data: imageFileData) else {
+                errors.append("Failed to load overview image: \(overviewData.filename)")
+                continue
+            }
+            
+            // Create BodyRegionOverview
+            let overview = BodyRegionOverview(bodyRegion: overviewData.bodyRegion, image: uiImage)
+            overview.id = UUID(uuidString: overviewData.id) ?? UUID()
+            overview.captureDate = overviewData.captureDate
+            overview.notes = overviewData.notes
+            overview.pitch = overviewData.pitch
+            overview.roll = overviewData.roll
+            overview.yaw = overviewData.yaw
+            overview.barometricPressure = overviewData.barometricPressure
+            overview.altitude = overviewData.altitude
+            
+            // Import location markers
+            for markerData in overviewData.locationMarkers {
+                // Find the mole for this marker
+                if let mole = moleMap[markerData.moleID] {
+                    let marker = MoleLocationMarker(
+                        normalizedX: markerData.x,
+                        normalizedY: markerData.y
+                    )
+                    marker.id = UUID(uuidString: markerData.id) ?? UUID()
+                    marker.mole = mole
+                    marker.overviewImage = overview
+                    overview.locationMarkers.append(marker)
+                    modelContext.insert(marker)
+                }
+            }
+            
+            modelContext.insert(overview)
+            overviewsImported += 1
+        }
+        
         // Save context
         try modelContext.save()
         
         return ImportResult(
             molesImported: molesImported,
             imagesImported: imagesImported,
+            overviewsImported: overviewsImported,
             molesSkipped: molesSkipped,
             imagesSkipped: imagesSkipped,
+            overviewsSkipped: overviewsSkipped,
             errors: errors
         )
     }

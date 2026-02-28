@@ -11,8 +11,7 @@ import SwiftData
 @main
 struct MoleTrackerApp: App {
     @StateObject private var notificationService = NotificationService.shared
-    @State private var importURL: URL?
-    @State private var showingImportConfirmation = false
+    @StateObject private var importState = ImportState()
     
     var body: some Scene {
         WindowGroup {
@@ -24,9 +23,15 @@ struct MoleTrackerApp: App {
                 .onOpenURL { url in
                     handleIncomingURL(url)
                 }
-                .sheet(isPresented: $showingImportConfirmation) {
-                    if let url = importURL {
-                        ImportConfirmationView(fileURL: url)
+                .sheet(isPresented: $importState.showingImportConfirmation, onDismiss: handleSheetDismiss) {
+                    Group {
+                        if let url = importState.importURL {
+                            let _ = print("🎭 Creating ImportConfirmationView with URL: \(url.lastPathComponent)")
+                            ImportConfirmationView(fileURL: url)
+                        } else {
+                            let _ = print("⚠️ ImportState.importURL is nil in sheet!")
+                            Text("Error: No file to import")
+                        }
                     }
                 }
         }
@@ -34,10 +39,65 @@ struct MoleTrackerApp: App {
     }
     
     private func handleIncomingURL(_ url: URL) {
+        print("📥 Received URL: \(url)")
+        
         // Check if it's a sync package file
-        if url.pathExtension == "moletracker" {
-            importURL = url
-            showingImportConfirmation = true
+        guard url.pathExtension == "moletracker" else {
+            print("⚠️ Not a moletracker file")
+            return
+        }
+        
+        // Start accessing security-scoped resource
+        guard url.startAccessingSecurityScopedResource() else {
+            print("❌ Failed to access security-scoped resource")
+            return
+        }
+        
+        // Copy file to app's temporary directory
+        let fileManager = FileManager.default
+        let tempURL = fileManager.temporaryDirectory
+            .appendingPathComponent(url.lastPathComponent)
+        
+        do {
+            // Remove existing temp file if present
+            if fileManager.fileExists(atPath: tempURL.path) {
+                try fileManager.removeItem(at: tempURL)
+            }
+            
+            // Copy to temp location
+            try fileManager.copyItem(at: url, to: tempURL)
+            print("✅ File copied to: \(tempURL)")
+            
+            // Stop accessing the original file
+            url.stopAccessingSecurityScopedResource()
+            
+            // Set state on main thread using ObservableObject
+            Task { @MainActor in
+                importState.setImportURL(tempURL)
+            }
+        } catch {
+            print("❌ Error copying file: \(error.localizedDescription)")
+            url.stopAccessingSecurityScopedResource()
+        }
+    }
+    
+    private func handleSheetDismiss() {
+        print("📋 Sheet dismissed")
+        // Clean up after sheet is fully dismissed
+        if let url = importState.importURL {
+            cleanupTempFile(url)
+            importState.reset()
+        }
+    }
+    
+    private func cleanupTempFile(_ url: URL) {
+        do {
+            if FileManager.default.fileExists(atPath: url.path) {
+                try FileManager.default.removeItem(at: url)
+                print("🗑️ Cleaned up temp file")
+            }
+        } catch {
+            print("⚠️ Failed to cleanup temp file: \(error)")
         }
     }
 }

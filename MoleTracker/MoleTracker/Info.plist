@@ -17,13 +17,19 @@
 			</array>
 		</dict>
 	</array>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+	<key>UIFileSharingEnabled</key>
+	<true/>
+	<key>UISupportsDocumentBrowser</key>
+	<true/>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.data</string>
-				<string>public.content</string>
+				<string>com.apple.package</string>
+				<string>public.directory</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>MoleTracker Sync Package</string>
@@ -35,8 +41,6 @@
 				<array>
 					<string>moletracker</string>
 				</array>
-				<key>public.mime-type</key>
-				<string>application/x-moletracker</string>
 			</dict>
 		</dict>
 	</array>

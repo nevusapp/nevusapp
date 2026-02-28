@@ -12,6 +12,7 @@ struct SyncView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     @Query private var moles: [Mole]
+    @Query private var overviews: [BodyRegionOverview]
     
     @State private var selectedDate = Calendar.current.startOfDay(for: Date())
     @State private var isExporting = false
@@ -209,7 +210,7 @@ struct SyncView: View {
         isExporting = true
         
         Task(priority: .userInitiated) {
-            if let url = ExportService.exportDeltaSync(moles: moles, sinceDate: selectedDate) {
+            if let url = ExportService.exportDeltaSync(moles: moles, overviews: overviews, sinceDate: selectedDate) {
                 await MainActor.run {
                     exportURL = url
                     isExporting = false
