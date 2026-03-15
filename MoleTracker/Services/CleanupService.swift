@@ -45,6 +45,12 @@ class CleanupService {
         
         // Process mole images
         for mole in moles {
+            // Find the latest image overall (across all dates)
+            let latestImage = mole.images.max(by: { $0.captureDate < $1.captureDate })
+            
+            // Get the reference image (explicitly set or defaults to oldest)
+            let referenceImage = mole.referenceImage
+            
             // Group images by calendar date
             var imagesByDate: [Date: [MoleImage]] = [:]
             
@@ -60,16 +66,18 @@ class CleanupService {
                 let totalCount = images.count
                 let totalBytes = images.reduce(Int64(0)) { $0 + Int64($1.imageData.count) }
                 
-                // Sort images by timestamp to identify deletable ones
-                let sortedImages = images.sorted { $0.captureDate < $1.captureDate }
-                let candidatesForDeletion = sortedImages.dropLast()
-                
-                // Filter out reference image from deletable candidates
-                let deletableImages = candidatesForDeletion.filter { image in
-                    // Keep reference image (don't mark as deletable)
-                    if let refID = mole.referenceImageID, image.id == refID {
+                // Determine which images are deletable
+                let deletableImages = images.filter { image in
+                    // Never delete the latest image overall
+                    if let latest = latestImage, image.id == latest.id {
                         return false
                     }
+                    
+                    // Never delete the reference image
+                    if let reference = referenceImage, image.id == reference.id {
+                        return false
+                    }
+                    
                     return true
                 }
                 
@@ -134,35 +142,36 @@ class CleanupService {
         for moleIndex in moles.indices {
             let mole = moles[moleIndex]
             
-            // Group images by calendar date
-            var imagesByDate: [Date: [MoleImage]] = [:]
+            // Find the latest image overall (across all dates)
+            let latestImage = mole.images.max(by: { $0.captureDate < $1.captureDate })
             
-            for image in mole.images {
-                let dateComponents = calendar.dateComponents([.year, .month, .day], from: image.captureDate)
-                if let normalizedDate = calendar.date(from: dateComponents) {
-                    imagesByDate[normalizedDate, default: []].append(image)
-                }
-            }
+            // Get the reference image (explicitly set or defaults to oldest)
+            let referenceImage = mole.referenceImage
             
             // Find images to delete
             var imagesToDelete: [MoleImage] = []
             
-            for (date, images) in imagesByDate {
-                if sessionDates.contains(date) {
-                    // Sort images by timestamp (oldest first)
-                    let sortedImages = images.sorted { $0.captureDate < $1.captureDate }
-                    
-                    // Mark all except the last one for deletion
-                    let candidatesForDeletion = sortedImages.dropLast()
-                    
-                    // Filter out reference image (never delete it)
-                    for candidate in candidatesForDeletion {
-                        // Skip if this is the reference image
-                        if let refID = mole.referenceImageID, candidate.id == refID {
-                            continue
-                        }
-                        imagesToDelete.append(candidate)
+            for image in mole.images {
+                // Get the calendar date for this image
+                let dateComponents = calendar.dateComponents([.year, .month, .day], from: image.captureDate)
+                guard let normalizedDate = calendar.date(from: dateComponents) else {
+                    continue
+                }
+                
+                // Only consider images from selected sessions
+                if sessionDates.contains(normalizedDate) {
+                    // Never delete the latest image overall
+                    if let latest = latestImage, image.id == latest.id {
+                        continue
                     }
+                    
+                    // Never delete the reference image
+                    if let reference = referenceImage, image.id == reference.id {
+                        continue
+                    }
+                    
+                    // This image can be deleted
+                    imagesToDelete.append(image)
                 }
             }
             
