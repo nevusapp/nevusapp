@@ -10,24 +10,21 @@
 		6B817DB82F0D36AB00EB1030 /* Nevus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nevus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		6B817DBA2F0D36AB00EB1031 /* Exceptions for "Nevus" folder in "Nevus" target */ = {
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		6B817DBA2F0D36AB00EB1030 /* Nevus */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6B817DBA2F0D36AB00EB1031 /* Nevus/App/Info.plist */,
+			);
+			path = Nevus;
+			sourceTree = "<group>";
+		};
+		6B817DBA2F0D36AB00EB1031 /* Nevus/App/Info.plist */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				App/Info.plist,
 			);
 			target = 6B817DB72F0D36AB00EB1030 /* Nevus */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		6B817DBA2F0D36AB00EB1030 /* Nevus */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				6B817DBA2F0D36AB00EB1031 /* Exceptions for "Nevus" folder in "Nevus" target */,
-			);
-			path = Nevus;
-			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -130,13 +127,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-			6B817DB42F0D36AB00EB1030 /* Sources */ = {
-				isa = PBXSourcesBuildPhase;
-				buildActionMask = 2147483647;
-				files = (
-				);
-				runOnlyForDeploymentPostprocessing = 0;
-			};
+		6B817DB42F0D36AB00EB1030 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
@@ -272,7 +269,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q3U88T33CV;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Nevus/App/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Nevus benötigt Zugriff auf die Kamera, um Fotos von Leberflecken aufzunehmen.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "Nevus nutzt Bewegungssensoren, um die Aufnahmeposition zu bestimmen.";
@@ -313,7 +309,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q3U88T33CV;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Nevus/App/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Nevus benötigt Zugriff auf die Kamera, um Fotos von Leberflecken aufzunehmen.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "Nevus nutzt Bewegungssensoren, um die Aufnahmeposition zu bestimmen.";
