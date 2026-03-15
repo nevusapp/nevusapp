@@ -11,6 +11,7 @@ import SwiftData
 struct ImportConfirmationView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var importState: ImportState
     
     let fileURL: URL
     
@@ -338,6 +339,8 @@ struct ImportConfirmationView: View {
                 await MainActor.run {
                     importResult = result
                     isImporting = false
+                    // Mark import as successful so original file can be deleted
+                    importState.importSucceeded = true
                 }
             } catch {
                 await MainActor.run {

@@ -28,6 +28,7 @@ struct MoleTrackerApp: App {
                         if let url = importState.importURL {
                             let _ = print("🎭 Creating ImportConfirmationView with URL: \(url.lastPathComponent)")
                             ImportConfirmationView(fileURL: url)
+                                .environmentObject(importState)
                         } else {
                             let _ = print("⚠️ ImportState.importURL is nil in sheet!")
                             Text("Error: No file to import")
@@ -68,11 +69,12 @@ struct MoleTrackerApp: App {
             try fileManager.copyItem(at: url, to: tempURL)
             print("✅ File copied to: \(tempURL)")
             
-            // Stop accessing the original file
+            // Stop accessing the original file (but keep URL for later deletion)
             url.stopAccessingSecurityScopedResource()
             
             // Set state on main thread using ObservableObject
             Task { @MainActor in
+                importState.originalFileURL = url
                 importState.setImportURL(tempURL)
             }
         } catch {
@@ -83,11 +85,19 @@ struct MoleTrackerApp: App {
     
     private func handleSheetDismiss() {
         print("📋 Sheet dismissed")
-        // Clean up after sheet is fully dismissed
-        if let url = importState.importURL {
-            cleanupTempFile(url)
-            importState.reset()
+        
+        // Clean up temp file
+        if let tempURL = importState.importURL {
+            cleanupTempFile(tempURL)
         }
+        
+        // Delete original file if import was successful
+        if importState.importSucceeded, let originalURL = importState.originalFileURL {
+            deleteOriginalFile(originalURL)
+        }
+        
+        // Reset state
+        importState.reset()
     }
     
     private func cleanupTempFile(_ url: URL) {
@@ -98,6 +108,30 @@ struct MoleTrackerApp: App {
             }
         } catch {
             print("⚠️ Failed to cleanup temp file: \(error)")
+        }
+    }
+    
+    private func deleteOriginalFile(_ url: URL) {
+        // Need to access security-scoped resource again for deletion
+        guard url.startAccessingSecurityScopedResource() else {
+            print("⚠️ Could not access original file for deletion")
+            return
+        }
+        
+        defer {
+            url.stopAccessingSecurityScopedResource()
+        }
+        
+        do {
+            if FileManager.default.fileExists(atPath: url.path) {
+                try FileManager.default.removeItem(at: url)
+                print("✅ Deleted original sync file from Files app: \(url.lastPathComponent)")
+            } else {
+                print("ℹ️ Original file already removed: \(url.lastPathComponent)")
+            }
+        } catch {
+            print("⚠️ Failed to delete original file: \(error.localizedDescription)")
+            print("   User can manually delete: \(url.lastPathComponent)")
         }
     }
 }

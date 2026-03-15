@@ -14,6 +14,12 @@ class ImportState: ObservableObject {
     @Published var importURL: URL?
     @Published var showingImportConfirmation = false
     
+    // Store the original file URL for deletion after import
+    var originalFileURL: URL?
+    
+    // Track if import was successful
+    var importSucceeded = false
+    
     func setImportURL(_ url: URL) {
         print("🔗 ImportState: Setting URL to \(url.lastPathComponent)")
         self.importURL = url
@@ -25,6 +31,8 @@ class ImportState: ObservableObject {
     func reset() {
         print("🔄 ImportState: Resetting")
         importURL = nil
+        originalFileURL = nil
+        importSucceeded = false
         showingImportConfirmation = false
     }
 }
