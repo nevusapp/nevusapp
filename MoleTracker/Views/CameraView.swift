@@ -121,55 +121,6 @@ struct CameraContentView: View {
             
             // UI Controls in top layer
             VStack(spacing: 0) {
-                // Top controls for overlay
-                if referenceImage != nil {
-                    VStack(spacing: 12) {
-                        // Overlay controls container (centered)
-                        HStack(spacing: 16) {
-                            // Toggle overlay button
-                            Button(action: {
-                                withAnimation {
-                                    showOverlay.toggle()
-                                }
-                            }) {
-                                Image(systemName: showOverlay ? "eye.fill" : "eye.slash.fill")
-                                    .font(.title2)
-                                    .foregroundColor(.white)
-                                    .padding(12)
-                                    .background(Color.black.opacity(0.7))
-                                    .clipShape(Circle())
-                                    .shadow(radius: 4)
-                            }
-
-                            // Opacity slider (only when overlay is visible)
-                            if showOverlay {
-                                HStack(spacing: 8) {
-                                    Text(String(localized: "camera_transparency"))
-                                        .font(.subheadline)
-                                        .foregroundColor(.white)
-
-                                    Slider(value: $overlayOpacity, in: 0.1...0.9)
-                                        .tint(.white)
-
-                                    Text("\(Int(overlayOpacity * 100))%")
-                                        .font(.subheadline)
-                                        .foregroundColor(.white)
-                                        .frame(width: 45)
-                                }
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 12)
-                                .background(Color.black.opacity(0.7))
-                                .cornerRadius(12)
-                                .shadow(radius: 4)
-                                .transition(.opacity)
-                            }
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding(.horizontal, 20)
-                    }
-                    .padding(.top, 70)
-                }
-
                 Spacer()
 
                 // Info text when overlay is active
@@ -184,16 +135,59 @@ struct CameraContentView: View {
                         .padding(.bottom, 20)
                 }
 
-                // Capture button
-                Button(action: onCapture) {
-                    Circle()
-                        .fill(Color.white)
-                        .frame(width: 70, height: 70)
-                        .overlay(
-                            Circle()
-                                .stroke(Color.white, lineWidth: 3)
-                                .frame(width: 80, height: 80)
-                        )
+                // Bottom control row: Transparency slider, Eye button, and Capture button
+                HStack(spacing: 16) {
+                    // Opacity slider (only when overlay is visible and reference image exists)
+                    if referenceImage != nil && showOverlay {
+                        VStack(spacing: 4) {
+                            Text(String(localized: "camera_transparency"))
+                                .font(.caption2)
+                                .foregroundColor(.white)
+
+                            Slider(value: $overlayOpacity, in: 0.1...0.9)
+                                .tint(.white)
+                                .frame(width: 100)
+
+                            Text("\(Int(overlayOpacity * 100))%")
+                                .font(.caption2)
+                                .foregroundColor(.white)
+                        }
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 8)
+                        .background(Color.black.opacity(0.7))
+                        .cornerRadius(10)
+                        .shadow(radius: 4)
+                        .transition(.opacity)
+                    }
+                    
+                    // Toggle overlay button (only when reference image exists)
+                    if referenceImage != nil {
+                        Button(action: {
+                            withAnimation {
+                                showOverlay.toggle()
+                            }
+                        }) {
+                            Image(systemName: showOverlay ? "eye.fill" : "eye.slash.fill")
+                                .font(.title2)
+                                .foregroundColor(.white)
+                                .padding(12)
+                                .background(Color.black.opacity(0.7))
+                                .clipShape(Circle())
+                                .shadow(radius: 4)
+                        }
+                    }
+                    
+                    // Capture button
+                    Button(action: onCapture) {
+                        Circle()
+                            .fill(Color.white)
+                            .frame(width: 70, height: 70)
+                            .overlay(
+                                Circle()
+                                    .stroke(Color.white, lineWidth: 3)
+                                    .frame(width: 80, height: 80)
+                            )
+                    }
                 }
                 .padding(.bottom, 40)
             }
