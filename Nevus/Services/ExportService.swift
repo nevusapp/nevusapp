@@ -332,11 +332,11 @@ class ExportService {
                 }
             }
             
-            // Create package bundle (directory with .moletracker extension)
+            // Create package bundle (directory with .nevus extension)
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let dateString = dateFormatter.string(from: sinceDate)
-            let packageURL = documentsDir.appendingPathComponent("MoleSync_since_\(dateString).moletracker")
+            let packageURL = documentsDir.appendingPathComponent("NevusSync_since_\(dateString).nevus")
             
             // Remove existing package if it exists
             if fileManager.fileExists(atPath: packageURL.path) {

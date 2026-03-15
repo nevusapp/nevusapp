@@ -52,7 +52,7 @@ class ImportService {
     
     /// Import a sync package from a URL
     static func importSyncPackage(from url: URL, modelContext: ModelContext) async throws -> ImportResult {
-        // The .moletracker file is actually a directory bundle
+        // The .nevus file is actually a directory bundle
         // Read manifest directly from it
         let manifestURL = url.appendingPathComponent("manifest.json")
         let manifestData = try Data(contentsOf: manifestURL)

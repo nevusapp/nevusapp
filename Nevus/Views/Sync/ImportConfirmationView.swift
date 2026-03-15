@@ -296,7 +296,7 @@ struct ImportConfirmationView: View {
         print("📦 Loading package info from: \(fileURL)")
         
         do {
-            // The .moletracker file is a directory bundle - read manifest directly
+            // The .nevus file is a directory bundle - read manifest directly
             let manifestURL = fileURL.appendingPathComponent("manifest.json")
             print("📄 Reading manifest from: \(manifestURL)")
             
@@ -354,6 +354,6 @@ struct ImportConfirmationView: View {
 }
 
 #Preview {
-    ImportConfirmationView(fileURL: URL(fileURLWithPath: "/tmp/test.moletracker"))
+    ImportConfirmationView(fileURL: URL(fileURLWithPath: "/tmp/test.nevus"))
         .modelContainer(for: [Mole.self, MoleImage.self], inMemory: true)
 }
