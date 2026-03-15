@@ -671,7 +671,8 @@ struct ComparisonSelectionView: View {
                     ForEach(sortedImages) { image in
                         ImageSelectionRow(
                             image: image,
-                            selectionNumber: getSelectionNumber(for: image)
+                            selectionNumber: getSelectionNumber(for: image),
+                            isReferenceImage: mole.referenceImage?.id == image.id
                         )
                         .contentShape(Rectangle())
                         .onTapGesture {
@@ -749,20 +750,47 @@ struct ComparisonSelectionView: View {
 struct ImageSelectionRow: View {
     let image: MoleImage
     let selectionNumber: Int?
+    let isReferenceImage: Bool
     
     var body: some View {
         HStack(spacing: 12) {
-            if let thumbnail = image.thumbnailImage {
-                Image(uiImage: thumbnail)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 60, height: 60)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
+            ZStack(alignment: .topLeading) {
+                if let thumbnail = image.thumbnailImage {
+                    Image(uiImage: thumbnail)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 60, height: 60)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                }
+                
+                // Reference image indicator
+                if isReferenceImage {
+                    Image(systemName: "star.fill")
+                        .font(.caption)
+                        .foregroundColor(.yellow)
+                        .padding(4)
+                        .background(Color.black.opacity(0.6))
+                        .clipShape(Circle())
+                        .padding(4)
+                }
             }
             
             VStack(alignment: .leading, spacing: 4) {
-                Text(image.captureDate.formatted(date: .long, time: .omitted))
-                    .font(.headline)
+                HStack(spacing: 4) {
+                    Text(image.captureDate.formatted(date: .long, time: .omitted))
+                        .font(.headline)
+                    
+                    if isReferenceImage {
+                        Text(String(localized: "reference_badge"))
+                            .font(.caption2)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(Color.yellow.opacity(0.2))
+                            .foregroundColor(.orange)
+                            .clipShape(Capsule())
+                    }
+                }
+                
                 Text(image.captureDate.formatted(date: .omitted, time: .shortened))
                     .font(.caption)
                     .foregroundColor(.secondary)
