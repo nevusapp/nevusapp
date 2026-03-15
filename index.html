@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="None">
+        
+        <link rel="canonical" href="http://nevusapp.github.io/nevusapp/">
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>Nevus App</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/fontawesome.min.css" rel="stylesheet">
+        <link href="css/brands.min.css" rel="stylesheet">
+        <link href="css/solid.min.css" rel="stylesheet">
+        <link href="css/v4-font-face.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body class="homepage">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href=".">Nevus App</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="." class="nav-link active" aria-current="page">Nevus - User Guide</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="ARCHITECTURE/" class="nav-link">Nevus - iOS App Architektur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="IMPLEMENTATION_SUMMARY/" class="nav-link">Nevus - Vollständige Implementierungszusammenfassung</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="INTERNATIONALIZATION/" class="nav-link">Internationalisierung / Internationalization</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="IPAD_COMPATIBILITY/" class="nav-link">iPad Compatibility Implementation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="TECHNICAL_SPECIFICATIONS/" class="nav-link">Nevus - Technische Spezifikationen</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Features</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="Features/AIRDROP_SYNC_FEATURE/" class="dropdown-item">AirDrop Sync Feature</a>
+</li>
+                                    
+<li>
+    <a href="Features/AIRDROP_SYNC_FIXES/" class="dropdown-item">AirDrop Sync - File Access Fixes</a>
+</li>
+                                    
+<li>
+    <a href="Features/AIRDROP_SYNC_IMPLEMENTATION_COMPLETE/" class="dropdown-item">AirDrop Sync Feature - Complete Implementation Summary</a>
+</li>
+                                    
+<li>
+    <a href="Features/AIRDROP_SYNC_SETUP/" class="dropdown-item">AirDrop Sync Feature - Setup Instructions</a>
+</li>
+                                    
+<li>
+    <a href="Features/ALL_REGIONS_OVERVIEW_FEATURE/" class="dropdown-item">All Regions Overview Feature</a>
+</li>
+                                    
+<li>
+    <a href="Features/AUTO_DELETE_SYNC_FILES/" class="dropdown-item">Automatic Sync File Deletion Feature</a>
+</li>
+                                    
+<li>
+    <a href="Features/DELETE_IMAGES_FEATURE/" class="dropdown-item">Bilder Löschen Feature</a>
+</li>
+                                    
+<li>
+    <a href="Features/GUIDED_COMPARISON_FEATURE/" class="dropdown-item">Guided Comparison Feature</a>
+</li>
+                                    
+<li>
+    <a href="Features/GUIDED_SCANNING_FEATURE/" class="dropdown-item">Guided Scanning Feature</a>
+</li>
+                                    
+<li>
+    <a href="Features/IMAGE_EXPORT_FEATURE/" class="dropdown-item">Einzelbild-Export Funktion</a>
+</li>
+                                    
+<li>
+    <a href="Features/MOLE_LOCATION_FEATURE/" class="dropdown-item">Mole Location on Overview Images Feature</a>
+</li>
+                                    
+<li>
+    <a href="Features/MONTHLY_REMINDER_FEATURE/" class="dropdown-item">Monthly Reminder Feature</a>
+</li>
+                                    
+<li>
+    <a href="Features/OVERLAY_CONTROLS/" class="dropdown-item">Overlay-Steuerelemente - Benutzerführung</a>
+</li>
+                                    
+<li>
+    <a href="Features/OVERLAY_MODE_FEATURE/" class="dropdown-item">Overlay-Modus für verbesserte Vergleichbarkeit</a>
+</li>
+                                    
+<li>
+    <a href="Features/PERFORMANCE_DEBUG/" class="dropdown-item">Performance Debugging Guide</a>
+</li>
+                                    
+<li>
+    <a href="Features/REFERENCE_IMAGE_SELECTION/" class="dropdown-item">Referenzbild-Auswahl für Overlay-Modus</a>
+</li>
+                                    
+<li>
+    <a href="Features/REGION_OVERVIEW_FEATURE/" class="dropdown-item">Körperregion-Übersichtsbilder Feature</a>
+</li>
+                                    
+<li>
+    <a href="Features/SESSION_CLEANUP_FEATURE/" class="dropdown-item">Session Cleanup Feature - Implementation Summary</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" class="nav-link disabled">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="ARCHITECTURE/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#nevus-user-guide" class="nav-link">Nevus - User Guide</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#quick-start" class="nav-link">📱 Quick Start</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#core-features" class="nav-link">✨ Core Features</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#how-to-guides" class="nav-link">📖 How-To Guides</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#privacy-security" class="nav-link">🔒 Privacy &amp; Security</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">🛠️ Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#frequently-asked-questions" class="nav-link">❓ Frequently Asked Questions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#additional-resources" class="nav-link">📚 Additional Resources</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#support" class="nav-link">🆘 Support</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#tips-for-best-results" class="nav-link">🎯 Tips for Best Results</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#whats-next" class="nav-link">🚀 What's Next?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="nevus-user-guide">Nevus - User Guide</h1>
+<p><strong>Welcome to Nevus!</strong> 🎯</p>
+<p>Nevus is your personal mole tracking companion that helps you monitor skin changes over time. This guide will help you get started and make the most of the app's features.</p>
+<blockquote>
+<p>⚠️ <strong>Medical Disclaimer</strong>: Nevus is a tracking tool, not a medical device. It is not intended for diagnosis or treatment. Always consult a healthcare professional for medical advice and regular skin examinations.</p>
+</blockquote>
+<hr />
+<h2 id="quick-start">📱 Quick Start</h2>
+<h3 id="getting-started-in-3-steps">Getting Started in 3 Steps</h3>
+<ol>
+<li><strong>Add Your First Mole</strong></li>
+<li>Tap the "+" button</li>
+<li>Select body region and side</li>
+<li>Take a photo with your camera</li>
+<li>
+<p>Add optional notes</p>
+</li>
+<li>
+<p><strong>Track Changes Over Time</strong></p>
+</li>
+<li>Take new photos of the same mole regularly</li>
+<li>Use the comparison feature to see changes</li>
+<li>
+<p>Add notes about any observations</p>
+</li>
+<li>
+<p><strong>Stay Organized</strong></p>
+</li>
+<li>Use region overview photos for context</li>
+<li>Set up monthly reminders</li>
+<li>Export data for doctor visits</li>
+</ol>
+<hr />
+<h2 id="core-features">✨ Core Features</h2>
+<h3 id="photo-capture">📸 Photo Capture</h3>
+<p>Take high-quality photos of your moles with:
+- <strong>Camera overlay</strong> - Align new photos with previous ones
+- <strong>Reference images</strong> - See your last photo while taking a new one
+- <strong>Instant save</strong> - Photos are saved immediately</p>
+<h3 id="organization">🗂️ Organization</h3>
+<p>Keep your data organized with:
+- <strong>12 body regions</strong> - Head, neck, arms, torso, back, legs
+- <strong>26 body sides</strong> - Detailed location tracking (front, back, left, right, etc.)
+- <strong>Notes</strong> - Add observations for each mole
+- <strong>Timestamps</strong> - Automatic date tracking</p>
+<h3 id="comparison-tools">🔍 Comparison Tools</h3>
+<p>Compare photos to spot changes:
+- <strong>Side-by-Side</strong> - View two photos next to each other
+- <strong>Overlay Mode</strong> - Superimpose photos with transparency slider
+- <strong>Zoom &amp; Pan</strong> - Examine details closely
+- <strong>Reference Selection</strong> - Choose which photo to use as baseline</p>
+<h3 id="overview-images">📊 Overview Images</h3>
+<p>Capture the big picture:
+- <strong>Region photos</strong> - Take overview shots of entire body areas
+- <strong>Context</strong> - See where individual moles are located
+- <strong>Notes</strong> - Document overall skin condition
+- <strong>Timeline</strong> - Track changes across regions</p>
+<h3 id="guided-workflows">🎯 Guided Workflows</h3>
+<p>Systematic tracking made easy:
+- <strong>Guided Scanning</strong> - Step-by-step photo capture of all moles
+- <strong>Guided Comparison</strong> - Systematic review of changes
+- <strong>Progress tracking</strong> - See how many moles you've checked
+- <strong>Skip &amp; navigate</strong> - Flexible workflow control</p>
+<h3 id="device-sync">🔄 Device Sync</h3>
+<p>Share data between your devices privately:
+- <strong>AirDrop sync</strong> - Transfer data directly between iPhone and iPad
+- <strong>No cloud required</strong> - Your data stays on your devices
+- <strong>Delta sync</strong> - Only transfer new photos
+- <strong>Duplicate detection</strong> - Prevents data duplication</p>
+<hr />
+<h2 id="how-to-guides">📖 How-To Guides</h2>
+<h3 id="adding-a-new-mole">Adding a New Mole</h3>
+<ol>
+<li>Tap the <strong>"+"</strong> button in the top-right corner</li>
+<li>Select the <strong>body region</strong> (e.g., "Arm Left")</li>
+<li>Select the <strong>body side</strong> (e.g., "Upper Arm Front")</li>
+<li>Optionally add <strong>notes</strong> (e.g., "Near elbow")</li>
+<li>Tap <strong>"Save"</strong></li>
+<li>Tap <strong>"Take Photo"</strong> to capture your first image</li>
+</ol>
+<h3 id="taking-a-photo">Taking a Photo</h3>
+<ol>
+<li>Open a mole from the list</li>
+<li>Tap <strong>"Take Photo"</strong></li>
+<li>Grant camera permission if prompted</li>
+<li><strong>Position your device</strong> to frame the mole</li>
+<li>Use the <strong>overlay</strong> (if available) to align with previous photos</li>
+<li>Tap the <strong>shutter button</strong></li>
+<li>Photo is automatically saved</li>
+</ol>
+<p><strong>Tips:</strong>
+- Use good lighting (natural light is best)
+- Keep the same distance each time
+- Try to use the same angle
+- Avoid shadows on the mole</p>
+<h3 id="comparing-photos">Comparing Photos</h3>
+<ol>
+<li>Open a mole with at least 2 photos</li>
+<li>Tap <strong>"Compare Images"</strong></li>
+<li>Select <strong>two photos</strong> to compare (numbered 1 and 2)</li>
+<li>Tap <strong>"Compare"</strong></li>
+<li>Use the <strong>mode toggle</strong> to switch between:</li>
+<li>Side-by-Side view</li>
+<li>Overlay view (with transparency slider)</li>
+<li><strong>Pinch to zoom</strong> for detailed examination</li>
+<li><strong>Swap</strong> photos if needed</li>
+</ol>
+<h3 id="using-guided-scanning">Using Guided Scanning</h3>
+<p>Perfect for regular check-ups:</p>
+<ol>
+<li>Tap the <strong>menu (⋯)</strong> in the top-left</li>
+<li>Select <strong>"Guided Scanning"</strong></li>
+<li>Follow the on-screen instructions for each mole</li>
+<li>Tap <strong>"Take Photo"</strong> when ready</li>
+<li>Use <strong>"Skip"</strong> for inaccessible moles</li>
+<li>Use <strong>"Back"</strong> to retake a photo</li>
+<li>Review <strong>statistics</strong> when complete</li>
+</ol>
+<h3 id="using-guided-comparison">Using Guided Comparison</h3>
+<p>Systematic review of all moles:</p>
+<ol>
+<li>Tap the <strong>menu (⋯)</strong> in the top-left</li>
+<li>Select <strong>"Guided Comparison"</strong></li>
+<li>Review each mole's latest photo vs. reference</li>
+<li>Add <strong>notes</strong> about any changes</li>
+<li>Use <strong>"Next"</strong> to continue</li>
+<li>Use <strong>"Skip"</strong> if no comparison needed</li>
+<li>Review <strong>summary</strong> at the end</li>
+</ol>
+<h3 id="syncing-between-devices">Syncing Between Devices</h3>
+<p>Transfer data from iPhone to iPad (or vice versa):</p>
+<p><strong>On Source Device:</strong>
+1. Tap <strong>menu (⋯)</strong> → <strong>"Sync to Device"</strong>
+2. Select <strong>date range</strong> (default: today)
+3. Tap <strong>"Preview Export"</strong> to see what will be sent
+4. Tap <strong>"Share via AirDrop"</strong>
+5. Select your <strong>target device</strong>
+6. Wait for transfer to complete</p>
+<p><strong>On Target Device:</strong>
+1. <strong>Accept</strong> the AirDrop transfer
+2. Nevus opens automatically
+3. <strong>Review</strong> the package contents
+4. Tap <strong>"Import Data"</strong>
+5. Wait for import to complete
+6. Review <strong>results</strong></p>
+<h3 id="creating-region-overview-photos">Creating Region Overview Photos</h3>
+<p>Document entire body areas:</p>
+<ol>
+<li>Scroll to a <strong>body region</strong> in the main list</li>
+<li>Tap <strong>"Add Overview Photo"</strong> (or the camera icon)</li>
+<li>Take a <strong>wide shot</strong> of the entire region</li>
+<li>Add <strong>notes</strong> if desired</li>
+<li>Photo appears in the region's overview section</li>
+</ol>
+<h3 id="setting-up-reminders">Setting Up Reminders</h3>
+<p>Get monthly check-up notifications:</p>
+<ol>
+<li>Tap <strong>menu (⋯)</strong> → <strong>"Settings"</strong> (if available)</li>
+<li>Enable <strong>"Monthly Reminders"</strong></li>
+<li>Grant <strong>notification permission</strong> when prompted</li>
+<li>Choose your preferred <strong>reminder time</strong></li>
+<li>Tap <strong>"Save"</strong></li>
+</ol>
+<h3 id="exporting-data">Exporting Data</h3>
+<p>Share with your doctor or backup:</p>
+<p><strong>Export Single Mole:</strong>
+1. Open the mole
+2. Tap <strong>menu (⋯)</strong> → <strong>"Export Mole"</strong>
+3. Choose where to share (Files, Email, etc.)</p>
+<p><strong>Export All Data:</strong>
+1. From main screen, tap <strong>menu (⋯)</strong>
+2. Select <strong>"Export All Moles"</strong>
+3. Choose destination
+4. Large ZIP file will be created</p>
+<p><strong>Export Single Image:</strong>
+1. Open an image in full screen
+2. Tap the <strong>share button</strong>
+3. Choose destination</p>
+<hr />
+<h2 id="privacy-security">🔒 Privacy &amp; Security</h2>
+<h3 id="your-data-is-private">Your Data is Private</h3>
+<ul>
+<li>✅ <strong>Local storage only</strong> - All data stays on your device</li>
+<li>✅ <strong>No cloud uploads</strong> - Unless you enable iCloud backup</li>
+<li>✅ <strong>No tracking</strong> - We don't collect usage data</li>
+<li>✅ <strong>No accounts</strong> - No registration required</li>
+<li>✅ <strong>Encrypted</strong> - Data is protected by iOS encryption</li>
+</ul>
+<h3 id="icloud-backup-optional">iCloud Backup (Optional)</h3>
+<p>If you enable iCloud:
+- Data is backed up to your personal iCloud
+- End-to-end encrypted
+- Only you can access it
+- Syncs across your devices automatically</p>
+<h3 id="airdrop-sync">AirDrop Sync</h3>
+<p>When using device-to-device sync:
+- Transfer is <strong>encrypted</strong> by iOS
+- Data never goes through the internet
+- Direct device-to-device transfer only
+- No third parties involved</p>
+<h3 id="best-practices">Best Practices</h3>
+<ol>
+<li><strong>Enable device encryption</strong> (iOS does this by default)</li>
+<li><strong>Use a strong passcode</strong> on your device</li>
+<li><strong>Enable Face ID/Touch ID</strong> for app access</li>
+<li><strong>Regular backups</strong> to iCloud or computer</li>
+<li><strong>Delete old sync files</strong> after importing</li>
+</ol>
+<hr />
+<h2 id="troubleshooting">🛠️ Troubleshooting</h2>
+<h3 id="camera-issues">Camera Issues</h3>
+<p><strong>Camera won't open:</strong>
+- Check camera permission in Settings → Nevus
+- Restart the app
+- Restart your device</p>
+<p><strong>Photos are blurry:</strong>
+- Clean your camera lens
+- Ensure good lighting
+- Hold device steady
+- Tap to focus before capturing</p>
+<p><strong>Overlay doesn't show:</strong>
+- Ensure the mole has at least one previous photo
+- Check that reference image is set
+- Try restarting the camera</p>
+<h3 id="sync-issues">Sync Issues</h3>
+<p><strong>AirDrop not working:</strong>
+- Enable Bluetooth and WiFi on both devices
+- Ensure devices are unlocked
+- Check AirDrop settings (set to "Everyone" or "Contacts Only")
+- Move devices closer together</p>
+<p><strong>Import fails:</strong>
+- Check available storage space
+- Ensure both devices have the latest app version
+- Try exporting with a smaller date range
+- Restart both devices</p>
+<p><strong>Duplicates after import:</strong>
+- This is normal - duplicates are automatically skipped
+- The system uses UUIDs to detect duplicates
+- Your data is safe and won't be duplicated</p>
+<h3 id="performance-issues">Performance Issues</h3>
+<p><strong>App is slow:</strong>
+- Close other apps
+- Restart the device
+- Check available storage (need at least 500MB free)
+- Consider deleting old overview photos</p>
+<p><strong>Photos take long to load:</strong>
+- This is normal for large collections
+- Images are compressed for faster loading
+- Thumbnails load first, full images on demand</p>
+<hr />
+<h2 id="frequently-asked-questions">❓ Frequently Asked Questions</h2>
+<h3 id="general">General</h3>
+<p><strong>Q: Is Nevus a medical device?</strong>
+A: No. Nevus is a tracking tool for personal use. It does not diagnose or treat any medical condition. Always consult a healthcare professional.</p>
+<p><strong>Q: How often should I take photos?</strong>
+A: Most dermatologists recommend checking moles monthly. Use the reminder feature to stay on schedule.</p>
+<p><strong>Q: Can I share my data with my doctor?</strong>
+A: Yes! Use the export feature to create a ZIP file with all your photos and data. You can email it or bring it on a USB drive.</p>
+<p><strong>Q: Does Nevus work offline?</strong>
+A: Yes! All features work offline. Sync requires WiFi/Bluetooth for AirDrop.</p>
+<h3 id="privacy">Privacy</h3>
+<p><strong>Q: Where is my data stored?</strong>
+A: All data is stored locally on your device in the app's secure container. If you enable iCloud, it's also backed up to your personal iCloud account.</p>
+<p><strong>Q: Can anyone else see my photos?</strong>
+A: No. Your data is private and only accessible on your device (and your iCloud if enabled). We don't have access to your data.</p>
+<p><strong>Q: Do you collect any data?</strong>
+A: No. We don't collect usage data, analytics, or any personal information.</p>
+<h3 id="features">Features</h3>
+<p><strong>Q: How many moles can I track?</strong>
+A: There's no limit. The app can handle hundreds of moles with thousands of photos.</p>
+<p><strong>Q: Can I track moles on multiple people?</strong>
+A: Currently, the app is designed for single-user tracking. For multiple people, use separate devices or consider future family sharing features.</p>
+<p><strong>Q: What's the difference between a mole photo and an overview photo?</strong>
+A: Mole photos are close-ups of individual moles. Overview photos show entire body regions for context.</p>
+<p><strong>Q: Can I delete photos?</strong>
+A: Yes. Swipe left on any photo to delete it. Be careful - this cannot be undone!</p>
+<h3 id="technical">Technical</h3>
+<p><strong>Q: What iOS version do I need?</strong>
+A: iOS 17.6 or later. The app works on iPhone and iPad.</p>
+<p><strong>Q: How much storage does the app use?</strong>
+A: It depends on how many photos you take. Each photo is about 1-2 MB. 100 photos = ~100-200 MB.</p>
+<p><strong>Q: Can I use this on my Apple Watch?</strong>
+A: Not yet. Apple Watch support is planned for a future version.</p>
+<p><strong>Q: Does this work with HealthKit?</strong>
+A: Not yet. HealthKit integration is planned for a future version.</p>
+<hr />
+<h2 id="additional-resources">📚 Additional Resources</h2>
+<h3 id="documentation">Documentation</h3>
+<ul>
+<li><strong><a href="TECHNICAL_SPECIFICATIONS/">Technical Specifications</a></strong> - Detailed technical information</li>
+<li><strong><a href="ARCHITECTURE/">Architecture</a></strong> - System design and structure</li>
+<li><strong><a href="IMPLEMENTATION_SUMMARY/">Implementation Summary</a></strong> - Complete feature list</li>
+<li><strong><a href="IPAD_COMPATIBILITY/">iPad Compatibility</a></strong> - iPad-specific features</li>
+<li><strong><a href="INTERNATIONALIZATION/">Internationalization</a></strong> - Language support</li>
+</ul>
+<h3 id="feature-guides">Feature Guides</h3>
+<ul>
+<li><strong><a href="Features/GUIDED_SCANNING_FEATURE/">Guided Scanning</a></strong> - Detailed scanning workflow</li>
+<li><strong><a href="Features/GUIDED_COMPARISON_FEATURE/">Guided Comparison</a></strong> - Comparison workflow</li>
+<li><strong><a href="Features/AIRDROP_SYNC_FEATURE/">AirDrop Sync</a></strong> - Complete sync guide</li>
+<li><strong><a href="Features/REGION_OVERVIEW_FEATURE/">Region Overview</a></strong> - Overview photos guide</li>
+<li><strong><a href="Features/">More Features...</a></strong> - All feature documentation</li>
+</ul>
+<h3 id="medical-resources">Medical Resources</h3>
+<p><strong>Important</strong>: These are general resources. Always consult your healthcare provider.</p>
+<ul>
+<li><strong>ABCDE Rule</strong> for mole checking:</li>
+<li><strong>A</strong>symmetry - One half doesn't match the other</li>
+<li><strong>B</strong>order - Irregular, ragged, or blurred edges</li>
+<li><strong>C</strong>olor - Multiple colors or uneven distribution</li>
+<li><strong>D</strong>iameter - Larger than 6mm (pencil eraser)</li>
+<li>
+<p><strong>E</strong>volving - Changes in size, shape, or color</p>
+</li>
+<li>
+<p><strong>When to see a doctor:</strong></p>
+</li>
+<li>New moles after age 30</li>
+<li>Moles that change in size, shape, or color</li>
+<li>Moles that bleed, itch, or become painful</li>
+<li>Any concerning changes</li>
+</ul>
+<hr />
+<h2 id="support">🆘 Support</h2>
+<h3 id="need-help">Need Help?</h3>
+<ol>
+<li><strong>Check this guide</strong> - Most questions are answered here</li>
+<li><strong>Review troubleshooting</strong> - Common issues and solutions</li>
+<li><strong>Check FAQ</strong> - Frequently asked questions</li>
+<li><strong>Restart the app</strong> - Solves many temporary issues</li>
+<li><strong>Update iOS</strong> - Ensure you have the latest iOS version</li>
+</ol>
+<h3 id="feedback">Feedback</h3>
+<p>We'd love to hear from you! If you have:
+- Feature requests
+- Bug reports
+- General feedback
+- Questions not covered here</p>
+<p>Please create an issue in the project repository or contact the developer.</p>
+<hr />
+<h2 id="tips-for-best-results">🎯 Tips for Best Results</h2>
+<h3 id="photography-tips">Photography Tips</h3>
+<ol>
+<li><strong>Consistent lighting</strong> - Use the same lighting conditions each time</li>
+<li><strong>Same distance</strong> - Try to maintain the same distance from the mole</li>
+<li><strong>Same angle</strong> - Use the overlay feature to match previous angles</li>
+<li><strong>Clean lens</strong> - Wipe your camera lens before taking photos</li>
+<li><strong>Steady hands</strong> - Rest your arms on a surface if possible</li>
+</ol>
+<h3 id="organization-tips">Organization Tips</h3>
+<ol>
+<li><strong>Regular schedule</strong> - Set monthly reminders and stick to them</li>
+<li><strong>Immediate notes</strong> - Add notes right after taking photos</li>
+<li><strong>Overview photos</strong> - Take region overviews every 3-6 months</li>
+<li><strong>Guided workflows</strong> - Use guided scanning for thorough checks</li>
+<li><strong>Export regularly</strong> - Keep backups of your data</li>
+</ol>
+<h3 id="comparison-tips">Comparison Tips</h3>
+<ol>
+<li><strong>Set reference images</strong> - Choose your best baseline photo</li>
+<li><strong>Use overlay mode</strong> - Best for detecting subtle changes</li>
+<li><strong>Zoom in</strong> - Don't be afraid to examine details closely</li>
+<li><strong>Take notes</strong> - Document what you observe</li>
+<li><strong>Show your doctor</strong> - Bring comparisons to appointments</li>
+</ol>
+<hr />
+<h2 id="whats-next">🚀 What's Next?</h2>
+<h3 id="planned-features-phase-2">Planned Features (Phase 2)</h3>
+<ul>
+<li>🤖 <strong>AI-powered change detection</strong> - Automatic highlighting of changes</li>
+<li>📊 <strong>Advanced analytics</strong> - Trends and statistics</li>
+<li>📄 <strong>PDF reports</strong> - Professional reports for doctors</li>
+<li>⌚ <strong>Apple Watch app</strong> - Quick reminders and tracking</li>
+<li>🏥 <strong>HealthKit integration</strong> - Connect with Health app</li>
+</ul>
+<h3 id="stay-updated">Stay Updated</h3>
+<p>Check the <a href="../README.md">README</a> for the latest project status and updates.</p>
+<hr />
+<p><strong>Version</strong>: 1.0<br />
+<strong>Last Updated</strong>: March 15, 2026<br />
+<strong>Status</strong>: Production Ready ✅</p>
+<hr />
+<p><em>Remember: Nevus is a tool to help you track your moles, but it's not a substitute for professional medical care. Regular check-ups with a dermatologist are essential for skin health.</em></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js"></script>
+        <script src="search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2026-03-15 18:06:42.154447+00:00
+-->
