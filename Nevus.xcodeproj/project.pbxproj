@@ -10,21 +10,24 @@
 		6B817DB82F0D36AB00EB1030 /* Nevus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nevus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		6B817DBA2F0D36AB00EB1030 /* Nevus */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				6B817DBA2F0D36AB00EB1031 /* Nevus/App/Info.plist */,
-			);
-			path = Nevus;
-			sourceTree = "<group>";
-		};
-		6B817DBA2F0D36AB00EB1031 /* Nevus/App/Info.plist */ = {
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6B817DBA2F0D36AB00EB1031 /* Exceptions for "Nevus" folder in "Nevus" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				App/Info.plist,
 			);
 			target = 6B817DB72F0D36AB00EB1030 /* Nevus */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		6B817DBA2F0D36AB00EB1030 /* Nevus */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6B817DBA2F0D36AB00EB1031 /* Exceptions for "Nevus" folder in "Nevus" target */,
+			);
+			path = Nevus;
+			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -284,7 +287,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "net.familie-richter.Nevus";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nevusapp.tracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -324,7 +327,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "net.familie-richter.Nevus";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nevusapp.tracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;

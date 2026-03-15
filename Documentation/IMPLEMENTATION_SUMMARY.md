@@ -351,7 +351,7 @@ Nevus/
 - Fotobibliothek (NSPhotoLibraryUsageDescription)
 
 ### Deployment
-- Bundle ID: `net.familie-richter.Nevus`
+- Bundle ID: `com.nevusapp.tracker`
 - Team: Q3U88T33CV
 - Deployment Target: iOS 17.6
 
@@ -372,7 +372,7 @@ Alle Phase-1-Features sind vollständig implementiert, getestet und dokumentiert
 - NSUserNotificationsUsageDescription - Monatliche Erinnerungen (optional)
 
 ### Deployment
-- Bundle ID: `net.familie-richter.Nevus`
+- Bundle ID: `com.nevusapp.tracker`
 - Deployment Target: iOS 17.6
 - Unterstützte Geräte: iPhone, iPad
 
