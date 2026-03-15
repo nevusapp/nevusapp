@@ -17,7 +17,7 @@
 - **iOS Version**: 17.6+
 - **Device**: iPhone 14 Pro oder neuer, iPad Pro
 - **Storage**: 2 GB freier Speicher
-- **iCloud**: Optional für automatisches Backup (SwiftData iCloud Sync)
+- **iCloud**: Optional für iOS-Geräte-Backup (keine App-Level-Sync)
 
 ## Datenmodell-Spezifikationen
 
@@ -291,7 +291,7 @@ SwiftData bietet automatische iCloud-Synchronisation:
 | Image Load | < 200ms | < 500ms |
 | Mole List Load | < 300ms | < 1s |
 | Comparison View | < 500ms | < 1s |
-| CloudKit Sync | < 5s | < 10s |
+| AirDrop Sync | < 5s | < 10s |
 
 ### Memory Limits
 
@@ -320,8 +320,8 @@ struct SecurityConfiguration {
     static let useFileProtection = true
     static let fileProtectionLevel: FileProtectionType = .complete
     
-    // CloudKit
-    static let useEncryption = true
+    // Local Storage
+    static let useEncryption = true  // iOS file encryption
     static let encryptionType: CKRecordZone.Capabilities = .fetchChanges
     
     // Biometric Authentication
@@ -363,7 +363,7 @@ struct APIVersions {
 - Core ML (geplant für Phase 2)
 - Vision Framework (geplant für Phase 2)
 - CoreMotion (geplant für Phase 2)
-- CloudKit (SwiftData nutzt automatisch iCloud)
+- AirDrop (für manuelle Geräte-zu-Gerät-Sync)
 
 ## Testing-Spezifikationen
 
@@ -498,7 +498,7 @@ struct BuildConfiguration {
 ## Implementierte Features (Stand März 2026)
 
 ### ✅ Core Features
-- SwiftData Persistenz mit iCloud Backup
+- SwiftData Persistenz (lokal, in iOS-Backup enthalten)
 - Kamera-Integration (AVFoundation)
 - 12 Körperregionen, 26 Körperseiten
 - Mehrere Bilder pro Leberfleck

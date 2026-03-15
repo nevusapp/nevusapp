@@ -19,7 +19,7 @@ Nevus ermöglicht es Benutzern, Leberflecke am Körper zu fotografieren, zu kata
 - 🎯 **Guided Scanning** - Systematisches Fotografieren aller Leberflecke
 - 🔄 **Guided Comparison** - Systematischer Vergleich mit Referenzbildern
 - 📤 **Export/Import** - ZIP-Export und AirDrop-Sync zwischen Geräten
-- 💾 **SwiftData** - Lokale Speicherung mit automatischem iCloud Backup
+- 💾 **SwiftData** - Lokale Speicherung (in iOS-Geräte-Backup enthalten)
 - 📱 **iPad-Optimierung** - Master-Detail Layout und adaptive Grids
 - 🌍 **Internationalisierung** - Deutsch und Englisch
 - 🔔 **Monatliche Erinnerungen** - Für regelmäßige Kontrollen
@@ -43,7 +43,7 @@ Nevus ermöglicht es Benutzern, Leberflecke am Körper zu fotografieren, zu kata
 - **Plattform**: iOS 17.6+ (iPhone & iPad)
 - **Sprache**: Swift 5.9+
 - **UI**: SwiftUI 5.0
-- **Datenpersistenz**: SwiftData mit automatischem iCloud Backup
+- **Datenpersistenz**: SwiftData (lokal, in iOS-Geräte-Backup enthalten)
 - **Kamera**: AVFoundation
 - **Lokalisierung**: String Catalog (DE/EN)
 - **Sync**: AirDrop-basiert (.nevus Pakete)
@@ -81,7 +81,7 @@ Nevus/
 │   ├── SensorService.swift           # Sensor-Integration
 │   ├── MLService.swift               # ML-Verarbeitung
 │   ├── StorageService.swift          # Daten-Persistenz
-│   └── CloudSyncService.swift        # iCloud-Sync
+│   └── ImportService.swift           # Import-Service
 ├── Utilities/
 │   ├── Extensions/                   # Swift-Extensions
 │   ├── Constants.swift               # App-Konstanten
@@ -151,7 +151,7 @@ Nevus/
                      ▼
 ┌─────────────────────────────────────────────────────────┐
 │                    Data Layer                            │
-│        (SwiftData Models, CloudKit Sync)                │
+│        (SwiftData Models, Local Storage)                │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -177,11 +177,11 @@ Nevus/
 - ✅ Biometrische Authentifizierung (Face ID/Touch ID)
 - ✅ Kein Tracking oder Analytics ohne Zustimmung
 
-### iCloud-Sync
-- ✅ End-to-End-Verschlüsselung via CloudKit
-- ✅ Opt-in für Cloud-Backup
-- ✅ Automatische Konfliktauflösung
-- ✅ Nur private CloudKit-Datenbank
+### Geräte-Backup
+- ✅ Daten werden in iOS-Geräte-Backup eingeschlossen (wenn aktiviert)
+- ✅ Verschlüsselt durch iOS-Verschlüsselung
+- ✅ Automatisch bei iCloud-Backup oder iTunes/Finder-Backup
+- ✅ Keine separate Cloud-Sync-Funktion (nur AirDrop zwischen Geräten)
 
 ### Berechtigungen
 - 📸 Kamera-Zugriff (erforderlich)
@@ -216,7 +216,7 @@ Nevus/
 - iOS 17.6+
 - iPhone 14 Pro oder neuer, iPad Pro
 - 2 GB freier Speicher
-- iCloud-Konto für automatisches Backup
+- iCloud-Backup aktiviert (optional, für Datensicherung)
 
 ## 🧪 Testing-Strategie
 
@@ -234,7 +234,7 @@ Nevus/
 
 ### Integration Tests
 - End-to-End-Workflows
-- CloudKit-Sync
+- AirDrop-Sync
 - ML-Pipeline
 - Performance
 
@@ -252,7 +252,7 @@ Nevus/
 | Foto-Aufnahme | < 1s | < 2s |
 | ML-Inferenz | < 500ms | < 1s |
 | Bildvergleich | < 500ms | < 1s |
-| CloudKit-Sync | < 5s | < 10s |
+| AirDrop-Sync | < 5s | < 10s |
 
 ## 🌍 Lokalisierung
 

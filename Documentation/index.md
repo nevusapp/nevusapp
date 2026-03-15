@@ -205,18 +205,19 @@ Share with your doctor or backup:
 ### Your Data is Private
 
 - ✅ **Local storage only** - All data stays on your device
-- ✅ **No cloud uploads** - Unless you enable iCloud backup
+- ✅ **No cloud uploads** - Data only in standard iOS device backup
 - ✅ **No tracking** - We don't collect usage data
 - ✅ **No accounts** - No registration required
 - ✅ **Encrypted** - Data is protected by iOS encryption
 
-### iCloud Backup (Optional)
+### iOS Device Backup
 
-If you enable iCloud:
-- Data is backed up to your personal iCloud
-- End-to-end encrypted
-- Only you can access it
-- Syncs across your devices automatically
+Your data is included in standard iOS backups:
+- **iCloud Backup** - If you have iCloud Backup enabled on your device
+- **Computer Backup** - When you backup via iTunes/Finder
+- **Encrypted** - Protected by iOS encryption
+- **Automatic** - No app configuration needed
+- **Note**: This is standard iOS backup, not app-level sync between devices
 
 ### AirDrop Sync
 
@@ -309,10 +310,10 @@ A: Yes! All features work offline. Sync requires WiFi/Bluetooth for AirDrop.
 ### Privacy
 
 **Q: Where is my data stored?**
-A: All data is stored locally on your device in the app's secure container. If you enable iCloud, it's also backed up to your personal iCloud account.
+A: All data is stored locally on your device in the app's secure container. It's included in your standard iOS device backup (iCloud Backup or computer backup).
 
 **Q: Can anyone else see my photos?**
-A: No. Your data is private and only accessible on your device (and your iCloud if enabled). We don't have access to your data.
+A: No. Your data is private and only accessible on your device (and in your iOS device backup). We don't have access to your data.
 
 **Q: Do you collect any data?**
 A: No. We don't collect usage data, analytics, or any personal information.

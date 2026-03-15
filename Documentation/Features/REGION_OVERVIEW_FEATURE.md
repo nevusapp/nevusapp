@@ -102,7 +102,7 @@ Query(
 ### Datenspeicherung
 - **SwiftData Model** mit `@Model` Annotation
 - **External Storage** für Bilddaten (`@Attribute(.externalStorage)`)
-- **Automatisches iCloud Backup** (wenn aktiviert)
+- **In iOS-Geräte-Backup enthalten** (iCloud oder Computer)
 - **JPEG Kompression** mit 80% Qualität
 
 ### Sensordaten
@@ -178,7 +178,7 @@ LazyVGrid(columns: [
 ## Datenschutz
 
 - **Lokale Speicherung** - Alle Daten bleiben auf dem Gerät
-- **iCloud Backup** - Optional, vom Benutzer kontrolliert
+- **iOS-Geräte-Backup** - Automatisch in Standard-Backup enthalten
 - **Keine Cloud-Sync** - Keine automatische Übertragung
 - **Keine Metadaten** - Keine GPS-Koordinaten in Bildern
 

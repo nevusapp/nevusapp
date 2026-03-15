@@ -12,7 +12,7 @@
 - **Plattform**: iOS 17.6+ (iPhone & iPad)
 - **Sprache**: Swift 5.9+
 - **UI Framework**: SwiftUI 5.0
-- **Datenpersistenz**: SwiftData mit automatischem iCloud Backup
+- **Datenpersistenz**: SwiftData (lokal, in iOS-Geräte-Backup enthalten)
 - **Kamera**: AVFoundation
 - **Lokalisierung**: String Catalog (Deutsch, Englisch)
 - **Sync**: AirDrop-basiert (.nevus Pakete)
@@ -47,7 +47,7 @@
                      ▼
 ┌─────────────────────────────────────────────────────────┐
 │                    Data Layer                            │
-│        (SwiftData Models, CloudKit Sync)                │
+│        (SwiftData Models, Local Storage)                │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -321,7 +321,7 @@ Quellgerät (iPhone)
 - Alle Bilder in App-Container (SwiftData)
 - External Storage für große Bilddaten
 - Keine Weitergabe an Dritte
-- Automatisches iCloud Backup (opt-in durch Benutzer)
+- In iOS-Geräte-Backup enthalten (iCloud oder Computer)
 
 ### AirDrop-Sync
 - Lokale Übertragung ohne Cloud
@@ -352,7 +352,7 @@ Quellgerät (iPhone)
    - SwiftData mit automatischer Optimierung
    - @Attribute(.unique) für schnelle Lookups
    - Cascade Delete für Beziehungen
-   - Automatisches iCloud Backup
+   - In iOS-Geräte-Backup enthalten
 
 3. **UI-Performance**
    - LazyVGrid/LazyHGrid für effizientes Rendering
@@ -407,7 +407,7 @@ Figma    SwiftUI      Unit Tests    UI Tests   Beta
 ### Apple Frameworks
 - SwiftUI
 - SwiftData / Core Data
-- CloudKit
+- AirDrop (für manuelle Sync)
 - Core ML
 - Vision
 - CoreMotion

@@ -10,7 +10,7 @@ Nevus ist eine iOS-App zur Erfassung und Katalogisierung von Leberflecken mit fo
 ## Implementierte Features
 
 ### 1. Core Funktionalität ✅
-- **SwiftData Persistenz** - Lokale Datenspeicherung mit automatischem iCloud Backup
+- **SwiftData Persistenz** - Lokale Datenspeicherung (in iOS-Geräte-Backup enthalten)
 - **Kamera-Integration** - AVFoundation mit direktem Callback für schnelle Bilderfassung
 - **12 Körperregionen** - head, neck, armLeft, armRight, chest, abdomen, pelvis, backUpper, backMiddle, backLower, legLeft, legRight
 - **26 Körperseiten** - Region-spezifische Seiten (z.B. headFront, torsoLeft, legThighFront)

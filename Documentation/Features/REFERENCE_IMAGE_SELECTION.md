@@ -270,7 +270,7 @@ struct ReferenceImageSelectionView: View {
 
 ### Datenpersistenz
 - **SwiftData**: Automatische Speicherung der `referenceImageID`
-- **iCloud Sync**: Referenzbild-Auswahl wird synchronisiert
+- **iOS-Backup**: Referenzbild-Auswahl in Geräte-Backup enthalten
 - **Cascade Delete**: Bei Löschen des Referenzbilds → Automatisch auf Standard zurück
 
 ### Performance

@@ -397,7 +397,7 @@ import_error_message
 
 - Sync packages stored in Documents directory
 - User responsible for deletion
-- No automatic cloud backup (unless user enables iCloud)
+- Included in standard iOS device backup (iCloud or computer)
 - No telemetry or usage tracking
 
 ## Support
