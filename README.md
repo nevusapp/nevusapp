@@ -1,10 +1,10 @@
-# MoleTracker - iOS App für Leberfleck-Überwachung
+# Nevus - iOS App für Nevus-Überwachung
 
 Eine native iOS-App zur systematischen Erfassung, Katalogisierung und Überwachung von Leberflecken mit automatischer Zuordnung durch Sensordaten und Machine Learning.
 
 ## 🎯 Projektziel
 
-MoleTracker ermöglicht es Benutzern, Leberflecke am Körper zu fotografieren, zu katalogisieren und über die Zeit zu vergleichen. Die App nutzt iPhone-Sensoren (Neigungswinkel, Barometer) und Machine Learning, um Aufnahmen automatisch den richtigen Leberflecken zuzuordnen.
+Nevus ermöglicht es Benutzern, Leberflecke am Körper zu fotografieren, zu katalogisieren und über die Zeit zu vergleichen. Die App nutzt iPhone-Sensoren (Neigungswinkel, Barometer) und Machine Learning, um Aufnahmen automatisch den richtigen Leberflecken zuzuordnen.
 
 ## ✨ Hauptfunktionen
 
@@ -41,9 +41,9 @@ MoleTracker ermöglicht es Benutzern, Leberflecke am Körper zu fotografieren, z
 ## 📁 Projekt-Struktur
 
 ```
-MoleTracker/
+Nevus/
 ├── App/
-│   ├── MoleTrackerApp.swift          # App Entry Point
+│   ├── NevusApp.swift          # App Entry Point
 │   └── AppDelegate.swift             # App Lifecycle
 ├── Models/
 │   ├── Mole.swift                    # Leberfleck-Datenmodell
