@@ -1,15 +1,20 @@
 # Nevus - Vollständige Implementierungszusammenfassung
 
+**Letzte Aktualisierung:** 15. März 2026
+**Status:** Produktionsbereit
+**Version:** 1.0
+
 ## Projektübersicht
-Nevus ist eine iOS-App zur Erfassung und Katalogisierung von Leberflecken mit fortgeschrittenen Tracking- und Vergleichsfunktionen.
+Nevus ist eine iOS-App zur Erfassung und Katalogisierung von Leberflecken mit fortgeschrittenen Tracking- und Vergleichsfunktionen, systematischen Workflows und privatsphäre-orientierter Geräte-zu-Gerät-Synchronisation.
 
 ## Implementierte Features
 
 ### 1. Core Funktionalität ✅
 - **SwiftData Persistenz** - Lokale Datenspeicherung mit automatischem iCloud Backup
 - **Kamera-Integration** - AVFoundation mit direktem Callback für schnelle Bilderfassung
-- **8 Körperregionen** - Kopf, Hals, Arme/Hände, Torso (4 Bereiche), Beine/Füße
-- **4 Körperseiten** - Links, Rechts, Mitte, Rücken
+- **12 Körperregionen** - head, neck, armLeft, armRight, chest, abdomen, pelvis, backUpper, backMiddle, backLower, legLeft, legRight
+- **26 Körperseiten** - Region-spezifische Seiten (z.B. headFront, torsoLeft, legThighFront)
+- **Referenzbild-System** - Auswählbares Referenzbild für Overlay-Vergleiche
 
 ### 2. Leberfleck-Tracking ✅
 **Models:**
@@ -33,21 +38,24 @@ Nevus ist eine iOS-App zur Erfassung und Katalogisierung von Leberflecken mit fo
 - Swap-Funktion zum Tauschen der Bilder
 - Nummerierte Auswahl (1 & 2)
 
-### 4. Körperregion-Übersichtsbilder ✅ (NEU)
+### 4. Körperregion-Übersichtsbilder ✅
 **Model:**
 - `BodyRegionOverview.swift` - Übersichtsbilder pro Region
+- `MoleLocationMarker.swift` - Verknüpfung Leberfleck ↔ Übersichtsbild
 
 **Views:**
 - `RegionOverviewView.swift` - Verwaltung der Übersichtsbilder
+- `AllRegionsOverviewView.swift` - Alle Regionen auf einen Blick
 - `OverviewImageDetailView` - Detailansicht mit Zoom und Notizen
 
 **Features:**
 - Übersichtsbilder für jede Körperregion
-- Inline-Anzeige in Hauptansicht (horizontales Scrollen)
-- Bis zu 5 neueste Bilder pro Region
+- Inline-Anzeige in Hauptansicht (adaptive: horizontal scroll auf iPhone, Grid auf iPad)
+- Bis zu 5 neueste Bilder pro Region (iPhone), 6 auf iPad
 - "Alle anzeigen" Link zur vollständigen Ansicht
 - Bearbeitbare Notizen pro Bild
 - Pinch-to-Zoom in Detailansicht
+- MoleLocationMarker für zukünftige Verknüpfungen
 
 ### 5. Export-Funktionalität ✅
 **Service:**
@@ -95,10 +103,66 @@ Nevus ist eine iOS-App zur Erfassung und Katalogisierung von Leberflecken mit fo
 - Lazy Loading in Grid-Views
 - JPEG-Kompression (80-95%)
 
-### 8. App-Icon ✅
-- 1024x1024 Icon mit braunem Leberfleck unter Lupe
-- Generiert mit IconGenerator.swift
-- Korrekt in Assets.xcassets integriert
+### 8. Guided Features ✅
+**Services:**
+- `GuidedScanningService.swift` - Workflow-Management für systematisches Fotografieren
+- `GuidedComparisonService.swift` - Workflow-Management für systematischen Vergleich
+
+**Views:**
+- `GuidedScanningView.swift` - Systematisches Fotografieren aller Leberflecke
+- `GuidedComparisonView.swift` - Systematischer Vergleich mit Referenzbildern
+
+**Features:**
+- Fortschrittsanzeige mit Prozent
+- Navigation (next, previous, skip)
+- Overlay mit Referenzbild beim Scannen
+- Inline-Notizen-Bearbeitung beim Vergleich
+- Statistiken am Ende (gescannt/verglichen/übersprungen)
+- Filtert automatisch Leberflecke mit ≥2 Bildern für Vergleich
+
+### 9. AirDrop Sync ✅
+**Models:**
+- `SyncPackage.swift` - Datenstrukturen für Sync-Pakete
+- `ImportState.swift` - State Management für Import
+
+**Services:**
+- `ImportService.swift` - Import-Logik mit Duplikat-Erkennung
+
+**Views:**
+- `SyncView.swift` - Export UI mit Datumswähler
+- `ImportConfirmationView.swift` - Import-Vorschau und Bestätigung
+
+**Features:**
+- Delta-Sync (nur neue Daten seit Datum)
+- .nevus Paket-Format (ZIP mit manifest.json)
+- UUID-basierte Duplikat-Erkennung
+- Smart Merge (erhält bestehende Daten)
+- Automatischer Import via AirDrop
+- Manueller Import-Fallback
+- Automatisches Löschen der Sync-Datei nach Import
+
+### 10. iPad-Unterstützung ✅
+**Features:**
+- NavigationSplitView (Master-Detail Pattern)
+- Adaptive Layouts basierend auf horizontalSizeClass
+- Größere Grids (3-5 Spalten statt 2-3)
+- Persistente Sidebar
+- Multitasking-Support (Split View, Slide Over)
+- Optimiert für alle iPad-Größen
+
+**Adaptive Komponenten:**
+- ContentView: Split View vs. Stack
+- MoleDetailView: Vertical Grid vs. Horizontal Scroll
+- AllRegionsOverviewView: 5 Spalten vs. 3 Spalten
+- RegionOverviewView: 4 Spalten vs. 2 Spalten
+
+### 11. Weitere Features ✅
+- **Internationalisierung** - String Catalog mit DE/EN
+- **Session Cleanup** - Löschen alter Daten mit Statistiken
+- **Monatliche Erinnerungen** - NotificationService
+- **Overlay-Modus** - Referenzbild-Overlay in Kamera
+- **Löschen mit Bestätigung** - Alert vor Löschen
+- **App-Icon** - 1024x1024 Icon mit Leberfleck unter Lupe
 
 ## Technische Architektur
 
@@ -106,43 +170,84 @@ Nevus ist eine iOS-App zur Erfassung und Katalogisierung von Leberflecken mit fo
 ```
 Mole (SwiftData)
 ├── id: UUID
-├── bodyRegion: String
-├── bodySide: String
+├── bodyRegion: String (12 Regionen)
+├── bodySide: String (26 region-spezifische Seiten)
 ├── notes: String
 ├── createdAt: Date
 ├── lastModified: Date
-└── images: [MoleImage]
+├── referenceImageID: UUID? (für Overlay)
+├── images: [MoleImage]
+└── locationMarkers: [MoleLocationMarker]
 
 MoleImage (SwiftData)
 ├── id: UUID
-├── imageData: Data (external)
+├── imageData: Data (external storage)
+├── thumbnailData: Data (200x200)
 ├── captureDate: Date
-├── pitch, roll, yaw: Double
-├── barometricPressure: Double?
-├── altitude: Double?
+├── imageWidth: Int
+├── imageHeight: Int
 └── mole: Mole?
 
 BodyRegionOverview (SwiftData)
 ├── id: UUID
 ├── bodyRegion: String
-├── imageData: Data (external)
+├── imageData: Data (external storage)
+├── thumbnailData: Data (200x200)
 ├── captureDate: Date
-├── notes: String
-└── pitch, roll, yaw, pressure, altitude
+└── notes: String
+
+MoleLocationMarker (SwiftData)
+├── id: UUID
+├── x: Double (0.0-1.0)
+├── y: Double (0.0-1.0)
+├── mole: Mole?
+└── overviewImage: BodyRegionOverview?
+
+SyncPackage (Codable)
+├── version: Int
+├── exportDate: Date
+├── sinceDate: Date?
+├── moles: [MoleExportData]
+└── images: [ImageExportData]
 ```
 
 ### Services
 ```
-CameraService (Singleton)
+CameraService (Singleton, @MainActor)
 ├── AVCaptureSession
 ├── Direct callback: onPhotoCaptured
-└── Authorization handling
+├── Authorization handling
+└── Photo quality: JPEG 90%
 
 ExportService (Static)
 ├── exportMole() -> ZIP
 ├── exportAllMoles() -> ZIP
 ├── exportImage() -> JPEG
+├── exportDeltaSync() -> .nevus
 └── zipDirectory()
+
+ImportService (Static)
+├── importSyncPackage() -> ImportResult
+├── UUID-based duplicate detection
+└── Smart merge logic
+
+GuidedScanningService (@MainActor)
+├── Session management
+├── Progress tracking
+└── Navigation (next, previous, skip)
+
+GuidedComparisonService (@MainActor)
+├── Filter moles with ≥2 images
+├── Progress tracking
+└── Comparison statistics
+
+NotificationService (Singleton, @MainActor)
+├── Monthly reminders
+└── Permission management
+
+CleanupService (Static)
+├── Delete old sessions
+└── Batch operations
 ```
 
 ### Views Hierarchie
@@ -183,49 +288,55 @@ Nevus/
 ```
 
 ## Dokumentation
-- ✅ `ARCHITECTURE.md` - Systemarchitektur
-- ✅ `TECHNICAL_SPECIFICATIONS.md` - Technische Spezifikationen
-- ✅ `PROJECT_PLAN.md` - Projektplan
-- ✅ `MVP_IMPLEMENTATION_SUMMARY.md` - MVP Zusammenfassung
-- ✅ `MVP_SETUP_GUIDE.md` - Setup-Anleitung
-- ✅ `PERFORMANCE_DEBUG.md` - Performance-Optimierungen
-- ✅ `EXPORT_FIX.md` - Export-Fehlerbehebung
-- ✅ `IMAGE_EXPORT_FEATURE.md` - Einzelbild-Export
-- ✅ `PROJECT_CLEANUP.md` - Projekt-Bereinigung
-- ✅ `REGION_OVERVIEW_FEATURE.md` - Übersichtsbilder-Feature
-- ✅ `APP_ICON_README.md` - App-Icon Dokumentation
-- ✅ `ICON_SETUP_COMPLETE.md` - Icon-Setup Abschluss
+
+### Hauptdokumentation
+- ✅ `README.md` - Projektübersicht
+- ✅ `ARCHITECTURE.md` - Systemarchitektur (aktualisiert 15.03.2026)
+- ✅ `TECHNICAL_SPECIFICATIONS.md` - Technische Spezifikationen (aktualisiert 15.03.2026)
+- ✅ `IMPLEMENTATION_SUMMARY.md` - Implementierungszusammenfassung (aktualisiert 15.03.2026)
+- ✅ `INTERNATIONALIZATION.md` - Lokalisierung
+- ✅ `IPAD_COMPATIBILITY.md` - iPad-Unterstützung
+
+### Feature-Dokumentation
+- ✅ `Features/GUIDED_SCANNING_FEATURE.md`
+- ✅ `Features/GUIDED_COMPARISON_FEATURE.md`
+- ✅ `Features/AIRDROP_SYNC_IMPLEMENTATION_COMPLETE.md`
+- ✅ `Features/REGION_OVERVIEW_FEATURE.md`
+- ✅ `Features/ALL_REGIONS_OVERVIEW_FEATURE.md`
+- ✅ Und weitere...
 
 ## Bekannte Einschränkungen
 
-### Sensordaten
-- CameraService hat aktuell keine Sensordaten-Properties
-- Übersichtsbilder werden mit Default-Werten (0) gespeichert
-- Zukünftige Erweiterung möglich durch CoreMotion Integration
+### Nicht Implementiert (Geplant für Phase 2)
+- **Sensordaten** - CoreMotion Integration
+- **ML-Features** - Core ML für automatische Erkennung
+- **Automatische Zuordnung** - Basierend auf Sensoren + ML
+- **Änderungs-Detektion** - ML-basierte Erkennung
 
-### Leberfleck-Erkennung
-- Keine automatische Erkennung in Übersichtsbildern
-- Keine Verknüpfung zwischen Übersichtsbild und Einzelaufnahmen
-- Manuelle Zuordnung erforderlich
+### Aktuelle Einschränkungen
+- MoleLocationMarker-Modell existiert, aber UI fehlt
+- Keine Sensordaten in Bildern
+- Manuelle Bildauswahl für Vergleich
+- PDF-Export für Ärzte noch nicht implementiert
 
 ## Zukünftige Erweiterungen
 
-### Priorität 1
-- [ ] CoreMotion Integration für echte Sensordaten
-- [ ] Automatische Leberfleck-Erkennung (Core ML)
-- [ ] Verknüpfung Übersichtsbild ↔ Einzelaufnahmen
+### Priorität 1 (Phase 2)
+- [ ] CoreMotion Integration
+- [ ] Core ML Integration
+- [ ] Automatische Zuordnung
+- [ ] ML-basierte Änderungs-Detektion
+- [ ] PDF-Export für Ärzte
 
 ### Priorität 2
-- [ ] Side-by-Side Vergleich von Übersichtsbildern
-- [ ] Annotationen/Markierungen auf Bildern
-- [ ] Export von Übersichtsbildern
-- [ ] Erinnerungen für regelmäßige Kontrollen
+- [ ] UI für MoleLocationMarker
+- [ ] Annotationen auf Bildern
+- [ ] Erweiterte Statistiken
 
 ### Priorität 3
 - [ ] Apple Watch Integration
 - [ ] HealthKit Integration
-- [ ] Teilen mit Ärzten (verschlüsselt)
-- [ ] Statistiken und Trends
+- [ ] Familien-Sharing
 
 ## Build-Informationen
 
@@ -245,9 +356,25 @@ Nevus/
 - Deployment Target: iOS 17.6
 
 ## Status
-✅ **Vollständig implementiert und bereit für Testing**
+✅ **Produktionsbereit - Version 1.0**
 
-Alle geplanten Features sind implementiert, dokumentiert und im Xcode-Projekt integriert.
+Alle Phase-1-Features sind vollständig implementiert, getestet und dokumentiert. Die App ist bereit für den Einsatz auf iPhone und iPad.
+
+## Build-Informationen
+
+### Anforderungen
+- iOS 17.6+
+- Xcode 15.0+
+- Swift 5.9+
+
+### Berechtigungen (Info.plist)
+- NSCameraUsageDescription - Kamera für Leberfleck-Fotos
+- NSUserNotificationsUsageDescription - Monatliche Erinnerungen (optional)
+
+### Deployment
+- Bundle ID: `net.familie-richter.Nevus`
+- Deployment Target: iOS 17.6
+- Unterstützte Geräte: iPhone, iPad
 
 ## Datum
-Letzte Aktualisierung: 11. Januar 2026
+Letzte Aktualisierung: 15. März 2026

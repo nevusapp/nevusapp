@@ -1,28 +1,38 @@
 # Nevus - iOS App für Nevus-Überwachung
 
-Eine native iOS-App zur systematischen Erfassung, Katalogisierung und Überwachung von Leberflecken mit automatischer Zuordnung durch Sensordaten und Machine Learning.
+**Status:** ✅ Produktionsbereit - Version 1.0
+**Letzte Aktualisierung:** 15. März 2026
+
+Eine native iOS-App zur systematischen Erfassung, Katalogisierung und Überwachung von Leberflecken mit fortgeschrittenen Vergleichsfunktionen und privatsphäre-orientierter Geräte-zu-Gerät-Synchronisation.
 
 ## 🎯 Projektziel
 
-Nevus ermöglicht es Benutzern, Leberflecke am Körper zu fotografieren, zu katalogisieren und über die Zeit zu vergleichen. Die App nutzt iPhone-Sensoren (Neigungswinkel, Barometer) und Machine Learning, um Aufnahmen automatisch den richtigen Leberflecken zuzuordnen.
+Nevus ermöglicht es Benutzern, Leberflecke am Körper zu fotografieren, zu katalogisieren und über die Zeit zu vergleichen. Die App bietet systematische Workflows für regelmäßige Kontrollen und sichere Synchronisation zwischen Geräten ohne Cloud-Abhängigkeit.
 
 ## ✨ Hauptfunktionen
 
-### Phase 1 (MVP)
-- 📸 **Hochauflösende Bildaufnahme** mit Kamera-Integration
-- 📊 **Sensor-Daten-Erfassung** (Neigung, Barometer)
-- 🗂️ **Katalogisierung** von Leberflecken mit Körperkarte
-- 🔍 **Bildvergleich** (Side-by-Side und Overlay) mit datumsbasierter Auswahl
-- ☁️ **iCloud-Synchronisation** für Backup
-- 🔒 **Lokale Datenspeicherung** mit Verschlüsselung
+### ✅ Implementiert (Version 1.0)
+- 📸 **Hochauflösende Bildaufnahme** - AVFoundation mit direktem Callback
+- 🗂️ **12 Körperregionen, 26 Körperseiten** - Detaillierte Katalogisierung
+- 🔍 **Bildvergleich** - Side-by-Side und Overlay mit Zoom
+- 📊 **Übersichtsbilder** - Pro Körperregion mit Notizen
+- 🎯 **Guided Scanning** - Systematisches Fotografieren aller Leberflecke
+- 🔄 **Guided Comparison** - Systematischer Vergleich mit Referenzbildern
+- 📤 **Export/Import** - ZIP-Export und AirDrop-Sync zwischen Geräten
+- 💾 **SwiftData** - Lokale Speicherung mit automatischem iCloud Backup
+- 📱 **iPad-Optimierung** - Master-Detail Layout und adaptive Grids
+- 🌍 **Internationalisierung** - Deutsch und Englisch
+- 🔔 **Monatliche Erinnerungen** - Für regelmäßige Kontrollen
+- 🔒 **Privatsphäre** - Keine Cloud-Abhängigkeit, lokale Daten
 
-### Phase 2
+### 🔄 Geplant (Phase 2)
 - 🤖 **Core ML Integration** für automatische Erkennung
+- 📊 **Sensordaten** (CoreMotion) für Geräteneigung
 - 🎯 **Automatische Zuordnung** basierend auf Sensoren + ML
-- 📈 **Änderungs-Tracking** mit Verlaufsanzeige
+- 📈 **Änderungs-Detektion** mit ML
 - 📄 **PDF-Export** für Arztbesuche
 
-### Phase 3+
+### 📋 Geplant (Phase 3+)
 - ⌚ **Apple Watch App** für Erinnerungen
 - 🏥 **HealthKit-Integration**
 - 👨‍⚕️ **Dermatologen-Portal** zum Teilen
@@ -30,13 +40,17 @@ Nevus ermöglicht es Benutzern, Leberflecke am Körper zu fotografieren, zu kata
 
 ## 🏗️ Technologie-Stack
 
-- **Plattform**: iOS 16+
+- **Plattform**: iOS 17.6+ (iPhone & iPad)
 - **Sprache**: Swift 5.9+
-- **UI**: SwiftUI
-- **Datenpersistenz**: SwiftData (mit Core Data Fallback)
-- **Cloud**: CloudKit
-- **ML**: Core ML + Vision Framework
-- **Sensoren**: CoreMotion, AVFoundation
+- **UI**: SwiftUI 5.0
+- **Datenpersistenz**: SwiftData mit automatischem iCloud Backup
+- **Kamera**: AVFoundation
+- **Lokalisierung**: String Catalog (DE/EN)
+- **Sync**: AirDrop-basiert (.nevus Pakete)
+
+**Geplant für Phase 2:**
+- Core ML + Vision Framework
+- CoreMotion (Sensordaten)
 
 ## 📁 Projekt-Struktur
 
@@ -77,70 +91,40 @@ Nevus/
     └── Localizable.strings           # Übersetzungen
 ```
 
-## 🚀 Entwicklungs-Roadmap
+## 🚀 Entwicklungsstatus
 
-### Woche 1-2: Projekt-Setup
-- [x] Architektur-Planung
-- [x] Projekt-Plan erstellen
-- [x] Technische Spezifikationen
-- [ ] Xcode-Projekt anlegen
-- [ ] Grundstruktur aufbauen
+### ✅ Phase 1 - Abgeschlossen (Januar - März 2026)
+- [x] Architektur-Planung und Spezifikationen
+- [x] Xcode-Projekt und Grundstruktur
+- [x] SwiftData-Modelle (Mole, MoleImage, BodyRegionOverview, MoleLocationMarker)
+- [x] CameraService mit AVFoundation
+- [x] Kamera-Integration mit Overlay-Modus
+- [x] Bildkompression und Thumbnail-Generierung
+- [x] UI-Implementierung (10+ Views)
+- [x] Bildvergleich (Side-by-Side & Overlay)
+- [x] Übersichtsbilder pro Körperregion
+- [x] Guided Scanning & Comparison
+- [x] Export/Import Funktionalität
+- [x] AirDrop-Sync zwischen Geräten
+- [x] iPad-Optimierung mit adaptiven Layouts
+- [x] Internationalisierung (DE/EN)
+- [x] Monatliche Erinnerungen
+- [x] Session Cleanup
+- [x] Dokumentation
 
-### Woche 2-3: Datenmodell
-- [ ] SwiftData-Modelle implementieren
-- [ ] StorageService erstellen
-- [ ] CloudKit-Setup
-- [ ] Unit Tests für Models
+### 🔄 Phase 2 - Geplant
+- [ ] CoreMotion-Integration für Sensordaten
+- [ ] Core ML Modell-Integration
+- [ ] Automatische Leberfleck-Erkennung
+- [ ] ML-basierte Änderungs-Detektion
+- [ ] PDF-Export für Ärzte
+- [ ] Erweiterte Statistiken
 
-### Woche 3-4: Kamera-Integration
-- [ ] CameraService implementieren
-- [ ] Bildaufnahme mit Preview
-- [ ] Bildkompression
-- [ ] Thumbnail-Generierung
-
-### Woche 4-5: Sensor-Integration
-- [ ] SensorService implementieren
-- [ ] CoreMotion-Integration
-- [ ] Barometer-Daten
-- [ ] Körperregion-Mapping
-
-### Woche 5-7: Machine Learning
-- [ ] ML-Modell vorbereiten
-- [ ] MLService implementieren
-- [ ] Feature-Extraktion
-- [ ] Vision Framework Integration
-
-### Woche 7-8: Matching-Algorithmus
-- [ ] Multi-Faktor-Matching
-- [ ] Sensor-Similarity
-- [ ] Feature-Similarity
-- [ ] Confidence-Scoring
-
-### Woche 8-11: UI-Implementierung
-- [ ] HomeView
-- [ ] BodyMapView
-- [ ] CameraView
-- [ ] MoleListView
-- [ ] MoleDetailView
-- [ ] ComparisonView
-
-### Woche 11-12: iCloud-Sync
-- [ ] CloudKit-Integration
-- [ ] Sync-Service
-- [ ] Konfliktauflösung
-- [ ] Offline-Modus
-
-### Woche 12-14: Testing
-- [ ] Unit Tests
-- [ ] UI Tests
-- [ ] Integration Tests
-- [ ] Beta-Testing (TestFlight)
-
-### Woche 14-16: Launch
-- [ ] UI/UX-Polishing
-- [ ] Performance-Optimierung
-- [ ] App Store Vorbereitung
-- [ ] Launch
+### 📋 Phase 3 - Geplant
+- [ ] Apple Watch Companion App
+- [ ] HealthKit-Integration
+- [ ] Dermatologen-Portal
+- [ ] Familien-Sharing
 
 ## 📊 Architektur-Übersicht
 
@@ -171,25 +155,19 @@ Nevus/
 └─────────────────────────────────────────────────────────┘
 ```
 
-### Matching-Algorithmus
+### Bildvergleichs-System
 
-Der Algorithmus kombiniert drei Faktoren für die automatische Zuordnung:
+**Aktuell implementiert:**
+- Manuelle Auswahl von Bildern für Vergleich
+- Referenzbild-System (ältestes oder benutzer-definiert)
+- Side-by-Side und Overlay-Vergleich
+- Guided Comparison für systematische Durchsicht
 
-1. **Sensor-basiertes Matching (45%)**
-   - Geräteneigung → Körperregion
-   - Barometer → Vertikale Position
-
-2. **ML-Feature-Matching (55%)**
-   - Cosine-Similarity der Feature-Vektoren
-   - Größe und Form
-   - Farbprofil
-
-**Hinweis**: Für Bildvergleiche wählt der Benutzer manuell aus vorherigen Aufnahmen basierend auf dem Aufnahmedatum.
-
-**Confidence-Schwellwerte:**
-- \> 0.85: Automatische Zuordnung
-- 0.70-0.85: Vorschlag mit Bestätigung
-- < 0.70: Manuelle Auswahl
+**Geplant für Phase 2:**
+- Automatische Zuordnung mit ML
+- Sensor-basiertes Matching (CoreMotion)
+- ML-Feature-Matching (Core ML)
+- Confidence-Scoring für Vorschläge
 
 ## 🔒 Datenschutz und Sicherheit
 
@@ -229,16 +207,16 @@ Der Algorithmus kombiniert drei Faktoren für die automatische Zuordnung:
 ## 📱 System-Anforderungen
 
 ### Minimum
-- iOS 16.0+
-- iPhone 12 oder neuer
+- iOS 17.6+
+- iPhone oder iPad
 - 500 MB freier Speicher
-- Kamera mit Dual-System
+- Rückkamera
 
 ### Empfohlen
-- iOS 17.0+
-- iPhone 14 Pro oder neuer
+- iOS 17.6+
+- iPhone 14 Pro oder neuer, iPad Pro
 - 2 GB freier Speicher
-- iCloud-Konto für Sync
+- iCloud-Konto für automatisches Backup
 
 ## 🧪 Testing-Strategie
 
@@ -289,9 +267,20 @@ Der Algorithmus kombiniert drei Faktoren für die automatische Zuordnung:
 
 ## 📚 Dokumentation
 
-- [`ARCHITECTURE.md`](ARCHITECTURE.md) - Detaillierte Architektur-Beschreibung
-- [`PROJECT_PLAN.md`](PROJECT_PLAN.md) - Vollständiger Entwicklungsplan
-- [`TECHNICAL_SPECIFICATIONS.md`](TECHNICAL_SPECIFICATIONS.md) - Technische Spezifikationen
+### Hauptdokumentation
+- [`README.md`](README.md) - Projektübersicht (dieses Dokument)
+- [`ARCHITECTURE.md`](Documentation/ARCHITECTURE.md) - Systemarchitektur
+- [`TECHNICAL_SPECIFICATIONS.md`](Documentation/TECHNICAL_SPECIFICATIONS.md) - Technische Spezifikationen
+- [`IMPLEMENTATION_SUMMARY.md`](Documentation/IMPLEMENTATION_SUMMARY.md) - Implementierungszusammenfassung
+- [`INTERNATIONALIZATION.md`](Documentation/INTERNATIONALIZATION.md) - Lokalisierung
+- [`IPAD_COMPATIBILITY.md`](Documentation/IPAD_COMPATIBILITY.md) - iPad-Unterstützung
+
+### Feature-Dokumentation
+- [Guided Scanning](Documentation/Features/GUIDED_SCANNING_FEATURE.md)
+- [Guided Comparison](Documentation/Features/GUIDED_COMPARISON_FEATURE.md)
+- [AirDrop Sync](Documentation/Features/AIRDROP_SYNC_IMPLEMENTATION_COMPLETE.md)
+- [Region Overview](Documentation/Features/REGION_OVERVIEW_FEATURE.md)
+- [Und weitere...](Documentation/Features/)
 
 ## 🤝 Entwicklungs-Workflow
 
@@ -331,6 +320,21 @@ Für Fragen oder Feedback zum Projekt, bitte ein Issue erstellen.
 
 ---
 
-**Status**: 🏗️ In Planung
-**Version**: 0.1.0 (Planning Phase)
-**Letzte Aktualisierung**: Januar 2026
+**Status**: ✅ Produktionsbereit - Version 1.0
+**Letzte Aktualisierung**: 15. März 2026
+
+**Implementierte Features:**
+- ✅ Core Funktionalität (12 Regionen, 26 Seiten)
+- ✅ Bildvergleich (Side-by-Side & Overlay)
+- ✅ Übersichtsbilder pro Region
+- ✅ Guided Scanning & Comparison
+- ✅ AirDrop Sync zwischen Geräten
+- ✅ iPad-Optimierung
+- ✅ Internationalisierung (DE/EN)
+- ✅ Export/Import Funktionalität
+
+**Geplant für Phase 2:**
+- 🔄 Core ML Integration
+- 🔄 Sensordaten (CoreMotion)
+- 🔄 Automatische Zuordnung
+- 🔄 PDF-Export für Ärzte

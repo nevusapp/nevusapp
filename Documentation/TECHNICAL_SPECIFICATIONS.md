@@ -1,20 +1,23 @@
 # Nevus - Technische Spezifikationen
 
+**Letzte Aktualisierung:** 15. März 2026
+**Version:** 1.0 (Implementiert)
+
 ## System-Anforderungen
 
 ### Minimum Requirements
-- **iOS Version**: 16.0+
-- **Device**: iPhone 12 oder neuer (empfohlen für beste Kamera-Qualität)
+- **iOS Version**: 17.6+ (SwiftData erforderlich)
+- **Device**: iPhone 12 oder neuer, iPad (alle Modelle mit iOS 17.6+)
 - **Storage**: 500 MB freier Speicher (minimal)
-- **RAM**: 3 GB (für ML-Verarbeitung)
-- **Kamera**: Dual-Kamera-System (für bessere Bildqualität)
-- **Sensoren**: Gyroskop, Accelerometer, Barometer
+- **RAM**: 3 GB
+- **Kamera**: Rückkamera erforderlich
+- **Sensoren**: Keine Sensordaten aktuell implementiert
 
 ### Empfohlene Requirements
-- **iOS Version**: 17.0+
-- **Device**: iPhone 14 Pro oder neuer
+- **iOS Version**: 17.6+
+- **Device**: iPhone 14 Pro oder neuer, iPad Pro
 - **Storage**: 2 GB freier Speicher
-- **iCloud**: Aktives iCloud-Konto für Sync
+- **iCloud**: Optional für automatisches Backup (SwiftData iCloud Sync)
 
 ## Datenmodell-Spezifikationen
 
@@ -25,16 +28,24 @@
 | `id` | UUID | Eindeutige Kennung | Primary Key, Unique |
 | `createdAt` | Date | Erstellungsdatum | Not Null |
 | `lastModified` | Date | Letzte Änderung | Not Null, Auto-update |
-| `bodyRegion` | String | Körperregion | Enum: head, torso, arms, legs |
-| `bodySide` | String | Körperseite | Enum: left, right, center, back |
-| `bodyMapX` | Double | X-Koordinate auf Körperkarte | 0.0 - 1.0 |
-| `bodyMapY` | Double | Y-Koordinate auf Körperkarte | 0.0 - 1.0 |
-| `notes` | String | Benutzer-Notizen | Optional, max 1000 Zeichen |
-| `isArchived` | Bool | Archiviert-Status | Default: false |
-| `riskLevel` | String | Risiko-Einschätzung | Enum: low, medium, high, unknown |
+| `bodyRegion` | String | Körperregion | 12 Regionen (siehe BodyRegion Enum) |
+| `bodySide` | String | Körperseite | Region-spezifische Seiten (siehe BodySide Enum) |
+| `notes` | String | Benutzer-Notizen | Default: "" |
+| `referenceImageID` | UUID? | Referenzbild für Overlay | Optional, default: ältestes Bild |
 
 **Relationships:**
 - `images`: One-to-Many zu MoleImage (Cascade Delete)
+- `locationMarkers`: One-to-Many zu MoleLocationMarker (Cascade Delete)
+
+**Implementierte Body Regions (12):**
+- head, neck, armLeft, armRight, chest, abdomen, pelvis, backUpper, backMiddle, backLower, legLeft, legRight
+
+**Body Sides (region-spezifisch):**
+- Head: headTop, headFront, headLeft, headRight, headBack
+- Neck: neckFront, neckLeft, neckRight, neckBack
+- Torso: torsoLeft, torsoCenter, torsoRight
+- Arms: armUpperFront, armUpperBack, armLowerInner, armLowerOuter, handInner, handOuter
+- Legs: legThighFront, legThighBack, legThighInner, legThighOuter, legCalfFront, legCalfBack, legCalfInner, legCalfOuter, footTop, footSole
 
 ### MoleImage Entity
 
@@ -42,30 +53,42 @@
 |------|-----|--------------|-------------|
 | `id` | UUID | Eindeutige Kennung | Primary Key, Unique |
 | `captureDate` | Date | Aufnahmedatum | Not Null |
-| `imageData` | Data | Vollbild (JPEG) | Not Null, max 10 MB |
-| `thumbnailData` | Data | Thumbnail (JPEG) | Not Null, max 100 KB |
+| `imageData` | Data | Vollbild (JPEG) | External Storage, 90% Qualität |
+| `thumbnailData` | Data | Thumbnail (JPEG) | 200x200, 70% Qualität |
 | `imageWidth` | Int | Bildbreite in Pixel | Not Null |
 | `imageHeight` | Int | Bildhöhe in Pixel | Not Null |
 
-**Sensor Data:**
-| Feld | Typ | Beschreibung | Constraints |
-|------|-----|--------------|-------------|
-| `pitch` | Double | Neigung vorwärts/rückwärts | -π bis π |
-| `roll` | Double | Neigung links/rechts | -π bis π |
-| `yaw` | Double | Rotation um vertikale Achse | -π bis π |
-| `barometricPressure` | Double? | Luftdruck in kPa | Optional |
-| `altitude` | Double? | Relative Höhe in Metern | Optional |
-| `deviceOrientation` | String | Geräte-Orientierung | Enum: portrait, landscape |
+**Relationships:**
+- `mole`: Many-to-One zu Mole
 
-**ML Features:**
+**Hinweis:** Sensordaten und ML-Features sind aktuell nicht implementiert.
+
+### BodyRegionOverview Entity
+
 | Feld | Typ | Beschreibung | Constraints |
 |------|-----|--------------|-------------|
-| `featureVector` | [Float] | ML-Feature-Vektor | 512 Dimensionen |
-| `matchConfidence` | Float | Zuordnungs-Konfidenz | 0.0 - 1.0 |
-| `mlModelVersion` | String | Verwendete Modell-Version | Not Null |
+| `id` | UUID | Eindeutige Kennung | Primary Key, Unique |
+| `bodyRegion` | String | Körperregion | Entspricht BodyRegion Enum |
+| `imageData` | Data | Vollbild (JPEG) | External Storage |
+| `thumbnailData` | Data | Thumbnail (JPEG) | 200x200 |
+| `captureDate` | Date | Aufnahmedatum | Not Null |
+| `notes` | String | Notizen zum Übersichtsbild | Default: "" |
+
+**Hinweis:** Übersichtsbilder für gesamte Körperregionen, unabhängig von einzelnen Leberflecken.
+
+### MoleLocationMarker Entity
+
+| Feld | Typ | Beschreibung | Constraints |
+|------|-----|--------------|-------------|
+| `id` | UUID | Eindeutige Kennung | Primary Key, Unique |
+| `x` | Double | X-Koordinate | 0.0 - 1.0 |
+| `y` | Double | Y-Koordinate | 0.0 - 1.0 |
 
 **Relationships:**
 - `mole`: Many-to-One zu Mole
+- `overviewImage`: Many-to-One zu BodyRegionOverview
+
+**Hinweis:** Verknüpft Leberflecke mit Positionen auf Übersichtsbildern.
 
 ## Kamera-Spezifikationen
 
@@ -164,104 +187,44 @@ enum BodyRegionMapping {
 
 ## Machine Learning Spezifikationen
 
-### Model Architecture
+**Status:** Nicht implementiert
 
-**Feature Extraction Model:**
-- **Base**: MobileNetV3-Large
-- **Input**: 224x224 RGB Image
-- **Output**: 512-dimensional feature vector
-- **Format**: Core ML (.mlmodel)
-- **Size**: ~15 MB
-- **Inference Time**: < 100ms (iPhone 12+)
+Machine Learning Features sind für zukünftige Versionen geplant:
+- Automatische Leberfleck-Erkennung
+- Feature-Extraktion für Bildvergleich
+- Automatische Zuordnung neuer Bilder
+- Änderungs-Detektion
 
-### Feature Vector Specifications
+## Bildvergleich Spezifikationen
+
+### Implementierte Features
+
+**ComparisonView:**
+- Side-by-Side Vergleich
+- Overlay-Modus mit Transparenz-Slider
+- Pinch-to-Zoom und Pan
+- Swap-Funktion zum Bildertausch
+- Datumsanzeige für beide Bilder
+
+**Guided Comparison:**
+- Systematischer Durchlauf aller Leberflecke
+- Fortschrittsanzeige
+- Inline-Notizen-Bearbeitung
+- Überspringen-Funktion
+- Statistiken am Ende
+
+### Referenzbild-Auswahl
 
 ```swift
-struct MLFeatureVector {
-    static let dimensions = 512
-    static let normalization: NormalizationType = .l2
-    static let dataType: MLMultiArrayDataType = .float32
-}
-```
-
-### Similarity Metrics
-
-```swift
-struct SimilarityMetrics {
-    // Cosine Similarity
-    static func cosineSimilarity(_ v1: [Float], _ v2: [Float]) -> Float {
-        let dotProduct = zip(v1, v2).map(*).reduce(0, +)
-        let magnitude1 = sqrt(v1.map { $0 * $0 }.reduce(0, +))
-        let magnitude2 = sqrt(v2.map { $0 * $0 }.reduce(0, +))
-        return dotProduct / (magnitude1 * magnitude2)
+// Mole.swift
+var referenceImage: MoleImage? {
+    // Wenn spezifisches Referenzbild gesetzt
+    if let refID = referenceImageID,
+       let image = images.first(where: { $0.id == refID }) {
+        return image
     }
-    
-    // Euclidean Distance
-    static func euclideanDistance(_ v1: [Float], _ v2: [Float]) -> Float {
-        return sqrt(zip(v1, v2).map { pow($0 - $1, 2) }.reduce(0, +))
-    }
-}
-```
-
-## Matching-Algorithmus Spezifikationen
-
-### Scoring Weights
-
-```swift
-struct MatchingWeights {
-    static let sensorScore: Float = 0.45
-    static let featureScore: Float = 0.55
-    static let temporalScore: Float = 0.0  // Not used - manual date selection
-}
-```
-
-### Confidence Thresholds
-
-```swift
-struct ConfidenceThresholds {
-    static let autoAssign: Float = 0.85      // Automatische Zuordnung
-    static let suggestWithConfirm: Float = 0.70  // Vorschlag mit Bestätigung
-    static let manualSelection: Float = 0.70     // Manuelle Auswahl erforderlich
-}
-```
-
-### Sensor Similarity Calculation
-
-```swift
-func calculateSensorSimilarity(
-    new: MoleImage,
-    existing: MoleImage
-) -> Float {
-    // Angle difference (normalized to 0-1)
-    let pitchDiff = abs(new.pitch - existing.pitch) / .pi
-    let rollDiff = abs(new.roll - existing.roll) / .pi
-    let yawDiff = abs(new.yaw - existing.yaw) / .pi
-    
-    let angleSimilarity = 1.0 - (pitchDiff + rollDiff + yawDiff) / 3.0
-    
-    // Altitude difference (if available)
-    var altitudeSimilarity: Float = 1.0
-    if let newAlt = new.altitude, let existingAlt = existing.altitude {
-        let altDiff = abs(newAlt - existingAlt)
-        altitudeSimilarity = max(0, 1.0 - Float(altDiff) / 2.0) // 2m threshold
-    }
-    
-    // Weighted combination (no GPS data used)
-    return angleSimilarity * 0.7 + altitudeSimilarity * 0.3
-}
-```
-
-### Temporal Score Calculation
-
-**Note**: Temporal scoring is not used in automatic matching. Users manually select which previous images to compare based on capture date through the UI.
-
-```swift
-// Not used - manual date selection in UI
-func calculateTemporalScore(
-    new: MoleImage,
-    existing: MoleImage
-) -> Float {
-    return 0.0  // Manual selection via date picker
+    // Sonst: ältestes Bild als Standard
+    return images.sorted(by: { $0.captureDate < $1.captureDate }).first
 }
 ```
 
@@ -293,22 +256,27 @@ struct DatabaseLimits {
 }
 ```
 
-### CloudKit Configuration
+### iCloud Sync
 
-```swift
-struct CloudKitConfiguration {
-    static let containerIdentifier = "iCloud.com.yourcompany.nevus"
-    static let databaseScope: CKDatabase.Scope = .private
-    
-    // Sync Settings
-    static let syncInterval: TimeInterval = 300 // 5 minutes
-    static let batchSize = 50
-    static let maxRetries = 3
-    
-    // Conflict Resolution
-    static let conflictResolution: ConflictResolutionStrategy = .latestWins
-}
-```
+**Status:** Automatisch via SwiftData
+
+SwiftData bietet automatische iCloud-Synchronisation:
+- Keine manuelle CloudKit-Konfiguration erforderlich
+- Automatische Konfliktauflösung
+- Opt-in durch Benutzer in iOS-Einstellungen
+- Verschlüsselte Übertragung
+
+### AirDrop Sync (Implementiert)
+
+**Manuelle Geräte-zu-Gerät Synchronisation:**
+- Export als .nevus Paket (ZIP)
+- Delta-Sync (nur neue Daten seit Datum)
+- UUID-basierte Duplikat-Erkennung
+- Automatischer Import via AirDrop
+- Keine Cloud-Abhängigkeit
+- Vollständige Privatsphäre
+
+**Siehe:** `Documentation/Features/AIRDROP_SYNC_IMPLEMENTATION_COMPLETE.md`
 
 ## Performance-Anforderungen
 
@@ -379,19 +347,23 @@ struct PrivacySettings {
 
 ## API-Versionen
 
-### Minimum API Versions
+### Implementierte API Versions
 
 ```swift
 struct APIVersions {
-    static let swiftVersion = "5.9"
-    static let iOS = "16.0"
-    static let swiftUI = "4.0"
-    static let coreML = "7.0"
-    static let vision = "5.0"
-    static let coreMotion = "1.0"
-    static let cloudKit = "1.0"
+    static let swiftVersion = "5.9+"
+    static let iOS = "17.6+"
+    static let swiftUI = "5.0"
+    static let swiftData = "1.0"
+    static let avFoundation = "1.0"
 }
 ```
+
+**Nicht verwendet:**
+- Core ML (geplant für Phase 2)
+- Vision Framework (geplant für Phase 2)
+- CoreMotion (geplant für Phase 2)
+- CloudKit (SwiftData nutzt automatisch iCloud)
 
 ## Testing-Spezifikationen
 
@@ -447,12 +419,26 @@ struct PerformanceTestTargets {
 
 ## Lokalisierung
 
-### Unterstützte Sprachen (Phase 1)
+### Implementierte Sprachen
 
-- Deutsch (de)
-- Englisch (en)
+- 🇩🇪 Deutsch (de) - Basissprache
+- 🇬🇧 Englisch (en) - Vollständig
 
-### Erweiterung (Phase 2+)
+**Format:** String Catalog (`Localizable.xcstrings`)
+
+**Lokalisierte Komponenten:**
+- Alle UI-Texte
+- Body Regions (12 Regionen)
+- Body Sides (26 Seiten)
+- Fehlermeldungen
+- Guided Scanning
+- Guided Comparison
+- AirDrop Sync
+- Export/Import
+
+**Siehe:** `Documentation/INTERNATIONALIZATION.md`
+
+### Geplante Erweiterungen
 
 - Französisch (fr)
 - Spanisch (es)
@@ -509,23 +495,76 @@ struct BuildConfiguration {
 - **In-App Purchases**: None (Phase 1)
 - **Subscriptions**: None (Phase 1)
 
+## Implementierte Features (Stand März 2026)
+
+### ✅ Core Features
+- SwiftData Persistenz mit iCloud Backup
+- Kamera-Integration (AVFoundation)
+- 12 Körperregionen, 26 Körperseiten
+- Mehrere Bilder pro Leberfleck
+- Bearbeitbare Notizen
+- Referenzbild-Auswahl für Overlay
+
+### ✅ Bildvergleich
+- Side-by-Side Vergleich
+- Overlay-Modus mit Transparenz
+- Pinch-to-Zoom und Pan
+- Swap-Funktion
+
+### ✅ Übersichtsbilder
+- Körperregion-Übersichtsbilder
+- Inline-Anzeige in Hauptansicht
+- Detailansicht mit Zoom
+- Notizen pro Übersichtsbild
+- Verknüpfung mit Leberflecken (MoleLocationMarker)
+
+### ✅ Guided Features
+- Guided Scanning (systematisches Fotografieren)
+- Guided Comparison (systematischer Vergleich)
+- Fortschrittsanzeige
+- Statistiken
+
+### ✅ Export/Import
+- Einzelner Leberfleck (ZIP)
+- Alle Leberflecke (ZIP)
+- Einzelnes Bild (JPEG)
+- AirDrop Sync (.nevus Pakete)
+- Delta-Sync (nur neue Daten)
+
+### ✅ iPad-Unterstützung
+- NavigationSplitView (Master-Detail)
+- Adaptive Layouts
+- Größere Grids
+- Multitasking-Support
+
+### ✅ Weitere Features
+- Internationalisierung (DE/EN)
+- Session Cleanup
+- Monatliche Erinnerungen
+- Overlay-Modus mit Referenzbild
+- Löschen mit Bestätigung
+
 ## Zukünftige Erweiterungen
 
-### Phase 2 Features
+### Phase 2 (Geplant)
+
+- ✅ ~~iPad-Optimierung~~ (Implementiert)
+- Core ML Integration
+- Automatische Leberfleck-Erkennung
+- Sensordaten (CoreMotion)
+- Änderungs-Detektion mit ML
+- PDF-Export für Ärzte
+- Erweiterte Statistiken
+
+### Phase 3 (Geplant)
 
 - Apple Watch Companion App
 - HealthKit Integration
-- Export für Ärzte (PDF)
-- Erweiterte Statistiken
-
-### Phase 3 Features
-
-- iPad-Optimierung
 - Familien-Sharing
 - Dermatologen-Portal
 - Risiko-Analyse mit ML
 
-### Phase 4 Features
+### Phase 4 (Vision)
 
 - AR-basierte Körperkarte
 - 3D-Scanning
