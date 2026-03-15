@@ -10,9 +10,22 @@
 		6B817DB82F0D36AB00EB1030 /* Nevus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nevus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6B817DBA2F0D36AB00EB1031 /* Exceptions for "Nevus" folder in "Nevus" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				App/Info.plist,
+			);
+			target = 6B817DB72F0D36AB00EB1030 /* Nevus */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		6B817DBA2F0D36AB00EB1030 /* Nevus */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6B817DBA2F0D36AB00EB1031 /* Exceptions for "Nevus" folder in "Nevus" target */,
+			);
 			path = Nevus;
 			sourceTree = "<group>";
 		};
