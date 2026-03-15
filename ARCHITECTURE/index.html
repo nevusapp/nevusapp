@@ -232,7 +232,7 @@
 <li><strong>Plattform</strong>: iOS 17.6+ (iPhone &amp; iPad)</li>
 <li><strong>Sprache</strong>: Swift 5.9+</li>
 <li><strong>UI Framework</strong>: SwiftUI 5.0</li>
-<li><strong>Datenpersistenz</strong>: SwiftData mit automatischem iCloud Backup</li>
+<li><strong>Datenpersistenz</strong>: SwiftData (lokal, in iOS-Geräte-Backup enthalten)</li>
 <li><strong>Kamera</strong>: AVFoundation</li>
 <li><strong>Lokalisierung</strong>: String Catalog (Deutsch, Englisch)</li>
 <li><strong>Sync</strong>: AirDrop-basiert (.nevus Pakete)</li>
@@ -263,7 +263,7 @@
                      ▼
 ┌─────────────────────────────────────────────────────────┐
 │                    Data Layer                            │
-│        (SwiftData Models, CloudKit Sync)                │
+│        (SwiftData Models, Local Storage)                │
 └─────────────────────────────────────────────────────────┘
 </code></pre>
 <h2 id="kern-komponenten">Kern-Komponenten</h2>
@@ -541,7 +541,7 @@ enum BodySide: String, CaseIterable {
 <li>Alle Bilder in App-Container (SwiftData)</li>
 <li>External Storage für große Bilddaten</li>
 <li>Keine Weitergabe an Dritte</li>
-<li>Automatisches iCloud Backup (opt-in durch Benutzer)</li>
+<li>In iOS-Geräte-Backup enthalten (iCloud oder Computer)</li>
 </ul>
 <h3 id="airdrop-sync">AirDrop-Sync</h3>
 <ul>
@@ -577,7 +577,7 @@ enum BodySide: String, CaseIterable {
 <li>@Attribute(.unique) für schnelle Lookups</li>
 <li>Cascade Delete für Beziehungen</li>
 <li>
-<p>Automatisches iCloud Backup</p>
+<p>In iOS-Geräte-Backup enthalten</p>
 </li>
 <li>
 <p><strong>UI-Performance</strong></p>
@@ -634,7 +634,7 @@ Figma    SwiftUI      Unit Tests    UI Tests   Beta
 <ul>
 <li>SwiftUI</li>
 <li>SwiftData / Core Data</li>
-<li>CloudKit</li>
+<li>AirDrop (für manuelle Sync)</li>
 <li>Core ML</li>
 <li>Vision</li>
 <li>CoreMotion</li>

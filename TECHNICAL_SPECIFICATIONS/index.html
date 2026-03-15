@@ -260,7 +260,7 @@
 <li><strong>iOS Version</strong>: 17.6+</li>
 <li><strong>Device</strong>: iPhone 14 Pro oder neuer, iPad Pro</li>
 <li><strong>Storage</strong>: 2 GB freier Speicher</li>
-<li><strong>iCloud</strong>: Optional für automatisches Backup (SwiftData iCloud Sync)</li>
+<li><strong>iCloud</strong>: Optional für iOS-Geräte-Backup (keine App-Level-Sync)</li>
 </ul>
 <h2 id="datenmodell-spezifikationen">Datenmodell-Spezifikationen</h2>
 <h3 id="mole-entity">Mole Entity</h3>
@@ -664,7 +664,7 @@ var referenceImage: MoleImage? {
 <td>&lt; 1s</td>
 </tr>
 <tr>
-<td>CloudKit Sync</td>
+<td>AirDrop Sync</td>
 <td>&lt; 5s</td>
 <td>&lt; 10s</td>
 </tr>
@@ -691,8 +691,8 @@ var referenceImage: MoleImage? {
     static let useFileProtection = true
     static let fileProtectionLevel: FileProtectionType = .complete
 
-    // CloudKit
-    static let useEncryption = true
+    // Local Storage
+    static let useEncryption = true  // iOS file encryption
     static let encryptionType: CKRecordZone.Capabilities = .fetchChanges
 
     // Biometric Authentication
@@ -726,7 +726,7 @@ var referenceImage: MoleImage? {
 - Core ML (geplant für Phase 2)
 - Vision Framework (geplant für Phase 2)
 - CoreMotion (geplant für Phase 2)
-- CloudKit (SwiftData nutzt automatisch iCloud)</p>
+- AirDrop (für manuelle Geräte-zu-Gerät-Sync)</p>
 <h2 id="testing-spezifikationen">Testing-Spezifikationen</h2>
 <h3 id="unit-test-coverage">Unit Test Coverage</h3>
 <ul>
@@ -843,7 +843,7 @@ var referenceImage: MoleImage? {
 <h2 id="implementierte-features-stand-marz-2026">Implementierte Features (Stand März 2026)</h2>
 <h3 id="core-features">✅ Core Features</h3>
 <ul>
-<li>SwiftData Persistenz mit iCloud Backup</li>
+<li>SwiftData Persistenz (lokal, in iOS-Backup enthalten)</li>
 <li>Kamera-Integration (AVFoundation)</li>
 <li>12 Körperregionen, 26 Körperseiten</li>
 <li>Mehrere Bilder pro Leberfleck</li>
