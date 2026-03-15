@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Referenzbild-Auswahl für Overlay-Modus - Nevus App</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Nevus App</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../ARCHITECTURE/" class="nav-link">Nevus - iOS App Architektur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IMPLEMENTATION_SUMMARY/" class="nav-link">Nevus - Vollständige Implementierungszusammenfassung</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../INTERNATIONALIZATION/" class="nav-link">Internationalisierung / Internationalization</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IPAD_COMPATIBILITY/" class="nav-link">iPad Compatibility Implementation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../TECHNICAL_SPECIFICATIONS/" class="nav-link">Nevus - Technische Spezifikationen</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Features</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FEATURE/" class="dropdown-item">AirDrop Sync Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FIXES/" class="dropdown-item">AirDrop Sync - File Access Fixes</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_IMPLEMENTATION_COMPLETE/" class="dropdown-item">AirDrop Sync Feature - Complete Implementation Summary</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_SETUP/" class="dropdown-item">AirDrop Sync Feature - Setup Instructions</a>
+</li>
+                                    
+<li>
+    <a href="../ALL_REGIONS_OVERVIEW_FEATURE/" class="dropdown-item">All Regions Overview Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AUTO_DELETE_SYNC_FILES/" class="dropdown-item">Automatic Sync File Deletion Feature</a>
+</li>
+                                    
+<li>
+    <a href="../DELETE_IMAGES_FEATURE/" class="dropdown-item">Bilder Löschen Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_COMPARISON_FEATURE/" class="dropdown-item">Guided Comparison Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_SCANNING_FEATURE/" class="dropdown-item">Guided Scanning Feature</a>
+</li>
+                                    
+<li>
+    <a href="../IMAGE_EXPORT_FEATURE/" class="dropdown-item">Einzelbild-Export Funktion</a>
+</li>
+                                    
+<li>
+    <a href="../MOLE_LOCATION_FEATURE/" class="dropdown-item">Mole Location on Overview Images Feature</a>
+</li>
+                                    
+<li>
+    <a href="../MONTHLY_REMINDER_FEATURE/" class="dropdown-item">Monthly Reminder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_CONTROLS/" class="dropdown-item">Overlay-Steuerelemente - Benutzerführung</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_MODE_FEATURE/" class="dropdown-item">Overlay-Modus für verbesserte Vergleichbarkeit</a>
+</li>
+                                    
+<li>
+    <a href="../PERFORMANCE_DEBUG/" class="dropdown-item">Performance Debugging Guide</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Referenzbild-Auswahl für Overlay-Modus</a>
+</li>
+                                    
+<li>
+    <a href="../REGION_OVERVIEW_FEATURE/" class="dropdown-item">Körperregion-Übersichtsbilder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../SESSION_CLEANUP_FEATURE/" class="dropdown-item">Session Cleanup Feature - Implementation Summary</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../PERFORMANCE_DEBUG/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../REGION_OVERVIEW_FEATURE/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#referenzbild-auswahl-fur-overlay-modus" class="nav-link">Referenzbild-Auswahl für Overlay-Modus</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#ubersicht" class="nav-link">Übersicht</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#implementierung" class="nav-link">Implementierung</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#benutzerfuhrung" class="nav-link">Benutzerführung</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#anwendungsfalle" class="nav-link">Anwendungsfälle</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#vorteile" class="nav-link">Vorteile</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#technische-details" class="nav-link">Technische Details</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#migration" class="nav-link">Migration</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#zukunftige-erweiterungen" class="nav-link">Zukünftige Erweiterungen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#best-practices" class="nav-link">Best Practices</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#datum" class="nav-link">Datum</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#dateien" class="nav-link">Dateien</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="referenzbild-auswahl-fur-overlay-modus">Referenzbild-Auswahl für Overlay-Modus</h1>
+<h2 id="ubersicht">Übersicht</h2>
+<p>Benutzer können jetzt ein spezifisches Bild als Referenz für den Overlay-Modus auswählen. Standardmäßig wird das älteste Bild (erste Aufnahme) verwendet, um langfristige Vergleichbarkeit zu gewährleisten.</p>
+<h2 id="implementierung">Implementierung</h2>
+<h3 id="1-datenmodell-erweiterung">1. Datenmodell-Erweiterung</h3>
+<p><strong>Datei:</strong> <code>Nevus/Models/Mole.swift</code></p>
+<p><strong>Neue Eigenschaften:</strong></p>
+<pre><code class="language-swift">// Reference image ID for overlay mode (defaults to oldest image)
+var referenceImageID: UUID?
+</code></pre>
+<p><strong>Neue Computed Property:</strong></p>
+<pre><code class="language-swift">var referenceImage: MoleImage? {
+    // If a specific reference is set, use it
+    if let refID = referenceImageID,
+       let image = images.first(where: { $0.id == refID }) {
+        return image
+    }
+
+    // Otherwise, default to the oldest image (first captured)
+    return images.sorted(by: { $0.captureDate &lt; $1.captureDate }).first
+}
+</code></pre>
+<p><strong>Neue Methoden:</strong></p>
+<pre><code class="language-swift">// Set a specific image as reference for overlay
+func setReferenceImage(_ image: MoleImage) {
+    self.referenceImageID = image.id
+    updateModifiedDate()
+}
+
+// Clear reference image (will default to oldest)
+func clearReferenceImage() {
+    self.referenceImageID = nil
+    updateModifiedDate()
+}
+</code></pre>
+<h3 id="2-ui-komponenten">2. UI-Komponenten</h3>
+<h4 id="a-overlay-einstellungen-sektion-moledetailview">A) Overlay-Einstellungen Sektion (MoleDetailView)</h4>
+<p><strong>Neue Sektion in der Detailansicht:</strong></p>
+<pre><code class="language-swift">Section {
+    // Aktuelles Referenzbild anzeigen
+    if let refImage = mole.referenceImage {
+        HStack {
+            // Thumbnail
+            if let thumbnail = refImage.thumbnailImage {
+                Image(uiImage: thumbnail)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 60, height: 60)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+            }
+
+            // Info
+            VStack(alignment: .leading, spacing: 4) {
+                Text(&quot;Referenzbild für Overlay&quot;)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                Text(refImage.captureDate.formatted(date: .abbreviated, time: .omitted))
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+
+            Spacer()
+
+            // Reset-Button (nur wenn manuell gesetzt)
+            if mole.referenceImageID != nil {
+                Button(&quot;Zurücksetzen&quot;) {
+                    mole.clearReferenceImage()
+                }
+                .font(.caption)
+            }
+        }
+    }
+
+    // Link zur Auswahl-View
+    if mole.images.count &gt;= 2 {
+        NavigationLink(destination: ReferenceImageSelectionView(mole: mole)) {
+            Label(&quot;Referenzbild ändern&quot;, systemImage: &quot;photo.on.rectangle.angled&quot;)
+        }
+    }
+} header: {
+    Text(&quot;Overlay-Einstellungen&quot;)
+} footer: {
+    Text(&quot;Das Referenzbild wird beim Fotografieren als halbtransparentes Overlay angezeigt. Standard: Ältestes Bild (erste Aufnahme).&quot;)
+        .font(.caption)
+}
+</code></pre>
+<h4 id="b-stern-indikator-im-bilder-grid">B) Stern-Indikator im Bilder-Grid</h4>
+<p><strong>Visueller Indikator für Referenzbild:</strong></p>
+<pre><code class="language-swift">// Reference image indicator
+if mole.referenceImage?.id == image.id {
+    Image(systemName: &quot;star.fill&quot;)
+        .font(.caption)
+        .foregroundColor(.yellow)
+        .padding(4)
+        .background(Color.black.opacity(0.6))
+        .clipShape(Circle())
+        .padding(4)
+}
+</code></pre>
+<h4 id="c-referenzbild-auswahl-view">C) Referenzbild-Auswahl View</h4>
+<p><strong>Neue View:</strong> <code>ReferenceImageSelectionView</code></p>
+<pre><code class="language-swift">struct ReferenceImageSelectionView: View {
+    @Bindable var mole: Mole
+    @Environment(\.dismiss) private var dismiss
+
+    var sortedImages: [MoleImage] {
+        mole.images.sorted(by: { $0.captureDate &lt; $1.captureDate }) // Oldest first
+    }
+
+    var body: some View {
+        List {
+            Section {
+                ForEach(sortedImages) { image in
+                    Button(action: {
+                        mole.setReferenceImage(image)
+                        dismiss()
+                    }) {
+                        HStack(spacing: 12) {
+                            // Thumbnail (80x80)
+                            // Info (Datum, &quot;Erste Aufnahme&quot;, Auflösung)
+                            // Checkmark wenn ausgewählt
+                        }
+                    }
+                }
+            } header: {
+                Text(&quot;Wähle ein Referenzbild&quot;)
+            } footer: {
+                Text(&quot;Das ausgewählte Bild wird beim Fotografieren als halbtransparentes Overlay angezeigt. Die erste Aufnahme ist standardmäßig ausgewählt für langfristige Vergleichbarkeit.&quot;)
+            }
+        }
+        .navigationTitle(&quot;Referenzbild&quot;)
+    }
+}
+</code></pre>
+<h3 id="3-integration-mit-cameraview">3. Integration mit CameraView</h3>
+<p><strong>Automatische Verwendung des Referenzbilds:</strong></p>
+<pre><code class="language-swift">.sheet(isPresented: $showingCamera) {
+    CameraView(referenceImage: mole.referenceImage?.uiImage) { image in
+        addImage(image)
+    }
+}
+</code></pre>
+<h2 id="benutzerfuhrung">Benutzerführung</h2>
+<h3 id="standard-verhalten-ohne-manuelle-auswahl">Standard-Verhalten (ohne manuelle Auswahl)</h3>
+<ol>
+<li><strong>Erste Aufnahme</strong></li>
+<li>Kein Overlay (kein vorheriges Bild vorhanden)</li>
+<li>
+<p>Bild wird als Referenz gespeichert</p>
+</li>
+<li>
+<p><strong>Zweite Aufnahme</strong></p>
+</li>
+<li>Overlay zeigt automatisch die erste Aufnahme</li>
+<li>
+<p>Langfristige Vergleichbarkeit gewährleistet</p>
+</li>
+<li>
+<p><strong>Weitere Aufnahmen</strong></p>
+</li>
+<li>Overlay zeigt weiterhin die erste Aufnahme</li>
+<li>Konsistente Referenz über die Zeit</li>
+</ol>
+<h3 id="manuelle-referenzbild-auswahl">Manuelle Referenzbild-Auswahl</h3>
+<h4 id="option-1-aus-overlay-einstellungen">Option 1: Aus Overlay-Einstellungen</h4>
+<ol>
+<li><strong>Leberfleck-Detailansicht öffnen</strong></li>
+<li><strong>Sektion "Overlay-Einstellungen" finden</strong></li>
+<li><strong>"Referenzbild ändern" antippen</strong></li>
+<li><strong>Gewünschtes Bild auswählen</strong></li>
+<li>Liste zeigt alle Bilder chronologisch (älteste zuerst)</li>
+<li>Aktuelles Referenzbild ist mit Checkmark markiert</li>
+<li>"Erste Aufnahme (Standard)" ist gekennzeichnet</li>
+<li><strong>Bild antippen</strong> → Automatische Auswahl und Rückkehr</li>
+</ol>
+<h4 id="option-2-zurucksetzen-auf-standard">Option 2: Zurücksetzen auf Standard</h4>
+<ol>
+<li><strong>Overlay-Einstellungen öffnen</strong></li>
+<li><strong>"Zurücksetzen" Button antippen</strong></li>
+<li>Nur sichtbar wenn manuell geändert</li>
+<li>Setzt zurück auf ältestes Bild</li>
+</ol>
+<h3 id="visuelle-indikatoren">Visuelle Indikatoren</h3>
+<p><strong>Im Bilder-Grid:</strong>
+- ⭐ <strong>Gelber Stern</strong> oben links = Aktuelles Referenzbild
+- Alle anderen Bilder ohne Stern</p>
+<p><strong>In Overlay-Einstellungen:</strong>
+- 📷 <strong>Thumbnail</strong> des aktuellen Referenzbilds
+- 📅 <strong>Datum</strong> der Aufnahme
+- 🔄 <strong>"Zurücksetzen"</strong> Button (wenn manuell geändert)</p>
+<p><strong>In Auswahl-View:</strong>
+- ✅ <strong>Checkmark</strong> beim aktuellen Referenzbild
+- 🏷️ <strong>"Erste Aufnahme (Standard)"</strong> Label
+- 📐 <strong>Auflösung</strong> jedes Bildes</p>
+<h2 id="anwendungsfalle">Anwendungsfälle</h2>
+<h3 id="use-case-1-langfristige-verlaufskontrolle">Use Case 1: Langfristige Verlaufskontrolle</h3>
+<p><strong>Szenario:</strong> Leberfleck über Jahre beobachten</p>
+<p><strong>Lösung:</strong>
+- Standard-Verhalten nutzen (erste Aufnahme)
+- Alle Folgeaufnahmen vergleichen mit Ausgangszustand
+- Langfristige Veränderungen erkennbar</p>
+<h3 id="use-case-2-kurzfristige-veranderung-dokumentieren">Use Case 2: Kurzfristige Veränderung dokumentieren</h3>
+<p><strong>Szenario:</strong> Leberfleck hat sich verändert, neue Baseline setzen</p>
+<p><strong>Lösung:</strong>
+1. Aktuelles Bild als neues Referenzbild wählen
+2. Zukünftige Aufnahmen vergleichen mit neuem Zustand
+3. Bei Bedarf zurück zur ersten Aufnahme wechseln</p>
+<h3 id="use-case-3-beste-aufnahme-als-referenz">Use Case 3: Beste Aufnahme als Referenz</h3>
+<p><strong>Szenario:</strong> Eine Aufnahme ist besonders gut (Beleuchtung, Schärfe)</p>
+<p><strong>Lösung:</strong>
+1. Beste Aufnahme als Referenzbild auswählen
+2. Alle Folgeaufnahmen orientieren sich daran
+3. Konsistente Qualität der Aufnahmen</p>
+<h3 id="use-case-4-vergleich-mit-spezifischem-zeitpunkt">Use Case 4: Vergleich mit spezifischem Zeitpunkt</h3>
+<p><strong>Szenario:</strong> Vergleich mit Zustand vor 6 Monaten</p>
+<p><strong>Lösung:</strong>
+1. Bild von vor 6 Monaten als Referenz wählen
+2. Neue Aufnahme mit Overlay machen
+3. Direkte Vergleichbarkeit mit gewünschtem Zeitpunkt</p>
+<h2 id="vorteile">Vorteile</h2>
+<h3 id="fur-benutzer">Für Benutzer</h3>
+<p>✅ <strong>Flexibilität</strong> - Freie Wahl des Referenzbilds
+✅ <strong>Langfristige Vergleichbarkeit</strong> - Standard auf erste Aufnahme
+✅ <strong>Einfache Bedienung</strong> - Ein Tap zur Auswahl
+✅ <strong>Visuelle Klarheit</strong> - Stern-Indikator zeigt Referenz
+✅ <strong>Reversibilität</strong> - Zurücksetzen jederzeit möglich</p>
+<h3 id="fur-medizinische-dokumentation">Für medizinische Dokumentation</h3>
+<p>✅ <strong>Standardisierung</strong> - Konsistente Referenz über Zeit
+✅ <strong>Flexibilität</strong> - Anpassung bei Veränderungen
+✅ <strong>Nachvollziehbarkeit</strong> - Referenzbild ist dokumentiert
+✅ <strong>Qualitätssicherung</strong> - Beste Aufnahme als Referenz wählbar</p>
+<h2 id="technische-details">Technische Details</h2>
+<h3 id="datenpersistenz">Datenpersistenz</h3>
+<ul>
+<li><strong>SwiftData</strong>: Automatische Speicherung der <code>referenceImageID</code></li>
+<li><strong>iCloud Sync</strong>: Referenzbild-Auswahl wird synchronisiert</li>
+<li><strong>Cascade Delete</strong>: Bei Löschen des Referenzbilds → Automatisch auf Standard zurück</li>
+</ul>
+<h3 id="performance">Performance</h3>
+<ul>
+<li><strong>Lazy Loading</strong>: Nur Thumbnail in Liste geladen</li>
+<li><strong>Efficient Sorting</strong>: Sortierung nur bei Bedarf</li>
+<li><strong>Minimal Updates</strong>: Nur bei Änderung der Auswahl</li>
+</ul>
+<h3 id="edge-cases">Edge Cases</h3>
+<p><strong>Fall 1: Referenzbild wird gelöscht</strong></p>
+<pre><code class="language-swift">var referenceImage: MoleImage? {
+    if let refID = referenceImageID,
+       let image = images.first(where: { $0.id == refID }) {
+        return image  // Gefunden
+    }
+    // Nicht gefunden → Fallback auf ältestes
+    return images.sorted(by: { $0.captureDate &lt; $1.captureDate }).first
+}
+</code></pre>
+<p><strong>Fall 2: Alle Bilder gelöscht</strong>
+- <code>referenceImage</code> gibt <code>nil</code> zurück
+- CameraView zeigt kein Overlay
+- Nächste Aufnahme wird neue Referenz</p>
+<p><strong>Fall 3: Nur ein Bild vorhanden</strong>
+- "Referenzbild ändern" Link nicht sichtbar
+- Einziges Bild ist automatisch Referenz
+- Kein Zurücksetzen-Button nötig</p>
+<h2 id="migration">Migration</h2>
+<h3 id="bestehende-daten">Bestehende Daten</h3>
+<ul>
+<li><strong>Alte Leberflecke</strong>: <code>referenceImageID</code> ist <code>nil</code></li>
+<li><strong>Verhalten</strong>: Automatisch ältestes Bild als Referenz</li>
+<li><strong>Keine Aktion nötig</strong>: Nahtlose Migration</li>
+</ul>
+<h3 id="swiftdata-schema">SwiftData Schema</h3>
+<pre><code class="language-swift">// Neue Property ist optional
+var referenceImageID: UUID?
+
+// Kein Migrations-Code nötig
+// SwiftData handhabt automatisch
+</code></pre>
+<h2 id="zukunftige-erweiterungen">Zukünftige Erweiterungen</h2>
+<h3 id="phase-2-erweiterte-features">Phase 2: Erweiterte Features</h3>
+<ul>
+<li>[ ] <strong>Mehrere Referenzbilder</strong>: Verschiedene Referenzen für verschiedene Zwecke</li>
+<li>[ ] <strong>Referenz-Tags</strong>: "Baseline", "Beste Qualität", "Vor Behandlung"</li>
+<li>[ ] <strong>Automatische Auswahl</strong>: KI wählt beste Referenz basierend auf Qualität</li>
+<li>[ ] <strong>Referenz-Historie</strong>: Verlauf der Referenzbild-Änderungen</li>
+</ul>
+<h3 id="phase-3-intelligente-assistenz">Phase 3: Intelligente Assistenz</h3>
+<ul>
+<li>[ ] <strong>Qualitäts-Score</strong>: Bewertung jedes Bildes als Referenz</li>
+<li>[ ] <strong>Empfehlungen</strong>: "Dieses Bild eignet sich besser als Referenz"</li>
+<li>[ ] <strong>Vergleichbarkeits-Analyse</strong>: Wie gut passt neue Aufnahme zur Referenz</li>
+<li>[ ] <strong>Automatische Anpassung</strong>: Referenz wechselt bei signifikanten Änderungen</li>
+</ul>
+<h2 id="best-practices">Best Practices</h2>
+<h3 id="empfehlungen-fur-benutzer">Empfehlungen für Benutzer</h3>
+<p><strong>Wann erste Aufnahme als Referenz nutzen:</strong>
+✅ Langfristige Verlaufskontrolle (Jahre)
+✅ Dokumentation von Ausgangszustand
+✅ Standardfall für die meisten Leberflecke</p>
+<p><strong>Wann Referenz ändern:</strong>
+✅ Leberfleck hat sich deutlich verändert
+✅ Bessere Aufnahme verfügbar (Qualität)
+✅ Spezifischer Vergleichszeitpunkt gewünscht
+✅ Nach medizinischer Behandlung (neue Baseline)</p>
+<p><strong>Wann zurücksetzen:</strong>
+✅ Zurück zur langfristigen Vergleichbarkeit
+✅ Nach Experiment mit verschiedenen Referenzen
+✅ Bei Unsicherheit → Standard ist sicher</p>
+<h2 id="datum">Datum</h2>
+<p>Implementiert: 11. Januar 2026</p>
+<h2 id="dateien">Dateien</h2>
+<ul>
+<li><code>Nevus/Models/Mole.swift</code> - Datenmodell mit Referenzbild-Logik</li>
+<li><code>Nevus/Views/MoleDetailView.swift</code> - UI für Auswahl und Anzeige</li>
+<li><code>Nevus/Views/CameraView.swift</code> - Overlay-Integration</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Bilder Löschen Feature - Nevus App</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Nevus App</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../ARCHITECTURE/" class="nav-link">Nevus - iOS App Architektur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IMPLEMENTATION_SUMMARY/" class="nav-link">Nevus - Vollständige Implementierungszusammenfassung</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../INTERNATIONALIZATION/" class="nav-link">Internationalisierung / Internationalization</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IPAD_COMPATIBILITY/" class="nav-link">iPad Compatibility Implementation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../TECHNICAL_SPECIFICATIONS/" class="nav-link">Nevus - Technische Spezifikationen</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Features</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FEATURE/" class="dropdown-item">AirDrop Sync Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FIXES/" class="dropdown-item">AirDrop Sync - File Access Fixes</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_IMPLEMENTATION_COMPLETE/" class="dropdown-item">AirDrop Sync Feature - Complete Implementation Summary</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_SETUP/" class="dropdown-item">AirDrop Sync Feature - Setup Instructions</a>
+</li>
+                                    
+<li>
+    <a href="../ALL_REGIONS_OVERVIEW_FEATURE/" class="dropdown-item">All Regions Overview Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AUTO_DELETE_SYNC_FILES/" class="dropdown-item">Automatic Sync File Deletion Feature</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Bilder Löschen Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_COMPARISON_FEATURE/" class="dropdown-item">Guided Comparison Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_SCANNING_FEATURE/" class="dropdown-item">Guided Scanning Feature</a>
+</li>
+                                    
+<li>
+    <a href="../IMAGE_EXPORT_FEATURE/" class="dropdown-item">Einzelbild-Export Funktion</a>
+</li>
+                                    
+<li>
+    <a href="../MOLE_LOCATION_FEATURE/" class="dropdown-item">Mole Location on Overview Images Feature</a>
+</li>
+                                    
+<li>
+    <a href="../MONTHLY_REMINDER_FEATURE/" class="dropdown-item">Monthly Reminder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_CONTROLS/" class="dropdown-item">Overlay-Steuerelemente - Benutzerführung</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_MODE_FEATURE/" class="dropdown-item">Overlay-Modus für verbesserte Vergleichbarkeit</a>
+</li>
+                                    
+<li>
+    <a href="../PERFORMANCE_DEBUG/" class="dropdown-item">Performance Debugging Guide</a>
+</li>
+                                    
+<li>
+    <a href="../REFERENCE_IMAGE_SELECTION/" class="dropdown-item">Referenzbild-Auswahl für Overlay-Modus</a>
+</li>
+                                    
+<li>
+    <a href="../REGION_OVERVIEW_FEATURE/" class="dropdown-item">Körperregion-Übersichtsbilder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../SESSION_CLEANUP_FEATURE/" class="dropdown-item">Session Cleanup Feature - Implementation Summary</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../AUTO_DELETE_SYNC_FILES/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../GUIDED_COMPARISON_FEATURE/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#bilder-loschen-feature" class="nav-link">Bilder Löschen Feature</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#ubersicht" class="nav-link">Übersicht</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#implementierung" class="nav-link">Implementierung</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#benutzerfuhrung" class="nav-link">Benutzerführung</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#ui-komponenten" class="nav-link">UI-Komponenten</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#technische-details" class="nav-link">Technische Details</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#sicherheitsmerkmale" class="nav-link">Sicherheitsmerkmale</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#unterschiede-zwischen-losch-methoden" class="nav-link">Unterschiede zwischen Lösch-Methoden</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#vorteile" class="nav-link">Vorteile</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#zukunftige-erweiterungen" class="nav-link">Zukünftige Erweiterungen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#datum" class="nav-link">Datum</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="bilder-loschen-feature">Bilder Löschen Feature</h1>
+<h2 id="ubersicht">Übersicht</h2>
+<p>Benutzer können jetzt sowohl Leberfleck-Detailbilder als auch Übersichtsbilder mit einem Bestätigungsdialog löschen.</p>
+<h2 id="implementierung">Implementierung</h2>
+<h3 id="1-leberfleck-detailbilder-moleimage">1. Leberfleck-Detailbilder (MoleImage)</h3>
+<p><strong>Datei:</strong> <code>Nevus/Views/MoleDetailView.swift</code> - <code>ImageDetailView</code></p>
+<p><strong>UI-Änderungen:</strong>
+- Toolbar-Button wurde von einzelnem Share-Button zu <strong>Menü</strong> geändert
+- Menü enthält:
+  - "Teilen" (mit Share-Icon)
+  - "Löschen" (mit Trash-Icon, destructive role)</p>
+<p><strong>Bestätigungsdialog:</strong></p>
+<pre><code class="language-swift">.alert(&quot;Bild löschen?&quot;, isPresented: $showingDeleteConfirmation) {
+    Button(&quot;Abbrechen&quot;, role: .cancel) { }
+    Button(&quot;Löschen&quot;, role: .destructive) {
+        deleteImage()
+    }
+} message: {
+    Text(&quot;Möchten Sie dieses Bild wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.&quot;)
+}
+</code></pre>
+<p><strong>Lösch-Funktion:</strong></p>
+<pre><code class="language-swift">private func deleteImage() {
+    if let mole = image.mole {
+        mole.updateModifiedDate()  // Update parent mole timestamp
+    }
+    modelContext.delete(image)
+    dismiss()  // Close detail view
+}
+</code></pre>
+<h3 id="2-ubersichtsbilder-bodyregionoverview">2. Übersichtsbilder (BodyRegionOverview)</h3>
+<p><strong>Datei:</strong> <code>Nevus/Views/RegionOverviewView.swift</code> - <code>OverviewImageDetailView</code></p>
+<p><strong>UI-Änderungen:</strong>
+- "Bearbeiten"/"Fertig" Button wurde in <strong>Menü</strong> integriert
+- Menü enthält:
+  - "Bearbeiten"/"Fertig" (für Notizen)
+  - "Löschen" (mit Trash-Icon, destructive role)</p>
+<p><strong>Bestätigungsdialog:</strong></p>
+<pre><code class="language-swift">.alert(&quot;Übersichtsbild löschen?&quot;, isPresented: $showingDeleteConfirmation) {
+    Button(&quot;Abbrechen&quot;, role: .cancel) { }
+    Button(&quot;Löschen&quot;, role: .destructive) {
+        deleteOverview()
+    }
+} message: {
+    Text(&quot;Möchten Sie dieses Übersichtsbild wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.&quot;)
+}
+</code></pre>
+<p><strong>Lösch-Funktion:</strong></p>
+<pre><code class="language-swift">private func deleteOverview() {
+    modelContext.delete(overview)
+    dismiss()  // Close detail view
+}
+</code></pre>
+<h2 id="benutzerfuhrung">Benutzerführung</h2>
+<h3 id="leberfleck-detailbild-loschen">Leberfleck-Detailbild löschen:</h3>
+<ol>
+<li><strong>Bild öffnen</strong></li>
+<li>
+<p>Leberfleck-Detailansicht → Bild antippen</p>
+</li>
+<li>
+<p><strong>Menü öffnen</strong></p>
+</li>
+<li>
+<p>Drei-Punkte-Icon (⋯) oben rechts antippen</p>
+</li>
+<li>
+<p><strong>Löschen wählen</strong></p>
+</li>
+<li>
+<p>"Löschen" Option antippen (rot markiert)</p>
+</li>
+<li>
+<p><strong>Bestätigen</strong></p>
+</li>
+<li>Bestätigungsdialog erscheint</li>
+<li>"Löschen" antippen zum Bestätigen</li>
+<li>
+<p>"Abbrechen" zum Abbrechen</p>
+</li>
+<li>
+<p><strong>Ergebnis</strong></p>
+</li>
+<li>Bild wird gelöscht</li>
+<li>Detailansicht schließt sich automatisch</li>
+<li>Leberfleck-Änderungsdatum wird aktualisiert</li>
+</ol>
+<h3 id="ubersichtsbild-loschen">Übersichtsbild löschen:</h3>
+<p><strong>Option 1: Aus Detailansicht</strong></p>
+<ol>
+<li><strong>Bild öffnen</strong></li>
+<li>
+<p>Übersichtsbild antippen</p>
+</li>
+<li>
+<p><strong>Menü öffnen</strong></p>
+</li>
+<li>
+<p>Drei-Punkte-Icon (⋯) oben rechts antippen</p>
+</li>
+<li>
+<p><strong>Löschen wählen</strong></p>
+</li>
+<li>
+<p>"Löschen" Option antippen (rot markiert)</p>
+</li>
+<li>
+<p><strong>Bestätigen</strong></p>
+</li>
+<li>Bestätigungsdialog erscheint</li>
+<li>
+<p>"Löschen" antippen zum Bestätigen</p>
+</li>
+<li>
+<p><strong>Ergebnis</strong></p>
+</li>
+<li>Bild wird gelöscht</li>
+<li>Detailansicht schließt sich automatisch</li>
+</ol>
+<p><strong>Option 2: Aus Grid-Ansicht (bereits vorhanden)</strong></p>
+<ol>
+<li><strong>Long-Press</strong> auf Thumbnail</li>
+<li><strong>Context-Menü</strong> erscheint</li>
+<li><strong>"Löschen"</strong> wählen</li>
+<li>Sofortiges Löschen ohne zusätzlichen Dialog</li>
+</ol>
+<h2 id="ui-komponenten">UI-Komponenten</h2>
+<h3 id="menu-button">Menü-Button</h3>
+<pre><code class="language-swift">Menu {
+    // Aktionen
+} label: {
+    Image(systemName: &quot;ellipsis.circle&quot;)
+}
+</code></pre>
+<h3 id="alert-dialog">Alert-Dialog</h3>
+<ul>
+<li><strong>Titel</strong>: "Bild löschen?" / "Übersichtsbild löschen?"</li>
+<li><strong>Nachricht</strong>: Warnung über Unwiderruflichkeit</li>
+<li><strong>Buttons</strong>:</li>
+<li>"Abbrechen" (cancel role)</li>
+<li>"Löschen" (destructive role, rot)</li>
+</ul>
+<h2 id="technische-details">Technische Details</h2>
+<h3 id="state-variablen">State-Variablen</h3>
+<pre><code class="language-swift">@State private var showingDeleteConfirmation = false
+</code></pre>
+<h3 id="environment-variablen">Environment-Variablen</h3>
+<pre><code class="language-swift">@Environment(\.modelContext) private var modelContext
+@Environment(\.dismiss) private var dismiss
+</code></pre>
+<h3 id="swiftdata-cascade-delete">SwiftData Cascade Delete</h3>
+<ul>
+<li>Leberfleck-Bilder: Automatisch gelöscht wenn Leberfleck gelöscht wird</li>
+<li>Übersichtsbilder: Unabhängig, müssen einzeln gelöscht werden</li>
+</ul>
+<h2 id="sicherheitsmerkmale">Sicherheitsmerkmale</h2>
+<h3 id="bestatigungsdialog">Bestätigungsdialog</h3>
+<p>✅ <strong>Verhindert versehentliches Löschen</strong>
+- Klare Warnung über Unwiderruflichkeit
+- Zwei-Schritt-Prozess (Menü → Bestätigung)
+- Destructive role (rote Farbe) für Löschen-Button</p>
+<h3 id="automatisches-schlieen">Automatisches Schließen</h3>
+<p>✅ <strong>Verhindert Fehler</strong>
+- View schließt sich nach Löschen automatisch
+- Keine "leere" Detailansicht
+- Zurück zur vorherigen Ansicht</p>
+<h3 id="timestamp-update">Timestamp-Update</h3>
+<p>✅ <strong>Konsistenz</strong>
+- Leberfleck-Änderungsdatum wird aktualisiert
+- Sortierung bleibt korrekt
+- Änderungen sind nachvollziehbar</p>
+<h2 id="unterschiede-zwischen-losch-methoden">Unterschiede zwischen Lösch-Methoden</h2>
+<h3 id="context-menu-grid-ansicht">Context-Menü (Grid-Ansicht)</h3>
+<ul>
+<li><strong>Zugriff</strong>: Long-Press auf Thumbnail</li>
+<li><strong>Bestätigung</strong>: Keine</li>
+<li><strong>Verwendung</strong>: Schnelles Löschen mehrerer Bilder</li>
+<li><strong>Verfügbar für</strong>: Nur Übersichtsbilder</li>
+</ul>
+<h3 id="menu-alert-detailansicht">Menü + Alert (Detailansicht)</h3>
+<ul>
+<li><strong>Zugriff</strong>: Drei-Punkte-Menü</li>
+<li><strong>Bestätigung</strong>: Ja (Alert-Dialog)</li>
+<li><strong>Verwendung</strong>: Sicheres Löschen einzelner Bilder</li>
+<li><strong>Verfügbar für</strong>: Beide Bildtypen</li>
+</ul>
+<h2 id="vorteile">Vorteile</h2>
+<h3 id="fur-benutzer">Für Benutzer</h3>
+<p>✅ <strong>Sicherheit</strong> - Bestätigungsdialog verhindert Fehler
+✅ <strong>Flexibilität</strong> - Zwei Lösch-Methoden je nach Kontext
+✅ <strong>Klarheit</strong> - Deutliche Warnung über Konsequenzen
+✅ <strong>Konsistenz</strong> - Gleiche UI-Patterns in beiden Views</p>
+<h3 id="fur-entwickler">Für Entwickler</h3>
+<p>✅ <strong>SwiftData Integration</strong> - Automatische Cascade Deletes
+✅ <strong>Clean Code</strong> - Separate Lösch-Funktionen
+✅ <strong>Error Handling</strong> - Dismiss nach Löschen
+✅ <strong>Maintainability</strong> - Konsistente Implementierung</p>
+<h2 id="zukunftige-erweiterungen">Zukünftige Erweiterungen</h2>
+<h3 id="mogliche-features">Mögliche Features</h3>
+<ul>
+<li>[ ] Undo-Funktion (Rückgängig machen)</li>
+<li>[ ] Papierkorb mit zeitlich begrenzter Wiederherstellung</li>
+<li>[ ] Batch-Delete (mehrere Bilder gleichzeitig)</li>
+<li>[ ] Export vor Löschen (automatisches Backup)</li>
+<li>[ ] Lösch-Statistiken (gelöschte Bilder zählen)</li>
+</ul>
+<h2 id="datum">Datum</h2>
+<p>Implementiert: 11. Januar 2026</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Körperregion-Übersichtsbilder Feature - Nevus App</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Nevus App</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../ARCHITECTURE/" class="nav-link">Nevus - iOS App Architektur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IMPLEMENTATION_SUMMARY/" class="nav-link">Nevus - Vollständige Implementierungszusammenfassung</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../INTERNATIONALIZATION/" class="nav-link">Internationalisierung / Internationalization</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IPAD_COMPATIBILITY/" class="nav-link">iPad Compatibility Implementation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../TECHNICAL_SPECIFICATIONS/" class="nav-link">Nevus - Technische Spezifikationen</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Features</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FEATURE/" class="dropdown-item">AirDrop Sync Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FIXES/" class="dropdown-item">AirDrop Sync - File Access Fixes</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_IMPLEMENTATION_COMPLETE/" class="dropdown-item">AirDrop Sync Feature - Complete Implementation Summary</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_SETUP/" class="dropdown-item">AirDrop Sync Feature - Setup Instructions</a>
+</li>
+                                    
+<li>
+    <a href="../ALL_REGIONS_OVERVIEW_FEATURE/" class="dropdown-item">All Regions Overview Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AUTO_DELETE_SYNC_FILES/" class="dropdown-item">Automatic Sync File Deletion Feature</a>
+</li>
+                                    
+<li>
+    <a href="../DELETE_IMAGES_FEATURE/" class="dropdown-item">Bilder Löschen Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_COMPARISON_FEATURE/" class="dropdown-item">Guided Comparison Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_SCANNING_FEATURE/" class="dropdown-item">Guided Scanning Feature</a>
+</li>
+                                    
+<li>
+    <a href="../IMAGE_EXPORT_FEATURE/" class="dropdown-item">Einzelbild-Export Funktion</a>
+</li>
+                                    
+<li>
+    <a href="../MOLE_LOCATION_FEATURE/" class="dropdown-item">Mole Location on Overview Images Feature</a>
+</li>
+                                    
+<li>
+    <a href="../MONTHLY_REMINDER_FEATURE/" class="dropdown-item">Monthly Reminder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_CONTROLS/" class="dropdown-item">Overlay-Steuerelemente - Benutzerführung</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_MODE_FEATURE/" class="dropdown-item">Overlay-Modus für verbesserte Vergleichbarkeit</a>
+</li>
+                                    
+<li>
+    <a href="../PERFORMANCE_DEBUG/" class="dropdown-item">Performance Debugging Guide</a>
+</li>
+                                    
+<li>
+    <a href="../REFERENCE_IMAGE_SELECTION/" class="dropdown-item">Referenzbild-Auswahl für Overlay-Modus</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Körperregion-Übersichtsbilder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../SESSION_CLEANUP_FEATURE/" class="dropdown-item">Session Cleanup Feature - Implementation Summary</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../REFERENCE_IMAGE_SELECTION/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../SESSION_CLEANUP_FEATURE/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#korperregion-ubersichtsbilder-feature" class="nav-link">Körperregion-Übersichtsbilder Feature</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#ubersicht" class="nav-link">Übersicht</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#implementierung" class="nav-link">Implementierung</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#benutzerfuhrung" class="nav-link">Benutzerführung</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#technische-details" class="nav-link">Technische Details</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#uiux-design" class="nav-link">UI/UX Design</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#anwendungsfalle" class="nav-link">Anwendungsfälle</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#vorteile" class="nav-link">Vorteile</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#datenschutz" class="nav-link">Datenschutz</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#zukunftige-erweiterungen" class="nav-link">Zukünftige Erweiterungen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#datum" class="nav-link">Datum</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="korperregion-ubersichtsbilder-feature">Körperregion-Übersichtsbilder Feature</h1>
+<h2 id="ubersicht">Übersicht</h2>
+<p>Die App unterstützt jetzt Übersichtsbilder für jede Körperregion, in denen alle Leberflecke der Region gleichzeitig sichtbar sind. Dies ermöglicht eine bessere Gesamtübersicht und erleichtert das Auffinden von Veränderungen.</p>
+<h2 id="implementierung">Implementierung</h2>
+<h3 id="1-datenmodell-bodyregionoverview">1. Datenmodell: BodyRegionOverview</h3>
+<p><strong>Datei:</strong> <code>Nevus/Models/BodyRegionOverview.swift</code></p>
+<p><strong>Eigenschaften:</strong>
+- <code>id: UUID</code> - Eindeutige ID
+- <code>bodyRegion: String</code> - Körperregion (z.B. "Kopf", "Arme/Hände")
+- <code>captureDate: Date</code> - Aufnahmedatum
+- <code>notes: String</code> - Bearbeitbare Notizen
+- <code>imageData: Data?</code> - Bilddaten (external storage)
+- Sensordaten: <code>pitch</code>, <code>roll</code>, <code>yaw</code>, <code>barometricPressure</code>, <code>altitude</code></p>
+<p><strong>Methoden:</strong>
+- <code>init(bodyRegion:image:)</code> - Erstellt Übersichtsbild mit UIImage
+- <code>uiImage</code> - Gibt UIImage zurück
+- <code>thumbnailImage</code> - Gibt Thumbnail (200x200) zurück
+- <code>updateSensorData(...)</code> - Aktualisiert Sensordaten</p>
+<h3 id="2-view-regionoverviewview">2. View: RegionOverviewView</h3>
+<p><strong>Datei:</strong> <code>Nevus/Views/RegionOverviewView.swift</code></p>
+<p><strong>Funktionen:</strong>
+- Zeigt alle Übersichtsbilder einer Körperregion
+- Grid-Layout mit 2 Spalten
+- Kamera-Button zum Aufnehmen neuer Übersichtsbilder
+- Tap auf Bild öffnet Detailansicht
+- Context-Menü zum Löschen
+- Empty State wenn keine Bilder vorhanden</p>
+<p><strong>Query-Filter:</strong></p>
+<pre><code class="language-swift">Query(
+    filter: #Predicate&lt;BodyRegionOverview&gt; { overview in
+        overview.bodyRegion == regionName
+    },
+    sort: \BodyRegionOverview.captureDate,
+    order: .reverse
+)
+</code></pre>
+<h3 id="3-detail-view-overviewimagedetailview">3. Detail View: OverviewImageDetailView</h3>
+<p><strong>Funktionen:</strong>
+- Vollbild-Ansicht mit Zoom (Pinch-Gesture)
+- Anzeige von Aufnahmedatum
+- Bearbeitbare Notizen
+- "Bearbeiten"/"Fertig" Button in Toolbar</p>
+<h3 id="4-integration-in-contentview">4. Integration in ContentView</h3>
+<p><strong>Änderungen:</strong>
+- Jede Körperregion-Sektion hat jetzt einen "Übersichtsbilder" Button
+- Button mit Icon <code>photo.on.rectangle.angled</code>
+- NavigationLink zu <code>RegionOverviewView</code>
+- Erscheint über den individuellen Leberflecken</p>
+<h2 id="benutzerfuhrung">Benutzerführung</h2>
+<h3 id="ubersichtsbilder-aufnehmen">Übersichtsbilder aufnehmen</h3>
+<ol>
+<li><strong>Hauptansicht öffnen</strong></li>
+<li>
+<p>App starten → Liste der Körperregionen</p>
+</li>
+<li>
+<p><strong>Region auswählen</strong></p>
+</li>
+<li>
+<p>Auf "Übersichtsbilder" Button in gewünschter Region tippen</p>
+</li>
+<li>
+<p><strong>Foto aufnehmen</strong></p>
+</li>
+<li>Kamera-Symbol (oben rechts) antippen</li>
+<li>Körperregion so fotografieren, dass alle Leberflecke sichtbar sind</li>
+<li>
+<p>Foto wird automatisch gespeichert</p>
+</li>
+<li>
+<p><strong>Notizen hinzufügen (optional)</strong></p>
+</li>
+<li>Auf Übersichtsbild tippen</li>
+<li>"Bearbeiten" antippen</li>
+<li>Notizen eingeben</li>
+<li>"Fertig" antippen</li>
+</ol>
+<h3 id="ubersichtsbilder-verwalten">Übersichtsbilder verwalten</h3>
+<p><strong>Ansehen:</strong>
+- Tap auf Thumbnail öffnet Vollbild-Ansicht
+- Pinch-to-Zoom für Details</p>
+<p><strong>Löschen:</strong>
+- Long-Press auf Thumbnail
+- "Löschen" im Context-Menü wählen</p>
+<p><strong>Sortierung:</strong>
+- Neueste Bilder zuerst
+- Chronologische Reihenfolge</p>
+<h2 id="technische-details">Technische Details</h2>
+<h3 id="datenspeicherung">Datenspeicherung</h3>
+<ul>
+<li><strong>SwiftData Model</strong> mit <code>@Model</code> Annotation</li>
+<li><strong>External Storage</strong> für Bilddaten (<code>@Attribute(.externalStorage)</code>)</li>
+<li><strong>Automatisches iCloud Backup</strong> (wenn aktiviert)</li>
+<li><strong>JPEG Kompression</strong> mit 80% Qualität</li>
+</ul>
+<h3 id="sensordaten">Sensordaten</h3>
+<ul>
+<li>Automatische Erfassung beim Fotografieren</li>
+<li>Pitch, Roll, Yaw von Geräteneigung</li>
+<li>Barometrischer Druck (optional)</li>
+<li>Höhe über Meeresspiegel (optional)</li>
+<li>Daten von <code>CameraService.shared</code></li>
+</ul>
+<h3 id="performance">Performance</h3>
+<ul>
+<li><strong>Thumbnails</strong> (200x200) für Grid-Ansicht</li>
+<li><strong>Lazy Loading</strong> mit LazyVGrid</li>
+<li><strong>Async Image Processing</strong> für responsive UI</li>
+</ul>
+<h2 id="uiux-design">UI/UX Design</h2>
+<h3 id="grid-layout">Grid-Layout</h3>
+<pre><code class="language-swift">LazyVGrid(columns: [
+    GridItem(.flexible(), spacing: 12),
+    GridItem(.flexible(), spacing: 12)
+], spacing: 12)
+</code></pre>
+<h3 id="empty-state">Empty State</h3>
+<ul>
+<li>Icon: <code>photo.on.rectangle.angled</code> (60pt)</li>
+<li>Titel: "Keine Übersichtsbilder"</li>
+<li>Beschreibung: Anleitung zum Aufnehmen</li>
+<li>Padding: 40pt vertikal</li>
+</ul>
+<h3 id="farben">Farben</h3>
+<ul>
+<li>Accent Color für "Übersichtsbilder" Button</li>
+<li>System Gray für Platzhalter</li>
+<li>Ultra Thin Material für Info-Bereiche</li>
+</ul>
+<h2 id="anwendungsfalle">Anwendungsfälle</h2>
+<h3 id="1-erstdokumentation">1. Erstdokumentation</h3>
+<ul>
+<li>Übersichtsbild jeder Körperregion aufnehmen</li>
+<li>Alle Leberflecke auf einen Blick</li>
+<li>Referenz für zukünftige Vergleiche</li>
+</ul>
+<h3 id="2-regelmaige-kontrolle">2. Regelmäßige Kontrolle</h3>
+<ul>
+<li>Neue Übersichtsbilder in regelmäßigen Abständen</li>
+<li>Vergleich mit früheren Aufnahmen</li>
+<li>Erkennung neuer Leberflecke</li>
+</ul>
+<h3 id="3-arztbesuch">3. Arztbesuch</h3>
+<ul>
+<li>Übersichtsbilder zeigen Gesamtsituation</li>
+<li>Einzelne Leberflecke können dann detailliert betrachtet werden</li>
+<li>Vollständige Dokumentation</li>
+</ul>
+<h3 id="4-selbstuntersuchung">4. Selbstuntersuchung</h3>
+<ul>
+<li>Systematische Kontrolle aller Körperregionen</li>
+<li>Notizen zu Auffälligkeiten</li>
+<li>Zeitliche Entwicklung nachvollziehbar</li>
+</ul>
+<h2 id="vorteile">Vorteile</h2>
+<h3 id="fur-benutzer">Für Benutzer</h3>
+<p>✅ <strong>Gesamtübersicht</strong> - Alle Leberflecke einer Region auf einen Blick
+✅ <strong>Einfache Navigation</strong> - Direkt von Hauptansicht erreichbar
+✅ <strong>Zeitersparnis</strong> - Schneller Überblick ohne einzelne Leberflecke öffnen
+✅ <strong>Vergleichbarkeit</strong> - Mehrere Übersichtsbilder über Zeit
+✅ <strong>Flexibilität</strong> - Notizen für jedes Übersichtsbild</p>
+<h3 id="fur-arzte">Für Ärzte</h3>
+<p>✅ <strong>Kontext</strong> - Lage der Leberflecke im Gesamtbild
+✅ <strong>Vollständigkeit</strong> - Keine Leberflecke übersehen
+✅ <strong>Dokumentation</strong> - Professionelle Bilderfassung
+✅ <strong>Verlaufskontrolle</strong> - Entwicklung über Zeit</p>
+<h2 id="datenschutz">Datenschutz</h2>
+<ul>
+<li><strong>Lokale Speicherung</strong> - Alle Daten bleiben auf dem Gerät</li>
+<li><strong>iCloud Backup</strong> - Optional, vom Benutzer kontrolliert</li>
+<li><strong>Keine Cloud-Sync</strong> - Keine automatische Übertragung</li>
+<li><strong>Keine Metadaten</strong> - Keine GPS-Koordinaten in Bildern</li>
+</ul>
+<h2 id="zukunftige-erweiterungen">Zukünftige Erweiterungen</h2>
+<h3 id="mogliche-features">Mögliche Features</h3>
+<ul>
+<li>[ ] Automatische Leberfleck-Erkennung in Übersichtsbildern</li>
+<li>[ ] Markierung einzelner Leberflecke im Übersichtsbild</li>
+<li>[ ] Verknüpfung Übersichtsbild ↔ Einzelaufnahmen</li>
+<li>[ ] Side-by-Side Vergleich von Übersichtsbildern</li>
+<li>[ ] Export von Übersichtsbildern</li>
+<li>[ ] Annotationen/Zeichnungen auf Übersichtsbildern</li>
+</ul>
+<h2 id="datum">Datum</h2>
+<p>Implementiert: 11. Januar 2026</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

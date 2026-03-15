@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>All Regions Overview Feature - Nevus App</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Nevus App</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../ARCHITECTURE/" class="nav-link">Nevus - iOS App Architektur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IMPLEMENTATION_SUMMARY/" class="nav-link">Nevus - Vollständige Implementierungszusammenfassung</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../INTERNATIONALIZATION/" class="nav-link">Internationalisierung / Internationalization</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IPAD_COMPATIBILITY/" class="nav-link">iPad Compatibility Implementation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../TECHNICAL_SPECIFICATIONS/" class="nav-link">Nevus - Technische Spezifikationen</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Features</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FEATURE/" class="dropdown-item">AirDrop Sync Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FIXES/" class="dropdown-item">AirDrop Sync - File Access Fixes</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_IMPLEMENTATION_COMPLETE/" class="dropdown-item">AirDrop Sync Feature - Complete Implementation Summary</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_SETUP/" class="dropdown-item">AirDrop Sync Feature - Setup Instructions</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">All Regions Overview Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AUTO_DELETE_SYNC_FILES/" class="dropdown-item">Automatic Sync File Deletion Feature</a>
+</li>
+                                    
+<li>
+    <a href="../DELETE_IMAGES_FEATURE/" class="dropdown-item">Bilder Löschen Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_COMPARISON_FEATURE/" class="dropdown-item">Guided Comparison Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_SCANNING_FEATURE/" class="dropdown-item">Guided Scanning Feature</a>
+</li>
+                                    
+<li>
+    <a href="../IMAGE_EXPORT_FEATURE/" class="dropdown-item">Einzelbild-Export Funktion</a>
+</li>
+                                    
+<li>
+    <a href="../MOLE_LOCATION_FEATURE/" class="dropdown-item">Mole Location on Overview Images Feature</a>
+</li>
+                                    
+<li>
+    <a href="../MONTHLY_REMINDER_FEATURE/" class="dropdown-item">Monthly Reminder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_CONTROLS/" class="dropdown-item">Overlay-Steuerelemente - Benutzerführung</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_MODE_FEATURE/" class="dropdown-item">Overlay-Modus für verbesserte Vergleichbarkeit</a>
+</li>
+                                    
+<li>
+    <a href="../PERFORMANCE_DEBUG/" class="dropdown-item">Performance Debugging Guide</a>
+</li>
+                                    
+<li>
+    <a href="../REFERENCE_IMAGE_SELECTION/" class="dropdown-item">Referenzbild-Auswahl für Overlay-Modus</a>
+</li>
+                                    
+<li>
+    <a href="../REGION_OVERVIEW_FEATURE/" class="dropdown-item">Körperregion-Übersichtsbilder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../SESSION_CLEANUP_FEATURE/" class="dropdown-item">Session Cleanup Feature - Implementation Summary</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../AIRDROP_SYNC_SETUP/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../AUTO_DELETE_SYNC_FILES/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#all-regions-overview-feature" class="nav-link">All Regions Overview Feature</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#implementation-date" class="nav-link">Implementation Date</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#files-createdmodified" class="nav-link">Files Created/Modified</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#features" class="nav-link">Features</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#user-workflow" class="nav-link">User Workflow</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#technical-details" class="nav-link">Technical Details</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#benefits" class="nav-link">Benefits</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#future-enhancements" class="nav-link">Future Enhancements</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#testing-recommendations" class="nav-link">Testing Recommendations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#compatibility" class="nav-link">Compatibility</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="all-regions-overview-feature">All Regions Overview Feature</h1>
+<h2 id="overview">Overview</h2>
+<p>This feature provides a comprehensive view of all body regions with their associated overview images, even when no moles have been scanned yet. Users can manage overview images for each region directly from this centralized view.</p>
+<h2 id="implementation-date">Implementation Date</h2>
+<p>January 11, 2026</p>
+<h2 id="files-createdmodified">Files Created/Modified</h2>
+<h3 id="new-files">New Files</h3>
+<ol>
+<li><strong>Nevus/Views/AllRegionsOverviewView.swift</strong></li>
+<li>Main view displaying all body regions</li>
+<li>Shows overview images in a grid layout</li>
+<li>Provides navigation to individual region management</li>
+<li>Displays empty state for regions without overview images</li>
+</ol>
+<h3 id="modified-files">Modified Files</h3>
+<ol>
+<li><strong>Nevus/Views/ContentView.swift</strong></li>
+<li>Added menu item to access "All Regions Overview"</li>
+<li>Integrated navigation link in the toolbar menu</li>
+<li>
+<p>Updated menu structure to include the new view</p>
+</li>
+<li>
+<p><strong>Nevus/Nevus/Localizable.xcstrings</strong></p>
+</li>
+<li>
+<p>Added German and English translations for:</p>
+<ul>
+<li><code>all_regions_overview_title</code>: "Alle Körperregionen" / "All Body Regions"</li>
+<li><code>all_regions_overview_menu</code>: "Alle Körperregionen" / "All Body Regions"</li>
+<li><code>no_overview_images</code>: "Keine Übersichtsbilder" / "No Overview Images"</li>
+<li><code>tap_to_add_overview</code>: "Tippen, um Übersichtsbild hinzuzufügen" / "Tap to add overview image"</li>
+<li><code>overview_count</code>: "%lld Bilder" / "%lld images"</li>
+<li><code>action_manage</code>: "Verwalten" / "Manage"</li>
+<li><code>more_images</code>: "weitere" / "more"</li>
+<li><code>menu_label</code>: "Menü" / "Menu"</li>
+</ul>
+</li>
+<li>
+<p><strong>Nevus/Nevus.xcodeproj/project.pbxproj</strong></p>
+</li>
+<li>Added AllRegionsOverviewView.swift to build phases</li>
+<li>Added file references</li>
+<li>Updated Views group</li>
+</ol>
+<h2 id="features">Features</h2>
+<h3 id="1-complete-body-region-display">1. Complete Body Region Display</h3>
+<ul>
+<li>Shows all 12 body regions defined in the app</li>
+<li>Displays regions in the standard order (head to legs)</li>
+<li>Each region is shown regardless of whether moles have been scanned</li>
+</ul>
+<h3 id="2-overview-image-management">2. Overview Image Management</h3>
+<ul>
+<li><strong>Empty State</strong>: Regions without overview images show a prompt to add images</li>
+<li><strong>Image Grid</strong>: Regions with images display up to 6 thumbnails in a 3-column grid</li>
+<li><strong>More Indicator</strong>: Shows "+N more" button if more than 6 images exist</li>
+<li><strong>Quick Navigation</strong>: Tap any region to navigate to detailed management view</li>
+</ul>
+<h3 id="3-user-interface">3. User Interface</h3>
+<ul>
+<li>List-based layout with sections for each body region</li>
+<li>Localized region names (German/English)</li>
+<li>Image count display for regions with overview images</li>
+<li>"Manage" button for quick access to full region view</li>
+<li>Consistent with existing app design patterns</li>
+</ul>
+<h3 id="4-integration">4. Integration</h3>
+<ul>
+<li>Accessible from main menu (ellipsis icon in toolbar)</li>
+<li>Positioned at top of menu for easy access</li>
+<li>Works seamlessly with existing RegionOverviewView</li>
+</ul>
+<h2 id="user-workflow">User Workflow</h2>
+<h3 id="accessing-the-view">Accessing the View</h3>
+<ol>
+<li>Open the app</li>
+<li>Tap the menu icon (ellipsis) in the top-left toolbar</li>
+<li>Select "Alle Körperregionen" / "All Body Regions"</li>
+</ol>
+<h3 id="managing-overview-images">Managing Overview Images</h3>
+<ol>
+<li>From the All Regions view, tap any region</li>
+<li>This opens the RegionOverviewView for that specific region</li>
+<li>Use the camera button to add new overview images</li>
+<li>Long-press or use context menu to delete images</li>
+</ol>
+<h3 id="empty-state">Empty State</h3>
+<ul>
+<li>Regions without images show a clear call-to-action</li>
+<li>Tapping the empty state navigates to the region's management view</li>
+<li>Users can immediately start adding overview images</li>
+</ul>
+<h2 id="technical-details">Technical Details</h2>
+<h3 id="data-model">Data Model</h3>
+<ul>
+<li>Uses existing <code>BodyRegionOverview</code> model</li>
+<li>Queries all overview images from SwiftData</li>
+<li>Filters images by region using <code>legacyRawValue</code> for backward compatibility</li>
+</ul>
+<h3 id="performance">Performance</h3>
+<ul>
+<li>Efficient thumbnail generation using <code>thumbnailImage</code> property</li>
+<li>Lazy loading with <code>LazyVGrid</code> for smooth scrolling</li>
+<li>Limits initial display to 6 images per region</li>
+</ul>
+<h3 id="localization">Localization</h3>
+<ul>
+<li>Full German and English support</li>
+<li>Uses String Catalog (Localizable.xcstrings)</li>
+<li>Consistent with existing localization patterns</li>
+</ul>
+<h2 id="benefits">Benefits</h2>
+<ol>
+<li><strong>Comprehensive Overview</strong>: Users can see all body regions at a glance</li>
+<li><strong>Easy Management</strong>: Quick access to add/view/delete overview images</li>
+<li><strong>Better Organization</strong>: Centralized view of all overview images</li>
+<li><strong>Improved UX</strong>: Clear empty states guide users to add images</li>
+<li><strong>Accessibility</strong>: Works even when no moles have been scanned</li>
+</ol>
+<h2 id="future-enhancements">Future Enhancements</h2>
+<p>Potential improvements for future versions:
+- Bulk image operations (delete multiple images at once)
+- Image sorting options (by date, region, etc.)
+- Search/filter functionality
+- Statistics (total images, storage used, etc.)
+- Export all overview images
+- Image comparison across regions</p>
+<h2 id="testing-recommendations">Testing Recommendations</h2>
+<ol>
+<li>Test with no overview images (empty state)</li>
+<li>Test with images in some regions but not others</li>
+<li>Test with more than 6 images in a region</li>
+<li>Test navigation to/from RegionOverviewView</li>
+<li>Test localization in both German and English</li>
+<li>Test on different device sizes (iPhone, iPad)</li>
+<li>Test with large number of images (performance)</li>
+</ol>
+<h2 id="compatibility">Compatibility</h2>
+<ul>
+<li>iOS 18.0+</li>
+<li>SwiftUI</li>
+<li>SwiftData</li>
+<li>Compatible with existing mole tracking features</li>
+<li>Backward compatible with legacy region naming</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

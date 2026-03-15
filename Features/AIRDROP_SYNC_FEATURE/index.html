@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>AirDrop Sync Feature - Nevus App</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Nevus App</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../ARCHITECTURE/" class="nav-link">Nevus - iOS App Architektur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IMPLEMENTATION_SUMMARY/" class="nav-link">Nevus - Vollständige Implementierungszusammenfassung</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../INTERNATIONALIZATION/" class="nav-link">Internationalisierung / Internationalization</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IPAD_COMPATIBILITY/" class="nav-link">iPad Compatibility Implementation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../TECHNICAL_SPECIFICATIONS/" class="nav-link">Nevus - Technische Spezifikationen</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Features</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">AirDrop Sync Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FIXES/" class="dropdown-item">AirDrop Sync - File Access Fixes</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_IMPLEMENTATION_COMPLETE/" class="dropdown-item">AirDrop Sync Feature - Complete Implementation Summary</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_SETUP/" class="dropdown-item">AirDrop Sync Feature - Setup Instructions</a>
+</li>
+                                    
+<li>
+    <a href="../ALL_REGIONS_OVERVIEW_FEATURE/" class="dropdown-item">All Regions Overview Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AUTO_DELETE_SYNC_FILES/" class="dropdown-item">Automatic Sync File Deletion Feature</a>
+</li>
+                                    
+<li>
+    <a href="../DELETE_IMAGES_FEATURE/" class="dropdown-item">Bilder Löschen Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_COMPARISON_FEATURE/" class="dropdown-item">Guided Comparison Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_SCANNING_FEATURE/" class="dropdown-item">Guided Scanning Feature</a>
+</li>
+                                    
+<li>
+    <a href="../IMAGE_EXPORT_FEATURE/" class="dropdown-item">Einzelbild-Export Funktion</a>
+</li>
+                                    
+<li>
+    <a href="../MOLE_LOCATION_FEATURE/" class="dropdown-item">Mole Location on Overview Images Feature</a>
+</li>
+                                    
+<li>
+    <a href="../MONTHLY_REMINDER_FEATURE/" class="dropdown-item">Monthly Reminder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_CONTROLS/" class="dropdown-item">Overlay-Steuerelemente - Benutzerführung</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_MODE_FEATURE/" class="dropdown-item">Overlay-Modus für verbesserte Vergleichbarkeit</a>
+</li>
+                                    
+<li>
+    <a href="../PERFORMANCE_DEBUG/" class="dropdown-item">Performance Debugging Guide</a>
+</li>
+                                    
+<li>
+    <a href="../REFERENCE_IMAGE_SELECTION/" class="dropdown-item">Referenzbild-Auswahl für Overlay-Modus</a>
+</li>
+                                    
+<li>
+    <a href="../REGION_OVERVIEW_FEATURE/" class="dropdown-item">Körperregion-Übersichtsbilder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../SESSION_CLEANUP_FEATURE/" class="dropdown-item">Session Cleanup Feature - Implementation Summary</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../../TECHNICAL_SPECIFICATIONS/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../AIRDROP_SYNC_FIXES/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#airdrop-sync-feature" class="nav-link">AirDrop Sync Feature</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#privacy-security" class="nav-link">Privacy &amp; Security</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#how-it-works" class="nav-link">How It Works</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#user-guide" class="nav-link">User Guide</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#technical-implementation" class="nav-link">Technical Implementation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#localization" class="nav-link">Localization</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#testing-checklist" class="nav-link">Testing Checklist</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#future-enhancements" class="nav-link">Future Enhancements</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#performance-considerations" class="nav-link">Performance Considerations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#security-considerations" class="nav-link">Security Considerations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#compliance" class="nav-link">Compliance</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#support" class="nav-link">Support</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#changelog" class="nav-link">Changelog</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="airdrop-sync-feature">AirDrop Sync Feature</h1>
+<h2 id="overview">Overview</h2>
+<p>The AirDrop Sync feature enables privacy-conserving data synchronization between iOS devices (e.g., iPhone and iPad) without requiring cloud storage. Users can capture mole images on their phone and transfer them to their tablet for analysis, or vice versa.</p>
+<h2 id="privacy-security">Privacy &amp; Security</h2>
+<h3 id="key-privacy-features">Key Privacy Features</h3>
+<ol>
+<li><strong>Local Transfer Only</strong>: Data is transferred directly between devices via AirDrop (Bluetooth/WiFi Direct)</li>
+<li><strong>No Cloud Storage</strong>: No data is stored on third-party servers</li>
+<li><strong>Encrypted in Transit</strong>: AirDrop uses end-to-end encryption</li>
+<li><strong>No Account Required</strong>: No registration, email, or tracking</li>
+<li><strong>Complete Control</strong>: User decides what and when to sync</li>
+</ol>
+<h3 id="data-protection">Data Protection</h3>
+<ul>
+<li>All transfers are encrypted by iOS's AirDrop protocol</li>
+<li>Data never leaves your local network during transfer</li>
+<li>No metadata is shared with third parties</li>
+<li>Duplicate detection prevents data duplication</li>
+</ul>
+<h2 id="how-it-works">How It Works</h2>
+<h3 id="architecture">Architecture</h3>
+<pre><code>Phone (Source Device)
+  ↓
+1. Select date range
+2. Filter new/modified data
+3. Create sync package (.nevus file)
+4. Share via AirDrop
+  ↓
+Tablet (Target Device)
+  ↓
+5. Receive package
+6. Preview contents
+7. Confirm import
+8. Merge with existing data
+</code></pre>
+<h3 id="sync-package-format">Sync Package Format</h3>
+<p>Sync packages use the <code>.nevus</code> file extension and contain:</p>
+<ul>
+<li><strong>manifest.json</strong>: Metadata about the sync (dates, counts, version)</li>
+<li><strong>images/</strong>: Directory with JPEG image files</li>
+<li>Package is compressed as ZIP for efficient transfer</li>
+</ul>
+<h3 id="delta-sync-logic">Delta Sync Logic</h3>
+<p>The system only exports data created or modified since a selected date:</p>
+<ol>
+<li>User selects cutoff date (default: today)</li>
+<li>System filters moles with images captured after that date</li>
+<li>Only new/modified images are included</li>
+<li>Associated mole metadata is included for context</li>
+<li>Duplicate detection on import prevents conflicts</li>
+</ol>
+<h2 id="user-guide">User Guide</h2>
+<h3 id="exporting-data-source-device">Exporting Data (Source Device)</h3>
+<ol>
+<li>Open Nevus app</li>
+<li>Tap the menu button (⋯) in top-left</li>
+<li>Select "Sync to Device"</li>
+<li>Choose the date range:</li>
+<li>Use date picker to select "since" date</li>
+<li>Default is today (exports today's photos only)</li>
+<li>Tap "Preview Export" to see what will be sent</li>
+<li>Review the statistics:</li>
+<li>Number of moles</li>
+<li>Number of images</li>
+<li>Date range</li>
+<li>Tap "Share via AirDrop"</li>
+<li>Select target device from AirDrop sheet</li>
+<li>Wait for transfer to complete</li>
+</ol>
+<h3 id="importing-data-target-device">Importing Data (Target Device)</h3>
+<ol>
+<li>Receive AirDrop notification</li>
+<li>Accept the <code>.nevus</code> file</li>
+<li>Nevus automatically opens</li>
+<li>Review package information:</li>
+<li>Moles count</li>
+<li>Images count</li>
+<li>Export date</li>
+<li>Date range</li>
+<li>Read import behavior notes:</li>
+<li>Duplicates will be skipped</li>
+<li>Data will be merged (not replaced)</li>
+<li>Existing data is safe</li>
+<li>Tap "Import Data"</li>
+<li>Wait for import to complete</li>
+<li>Review import results:</li>
+<li>Items imported</li>
+<li>Items skipped (duplicates)</li>
+<li>Any errors</li>
+<li>Tap "Done"</li>
+</ol>
+<h3 id="best-practices">Best Practices</h3>
+<p><strong>For Daily Use:</strong>
+- Keep default date (today) to sync only new photos
+- Sync at end of each photo session
+- Both devices should be nearby for fast transfer</p>
+<p><strong>For Initial Setup:</strong>
+- Select earlier date to transfer historical data
+- May take longer for large datasets
+- Ensure both devices have sufficient battery</p>
+<p><strong>For Troubleshooting:</strong>
+- If import fails, try exporting again
+- Check both devices have enough storage
+- Ensure iOS is up to date on both devices</p>
+<h2 id="technical-implementation">Technical Implementation</h2>
+<h3 id="components">Components</h3>
+<h4 id="1-syncpackage-model-modelssyncpackageswift">1. SyncPackage Model (<code>Models/SyncPackage.swift</code>)</h4>
+<ul>
+<li>Codable structure for manifest</li>
+<li>Version tracking for compatibility</li>
+<li>Mole and image metadata structures</li>
+</ul>
+<h4 id="2-exportservice-extension-servicesexportserviceswift">2. ExportService Extension (<code>Services/ExportService.swift</code>)</h4>
+<ul>
+<li><code>exportDeltaSync()</code>: Creates sync package</li>
+<li><code>filterDataSinceDate()</code>: Filters data by date</li>
+<li>Handles ZIP creation and file management</li>
+</ul>
+<h4 id="3-importservice-servicesimportserviceswift">3. ImportService (<code>Services/ImportService.swift</code>)</h4>
+<ul>
+<li><code>importSyncPackage()</code>: Processes received packages</li>
+<li>Duplicate detection by UUID</li>
+<li>Merge logic with conflict resolution</li>
+<li>Error handling and reporting</li>
+</ul>
+<h4 id="4-syncview-viewssyncviewswift">4. SyncView (<code>Views/SyncView.swift</code>)</h4>
+<ul>
+<li>Date picker UI</li>
+<li>Export preview with statistics</li>
+<li>Progress indicators</li>
+<li>Share sheet integration</li>
+</ul>
+<h4 id="5-importconfirmationview-viewsimportconfirmationviewswift">5. ImportConfirmationView (<code>Views/ImportConfirmationView.swift</code>)</h4>
+<ul>
+<li>Package preview</li>
+<li>Import confirmation dialog</li>
+<li>Results display</li>
+<li>Error handling</li>
+</ul>
+<h4 id="6-nevusapp-integration-nevusnevusappswift">6. NevusApp Integration (<code>Nevus/NevusApp.swift</code>)</h4>
+<ul>
+<li><code>.onOpenURL</code> handler for <code>.nevus</code> files</li>
+<li>Automatic import flow trigger</li>
+</ul>
+<h3 id="data-flow">Data Flow</h3>
+<pre><code class="language-swift">// Export Flow
+User selects date
+  → Calculate stats (preview)
+  → User confirms
+  → Filter moles/images by date
+  → Create manifest.json
+  → Export images to /images/
+  → ZIP package
+  → Present share sheet
+  → AirDrop transfer
+
+// Import Flow
+Receive .nevus file
+  → Trigger onOpenURL
+  → Show ImportConfirmationView
+  → Unzip package
+  → Parse manifest.json
+  → Preview to user
+  → User confirms
+  → Check for duplicates (by UUID)
+  → Import new moles
+  → Import new images
+  → Link relationships
+  → Save to SwiftData
+  → Show results
+</code></pre>
+<h3 id="duplicate-detection">Duplicate Detection</h3>
+<p>The system uses UUIDs to detect duplicates:</p>
+<pre><code class="language-swift">// Moles: Check by mole.id
+if existingMoleIDs.contains(moleData.id) {
+    // Skip or update metadata if newer
+}
+
+// Images: Check by image.id
+if existingImageIDs.contains(imageData.id) {
+    // Skip (images are immutable)
+}
+</code></pre>
+<h3 id="conflict-resolution">Conflict Resolution</h3>
+<ul>
+<li><strong>Moles</strong>: If duplicate found, update metadata if source is newer</li>
+<li><strong>Images</strong>: If duplicate found, skip (images are immutable)</li>
+<li><strong>Relationships</strong>: Preserved through UUID references</li>
+</ul>
+<h2 id="localization">Localization</h2>
+<p>All user-facing strings support localization via <code>Localizable.xcstrings</code>:</p>
+<h3 id="required-string-keys">Required String Keys</h3>
+<pre><code>sync_title
+sync_date_picker_label
+sync_date_section_header
+sync_date_section_footer
+sync_preview_button
+sync_export_section_header
+sync_export_section_footer
+sync_stats_moles
+sync_stats_images
+sync_stats_since
+sync_share_button
+sync_preview_section_header
+sync_confirm_title
+sync_confirm_message
+sync_confirm_button
+sync_exporting
+sync_no_data_error
+sync_export_failed
+sync_menu_item
+import_title
+import_loading
+import_info_moles
+import_info_images
+import_info_since
+import_info_exported
+import_package_info_header
+import_info_duplicates
+import_info_merge
+import_info_safe
+import_behavior_header
+import_confirm_button
+import_success
+import_no_new_data
+import_result_moles_imported
+import_result_images_imported
+import_result_moles_skipped
+import_result_images_skipped
+import_result_header
+import_errors_header
+import_error_title
+import_error_message
+</code></pre>
+<h2 id="testing-checklist">Testing Checklist</h2>
+<h3 id="export-testing">Export Testing</h3>
+<ul>
+<li>[ ] Export with today's date (default)</li>
+<li>[ ] Export with custom date range</li>
+<li>[ ] Export with no new data (should show error)</li>
+<li>[ ] Export with large dataset (100+ images)</li>
+<li>[ ] Cancel export mid-process</li>
+<li>[ ] Share via AirDrop successfully</li>
+<li>[ ] Share via other methods (Files, Messages)</li>
+</ul>
+<h3 id="import-testing">Import Testing</h3>
+<ul>
+<li>[ ] Import valid package</li>
+<li>[ ] Import package with duplicates</li>
+<li>[ ] Import package with no new data</li>
+<li>[ ] Import corrupted package (should show error)</li>
+<li>[ ] Import old version package (version check)</li>
+<li>[ ] Cancel import before confirmation</li>
+<li>[ ] Import while app is closed (should open app)</li>
+</ul>
+<h3 id="edge-cases">Edge Cases</h3>
+<ul>
+<li>[ ] Export/import with no moles</li>
+<li>[ ] Export/import with moles but no images</li>
+<li>[ ] Export/import with special characters in notes</li>
+<li>[ ] Multiple imports of same package</li>
+<li>[ ] Import on device with no existing data</li>
+<li>[ ] Import on device with existing data</li>
+<li>[ ] Low storage scenarios</li>
+<li>[ ] Interrupted transfers</li>
+</ul>
+<h3 id="privacy-testing">Privacy Testing</h3>
+<ul>
+<li>[ ] Verify no cloud upload occurs</li>
+<li>[ ] Verify data stays local during transfer</li>
+<li>[ ] Verify package is encrypted in transit (AirDrop)</li>
+<li>[ ] Verify no tracking or analytics</li>
+<li>[ ] Verify package can be deleted after import</li>
+</ul>
+<h2 id="future-enhancements">Future Enhancements</h2>
+<h3 id="potential-improvements">Potential Improvements</h3>
+<ol>
+<li><strong>Bidirectional Sync</strong></li>
+<li>Detect changes on both devices</li>
+<li>Merge changes intelligently</li>
+<li>
+<p>Conflict resolution UI</p>
+</li>
+<li>
+<p><strong>Selective Sync</strong></p>
+</li>
+<li>Choose specific body regions</li>
+<li>Choose specific moles</li>
+<li>
+<p>Exclude certain data types</p>
+</li>
+<li>
+<p><strong>Sync History</strong></p>
+</li>
+<li>Track sync operations</li>
+<li>Show last sync date per device</li>
+<li>
+<p>Sync statistics</p>
+</li>
+<li>
+<p><strong>Encryption Options</strong></p>
+</li>
+<li>Optional password protection</li>
+<li>Additional encryption layer</li>
+<li>
+<p>Secure deletion</p>
+</li>
+<li>
+<p><strong>Automatic Sync</strong></p>
+</li>
+<li>Background sync when devices nearby</li>
+<li>Scheduled sync</li>
+<li>
+<p>Smart sync based on usage patterns</p>
+</li>
+<li>
+<p><strong>Compression Options</strong></p>
+</li>
+<li>Adjustable image quality</li>
+<li>Thumbnail-only mode</li>
+<li>Progressive sync</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="common-issues">Common Issues</h3>
+<p><strong>"No new data to export"</strong>
+- Solution: Select an earlier date or capture new images</p>
+<p><strong>"Cannot read package"</strong>
+- Solution: Re-export from source device, ensure both devices have latest app version</p>
+<p><strong>"Import failed"</strong>
+- Solution: Check storage space, restart app, try smaller date range</p>
+<p><strong>AirDrop not showing target device</strong>
+- Solution: Enable Bluetooth and WiFi on both devices, ensure devices are unlocked</p>
+<p><strong>Slow transfer</strong>
+- Solution: Move devices closer together, ensure good WiFi/Bluetooth signal</p>
+<h2 id="performance-considerations">Performance Considerations</h2>
+<h3 id="optimization-strategies">Optimization Strategies</h3>
+<ol>
+<li><strong>Image Compression</strong>: JPEG at 90% quality balances size and quality</li>
+<li><strong>Thumbnail Generation</strong>: Async processing prevents UI blocking</li>
+<li><strong>Batch Processing</strong>: Import images in batches to prevent memory issues</li>
+<li><strong>Progress Indicators</strong>: Keep user informed during long operations</li>
+<li><strong>Background Processing</strong>: Use Task with appropriate priority</li>
+</ol>
+<h3 id="recommended-limits">Recommended Limits</h3>
+<ul>
+<li><strong>Single Sync</strong>: Up to 500 images (tested)</li>
+<li><strong>Package Size</strong>: Up to 500MB (typical)</li>
+<li><strong>Transfer Time</strong>: ~1-2 minutes for 100 images over AirDrop</li>
+</ul>
+<h2 id="security-considerations">Security Considerations</h2>
+<h3 id="threat-model">Threat Model</h3>
+<p><strong>Protected Against:</strong>
+- Cloud provider data breaches
+- Network interception (encrypted)
+- Unauthorized access (local only)
+- Tracking and profiling</p>
+<p><strong>Not Protected Against:</strong>
+- Physical device access (use device encryption)
+- Malicious apps on same device (iOS sandboxing)
+- Social engineering (user must accept transfer)</p>
+<h3 id="recommendations">Recommendations</h3>
+<ol>
+<li>Enable device encryption (FileVault/iOS encryption)</li>
+<li>Use strong device passcodes</li>
+<li>Enable Face ID/Touch ID</li>
+<li>Only accept transfers from known devices</li>
+<li>Delete sync packages after import</li>
+<li>Regular device backups (encrypted)</li>
+</ol>
+<h2 id="compliance">Compliance</h2>
+<h3 id="privacy-regulations">Privacy Regulations</h3>
+<ul>
+<li><strong>GDPR Compliant</strong>: No data processing, user has full control</li>
+<li><strong>HIPAA Considerations</strong>: Local storage only, encrypted transfer</li>
+<li><strong>CCPA Compliant</strong>: No data sale or sharing with third parties</li>
+</ul>
+<h3 id="data-retention">Data Retention</h3>
+<ul>
+<li>Sync packages stored in Documents directory</li>
+<li>User responsible for deletion</li>
+<li>No automatic cloud backup (unless user enables iCloud)</li>
+<li>No telemetry or usage tracking</li>
+</ul>
+<h2 id="support">Support</h2>
+<h3 id="for-users">For Users</h3>
+<p>If you encounter issues:
+1. Check this documentation
+2. Verify both devices have latest iOS version
+3. Ensure sufficient storage space
+4. Try restarting both devices
+5. Re-export with smaller date range</p>
+<h3 id="for-developers">For Developers</h3>
+<p>Key files to review:
+- <code>Services/ExportService.swift</code> - Export logic
+- <code>Services/ImportService.swift</code> - Import logic
+- <code>Models/SyncPackage.swift</code> - Data structures
+- <code>Views/SyncView.swift</code> - Export UI
+- <code>Views/ImportConfirmationView.swift</code> - Import UI</p>
+<h2 id="changelog">Changelog</h2>
+<h3 id="version-10-2026-02-28">Version 1.0 (2026-02-28)</h3>
+<ul>
+<li>Initial implementation</li>
+<li>Delta sync based on date</li>
+<li>AirDrop integration</li>
+<li>Duplicate detection</li>
+<li>Import/export confirmation dialogs</li>
+<li>Comprehensive error handling</li>
+<li>Full localization support</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

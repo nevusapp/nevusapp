@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Nevus - Vollständige Implementierungszusammenfassung - Nevus App</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Nevus App</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../ARCHITECTURE/" class="nav-link">Nevus - iOS App Architektur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Nevus - Vollständige Implementierungszusammenfassung</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../INTERNATIONALIZATION/" class="nav-link">Internationalisierung / Internationalization</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../IPAD_COMPATIBILITY/" class="nav-link">iPad Compatibility Implementation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../TECHNICAL_SPECIFICATIONS/" class="nav-link">Nevus - Technische Spezifikationen</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Features</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../Features/AIRDROP_SYNC_FEATURE/" class="dropdown-item">AirDrop Sync Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/AIRDROP_SYNC_FIXES/" class="dropdown-item">AirDrop Sync - File Access Fixes</a>
+</li>
+                                    
+<li>
+    <a href="../Features/AIRDROP_SYNC_IMPLEMENTATION_COMPLETE/" class="dropdown-item">AirDrop Sync Feature - Complete Implementation Summary</a>
+</li>
+                                    
+<li>
+    <a href="../Features/AIRDROP_SYNC_SETUP/" class="dropdown-item">AirDrop Sync Feature - Setup Instructions</a>
+</li>
+                                    
+<li>
+    <a href="../Features/ALL_REGIONS_OVERVIEW_FEATURE/" class="dropdown-item">All Regions Overview Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/AUTO_DELETE_SYNC_FILES/" class="dropdown-item">Automatic Sync File Deletion Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/DELETE_IMAGES_FEATURE/" class="dropdown-item">Bilder Löschen Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/GUIDED_COMPARISON_FEATURE/" class="dropdown-item">Guided Comparison Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/GUIDED_SCANNING_FEATURE/" class="dropdown-item">Guided Scanning Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/IMAGE_EXPORT_FEATURE/" class="dropdown-item">Einzelbild-Export Funktion</a>
+</li>
+                                    
+<li>
+    <a href="../Features/MOLE_LOCATION_FEATURE/" class="dropdown-item">Mole Location on Overview Images Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/MONTHLY_REMINDER_FEATURE/" class="dropdown-item">Monthly Reminder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/OVERLAY_CONTROLS/" class="dropdown-item">Overlay-Steuerelemente - Benutzerführung</a>
+</li>
+                                    
+<li>
+    <a href="../Features/OVERLAY_MODE_FEATURE/" class="dropdown-item">Overlay-Modus für verbesserte Vergleichbarkeit</a>
+</li>
+                                    
+<li>
+    <a href="../Features/PERFORMANCE_DEBUG/" class="dropdown-item">Performance Debugging Guide</a>
+</li>
+                                    
+<li>
+    <a href="../Features/REFERENCE_IMAGE_SELECTION/" class="dropdown-item">Referenzbild-Auswahl für Overlay-Modus</a>
+</li>
+                                    
+<li>
+    <a href="../Features/REGION_OVERVIEW_FEATURE/" class="dropdown-item">Körperregion-Übersichtsbilder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/SESSION_CLEANUP_FEATURE/" class="dropdown-item">Session Cleanup Feature - Implementation Summary</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../ARCHITECTURE/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../INTERNATIONALIZATION/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#nevus-vollstandige-implementierungszusammenfassung" class="nav-link">Nevus - Vollständige Implementierungszusammenfassung</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#projektubersicht" class="nav-link">Projektübersicht</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#implementierte-features" class="nav-link">Implementierte Features</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#technische-architektur" class="nav-link">Technische Architektur</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#projektstruktur" class="nav-link">Projektstruktur</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#dokumentation" class="nav-link">Dokumentation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#bekannte-einschrankungen" class="nav-link">Bekannte Einschränkungen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#zukunftige-erweiterungen" class="nav-link">Zukünftige Erweiterungen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#build-informationen" class="nav-link">Build-Informationen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#status" class="nav-link">Status</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#build-informationen_1" class="nav-link">Build-Informationen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#datum" class="nav-link">Datum</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="nevus-vollstandige-implementierungszusammenfassung">Nevus - Vollständige Implementierungszusammenfassung</h1>
+<p><strong>Letzte Aktualisierung:</strong> 15. März 2026
+<strong>Status:</strong> Produktionsbereit
+<strong>Version:</strong> 1.0</p>
+<h2 id="projektubersicht">Projektübersicht</h2>
+<p>Nevus ist eine iOS-App zur Erfassung und Katalogisierung von Leberflecken mit fortgeschrittenen Tracking- und Vergleichsfunktionen, systematischen Workflows und privatsphäre-orientierter Geräte-zu-Gerät-Synchronisation.</p>
+<h2 id="implementierte-features">Implementierte Features</h2>
+<h3 id="1-core-funktionalitat">1. Core Funktionalität ✅</h3>
+<ul>
+<li><strong>SwiftData Persistenz</strong> - Lokale Datenspeicherung mit automatischem iCloud Backup</li>
+<li><strong>Kamera-Integration</strong> - AVFoundation mit direktem Callback für schnelle Bilderfassung</li>
+<li><strong>12 Körperregionen</strong> - head, neck, armLeft, armRight, chest, abdomen, pelvis, backUpper, backMiddle, backLower, legLeft, legRight</li>
+<li><strong>26 Körperseiten</strong> - Region-spezifische Seiten (z.B. headFront, torsoLeft, legThighFront)</li>
+<li><strong>Referenzbild-System</strong> - Auswählbares Referenzbild für Overlay-Vergleiche</li>
+</ul>
+<h3 id="2-leberfleck-tracking">2. Leberfleck-Tracking ✅</h3>
+<p><strong>Models:</strong>
+- <code>Mole.swift</code> - Hauptmodel mit Metadaten
+- <code>MoleImage.swift</code> - Bildmodel mit Sensordaten</p>
+<p><strong>Features:</strong>
+- Mehrere Bilder pro Leberfleck
+- Bearbeitbare Notizen
+- Zeitstempel (Erstellung &amp; letzte Änderung)
+- Automatische Sortierung nach Änderungsdatum</p>
+<h3 id="3-bildvergleich">3. Bildvergleich ✅</h3>
+<p><strong>Views:</strong>
+- <code>ComparisonView.swift</code> - Side-by-Side und Overlay-Vergleich
+- <code>ComparisonSelectionView.swift</code> - Vereinfachte Bildauswahl mit Nummern</p>
+<p><strong>Features:</strong>
+- Zwei Bilder gleichzeitig vergleichen
+- Overlay-Modus mit Transparenz-Slider
+- Swap-Funktion zum Tauschen der Bilder
+- Nummerierte Auswahl (1 &amp; 2)</p>
+<h3 id="4-korperregion-ubersichtsbilder">4. Körperregion-Übersichtsbilder ✅</h3>
+<p><strong>Model:</strong>
+- <code>BodyRegionOverview.swift</code> - Übersichtsbilder pro Region
+- <code>MoleLocationMarker.swift</code> - Verknüpfung Leberfleck ↔ Übersichtsbild</p>
+<p><strong>Views:</strong>
+- <code>RegionOverviewView.swift</code> - Verwaltung der Übersichtsbilder
+- <code>AllRegionsOverviewView.swift</code> - Alle Regionen auf einen Blick
+- <code>OverviewImageDetailView</code> - Detailansicht mit Zoom und Notizen</p>
+<p><strong>Features:</strong>
+- Übersichtsbilder für jede Körperregion
+- Inline-Anzeige in Hauptansicht (adaptive: horizontal scroll auf iPhone, Grid auf iPad)
+- Bis zu 5 neueste Bilder pro Region (iPhone), 6 auf iPad
+- "Alle anzeigen" Link zur vollständigen Ansicht
+- Bearbeitbare Notizen pro Bild
+- Pinch-to-Zoom in Detailansicht
+- MoleLocationMarker für zukünftige Verknüpfungen</p>
+<h3 id="5-export-funktionalitat">5. Export-Funktionalität ✅</h3>
+<p><strong>Service:</strong>
+- <code>ExportService.swift</code> - ZIP und JPEG Export</p>
+<p><strong>Export-Optionen:</strong>
+1. <strong>Einzelner Leberfleck</strong> - ZIP mit allen Bildern + JSON-Metadaten
+2. <strong>Alle Leberflecke</strong> - Komplettes Backup als ZIP
+3. <strong>Einzelnes Bild</strong> - JPEG für direktes Teilen</p>
+<p><strong>Features:</strong>
+- Documents-Verzeichnis für iOS Share Sheet Zugriff
+- JSON-Metadaten mit Sensordaten
+- Dateiname mit Zeitstempel
+- Native iOS Share Sheet Integration</p>
+<h3 id="6-uiux">6. UI/UX ✅</h3>
+<p><strong>Hauptansicht (ContentView):</strong>
+- Gruppierte Liste nach Körperregionen
+- Übersichtsbilder inline mit horizontalem Scroll
+- Export-Button für alle Leberflecke
+- Empty State mit Anleitung</p>
+<p><strong>Detailansicht (MoleDetailView):</strong>
+- LazyHGrid für Bilder (2 Zeilen, horizontal scrollbar)
+- Bearbeitbare Felder (Region, Seite, Notizen)
+- Export-Menü (Leberfleck oder einzelnes Bild)
+- Direkter Zugriff auf Bildvergleich</p>
+<p><strong>Bilddetailansicht (ImageDetailView):</strong>
+- Vollbild mit Pinch-to-Zoom
+- Share-Button für JPEG-Export
+- Vergleich-Button (wenn &gt;1 Bild vorhanden)
+- Metadaten-Anzeige</p>
+<h3 id="7-performance-optimierungen">7. Performance-Optimierungen ✅</h3>
+<p><strong>Kamera:</strong>
+- Direkter Callback statt @Published (9 Sekunden Verzögerung behoben)
+- Sofortiges Schließen nach Aufnahme
+- Async Bildverarbeitung im Hintergrund</p>
+<p><strong>Bilder:</strong>
+- Thumbnail-Generierung (200x200)
+- External Storage für große Bilddaten
+- Lazy Loading in Grid-Views
+- JPEG-Kompression (80-95%)</p>
+<h3 id="8-guided-features">8. Guided Features ✅</h3>
+<p><strong>Services:</strong>
+- <code>GuidedScanningService.swift</code> - Workflow-Management für systematisches Fotografieren
+- <code>GuidedComparisonService.swift</code> - Workflow-Management für systematischen Vergleich</p>
+<p><strong>Views:</strong>
+- <code>GuidedScanningView.swift</code> - Systematisches Fotografieren aller Leberflecke
+- <code>GuidedComparisonView.swift</code> - Systematischer Vergleich mit Referenzbildern</p>
+<p><strong>Features:</strong>
+- Fortschrittsanzeige mit Prozent
+- Navigation (next, previous, skip)
+- Overlay mit Referenzbild beim Scannen
+- Inline-Notizen-Bearbeitung beim Vergleich
+- Statistiken am Ende (gescannt/verglichen/übersprungen)
+- Filtert automatisch Leberflecke mit ≥2 Bildern für Vergleich</p>
+<h3 id="9-airdrop-sync">9. AirDrop Sync ✅</h3>
+<p><strong>Models:</strong>
+- <code>SyncPackage.swift</code> - Datenstrukturen für Sync-Pakete
+- <code>ImportState.swift</code> - State Management für Import</p>
+<p><strong>Services:</strong>
+- <code>ImportService.swift</code> - Import-Logik mit Duplikat-Erkennung</p>
+<p><strong>Views:</strong>
+- <code>SyncView.swift</code> - Export UI mit Datumswähler
+- <code>ImportConfirmationView.swift</code> - Import-Vorschau und Bestätigung</p>
+<p><strong>Features:</strong>
+- Delta-Sync (nur neue Daten seit Datum)
+- .nevus Paket-Format (ZIP mit manifest.json)
+- UUID-basierte Duplikat-Erkennung
+- Smart Merge (erhält bestehende Daten)
+- Automatischer Import via AirDrop
+- Manueller Import-Fallback
+- Automatisches Löschen der Sync-Datei nach Import</p>
+<h3 id="10-ipad-unterstutzung">10. iPad-Unterstützung ✅</h3>
+<p><strong>Features:</strong>
+- NavigationSplitView (Master-Detail Pattern)
+- Adaptive Layouts basierend auf horizontalSizeClass
+- Größere Grids (3-5 Spalten statt 2-3)
+- Persistente Sidebar
+- Multitasking-Support (Split View, Slide Over)
+- Optimiert für alle iPad-Größen</p>
+<p><strong>Adaptive Komponenten:</strong>
+- ContentView: Split View vs. Stack
+- MoleDetailView: Vertical Grid vs. Horizontal Scroll
+- AllRegionsOverviewView: 5 Spalten vs. 3 Spalten
+- RegionOverviewView: 4 Spalten vs. 2 Spalten</p>
+<h3 id="11-weitere-features">11. Weitere Features ✅</h3>
+<ul>
+<li><strong>Internationalisierung</strong> - String Catalog mit DE/EN</li>
+<li><strong>Session Cleanup</strong> - Löschen alter Daten mit Statistiken</li>
+<li><strong>Monatliche Erinnerungen</strong> - NotificationService</li>
+<li><strong>Overlay-Modus</strong> - Referenzbild-Overlay in Kamera</li>
+<li><strong>Löschen mit Bestätigung</strong> - Alert vor Löschen</li>
+<li><strong>App-Icon</strong> - 1024x1024 Icon mit Leberfleck unter Lupe</li>
+</ul>
+<h2 id="technische-architektur">Technische Architektur</h2>
+<h3 id="datenmodelle">Datenmodelle</h3>
+<pre><code>Mole (SwiftData)
+├── id: UUID
+├── bodyRegion: String (12 Regionen)
+├── bodySide: String (26 region-spezifische Seiten)
+├── notes: String
+├── createdAt: Date
+├── lastModified: Date
+├── referenceImageID: UUID? (für Overlay)
+├── images: [MoleImage]
+└── locationMarkers: [MoleLocationMarker]
+
+MoleImage (SwiftData)
+├── id: UUID
+├── imageData: Data (external storage)
+├── thumbnailData: Data (200x200)
+├── captureDate: Date
+├── imageWidth: Int
+├── imageHeight: Int
+└── mole: Mole?
+
+BodyRegionOverview (SwiftData)
+├── id: UUID
+├── bodyRegion: String
+├── imageData: Data (external storage)
+├── thumbnailData: Data (200x200)
+├── captureDate: Date
+└── notes: String
+
+MoleLocationMarker (SwiftData)
+├── id: UUID
+├── x: Double (0.0-1.0)
+├── y: Double (0.0-1.0)
+├── mole: Mole?
+└── overviewImage: BodyRegionOverview?
+
+SyncPackage (Codable)
+├── version: Int
+├── exportDate: Date
+├── sinceDate: Date?
+├── moles: [MoleExportData]
+└── images: [ImageExportData]
+</code></pre>
+<h3 id="services">Services</h3>
+<pre><code>CameraService (Singleton, @MainActor)
+├── AVCaptureSession
+├── Direct callback: onPhotoCaptured
+├── Authorization handling
+└── Photo quality: JPEG 90%
+
+ExportService (Static)
+├── exportMole() -&gt; ZIP
+├── exportAllMoles() -&gt; ZIP
+├── exportImage() -&gt; JPEG
+├── exportDeltaSync() -&gt; .nevus
+└── zipDirectory()
+
+ImportService (Static)
+├── importSyncPackage() -&gt; ImportResult
+├── UUID-based duplicate detection
+└── Smart merge logic
+
+GuidedScanningService (@MainActor)
+├── Session management
+├── Progress tracking
+└── Navigation (next, previous, skip)
+
+GuidedComparisonService (@MainActor)
+├── Filter moles with ≥2 images
+├── Progress tracking
+└── Comparison statistics
+
+NotificationService (Singleton, @MainActor)
+├── Monthly reminders
+└── Permission management
+
+CleanupService (Static)
+├── Delete old sessions
+└── Batch operations
+</code></pre>
+<h3 id="views-hierarchie">Views Hierarchie</h3>
+<pre><code>NevusApp
+└── ContentView
+    ├── AddMoleView
+    ├── MoleDetailView
+    │   ├── CameraView
+    │   ├── ImageDetailView
+    │   │   └── ComparisonSelectionView
+    │   │       └── ComparisonView
+    │   └── ShareSheet
+    └── RegionOverviewView
+        ├── CameraView
+        └── OverviewImageDetailView
+</code></pre>
+<h2 id="projektstruktur">Projektstruktur</h2>
+<pre><code>Nevus/
+├── Models/
+│   ├── Mole.swift
+│   ├── MoleImage.swift
+│   └── BodyRegionOverview.swift
+├── Views/
+│   ├── ContentView.swift
+│   ├── MoleDetailView.swift
+│   ├── CameraView.swift
+│   ├── ComparisonView.swift
+│   └── RegionOverviewView.swift
+├── Services/
+│   ├── CameraService.swift
+│   └── ExportService.swift
+└── Nevus/
+    ├── NevusApp.swift
+    └── Assets.xcassets/
+</code></pre>
+<h2 id="dokumentation">Dokumentation</h2>
+<h3 id="hauptdokumentation">Hauptdokumentation</h3>
+<ul>
+<li>✅ <code>README.md</code> - Projektübersicht</li>
+<li>✅ <code>ARCHITECTURE.md</code> - Systemarchitektur (aktualisiert 15.03.2026)</li>
+<li>✅ <code>TECHNICAL_SPECIFICATIONS.md</code> - Technische Spezifikationen (aktualisiert 15.03.2026)</li>
+<li>✅ <code>IMPLEMENTATION_SUMMARY.md</code> - Implementierungszusammenfassung (aktualisiert 15.03.2026)</li>
+<li>✅ <code>INTERNATIONALIZATION.md</code> - Lokalisierung</li>
+<li>✅ <code>IPAD_COMPATIBILITY.md</code> - iPad-Unterstützung</li>
+</ul>
+<h3 id="feature-dokumentation">Feature-Dokumentation</h3>
+<ul>
+<li>✅ <code>Features/GUIDED_SCANNING_FEATURE.md</code></li>
+<li>✅ <code>Features/GUIDED_COMPARISON_FEATURE.md</code></li>
+<li>✅ <code>Features/AIRDROP_SYNC_IMPLEMENTATION_COMPLETE.md</code></li>
+<li>✅ <code>Features/REGION_OVERVIEW_FEATURE.md</code></li>
+<li>✅ <code>Features/ALL_REGIONS_OVERVIEW_FEATURE.md</code></li>
+<li>✅ Und weitere...</li>
+</ul>
+<h2 id="bekannte-einschrankungen">Bekannte Einschränkungen</h2>
+<h3 id="nicht-implementiert-geplant-fur-phase-2">Nicht Implementiert (Geplant für Phase 2)</h3>
+<ul>
+<li><strong>Sensordaten</strong> - CoreMotion Integration</li>
+<li><strong>ML-Features</strong> - Core ML für automatische Erkennung</li>
+<li><strong>Automatische Zuordnung</strong> - Basierend auf Sensoren + ML</li>
+<li><strong>Änderungs-Detektion</strong> - ML-basierte Erkennung</li>
+</ul>
+<h3 id="aktuelle-einschrankungen">Aktuelle Einschränkungen</h3>
+<ul>
+<li>MoleLocationMarker-Modell existiert, aber UI fehlt</li>
+<li>Keine Sensordaten in Bildern</li>
+<li>Manuelle Bildauswahl für Vergleich</li>
+<li>PDF-Export für Ärzte noch nicht implementiert</li>
+</ul>
+<h2 id="zukunftige-erweiterungen">Zukünftige Erweiterungen</h2>
+<h3 id="prioritat-1-phase-2">Priorität 1 (Phase 2)</h3>
+<ul>
+<li>[ ] CoreMotion Integration</li>
+<li>[ ] Core ML Integration</li>
+<li>[ ] Automatische Zuordnung</li>
+<li>[ ] ML-basierte Änderungs-Detektion</li>
+<li>[ ] PDF-Export für Ärzte</li>
+</ul>
+<h3 id="prioritat-2">Priorität 2</h3>
+<ul>
+<li>[ ] UI für MoleLocationMarker</li>
+<li>[ ] Annotationen auf Bildern</li>
+<li>[ ] Erweiterte Statistiken</li>
+</ul>
+<h3 id="prioritat-3">Priorität 3</h3>
+<ul>
+<li>[ ] Apple Watch Integration</li>
+<li>[ ] HealthKit Integration</li>
+<li>[ ] Familien-Sharing</li>
+</ul>
+<h2 id="build-informationen">Build-Informationen</h2>
+<h3 id="anforderungen">Anforderungen</h3>
+<ul>
+<li>iOS 17.6+</li>
+<li>Xcode 15.0+</li>
+<li>Swift 5.9+</li>
+</ul>
+<h3 id="berechtigungen">Berechtigungen</h3>
+<ul>
+<li>Kamera (NSCameraUsageDescription)</li>
+<li>Bewegungssensoren (NSMotionUsageDescription)</li>
+<li>Fotobibliothek (NSPhotoLibraryUsageDescription)</li>
+</ul>
+<h3 id="deployment">Deployment</h3>
+<ul>
+<li>Bundle ID: <code>net.familie-richter.Nevus</code></li>
+<li>Team: Q3U88T33CV</li>
+<li>Deployment Target: iOS 17.6</li>
+</ul>
+<h2 id="status">Status</h2>
+<p>✅ <strong>Produktionsbereit - Version 1.0</strong></p>
+<p>Alle Phase-1-Features sind vollständig implementiert, getestet und dokumentiert. Die App ist bereit für den Einsatz auf iPhone und iPad.</p>
+<h2 id="build-informationen_1">Build-Informationen</h2>
+<h3 id="anforderungen_1">Anforderungen</h3>
+<ul>
+<li>iOS 17.6+</li>
+<li>Xcode 15.0+</li>
+<li>Swift 5.9+</li>
+</ul>
+<h3 id="berechtigungen-infoplist">Berechtigungen (Info.plist)</h3>
+<ul>
+<li>NSCameraUsageDescription - Kamera für Leberfleck-Fotos</li>
+<li>NSUserNotificationsUsageDescription - Monatliche Erinnerungen (optional)</li>
+</ul>
+<h3 id="deployment_1">Deployment</h3>
+<ul>
+<li>Bundle ID: <code>net.familie-richter.Nevus</code></li>
+<li>Deployment Target: iOS 17.6</li>
+<li>Unterstützte Geräte: iPhone, iPad</li>
+</ul>
+<h2 id="datum">Datum</h2>
+<p>Letzte Aktualisierung: 15. März 2026</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

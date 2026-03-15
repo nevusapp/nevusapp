@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Internationalisierung / Internationalization - Nevus App</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Nevus App</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../ARCHITECTURE/" class="nav-link">Nevus - iOS App Architektur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../IMPLEMENTATION_SUMMARY/" class="nav-link">Nevus - Vollständige Implementierungszusammenfassung</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Internationalisierung / Internationalization</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../IPAD_COMPATIBILITY/" class="nav-link">iPad Compatibility Implementation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../TECHNICAL_SPECIFICATIONS/" class="nav-link">Nevus - Technische Spezifikationen</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Features</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../Features/AIRDROP_SYNC_FEATURE/" class="dropdown-item">AirDrop Sync Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/AIRDROP_SYNC_FIXES/" class="dropdown-item">AirDrop Sync - File Access Fixes</a>
+</li>
+                                    
+<li>
+    <a href="../Features/AIRDROP_SYNC_IMPLEMENTATION_COMPLETE/" class="dropdown-item">AirDrop Sync Feature - Complete Implementation Summary</a>
+</li>
+                                    
+<li>
+    <a href="../Features/AIRDROP_SYNC_SETUP/" class="dropdown-item">AirDrop Sync Feature - Setup Instructions</a>
+</li>
+                                    
+<li>
+    <a href="../Features/ALL_REGIONS_OVERVIEW_FEATURE/" class="dropdown-item">All Regions Overview Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/AUTO_DELETE_SYNC_FILES/" class="dropdown-item">Automatic Sync File Deletion Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/DELETE_IMAGES_FEATURE/" class="dropdown-item">Bilder Löschen Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/GUIDED_COMPARISON_FEATURE/" class="dropdown-item">Guided Comparison Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/GUIDED_SCANNING_FEATURE/" class="dropdown-item">Guided Scanning Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/IMAGE_EXPORT_FEATURE/" class="dropdown-item">Einzelbild-Export Funktion</a>
+</li>
+                                    
+<li>
+    <a href="../Features/MOLE_LOCATION_FEATURE/" class="dropdown-item">Mole Location on Overview Images Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/MONTHLY_REMINDER_FEATURE/" class="dropdown-item">Monthly Reminder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/OVERLAY_CONTROLS/" class="dropdown-item">Overlay-Steuerelemente - Benutzerführung</a>
+</li>
+                                    
+<li>
+    <a href="../Features/OVERLAY_MODE_FEATURE/" class="dropdown-item">Overlay-Modus für verbesserte Vergleichbarkeit</a>
+</li>
+                                    
+<li>
+    <a href="../Features/PERFORMANCE_DEBUG/" class="dropdown-item">Performance Debugging Guide</a>
+</li>
+                                    
+<li>
+    <a href="../Features/REFERENCE_IMAGE_SELECTION/" class="dropdown-item">Referenzbild-Auswahl für Overlay-Modus</a>
+</li>
+                                    
+<li>
+    <a href="../Features/REGION_OVERVIEW_FEATURE/" class="dropdown-item">Körperregion-Übersichtsbilder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/SESSION_CLEANUP_FEATURE/" class="dropdown-item">Session Cleanup Feature - Implementation Summary</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../IMPLEMENTATION_SUMMARY/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../IPAD_COMPATIBILITY/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#internationalisierung-internationalization" class="nav-link">Internationalisierung / Internationalization</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#ubersicht-overview" class="nav-link">Übersicht / Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#unterstutzte-sprachen-supported-languages" class="nav-link">Unterstützte Sprachen / Supported Languages</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#implementierung-implementation" class="nav-link">Implementierung / Implementation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#neue-sprache-hinzufugen-adding-a-new-language" class="nav-link">Neue Sprache hinzufügen / Adding a New Language</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#string-kategorien-string-categories" class="nav-link">String-Kategorien / String Categories</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#testen-testing" class="nav-link">Testen / Testing</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#best-practices" class="nav-link">Best Practices</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#wartung-maintenance" class="nav-link">Wartung / Maintenance</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#ressourcen-resources" class="nav-link">Ressourcen / Resources</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="internationalisierung-internationalization">Internationalisierung / Internationalization</h1>
+<h2 id="ubersicht-overview">Übersicht / Overview</h2>
+<p>Die Nevus App wurde vollständig internationalisiert und unterstützt mehrere Sprachen.</p>
+<p>The Nevus app has been fully internationalized and supports multiple languages.</p>
+<h2 id="unterstutzte-sprachen-supported-languages">Unterstützte Sprachen / Supported Languages</h2>
+<ul>
+<li>🇩🇪 Deutsch (German) - Base Language</li>
+<li>🇬🇧 English</li>
+</ul>
+<h2 id="implementierung-implementation">Implementierung / Implementation</h2>
+<h3 id="string-catalog">String Catalog</h3>
+<p>Die App verwendet das moderne <strong>String Catalog</strong> System von Xcode 15+:
+- Datei: <code>Nevus/Localizable.xcstrings</code>
+- Format: JSON-basiert
+- Automatische Pluralisierung und Variablen-Unterstützung</p>
+<p>The app uses the modern <strong>String Catalog</strong> system from Xcode 15+:
+- File: <code>Nevus/Localizable.xcstrings</code>
+- Format: JSON-based
+- Automatic pluralization and variable support</p>
+<h3 id="lokalisierte-komponenten-localized-components">Lokalisierte Komponenten / Localized Components</h3>
+<h4 id="1-ui-texte-ui-texts">1. UI-Texte / UI Texts</h4>
+<p>Alle Benutzeroberflächen-Texte verwenden <code>String(localized:)</code>:</p>
+<pre><code class="language-swift">Text(String(localized: &quot;title_mole_list&quot;))
+Button(String(localized: &quot;action_save&quot;))
+</code></pre>
+<h4 id="2-enumerationen-enumerations">2. Enumerationen / Enumerations</h4>
+<p><strong>BodyRegion</strong> und <strong>BodySide</strong> Enums haben lokalisierte Namen:</p>
+<pre><code class="language-swift">enum BodyRegion {
+    var localizedName: String {
+        switch self {
+        case .head: return String(localized: &quot;body_region_head&quot;)
+        // ...
+        }
+    }
+}
+</code></pre>
+<h4 id="3-ruckwartskompatibilitat-backward-compatibility">3. Rückwärtskompatibilität / Backward Compatibility</h4>
+<p>Die Enums behalten ihre ursprünglichen deutschen Werte für bestehende Daten:</p>
+<pre><code class="language-swift">var legacyRawValue: String {
+    switch self {
+    case .head: return &quot;Kopf&quot;
+    // ...
+    }
+}
+</code></pre>
+<h3 id="lokalisierte-dateien-localized-files">Lokalisierte Dateien / Localized Files</h3>
+<ul>
+<li>✅ <code>ContentView.swift</code> - Hauptansicht / Main view</li>
+<li>✅ <code>MoleDetailView.swift</code> - Detailansicht / Detail view</li>
+<li>✅ <code>Models/Mole.swift</code> - Datenmodell / Data model</li>
+<li>✅ <code>Localizable.xcstrings</code> - String-Katalog / String catalog</li>
+</ul>
+<h2 id="neue-sprache-hinzufugen-adding-a-new-language">Neue Sprache hinzufügen / Adding a New Language</h2>
+<h3 id="in-xcode">In Xcode:</h3>
+<ol>
+<li>Öffne das Projekt in Xcode / Open project in Xcode</li>
+<li>Wähle das Projekt im Navigator / Select project in navigator</li>
+<li>Gehe zu <strong>Info</strong> Tab</li>
+<li>Unter <strong>Localizations</strong> klicke auf <strong>+</strong></li>
+<li>Wähle die gewünschte Sprache / Select desired language</li>
+<li>Öffne <code>Localizable.xcstrings</code></li>
+<li>Füge Übersetzungen hinzu / Add translations</li>
+</ol>
+<h3 id="programmatisch-programmatically">Programmatisch / Programmatically:</h3>
+<p>Bearbeite <code>Localizable.xcstrings</code> und füge neue Spracheinträge hinzu:</p>
+<pre><code class="language-json">{
+  &quot;strings&quot;: {
+    &quot;title_mole_list&quot;: {
+      &quot;localizations&quot;: {
+        &quot;de&quot;: { &quot;stringUnit&quot;: { &quot;value&quot;: &quot;Meine Leberflecke&quot; } },
+        &quot;en&quot;: { &quot;stringUnit&quot;: { &quot;value&quot;: &quot;My Moles&quot; } },
+        &quot;fr&quot;: { &quot;stringUnit&quot;: { &quot;value&quot;: &quot;Mes Grains de Beauté&quot; } }
+      }
+    }
+  }
+}
+</code></pre>
+<h2 id="string-kategorien-string-categories">String-Kategorien / String Categories</h2>
+<h3 id="navigation-titel-navigation-titles">Navigation &amp; Titel / Navigation &amp; Titles</h3>
+<ul>
+<li><code>title_mole_list</code> - Haupttitel</li>
+<li><code>title_mole_detail</code> - Detailansicht</li>
+<li><code>title_add_mole</code> - Neuer Leberfleck</li>
+</ul>
+<h3 id="korperregionen-body-regions">Körperregionen / Body Regions</h3>
+<ul>
+<li><code>body_region_head</code> - Kopf / Head</li>
+<li><code>body_region_neck</code> - Hals / Neck</li>
+<li><code>body_region_arm_left</code> - Arm links / Left arm</li>
+<li>etc.</li>
+</ul>
+<h3 id="korperseiten-body-sides">Körperseiten / Body Sides</h3>
+<ul>
+<li><code>body_side_head_front</code> - Vorne/Gesicht / Front/Face</li>
+<li><code>body_side_torso_left</code> - Links / Left</li>
+<li>etc.</li>
+</ul>
+<h3 id="aktionen-actions">Aktionen / Actions</h3>
+<ul>
+<li><code>action_add</code> - Hinzufügen / Add</li>
+<li><code>action_save</code> - Speichern / Save</li>
+<li><code>action_delete</code> - Löschen / Delete</li>
+<li><code>action_export</code> - Exportieren / Export</li>
+</ul>
+<h3 id="meldungen-messages">Meldungen / Messages</h3>
+<ul>
+<li><code>empty_moles_title</code> - Keine Leberflecke erfasst</li>
+<li><code>delete_confirmation_mole</code> - Löschbestätigung</li>
+<li><code>exporting_data</code> - Exportiere Daten...</li>
+</ul>
+<h2 id="testen-testing">Testen / Testing</h2>
+<h3 id="im-simulator-in-simulator">Im Simulator / In Simulator:</h3>
+<ol>
+<li>Öffne Einstellungen / Open Settings</li>
+<li>Gehe zu <strong>Allgemein &gt; Sprache &amp; Region</strong> / Go to <strong>General &gt; Language &amp; Region</strong></li>
+<li>Ändere die Sprache / Change language</li>
+<li>Starte die App neu / Restart app</li>
+</ol>
+<h3 id="in-xcode_1">In Xcode:</h3>
+<ol>
+<li>Wähle Schema / Select scheme</li>
+<li><strong>Edit Scheme</strong> &gt; <strong>Run</strong> &gt; <strong>Options</strong></li>
+<li>Setze <strong>App Language</strong> auf gewünschte Sprache / Set to desired language</li>
+</ol>
+<h2 id="best-practices">Best Practices</h2>
+<ol>
+<li><strong>Immer String(localized:) verwenden</strong> / Always use String(localized:)
+   ```swift
+   // ✅ Gut / Good
+   Text(String(localized: "action_save"))</li>
+</ol>
+<p>// ❌ Schlecht / Bad
+   Text("Speichern")
+   ```</p>
+<ol>
+<li>
+<p><strong>Kontext für Übersetzer bereitstellen</strong> / Provide context for translators
+   <code>swift
+   String(localized: "section_images_count", 
+          defaultValue: "Images (\(count))", 
+          comment: "Section header with image count")</code></p>
+</li>
+<li>
+<p><strong>Datum/Zeit automatisch formatieren</strong> / Auto-format dates/times
+   <code>swift
+   // Automatisch lokalisiert / Automatically localized
+   date.formatted(date: .long, time: .shortened)</code></p>
+</li>
+<li>
+<p><strong>Pluralisierung nutzen</strong> / Use pluralization
+   <code>swift
+   String(localized: "^[\(count) image](inflect: true)")</code></p>
+</li>
+</ol>
+<h2 id="wartung-maintenance">Wartung / Maintenance</h2>
+<ul>
+<li>Neue Strings immer zu <code>Localizable.xcstrings</code> hinzufügen</li>
+<li>Alle Sprachen gleichzeitig aktualisieren</li>
+<li>
+<p>Regelmäßig auf fehlende Übersetzungen prüfen</p>
+</li>
+<li>
+<p>Always add new strings to <code>Localizable.xcstrings</code></p>
+</li>
+<li>Update all languages simultaneously</li>
+<li>Regularly check for missing translations</li>
+</ul>
+<h2 id="ressourcen-resources">Ressourcen / Resources</h2>
+<ul>
+<li><a href="https://developer.apple.com/localization/">Apple Localization Guide</a></li>
+<li><a href="https://developer.apple.com/documentation/xcode/localizing-and-varying-text-with-a-string-catalog">String Catalogs Documentation</a></li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

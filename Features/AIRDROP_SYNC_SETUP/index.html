@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>AirDrop Sync Feature - Setup Instructions - Nevus App</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Nevus App</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../ARCHITECTURE/" class="nav-link">Nevus - iOS App Architektur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IMPLEMENTATION_SUMMARY/" class="nav-link">Nevus - Vollständige Implementierungszusammenfassung</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../INTERNATIONALIZATION/" class="nav-link">Internationalisierung / Internationalization</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IPAD_COMPATIBILITY/" class="nav-link">iPad Compatibility Implementation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../TECHNICAL_SPECIFICATIONS/" class="nav-link">Nevus - Technische Spezifikationen</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Features</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FEATURE/" class="dropdown-item">AirDrop Sync Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FIXES/" class="dropdown-item">AirDrop Sync - File Access Fixes</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_IMPLEMENTATION_COMPLETE/" class="dropdown-item">AirDrop Sync Feature - Complete Implementation Summary</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">AirDrop Sync Feature - Setup Instructions</a>
+</li>
+                                    
+<li>
+    <a href="../ALL_REGIONS_OVERVIEW_FEATURE/" class="dropdown-item">All Regions Overview Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AUTO_DELETE_SYNC_FILES/" class="dropdown-item">Automatic Sync File Deletion Feature</a>
+</li>
+                                    
+<li>
+    <a href="../DELETE_IMAGES_FEATURE/" class="dropdown-item">Bilder Löschen Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_COMPARISON_FEATURE/" class="dropdown-item">Guided Comparison Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_SCANNING_FEATURE/" class="dropdown-item">Guided Scanning Feature</a>
+</li>
+                                    
+<li>
+    <a href="../IMAGE_EXPORT_FEATURE/" class="dropdown-item">Einzelbild-Export Funktion</a>
+</li>
+                                    
+<li>
+    <a href="../MOLE_LOCATION_FEATURE/" class="dropdown-item">Mole Location on Overview Images Feature</a>
+</li>
+                                    
+<li>
+    <a href="../MONTHLY_REMINDER_FEATURE/" class="dropdown-item">Monthly Reminder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_CONTROLS/" class="dropdown-item">Overlay-Steuerelemente - Benutzerführung</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_MODE_FEATURE/" class="dropdown-item">Overlay-Modus für verbesserte Vergleichbarkeit</a>
+</li>
+                                    
+<li>
+    <a href="../PERFORMANCE_DEBUG/" class="dropdown-item">Performance Debugging Guide</a>
+</li>
+                                    
+<li>
+    <a href="../REFERENCE_IMAGE_SELECTION/" class="dropdown-item">Referenzbild-Auswahl für Overlay-Modus</a>
+</li>
+                                    
+<li>
+    <a href="../REGION_OVERVIEW_FEATURE/" class="dropdown-item">Körperregion-Übersichtsbilder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../SESSION_CLEANUP_FEATURE/" class="dropdown-item">Session Cleanup Feature - Implementation Summary</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../AIRDROP_SYNC_IMPLEMENTATION_COMPLETE/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../ALL_REGIONS_OVERVIEW_FEATURE/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#airdrop-sync-feature-setup-instructions" class="nav-link">AirDrop Sync Feature - Setup Instructions</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#quick-setup-guide" class="nav-link">Quick Setup Guide</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-1-add-files-to-xcode-project" class="nav-link">Step 1: Add Files to Xcode Project</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-2-register-file-type" class="nav-link">Step 2: Register File Type</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-3-add-localization-strings" class="nav-link">Step 3: Add Localization Strings</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-4-build-and-test" class="nav-link">Step 4: Build and Test</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#verification-checklist" class="nav-link">Verification Checklist</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#next-steps" class="nav-link">Next Steps</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="airdrop-sync-feature-setup-instructions">AirDrop Sync Feature - Setup Instructions</h1>
+<h2 id="quick-setup-guide">Quick Setup Guide</h2>
+<p>Follow these steps to add the AirDrop sync feature to your Xcode project.</p>
+<h2 id="step-1-add-files-to-xcode-project">Step 1: Add Files to Xcode Project</h2>
+<p>The following files have been created and need to be added to your Xcode project:</p>
+<h3 id="models">Models</h3>
+<ul>
+<li><code>Models/SyncPackage.swift</code></li>
+</ul>
+<h3 id="services">Services</h3>
+<ul>
+<li><code>Services/ImportService.swift</code></li>
+</ul>
+<h3 id="views">Views</h3>
+<ul>
+<li><code>Views/SyncView.swift</code></li>
+<li><code>Views/ImportConfirmationView.swift</code></li>
+</ul>
+<h3 id="how-to-add-files">How to Add Files:</h3>
+<ol>
+<li>Open <code>Nevus.xcodeproj</code> in Xcode</li>
+<li>In the Project Navigator (left sidebar), right-click on the <strong>Models</strong> folder</li>
+<li>Select "Add Files to Nevus..."</li>
+<li>Navigate to and select <code>Models/SyncPackage.swift</code></li>
+<li>Ensure "Copy items if needed" is <strong>unchecked</strong> (files are already in correct location)</li>
+<li>Ensure "Nevus" target is <strong>checked</strong></li>
+<li>
+<p>Click "Add"</p>
+</li>
+<li>
+<p>Repeat for <strong>Services</strong> folder:</p>
+</li>
+<li>
+<p>Add <code>Services/ImportService.swift</code></p>
+</li>
+<li>
+<p>Repeat for <strong>Views</strong> folder:</p>
+</li>
+<li>Add <code>Views/SyncView.swift</code></li>
+<li>Add <code>Views/ImportConfirmationView.swift</code></li>
+</ol>
+<h2 id="step-2-register-file-type">Step 2: Register File Type</h2>
+<p>Add support for <code>.nevus</code> files so iOS knows to open them with your app.</p>
+<ol>
+<li>In Xcode, select the <strong>Nevus</strong> project in the navigator</li>
+<li>Select the <strong>Nevus</strong> target</li>
+<li>Go to the <strong>Info</strong> tab</li>
+<li>Expand <strong>Document Types</strong> section</li>
+<li>Click the <strong>+</strong> button to add a new document type</li>
+<li>Configure as follows:</li>
+<li><strong>Name</strong>: Nevus Sync Package</li>
+<li><strong>Types</strong>: <code>com.nevus.sync-package</code></li>
+<li><strong>Extensions</strong>: <code>nevus</code></li>
+<li><strong>Role</strong>: Editor</li>
+<li>
+<p><strong>Rank</strong>: Owner</p>
+</li>
+<li>
+<p>Expand <strong>Exported Type Identifiers</strong> section</p>
+</li>
+<li>Click the <strong>+</strong> button</li>
+<li>Configure as follows:</li>
+<li><strong>Description</strong>: Nevus Sync Package</li>
+<li><strong>Identifier</strong>: <code>com.nevus.sync-package</code></li>
+<li><strong>Conforms To</strong>: <code>public.data</code></li>
+<li><strong>Extensions</strong>: <code>nevus</code></li>
+</ol>
+<h2 id="step-3-add-localization-strings">Step 3: Add Localization Strings</h2>
+<p>Add the following strings to <code>Nevus/Localizable.xcstrings</code>:</p>
+<h3 id="english-strings-to-add">English Strings to Add:</h3>
+<pre><code class="language-json">&quot;sync_menu_item&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Sync to Device&quot;
+      }
+    }
+  }
+},
+&quot;sync_title&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Sync Data&quot;
+      }
+    }
+  }
+},
+&quot;sync_date_picker_label&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Export data since&quot;
+      }
+    }
+  }
+},
+&quot;sync_date_section_header&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Select Date&quot;
+      }
+    }
+  }
+},
+&quot;sync_date_section_footer&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Only moles and images created or modified since this date will be exported.&quot;
+      }
+    }
+  }
+},
+&quot;sync_preview_button&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Preview Export&quot;
+      }
+    }
+  }
+},
+&quot;sync_export_section_header&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Export&quot;
+      }
+    }
+  }
+},
+&quot;sync_export_section_footer&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Preview what will be exported before sharing.&quot;
+      }
+    }
+  }
+},
+&quot;sync_stats_moles&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Moles&quot;
+      }
+    }
+  }
+},
+&quot;sync_stats_images&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Images&quot;
+      }
+    }
+  }
+},
+&quot;sync_stats_since&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Since&quot;
+      }
+    }
+  }
+},
+&quot;sync_share_button&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Share via AirDrop&quot;
+      }
+    }
+  }
+},
+&quot;sync_preview_section_header&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Export Preview&quot;
+      }
+    }
+  }
+},
+&quot;sync_confirm_title&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Export Data?&quot;
+      }
+    }
+  }
+},
+&quot;sync_confirm_button&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Export&quot;
+      }
+    }
+  }
+},
+&quot;sync_exporting&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Preparing export...&quot;
+      }
+    }
+  }
+},
+&quot;sync_no_data_error&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;No new data to export since the selected date.&quot;
+      }
+    }
+  }
+},
+&quot;sync_export_failed&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Failed to create export package. Please try again.&quot;
+      }
+    }
+  }
+},
+&quot;import_title&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Import Data&quot;
+      }
+    }
+  }
+},
+&quot;import_loading&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Reading package...&quot;
+      }
+    }
+  }
+},
+&quot;import_info_moles&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Moles&quot;
+      }
+    }
+  }
+},
+&quot;import_info_images&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Images&quot;
+      }
+    }
+  }
+},
+&quot;import_info_since&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Since&quot;
+      }
+    }
+  }
+},
+&quot;import_info_exported&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Exported&quot;
+      }
+    }
+  }
+},
+&quot;import_package_info_header&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Package Information&quot;
+      }
+    }
+  }
+},
+&quot;import_info_duplicates&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Duplicate items will be skipped&quot;
+      }
+    }
+  }
+},
+&quot;import_info_merge&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;New data will be merged with existing&quot;
+      }
+    }
+  }
+},
+&quot;import_info_safe&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Your existing data will not be deleted&quot;
+      }
+    }
+  }
+},
+&quot;import_behavior_header&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Import Behavior&quot;
+      }
+    }
+  }
+},
+&quot;import_confirm_button&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Import Data&quot;
+      }
+    }
+  }
+},
+&quot;import_success&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Import completed successfully&quot;
+      }
+    }
+  }
+},
+&quot;import_no_new_data&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;No new data to import&quot;
+      }
+    }
+  }
+},
+&quot;import_result_moles_imported&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Moles imported&quot;
+      }
+    }
+  }
+},
+&quot;import_result_images_imported&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Images imported&quot;
+      }
+    }
+  }
+},
+&quot;import_result_moles_skipped&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Moles skipped&quot;
+      }
+    }
+  }
+},
+&quot;import_result_images_skipped&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Images skipped&quot;
+      }
+    }
+  }
+},
+&quot;import_result_header&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Import Results&quot;
+      }
+    }
+  }
+},
+&quot;import_errors_header&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Errors&quot;
+      }
+    }
+  }
+},
+&quot;import_error_title&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;Cannot Read Package&quot;
+      }
+    }
+  }
+},
+&quot;import_error_message&quot;: {
+  &quot;extractionState&quot;: &quot;manual&quot;,
+  &quot;localizations&quot;: {
+    &quot;en&quot;: {
+      &quot;stringUnit&quot;: {
+        &quot;state&quot;: &quot;translated&quot;,
+        &quot;value&quot;: &quot;The sync package could not be read. It may be corrupted or from an incompatible version.&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<p><strong>Note</strong>: You can add these strings directly in Xcode's String Catalog editor, or manually edit the <code>Localizable.xcstrings</code> file.</p>
+<h2 id="step-4-build-and-test">Step 4: Build and Test</h2>
+<ol>
+<li>Build the project (⌘B)</li>
+<li>Fix any remaining build errors</li>
+<li>Run on device or simulator</li>
+<li>Test the sync feature:</li>
+<li>Create some moles with images</li>
+<li>Go to Menu → "Sync to Device"</li>
+<li>Select date and preview</li>
+<li>Share via AirDrop to another device</li>
+<li>Accept on receiving device</li>
+<li>Verify import works correctly</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="cannot-find-importconfirmationview-in-scope">"Cannot find 'ImportConfirmationView' in scope"</h3>
+<ul>
+<li>Make sure you added all View files to the Xcode project</li>
+<li>Clean build folder (⇧⌘K) and rebuild</li>
+</ul>
+<h3 id="cannot-find-syncpackage-in-scope">"Cannot find 'SyncPackage' in scope"</h3>
+<ul>
+<li>Make sure you added the Models/SyncPackage.swift file</li>
+<li>Check that it's included in the target</li>
+</ul>
+<h3 id="localization-strings-not-showing">Localization strings not showing</h3>
+<ul>
+<li>Add all required strings to Localizable.xcstrings</li>
+<li>Or use the default values (they're included in the code)</li>
+</ul>
+<h3 id="file-type-not-recognized">File type not recognized</h3>
+<ul>
+<li>Make sure you registered the .nevus file type in Info.plist</li>
+<li>Restart the device after installing</li>
+</ul>
+<h2 id="verification-checklist">Verification Checklist</h2>
+<ul>
+<li>[ ] All 4 new files added to Xcode project</li>
+<li>[ ] Project builds without errors</li>
+<li>[ ] "Sync to Device" appears in menu</li>
+<li>[ ] Date picker works</li>
+<li>[ ] Export preview shows correct counts</li>
+<li>[ ] AirDrop share sheet appears</li>
+<li>[ ] Receiving device opens import dialog</li>
+<li>[ ] Import completes successfully</li>
+<li>[ ] Data appears in receiving device</li>
+</ul>
+<h2 id="next-steps">Next Steps</h2>
+<p>Once setup is complete, refer to <code>AIRDROP_SYNC_FEATURE.md</code> for:
+- Complete feature documentation
+- User guide
+- Privacy details
+- Testing checklist
+- Troubleshooting guide</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

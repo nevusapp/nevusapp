@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Automatic Sync File Deletion Feature - Nevus App</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Nevus App</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../ARCHITECTURE/" class="nav-link">Nevus - iOS App Architektur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IMPLEMENTATION_SUMMARY/" class="nav-link">Nevus - Vollständige Implementierungszusammenfassung</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../INTERNATIONALIZATION/" class="nav-link">Internationalisierung / Internationalization</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IPAD_COMPATIBILITY/" class="nav-link">iPad Compatibility Implementation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../TECHNICAL_SPECIFICATIONS/" class="nav-link">Nevus - Technische Spezifikationen</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Features</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FEATURE/" class="dropdown-item">AirDrop Sync Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FIXES/" class="dropdown-item">AirDrop Sync - File Access Fixes</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_IMPLEMENTATION_COMPLETE/" class="dropdown-item">AirDrop Sync Feature - Complete Implementation Summary</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_SETUP/" class="dropdown-item">AirDrop Sync Feature - Setup Instructions</a>
+</li>
+                                    
+<li>
+    <a href="../ALL_REGIONS_OVERVIEW_FEATURE/" class="dropdown-item">All Regions Overview Feature</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Automatic Sync File Deletion Feature</a>
+</li>
+                                    
+<li>
+    <a href="../DELETE_IMAGES_FEATURE/" class="dropdown-item">Bilder Löschen Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_COMPARISON_FEATURE/" class="dropdown-item">Guided Comparison Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_SCANNING_FEATURE/" class="dropdown-item">Guided Scanning Feature</a>
+</li>
+                                    
+<li>
+    <a href="../IMAGE_EXPORT_FEATURE/" class="dropdown-item">Einzelbild-Export Funktion</a>
+</li>
+                                    
+<li>
+    <a href="../MOLE_LOCATION_FEATURE/" class="dropdown-item">Mole Location on Overview Images Feature</a>
+</li>
+                                    
+<li>
+    <a href="../MONTHLY_REMINDER_FEATURE/" class="dropdown-item">Monthly Reminder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_CONTROLS/" class="dropdown-item">Overlay-Steuerelemente - Benutzerführung</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_MODE_FEATURE/" class="dropdown-item">Overlay-Modus für verbesserte Vergleichbarkeit</a>
+</li>
+                                    
+<li>
+    <a href="../PERFORMANCE_DEBUG/" class="dropdown-item">Performance Debugging Guide</a>
+</li>
+                                    
+<li>
+    <a href="../REFERENCE_IMAGE_SELECTION/" class="dropdown-item">Referenzbild-Auswahl für Overlay-Modus</a>
+</li>
+                                    
+<li>
+    <a href="../REGION_OVERVIEW_FEATURE/" class="dropdown-item">Körperregion-Übersichtsbilder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../SESSION_CLEANUP_FEATURE/" class="dropdown-item">Session Cleanup Feature - Implementation Summary</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../ALL_REGIONS_OVERVIEW_FEATURE/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../DELETE_IMAGES_FEATURE/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#automatic-sync-file-deletion-feature" class="nav-link">Automatic Sync File Deletion Feature</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#implementation-date" class="nav-link">Implementation Date</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#problem-solved" class="nav-link">Problem Solved</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#solution" class="nav-link">Solution</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#technical-implementation" class="nav-link">Technical Implementation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#user-experience" class="nav-link">User Experience</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#safety-features" class="nav-link">Safety Features</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#console-logging" class="nav-link">Console Logging</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#testing-checklist" class="nav-link">Testing Checklist</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#edge-cases-handled" class="nav-link">Edge Cases Handled</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#privacy-security" class="nav-link">Privacy &amp; Security</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#future-enhancements" class="nav-link">Future Enhancements</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#compatibility" class="nav-link">Compatibility</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#related-documentation" class="nav-link">Related Documentation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#summary" class="nav-link">Summary</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="automatic-sync-file-deletion-feature">Automatic Sync File Deletion Feature</h1>
+<h2 id="overview">Overview</h2>
+<p>This feature automatically deletes <code>.nevus</code> sync files from the Files app after successful import, eliminating the need for manual cleanup.</p>
+<h2 id="implementation-date">Implementation Date</h2>
+<p>March 15, 2026</p>
+<h2 id="problem-solved">Problem Solved</h2>
+<p>Previously, when users received a sync package via AirDrop:
+1. File was saved to Files app
+2. User opened it in Nevus
+3. Data was imported successfully
+4. <strong>File remained in Files app</strong> requiring manual deletion</p>
+<p>This created clutter and potential confusion about whether files had been imported.</p>
+<h2 id="solution">Solution</h2>
+<p>The app now automatically deletes the original sync file from the Files app after successful import, while maintaining data safety through a temporary copy during the import process.</p>
+<h2 id="technical-implementation">Technical Implementation</h2>
+<h3 id="files-modified">Files Modified</h3>
+<ol>
+<li><strong><code>Models/ImportState.swift</code></strong></li>
+<li>Added <code>originalFileURL: URL?</code> to track the original file location</li>
+<li>Added <code>importSucceeded: Bool</code> to track import success</li>
+<li>
+<p>Updated <code>reset()</code> to clear both new properties</p>
+</li>
+<li>
+<p><strong><code>Nevus/NevusApp.swift</code></strong></p>
+</li>
+<li>Modified <code>handleIncomingURL()</code> to store original file URL</li>
+<li>Updated <code>handleSheetDismiss()</code> to delete original file after successful import</li>
+<li>
+<p>Added <code>deleteOriginalFile()</code> function with security-scoped resource handling</p>
+</li>
+<li>
+<p><strong><code>Views/ImportConfirmationView.swift</code></strong></p>
+</li>
+<li>Added <code>@EnvironmentObject private var importState: ImportState</code></li>
+<li>Modified <code>performImport()</code> to set <code>importState.importSucceeded = true</code> on success</li>
+<li>Environment object passed from NevusApp</li>
+</ol>
+<h3 id="how-it-works">How It Works</h3>
+<h4 id="1-file-reception-airdrop">1. File Reception (AirDrop)</h4>
+<pre><code class="language-swift">// User receives file via AirDrop
+// iOS calls onOpenURL with the file URL
+</code></pre>
+<h4 id="2-file-handling">2. File Handling</h4>
+<pre><code class="language-swift">handleIncomingURL(url)
+├── Access security-scoped resource
+├── Copy file to temp directory (for safe import)
+├── Store original URL in importState.originalFileURL
+└── Open import confirmation dialog
+</code></pre>
+<h4 id="3-import-process">3. Import Process</h4>
+<pre><code class="language-swift">ImportConfirmationView.performImport()
+├── Import data from temp file
+├── On success: Set importState.importSucceeded = true
+└── User dismisses dialog
+</code></pre>
+<h4 id="4-cleanup">4. Cleanup</h4>
+<pre><code class="language-swift">handleSheetDismiss()
+├── Delete temp file (always)
+├── If import succeeded:
+│   └── Delete original file from Files app
+└── Reset import state
+</code></pre>
+<h3 id="security-scoped-resource-access">Security-Scoped Resource Access</h3>
+<p>The original file requires security-scoped resource access for deletion:</p>
+<pre><code class="language-swift">private func deleteOriginalFile(_ url: URL) {
+    guard url.startAccessingSecurityScopedResource() else {
+        print(&quot;⚠️ Could not access original file for deletion&quot;)
+        return
+    }
+
+    defer {
+        url.stopAccessingSecurityScopedResource()
+    }
+
+    try FileManager.default.removeItem(at: url)
+}
+</code></pre>
+<h2 id="user-experience">User Experience</h2>
+<h3 id="before">Before</h3>
+<ol>
+<li>Receive file via AirDrop</li>
+<li>Tap "Open in Nevus"</li>
+<li>Review and import data</li>
+<li><strong>Manually navigate to Files app</strong></li>
+<li><strong>Find and delete the sync file</strong></li>
+</ol>
+<h3 id="after">After</h3>
+<ol>
+<li>Receive file via AirDrop</li>
+<li>Tap "Open in Nevus"</li>
+<li>Review and import data</li>
+<li>✅ <strong>File automatically deleted</strong> - Done!</li>
+</ol>
+<h2 id="safety-features">Safety Features</h2>
+<h3 id="data-protection">Data Protection</h3>
+<ul>
+<li><strong>Temp Copy</strong>: Original file is copied to temp directory before import</li>
+<li><strong>Import First</strong>: Data is fully imported before any deletion occurs</li>
+<li><strong>Success Check</strong>: Original file only deleted if import succeeds</li>
+<li><strong>Error Handling</strong>: If deletion fails, user can still manually delete</li>
+</ul>
+<h3 id="failure-scenarios">Failure Scenarios</h3>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Import fails</td>
+<td>Original file kept, temp file deleted</td>
+</tr>
+<tr>
+<td>Import cancelled</td>
+<td>Original file kept, temp file deleted</td>
+</tr>
+<tr>
+<td>Deletion fails</td>
+<td>Console warning, user can manually delete</td>
+</tr>
+<tr>
+<td>Permission denied</td>
+<td>Console warning, file remains accessible</td>
+</tr>
+</tbody>
+</table>
+<h2 id="console-logging">Console Logging</h2>
+<h3 id="successful-flow">Successful Flow</h3>
+<pre><code>📥 Received URL: file:///...
+✅ File copied to: file:///tmp/...
+🎭 Creating ImportConfirmationView with URL: ...
+📦 Loading package info from: ...
+✅ Package info loaded successfully
+✅ Import completed
+📋 Sheet dismissed
+🗑️ Cleaned up temp file
+✅ Deleted original sync file from Files app: MoleSync_since_2026-03-15.nevus
+</code></pre>
+<h3 id="import-cancelled">Import Cancelled</h3>
+<pre><code>📥 Received URL: file:///...
+✅ File copied to: file:///tmp/...
+📋 Sheet dismissed
+🗑️ Cleaned up temp file
+(Original file kept - import not completed)
+</code></pre>
+<h3 id="deletion-failed">Deletion Failed</h3>
+<pre><code>📋 Sheet dismissed
+🗑️ Cleaned up temp file
+⚠️ Failed to delete original file: [error details]
+   User can manually delete: MoleSync_since_2026-03-15.nevus
+</code></pre>
+<h2 id="testing-checklist">Testing Checklist</h2>
+<ul>
+<li>[ ] Receive sync file via AirDrop</li>
+<li>[ ] Open in Nevus</li>
+<li>[ ] Complete import successfully</li>
+<li>[ ] Verify original file deleted from Files app</li>
+<li>[ ] Verify data imported correctly</li>
+<li>[ ] Test import cancellation (file should remain)</li>
+<li>[ ] Test import failure (file should remain)</li>
+<li>[ ] Test with file in different locations</li>
+<li>[ ] Test manual import (should also auto-delete)</li>
+<li>[ ] Check console logs for proper cleanup</li>
+</ul>
+<h2 id="edge-cases-handled">Edge Cases Handled</h2>
+<ol>
+<li><strong>User cancels import</strong>: Original file kept</li>
+<li><strong>Import fails</strong>: Original file kept</li>
+<li><strong>Permission denied</strong>: Graceful failure with console warning</li>
+<li><strong>File already deleted</strong>: No error, continues normally</li>
+<li><strong>Multiple imports</strong>: Each tracked independently</li>
+</ol>
+<h2 id="privacy-security">Privacy &amp; Security</h2>
+<ul>
+<li><strong>No Cloud Storage</strong>: Files never leave the device</li>
+<li><strong>Secure Deletion</strong>: Uses iOS FileManager for proper deletion</li>
+<li><strong>Access Control</strong>: Respects iOS security-scoped resources</li>
+<li><strong>User Control</strong>: Import must be confirmed before deletion</li>
+</ul>
+<h2 id="future-enhancements">Future Enhancements</h2>
+<p>Potential improvements for future versions:</p>
+<ol>
+<li><strong>User Preference</strong>: Option to keep files after import</li>
+<li><strong>Deletion Confirmation</strong>: Optional prompt before deletion</li>
+<li><strong>Trash/Undo</strong>: Move to Recently Deleted instead of permanent deletion</li>
+<li><strong>Batch Import</strong>: Handle multiple files with single cleanup</li>
+<li><strong>Statistics</strong>: Track cleanup success rate</li>
+</ol>
+<h2 id="compatibility">Compatibility</h2>
+<ul>
+<li><strong>iOS Version</strong>: iOS 17.0+</li>
+<li><strong>File Types</strong>: <code>.nevus</code> files only</li>
+<li><strong>Transfer Methods</strong>: </li>
+<li>✅ AirDrop (automatic)</li>
+<li>✅ Manual import from Files app</li>
+<li>✅ Share sheet</li>
+<li>✅ Open in... menu</li>
+</ul>
+<h2 id="related-documentation">Related Documentation</h2>
+<ul>
+<li><a href="../AIRDROP_SYNC_IMPLEMENTATION_COMPLETE/">AIRDROP_SYNC_IMPLEMENTATION_COMPLETE.md</a> - Original sync feature</li>
+<li><a href="../AIRDROP_SYNC_FIXES/">AIRDROP_SYNC_FIXES.md</a> - File access fixes</li>
+<li><a href="../AIRDROP_SYNC_SETUP/">AIRDROP_SYNC_SETUP.md</a> - Setup instructions</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<p>This enhancement improves the user experience by automating the cleanup of sync files after successful import. The implementation is safe, respects iOS security boundaries, and provides appropriate fallbacks for edge cases.</p>
+<p><strong>Key Benefits:</strong>
+- ✅ No manual file cleanup required
+- ✅ Automatic deletion after successful import
+- ✅ Safe: Original file kept if import fails
+- ✅ Transparent: Console logging for debugging
+- ✅ Graceful: Handles permission errors appropriately</p>
+<hr />
+<p><strong>Status</strong>: ✅ Implemented and Ready for Testing
+<strong>Version</strong>: 1.0</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

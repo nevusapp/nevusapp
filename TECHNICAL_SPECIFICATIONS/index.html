@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Nevus - Technische Spezifikationen - Nevus App</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Nevus App</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../ARCHITECTURE/" class="nav-link">Nevus - iOS App Architektur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../IMPLEMENTATION_SUMMARY/" class="nav-link">Nevus - Vollständige Implementierungszusammenfassung</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../INTERNATIONALIZATION/" class="nav-link">Internationalisierung / Internationalization</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../IPAD_COMPATIBILITY/" class="nav-link">iPad Compatibility Implementation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Nevus - Technische Spezifikationen</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Features</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../Features/AIRDROP_SYNC_FEATURE/" class="dropdown-item">AirDrop Sync Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/AIRDROP_SYNC_FIXES/" class="dropdown-item">AirDrop Sync - File Access Fixes</a>
+</li>
+                                    
+<li>
+    <a href="../Features/AIRDROP_SYNC_IMPLEMENTATION_COMPLETE/" class="dropdown-item">AirDrop Sync Feature - Complete Implementation Summary</a>
+</li>
+                                    
+<li>
+    <a href="../Features/AIRDROP_SYNC_SETUP/" class="dropdown-item">AirDrop Sync Feature - Setup Instructions</a>
+</li>
+                                    
+<li>
+    <a href="../Features/ALL_REGIONS_OVERVIEW_FEATURE/" class="dropdown-item">All Regions Overview Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/AUTO_DELETE_SYNC_FILES/" class="dropdown-item">Automatic Sync File Deletion Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/DELETE_IMAGES_FEATURE/" class="dropdown-item">Bilder Löschen Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/GUIDED_COMPARISON_FEATURE/" class="dropdown-item">Guided Comparison Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/GUIDED_SCANNING_FEATURE/" class="dropdown-item">Guided Scanning Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/IMAGE_EXPORT_FEATURE/" class="dropdown-item">Einzelbild-Export Funktion</a>
+</li>
+                                    
+<li>
+    <a href="../Features/MOLE_LOCATION_FEATURE/" class="dropdown-item">Mole Location on Overview Images Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/MONTHLY_REMINDER_FEATURE/" class="dropdown-item">Monthly Reminder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/OVERLAY_CONTROLS/" class="dropdown-item">Overlay-Steuerelemente - Benutzerführung</a>
+</li>
+                                    
+<li>
+    <a href="../Features/OVERLAY_MODE_FEATURE/" class="dropdown-item">Overlay-Modus für verbesserte Vergleichbarkeit</a>
+</li>
+                                    
+<li>
+    <a href="../Features/PERFORMANCE_DEBUG/" class="dropdown-item">Performance Debugging Guide</a>
+</li>
+                                    
+<li>
+    <a href="../Features/REFERENCE_IMAGE_SELECTION/" class="dropdown-item">Referenzbild-Auswahl für Overlay-Modus</a>
+</li>
+                                    
+<li>
+    <a href="../Features/REGION_OVERVIEW_FEATURE/" class="dropdown-item">Körperregion-Übersichtsbilder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../Features/SESSION_CLEANUP_FEATURE/" class="dropdown-item">Session Cleanup Feature - Implementation Summary</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../IPAD_COMPATIBILITY/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../Features/AIRDROP_SYNC_FEATURE/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#nevus-technische-spezifikationen" class="nav-link">Nevus - Technische Spezifikationen</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#system-anforderungen" class="nav-link">System-Anforderungen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#datenmodell-spezifikationen" class="nav-link">Datenmodell-Spezifikationen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#kamera-spezifikationen" class="nav-link">Kamera-Spezifikationen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#sensor-spezifikationen" class="nav-link">Sensor-Spezifikationen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#machine-learning-spezifikationen" class="nav-link">Machine Learning Spezifikationen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#bildvergleich-spezifikationen" class="nav-link">Bildvergleich Spezifikationen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#storage-spezifikationen" class="nav-link">Storage Spezifikationen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#performance-anforderungen" class="nav-link">Performance-Anforderungen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#sicherheit-und-datenschutz" class="nav-link">Sicherheit und Datenschutz</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#api-versionen" class="nav-link">API-Versionen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#testing-spezifikationen" class="nav-link">Testing-Spezifikationen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#accessibility-anforderungen" class="nav-link">Accessibility-Anforderungen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lokalisierung" class="nav-link">Lokalisierung</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#monitoring-und-analytics" class="nav-link">Monitoring und Analytics</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#deployment" class="nav-link">Deployment</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#implementierte-features-stand-marz-2026" class="nav-link">Implementierte Features (Stand März 2026)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#zukunftige-erweiterungen" class="nav-link">Zukünftige Erweiterungen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="nevus-technische-spezifikationen">Nevus - Technische Spezifikationen</h1>
+<p><strong>Letzte Aktualisierung:</strong> 15. März 2026
+<strong>Version:</strong> 1.0 (Implementiert)</p>
+<h2 id="system-anforderungen">System-Anforderungen</h2>
+<h3 id="minimum-requirements">Minimum Requirements</h3>
+<ul>
+<li><strong>iOS Version</strong>: 17.6+ (SwiftData erforderlich)</li>
+<li><strong>Device</strong>: iPhone 12 oder neuer, iPad (alle Modelle mit iOS 17.6+)</li>
+<li><strong>Storage</strong>: 500 MB freier Speicher (minimal)</li>
+<li><strong>RAM</strong>: 3 GB</li>
+<li><strong>Kamera</strong>: Rückkamera erforderlich</li>
+<li><strong>Sensoren</strong>: Keine Sensordaten aktuell implementiert</li>
+</ul>
+<h3 id="empfohlene-requirements">Empfohlene Requirements</h3>
+<ul>
+<li><strong>iOS Version</strong>: 17.6+</li>
+<li><strong>Device</strong>: iPhone 14 Pro oder neuer, iPad Pro</li>
+<li><strong>Storage</strong>: 2 GB freier Speicher</li>
+<li><strong>iCloud</strong>: Optional für automatisches Backup (SwiftData iCloud Sync)</li>
+</ul>
+<h2 id="datenmodell-spezifikationen">Datenmodell-Spezifikationen</h2>
+<h3 id="mole-entity">Mole Entity</h3>
+<table>
+<thead>
+<tr>
+<th>Feld</th>
+<th>Typ</th>
+<th>Beschreibung</th>
+<th>Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>UUID</td>
+<td>Eindeutige Kennung</td>
+<td>Primary Key, Unique</td>
+</tr>
+<tr>
+<td><code>createdAt</code></td>
+<td>Date</td>
+<td>Erstellungsdatum</td>
+<td>Not Null</td>
+</tr>
+<tr>
+<td><code>lastModified</code></td>
+<td>Date</td>
+<td>Letzte Änderung</td>
+<td>Not Null, Auto-update</td>
+</tr>
+<tr>
+<td><code>bodyRegion</code></td>
+<td>String</td>
+<td>Körperregion</td>
+<td>12 Regionen (siehe BodyRegion Enum)</td>
+</tr>
+<tr>
+<td><code>bodySide</code></td>
+<td>String</td>
+<td>Körperseite</td>
+<td>Region-spezifische Seiten (siehe BodySide Enum)</td>
+</tr>
+<tr>
+<td><code>notes</code></td>
+<td>String</td>
+<td>Benutzer-Notizen</td>
+<td>Default: ""</td>
+</tr>
+<tr>
+<td><code>referenceImageID</code></td>
+<td>UUID?</td>
+<td>Referenzbild für Overlay</td>
+<td>Optional, default: ältestes Bild</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relationships:</strong>
+- <code>images</code>: One-to-Many zu MoleImage (Cascade Delete)
+- <code>locationMarkers</code>: One-to-Many zu MoleLocationMarker (Cascade Delete)</p>
+<p><strong>Implementierte Body Regions (12):</strong>
+- head, neck, armLeft, armRight, chest, abdomen, pelvis, backUpper, backMiddle, backLower, legLeft, legRight</p>
+<p><strong>Body Sides (region-spezifisch):</strong>
+- Head: headTop, headFront, headLeft, headRight, headBack
+- Neck: neckFront, neckLeft, neckRight, neckBack
+- Torso: torsoLeft, torsoCenter, torsoRight
+- Arms: armUpperFront, armUpperBack, armLowerInner, armLowerOuter, handInner, handOuter
+- Legs: legThighFront, legThighBack, legThighInner, legThighOuter, legCalfFront, legCalfBack, legCalfInner, legCalfOuter, footTop, footSole</p>
+<h3 id="moleimage-entity">MoleImage Entity</h3>
+<table>
+<thead>
+<tr>
+<th>Feld</th>
+<th>Typ</th>
+<th>Beschreibung</th>
+<th>Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>UUID</td>
+<td>Eindeutige Kennung</td>
+<td>Primary Key, Unique</td>
+</tr>
+<tr>
+<td><code>captureDate</code></td>
+<td>Date</td>
+<td>Aufnahmedatum</td>
+<td>Not Null</td>
+</tr>
+<tr>
+<td><code>imageData</code></td>
+<td>Data</td>
+<td>Vollbild (JPEG)</td>
+<td>External Storage, 90% Qualität</td>
+</tr>
+<tr>
+<td><code>thumbnailData</code></td>
+<td>Data</td>
+<td>Thumbnail (JPEG)</td>
+<td>200x200, 70% Qualität</td>
+</tr>
+<tr>
+<td><code>imageWidth</code></td>
+<td>Int</td>
+<td>Bildbreite in Pixel</td>
+<td>Not Null</td>
+</tr>
+<tr>
+<td><code>imageHeight</code></td>
+<td>Int</td>
+<td>Bildhöhe in Pixel</td>
+<td>Not Null</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relationships:</strong>
+- <code>mole</code>: Many-to-One zu Mole</p>
+<p><strong>Hinweis:</strong> Sensordaten und ML-Features sind aktuell nicht implementiert.</p>
+<h3 id="bodyregionoverview-entity">BodyRegionOverview Entity</h3>
+<table>
+<thead>
+<tr>
+<th>Feld</th>
+<th>Typ</th>
+<th>Beschreibung</th>
+<th>Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>UUID</td>
+<td>Eindeutige Kennung</td>
+<td>Primary Key, Unique</td>
+</tr>
+<tr>
+<td><code>bodyRegion</code></td>
+<td>String</td>
+<td>Körperregion</td>
+<td>Entspricht BodyRegion Enum</td>
+</tr>
+<tr>
+<td><code>imageData</code></td>
+<td>Data</td>
+<td>Vollbild (JPEG)</td>
+<td>External Storage</td>
+</tr>
+<tr>
+<td><code>thumbnailData</code></td>
+<td>Data</td>
+<td>Thumbnail (JPEG)</td>
+<td>200x200</td>
+</tr>
+<tr>
+<td><code>captureDate</code></td>
+<td>Date</td>
+<td>Aufnahmedatum</td>
+<td>Not Null</td>
+</tr>
+<tr>
+<td><code>notes</code></td>
+<td>String</td>
+<td>Notizen zum Übersichtsbild</td>
+<td>Default: ""</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Hinweis:</strong> Übersichtsbilder für gesamte Körperregionen, unabhängig von einzelnen Leberflecken.</p>
+<h3 id="molelocationmarker-entity">MoleLocationMarker Entity</h3>
+<table>
+<thead>
+<tr>
+<th>Feld</th>
+<th>Typ</th>
+<th>Beschreibung</th>
+<th>Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>UUID</td>
+<td>Eindeutige Kennung</td>
+<td>Primary Key, Unique</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>Double</td>
+<td>X-Koordinate</td>
+<td>0.0 - 1.0</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>Double</td>
+<td>Y-Koordinate</td>
+<td>0.0 - 1.0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relationships:</strong>
+- <code>mole</code>: Many-to-One zu Mole
+- <code>overviewImage</code>: Many-to-One zu BodyRegionOverview</p>
+<p><strong>Hinweis:</strong> Verknüpft Leberflecke mit Positionen auf Übersichtsbildern.</p>
+<h2 id="kamera-spezifikationen">Kamera-Spezifikationen</h2>
+<h3 id="capture-settings">Capture Settings</h3>
+<pre><code class="language-swift">struct CameraConfiguration {
+    // Photo Settings
+    static let photoFormat = AVFileType.jpg
+    static let photoQuality: CGFloat = 0.9
+    static let maxResolution = CGSize(width: 4032, height: 3024) // 12 MP
+
+    // Capture Settings
+    static let flashMode: AVCaptureDevice.FlashMode = .auto
+    static let focusMode: AVCaptureDevice.FocusMode = .continuousAutoFocus
+    static let exposureMode: AVCaptureDevice.ExposureMode = .continuousAutoExposure
+    static let whiteBalanceMode: AVCaptureDevice.WhiteBalanceMode = .continuousAutoWhiteBalance
+
+    // Stabilization
+    static let videoStabilization: AVCaptureVideoStabilizationMode = .auto
+
+    // HDR
+    static let isHDREnabled = true
+}
+</code></pre>
+<h3 id="thumbnail-generation">Thumbnail Generation</h3>
+<pre><code class="language-swift">struct ThumbnailConfiguration {
+    static let size = CGSize(width: 200, height: 200)
+    static let compressionQuality: CGFloat = 0.7
+    static let contentMode: UIView.ContentMode = .scaleAspectFill
+}
+</code></pre>
+<h2 id="sensor-spezifikationen">Sensor-Spezifikationen</h2>
+<h3 id="coremotion-configuration">CoreMotion Configuration</h3>
+<pre><code class="language-swift">struct SensorConfiguration {
+    // Update Intervals
+    static let motionUpdateInterval: TimeInterval = 0.1 // 10 Hz
+    static let altimeterUpdateInterval: TimeInterval = 1.0 // 1 Hz
+
+    // Thresholds
+    static let stabilityThreshold: Double = 0.05 // Radians
+    static let minimumStabilityDuration: TimeInterval = 0.5 // Seconds
+
+    // Calibration
+    static let requiresCalibration = true
+    static let calibrationSamples = 10
+}
+</code></pre>
+<h3 id="body-region-mapping">Body Region Mapping</h3>
+<pre><code class="language-swift">enum BodyRegionMapping {
+    case head       // pitch &gt; 45°
+    case torso      // pitch -15° to 45°
+    case arms       // roll &gt; 30° or &lt; -30°
+    case legs       // pitch &lt; -15°
+
+    static func region(from orientation: DeviceOrientation) -&gt; BodyRegion {
+        let pitchDegrees = orientation.pitch * 180 / .pi
+        let rollDegrees = abs(orientation.roll * 180 / .pi)
+
+        if pitchDegrees &gt; 45 {
+            return .head
+        } else if pitchDegrees &lt; -15 {
+            return .legs
+        } else if rollDegrees &gt; 30 {
+            return .arms
+        } else {
+            return .torso
+        }
+    }
+
+    static func side(from orientation: DeviceOrientation) -&gt; BodySide {
+        let rollDegrees = orientation.roll * 180 / .pi
+
+        if rollDegrees &gt; 30 {
+            return .right
+        } else if rollDegrees &lt; -30 {
+            return .left
+        } else if abs(orientation.yaw * 180 / .pi) &gt; 135 {
+            return .back
+        } else {
+            return .center
+        }
+    }
+}
+</code></pre>
+<h2 id="machine-learning-spezifikationen">Machine Learning Spezifikationen</h2>
+<p><strong>Status:</strong> Nicht implementiert</p>
+<p>Machine Learning Features sind für zukünftige Versionen geplant:
+- Automatische Leberfleck-Erkennung
+- Feature-Extraktion für Bildvergleich
+- Automatische Zuordnung neuer Bilder
+- Änderungs-Detektion</p>
+<h2 id="bildvergleich-spezifikationen">Bildvergleich Spezifikationen</h2>
+<h3 id="implementierte-features">Implementierte Features</h3>
+<p><strong>ComparisonView:</strong>
+- Side-by-Side Vergleich
+- Overlay-Modus mit Transparenz-Slider
+- Pinch-to-Zoom und Pan
+- Swap-Funktion zum Bildertausch
+- Datumsanzeige für beide Bilder</p>
+<p><strong>Guided Comparison:</strong>
+- Systematischer Durchlauf aller Leberflecke
+- Fortschrittsanzeige
+- Inline-Notizen-Bearbeitung
+- Überspringen-Funktion
+- Statistiken am Ende</p>
+<h3 id="referenzbild-auswahl">Referenzbild-Auswahl</h3>
+<pre><code class="language-swift">// Mole.swift
+var referenceImage: MoleImage? {
+    // Wenn spezifisches Referenzbild gesetzt
+    if let refID = referenceImageID,
+       let image = images.first(where: { $0.id == refID }) {
+        return image
+    }
+    // Sonst: ältestes Bild als Standard
+    return images.sorted(by: { $0.captureDate &lt; $1.captureDate }).first
+}
+</code></pre>
+<h2 id="storage-spezifikationen">Storage Spezifikationen</h2>
+<h3 id="image-compression">Image Compression</h3>
+<pre><code class="language-swift">struct ImageCompressionSettings {
+    // Full Image
+    static let fullImageQuality: CGFloat = 0.9
+    static let fullImageMaxSize: Int = 10 * 1024 * 1024 // 10 MB
+
+    // Thumbnail
+    static let thumbnailSize = CGSize(width: 200, height: 200)
+    static let thumbnailQuality: CGFloat = 0.7
+    static let thumbnailMaxSize: Int = 100 * 1024 // 100 KB
+}
+</code></pre>
+<h3 id="database-limits">Database Limits</h3>
+<pre><code class="language-swift">struct DatabaseLimits {
+    static let maxMolesPerUser = 1000
+    static let maxImagesPerMole = 50
+    static let maxTotalImages = 5000
+    static let maxStorageSize: Int64 = 5 * 1024 * 1024 * 1024 // 5 GB
+}
+</code></pre>
+<h3 id="icloud-sync">iCloud Sync</h3>
+<p><strong>Status:</strong> Automatisch via SwiftData</p>
+<p>SwiftData bietet automatische iCloud-Synchronisation:
+- Keine manuelle CloudKit-Konfiguration erforderlich
+- Automatische Konfliktauflösung
+- Opt-in durch Benutzer in iOS-Einstellungen
+- Verschlüsselte Übertragung</p>
+<h3 id="airdrop-sync-implementiert">AirDrop Sync (Implementiert)</h3>
+<p><strong>Manuelle Geräte-zu-Gerät Synchronisation:</strong>
+- Export als .nevus Paket (ZIP)
+- Delta-Sync (nur neue Daten seit Datum)
+- UUID-basierte Duplikat-Erkennung
+- Automatischer Import via AirDrop
+- Keine Cloud-Abhängigkeit
+- Vollständige Privatsphäre</p>
+<p><strong>Siehe:</strong> <code>Documentation/Features/AIRDROP_SYNC_IMPLEMENTATION_COMPLETE.md</code></p>
+<h2 id="performance-anforderungen">Performance-Anforderungen</h2>
+<h3 id="response-times">Response Times</h3>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Target</th>
+<th>Maximum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App Launch</td>
+<td>&lt; 2s</td>
+<td>&lt; 3s</td>
+</tr>
+<tr>
+<td>Camera Open</td>
+<td>&lt; 1s</td>
+<td>&lt; 2s</td>
+</tr>
+<tr>
+<td>Photo Capture</td>
+<td>&lt; 1s</td>
+<td>&lt; 2s</td>
+</tr>
+<tr>
+<td>ML Inference</td>
+<td>&lt; 500ms</td>
+<td>&lt; 1s</td>
+</tr>
+<tr>
+<td>Image Load</td>
+<td>&lt; 200ms</td>
+<td>&lt; 500ms</td>
+</tr>
+<tr>
+<td>Mole List Load</td>
+<td>&lt; 300ms</td>
+<td>&lt; 1s</td>
+</tr>
+<tr>
+<td>Comparison View</td>
+<td>&lt; 500ms</td>
+<td>&lt; 1s</td>
+</tr>
+<tr>
+<td>CloudKit Sync</td>
+<td>&lt; 5s</td>
+<td>&lt; 10s</td>
+</tr>
+</tbody>
+</table>
+<h3 id="memory-limits">Memory Limits</h3>
+<pre><code class="language-swift">struct MemoryLimits {
+    static let maxImageCacheSize: Int = 100 * 1024 * 1024 // 100 MB
+    static let maxThumbnailCacheSize: Int = 20 * 1024 * 1024 // 20 MB
+    static let maxMLModelMemory: Int = 50 * 1024 * 1024 // 50 MB
+}
+</code></pre>
+<h3 id="battery-consumption">Battery Consumption</h3>
+<ul>
+<li><strong>Target</strong>: &lt; 5% pro Stunde aktiver Nutzung</li>
+<li><strong>ML Inference</strong>: Optimiert für Neural Engine</li>
+<li><strong>Background Sync</strong>: Nur bei WLAN und Ladung</li>
+<li><strong>Location Services</strong>: Nicht verwendet (keine GPS-Daten)</li>
+</ul>
+<h2 id="sicherheit-und-datenschutz">Sicherheit und Datenschutz</h2>
+<h3 id="data-encryption">Data Encryption</h3>
+<pre><code class="language-swift">struct SecurityConfiguration {
+    // Local Storage
+    static let useFileProtection = true
+    static let fileProtectionLevel: FileProtectionType = .complete
+
+    // CloudKit
+    static let useEncryption = true
+    static let encryptionType: CKRecordZone.Capabilities = .fetchChanges
+
+    // Biometric Authentication
+    static let requireBiometrics = true
+    static let biometricPolicy: LAPolicy = .deviceOwnerAuthenticationWithBiometrics
+}
+</code></pre>
+<h3 id="privacy-settings">Privacy Settings</h3>
+<pre><code class="language-swift">struct PrivacySettings {
+    // Data Collection
+    static let collectLocation = false // Not used - no GPS data
+    static let collectAnalytics = false // Opt-in
+    static let shareWithHealthKit = false // Opt-in
+
+    // Data Retention
+    static let autoDeleteAfterDays: Int? = nil // Never auto-delete
+    static let exportFormat: ExportFormat = .pdf
+}
+</code></pre>
+<h2 id="api-versionen">API-Versionen</h2>
+<h3 id="implementierte-api-versions">Implementierte API Versions</h3>
+<pre><code class="language-swift">struct APIVersions {
+    static let swiftVersion = &quot;5.9+&quot;
+    static let iOS = &quot;17.6+&quot;
+    static let swiftUI = &quot;5.0&quot;
+    static let swiftData = &quot;1.0&quot;
+    static let avFoundation = &quot;1.0&quot;
+}
+</code></pre>
+<p><strong>Nicht verwendet:</strong>
+- Core ML (geplant für Phase 2)
+- Vision Framework (geplant für Phase 2)
+- CoreMotion (geplant für Phase 2)
+- CloudKit (SwiftData nutzt automatisch iCloud)</p>
+<h2 id="testing-spezifikationen">Testing-Spezifikationen</h2>
+<h3 id="unit-test-coverage">Unit Test Coverage</h3>
+<ul>
+<li><strong>Target</strong>: &gt; 80% Code Coverage</li>
+<li><strong>Critical Paths</strong>: 100% Coverage</li>
+<li>Matching Algorithm</li>
+<li>Sensor Data Processing</li>
+<li>ML Feature Extraction</li>
+<li>Data Persistence</li>
+</ul>
+<h3 id="performance-tests">Performance Tests</h3>
+<pre><code class="language-swift">struct PerformanceTestTargets {
+    static let imageLoadTime: TimeInterval = 0.5
+    static let mlInferenceTime: TimeInterval = 1.0
+    static let matchingAlgorithmTime: TimeInterval = 2.0
+    static let syncTime: TimeInterval = 10.0
+}
+</code></pre>
+<h3 id="ui-test-scenarios">UI Test Scenarios</h3>
+<ol>
+<li><strong>Happy Path</strong>: Aufnahme → Automatische Zuordnung → Datumsauswahl → Vergleich</li>
+<li><strong>Manual Assignment</strong>: Aufnahme → Manuelle Auswahl → Speichern</li>
+<li><strong>Comparison Flow</strong>: Mole auswählen → Datum wählen → Bilder vergleichen → Notizen</li>
+<li><strong>Sync Flow</strong>: Offline-Aufnahme → Online → Sync → Konflikt</li>
+<li><strong>Error Handling</strong>: Kamera-Fehler, Speicher voll, Netzwerk-Fehler</li>
+</ol>
+<h2 id="accessibility-anforderungen">Accessibility-Anforderungen</h2>
+<h3 id="voiceover-support">VoiceOver Support</h3>
+<ul>
+<li>Alle UI-Elemente mit aussagekräftigen Labels</li>
+<li>Kamera-Feedback akustisch</li>
+<li>Bildvergleich beschreibbar</li>
+<li>Navigation vollständig per VoiceOver</li>
+</ul>
+<h3 id="dynamic-type">Dynamic Type</h3>
+<ul>
+<li>Alle Texte skalierbar</li>
+<li>Minimum: Large</li>
+<li>Maximum: AX5</li>
+<li>Layout-Anpassung bei Größenänderung</li>
+</ul>
+<h3 id="color-contrast">Color Contrast</h3>
+<ul>
+<li>WCAG AA Standard (4.5:1 für Text)</li>
+<li>Farbunabhängige Informationen</li>
+<li>Dark Mode Support</li>
+</ul>
+<h2 id="lokalisierung">Lokalisierung</h2>
+<h3 id="implementierte-sprachen">Implementierte Sprachen</h3>
+<ul>
+<li>🇩🇪 Deutsch (de) - Basissprache</li>
+<li>🇬🇧 Englisch (en) - Vollständig</li>
+</ul>
+<p><strong>Format:</strong> String Catalog (<code>Localizable.xcstrings</code>)</p>
+<p><strong>Lokalisierte Komponenten:</strong>
+- Alle UI-Texte
+- Body Regions (12 Regionen)
+- Body Sides (26 Seiten)
+- Fehlermeldungen
+- Guided Scanning
+- Guided Comparison
+- AirDrop Sync
+- Export/Import</p>
+<p><strong>Siehe:</strong> <code>Documentation/INTERNATIONALIZATION.md</code></p>
+<h3 id="geplante-erweiterungen">Geplante Erweiterungen</h3>
+<ul>
+<li>Französisch (fr)</li>
+<li>Spanisch (es)</li>
+<li>Italienisch (it)</li>
+</ul>
+<h2 id="monitoring-und-analytics">Monitoring und Analytics</h2>
+<h3 id="error-tracking">Error Tracking</h3>
+<pre><code class="language-swift">struct ErrorTracking {
+    static let trackCrashes = true
+    static let trackErrors = true
+    static let trackPerformance = true
+
+    // Privacy-preserving
+    static let anonymizeUserData = true
+    static let excludeHealthData = true
+}
+</code></pre>
+<h3 id="performance-metrics">Performance Metrics</h3>
+<ul>
+<li>App Launch Time</li>
+<li>Screen Load Times</li>
+<li>ML Inference Duration</li>
+<li>Network Request Duration</li>
+<li>Memory Usage</li>
+<li>Battery Impact</li>
+</ul>
+<h2 id="deployment">Deployment</h2>
+<h3 id="build-configuration">Build Configuration</h3>
+<pre><code class="language-swift">struct BuildConfiguration {
+    #if DEBUG
+    static let environment = &quot;Development&quot;
+    static let apiEndpoint = &quot;https://dev.api.nevus.com&quot;
+    static let logLevel = &quot;verbose&quot;
+    #else
+    static let environment = &quot;Production&quot;
+    static let apiEndpoint = &quot;https://api.nevus.com&quot;
+    static let logLevel = &quot;error&quot;
+    #endif
+}
+</code></pre>
+<h3 id="app-store-metadata">App Store Metadata</h3>
+<ul>
+<li><strong>Category</strong>: Health &amp; Fitness</li>
+<li><strong>Age Rating</strong>: 4+</li>
+<li><strong>Privacy Labels</strong>: Required</li>
+<li><strong>In-App Purchases</strong>: None (Phase 1)</li>
+<li><strong>Subscriptions</strong>: None (Phase 1)</li>
+</ul>
+<h2 id="implementierte-features-stand-marz-2026">Implementierte Features (Stand März 2026)</h2>
+<h3 id="core-features">✅ Core Features</h3>
+<ul>
+<li>SwiftData Persistenz mit iCloud Backup</li>
+<li>Kamera-Integration (AVFoundation)</li>
+<li>12 Körperregionen, 26 Körperseiten</li>
+<li>Mehrere Bilder pro Leberfleck</li>
+<li>Bearbeitbare Notizen</li>
+<li>Referenzbild-Auswahl für Overlay</li>
+</ul>
+<h3 id="bildvergleich">✅ Bildvergleich</h3>
+<ul>
+<li>Side-by-Side Vergleich</li>
+<li>Overlay-Modus mit Transparenz</li>
+<li>Pinch-to-Zoom und Pan</li>
+<li>Swap-Funktion</li>
+</ul>
+<h3 id="ubersichtsbilder">✅ Übersichtsbilder</h3>
+<ul>
+<li>Körperregion-Übersichtsbilder</li>
+<li>Inline-Anzeige in Hauptansicht</li>
+<li>Detailansicht mit Zoom</li>
+<li>Notizen pro Übersichtsbild</li>
+<li>Verknüpfung mit Leberflecken (MoleLocationMarker)</li>
+</ul>
+<h3 id="guided-features">✅ Guided Features</h3>
+<ul>
+<li>Guided Scanning (systematisches Fotografieren)</li>
+<li>Guided Comparison (systematischer Vergleich)</li>
+<li>Fortschrittsanzeige</li>
+<li>Statistiken</li>
+</ul>
+<h3 id="exportimport">✅ Export/Import</h3>
+<ul>
+<li>Einzelner Leberfleck (ZIP)</li>
+<li>Alle Leberflecke (ZIP)</li>
+<li>Einzelnes Bild (JPEG)</li>
+<li>AirDrop Sync (.nevus Pakete)</li>
+<li>Delta-Sync (nur neue Daten)</li>
+</ul>
+<h3 id="ipad-unterstutzung">✅ iPad-Unterstützung</h3>
+<ul>
+<li>NavigationSplitView (Master-Detail)</li>
+<li>Adaptive Layouts</li>
+<li>Größere Grids</li>
+<li>Multitasking-Support</li>
+</ul>
+<h3 id="weitere-features">✅ Weitere Features</h3>
+<ul>
+<li>Internationalisierung (DE/EN)</li>
+<li>Session Cleanup</li>
+<li>Monatliche Erinnerungen</li>
+<li>Overlay-Modus mit Referenzbild</li>
+<li>Löschen mit Bestätigung</li>
+</ul>
+<h2 id="zukunftige-erweiterungen">Zukünftige Erweiterungen</h2>
+<h3 id="phase-2-geplant">Phase 2 (Geplant)</h3>
+<ul>
+<li>✅ ~~iPad-Optimierung~~ (Implementiert)</li>
+<li>Core ML Integration</li>
+<li>Automatische Leberfleck-Erkennung</li>
+<li>Sensordaten (CoreMotion)</li>
+<li>Änderungs-Detektion mit ML</li>
+<li>PDF-Export für Ärzte</li>
+<li>Erweiterte Statistiken</li>
+</ul>
+<h3 id="phase-3-geplant">Phase 3 (Geplant)</h3>
+<ul>
+<li>Apple Watch Companion App</li>
+<li>HealthKit Integration</li>
+<li>Familien-Sharing</li>
+<li>Dermatologen-Portal</li>
+<li>Risiko-Analyse mit ML</li>
+</ul>
+<h3 id="phase-4-vision">Phase 4 (Vision)</h3>
+<ul>
+<li>AR-basierte Körperkarte</li>
+<li>3D-Scanning</li>
+<li>Telemedicine-Integration</li>
+<li>KI-gestützte Früherkennung</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Overlay-Modus für verbesserte Vergleichbarkeit - Nevus App</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Nevus App</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../ARCHITECTURE/" class="nav-link">Nevus - iOS App Architektur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IMPLEMENTATION_SUMMARY/" class="nav-link">Nevus - Vollständige Implementierungszusammenfassung</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../INTERNATIONALIZATION/" class="nav-link">Internationalisierung / Internationalization</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IPAD_COMPATIBILITY/" class="nav-link">iPad Compatibility Implementation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../TECHNICAL_SPECIFICATIONS/" class="nav-link">Nevus - Technische Spezifikationen</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Features</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FEATURE/" class="dropdown-item">AirDrop Sync Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FIXES/" class="dropdown-item">AirDrop Sync - File Access Fixes</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_IMPLEMENTATION_COMPLETE/" class="dropdown-item">AirDrop Sync Feature - Complete Implementation Summary</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_SETUP/" class="dropdown-item">AirDrop Sync Feature - Setup Instructions</a>
+</li>
+                                    
+<li>
+    <a href="../ALL_REGIONS_OVERVIEW_FEATURE/" class="dropdown-item">All Regions Overview Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AUTO_DELETE_SYNC_FILES/" class="dropdown-item">Automatic Sync File Deletion Feature</a>
+</li>
+                                    
+<li>
+    <a href="../DELETE_IMAGES_FEATURE/" class="dropdown-item">Bilder Löschen Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_COMPARISON_FEATURE/" class="dropdown-item">Guided Comparison Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_SCANNING_FEATURE/" class="dropdown-item">Guided Scanning Feature</a>
+</li>
+                                    
+<li>
+    <a href="../IMAGE_EXPORT_FEATURE/" class="dropdown-item">Einzelbild-Export Funktion</a>
+</li>
+                                    
+<li>
+    <a href="../MOLE_LOCATION_FEATURE/" class="dropdown-item">Mole Location on Overview Images Feature</a>
+</li>
+                                    
+<li>
+    <a href="../MONTHLY_REMINDER_FEATURE/" class="dropdown-item">Monthly Reminder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_CONTROLS/" class="dropdown-item">Overlay-Steuerelemente - Benutzerführung</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Overlay-Modus für verbesserte Vergleichbarkeit</a>
+</li>
+                                    
+<li>
+    <a href="../PERFORMANCE_DEBUG/" class="dropdown-item">Performance Debugging Guide</a>
+</li>
+                                    
+<li>
+    <a href="../REFERENCE_IMAGE_SELECTION/" class="dropdown-item">Referenzbild-Auswahl für Overlay-Modus</a>
+</li>
+                                    
+<li>
+    <a href="../REGION_OVERVIEW_FEATURE/" class="dropdown-item">Körperregion-Übersichtsbilder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../SESSION_CLEANUP_FEATURE/" class="dropdown-item">Session Cleanup Feature - Implementation Summary</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../OVERLAY_CONTROLS/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../PERFORMANCE_DEBUG/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#overlay-modus-fur-verbesserte-vergleichbarkeit" class="nav-link">Overlay-Modus für verbesserte Vergleichbarkeit</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#ubersicht" class="nav-link">Übersicht</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#problem" class="nav-link">Problem</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#losung-overlay-modus" class="nav-link">Lösung: Overlay-Modus</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#implementierung" class="nav-link">Implementierung</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#benutzerfuhrung" class="nav-link">Benutzerführung</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#vorteile" class="nav-link">Vorteile</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#technische-details" class="nav-link">Technische Details</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#zukunftige-erweiterungen" class="nav-link">Zukünftige Erweiterungen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#verwandte-features" class="nav-link">Verwandte Features</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#best-practices" class="nav-link">Best Practices</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#datum" class="nav-link">Datum</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#dateien" class="nav-link">Dateien</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="overlay-modus-fur-verbesserte-vergleichbarkeit">Overlay-Modus für verbesserte Vergleichbarkeit</h1>
+<h2 id="ubersicht">Übersicht</h2>
+<p>Der Overlay-Modus zeigt das vorherige Bild halbtransparent über der Live-Kamera-Ansicht, um eine präzise Positionierung und Ausrichtung für Folgeaufnahmen zu ermöglichen.</p>
+<h2 id="problem">Problem</h2>
+<p>Für eine medizinisch sinnvolle Verlaufskontrolle von Leberflecken müssen Folgeaufnahmen vergleichbar sein:
+- ✅ Gleiche Ausrichtung (Kamerawinkel)
+- ✅ Gleiche Größe (Abstand zur Kamera)
+- ✅ Gleiche Position im Bild (X/Y Koordinaten)
+- ✅ Ähnliche Beleuchtung</p>
+<h2 id="losung-overlay-modus">Lösung: Overlay-Modus</h2>
+<h3 id="funktionsweise">Funktionsweise</h3>
+<p><strong>Automatische Aktivierung:</strong>
+- Wenn bereits Bilder für einen Leberfleck existieren
+- Das neueste Bild wird als Referenz verwendet
+- Overlay wird automatisch mit 50% Transparenz angezeigt</p>
+<p><strong>Benutzersteuerung:</strong>
+1. <strong>Ein/Aus-Schalter</strong> (Auge-Icon)
+   - Overlay ein-/ausblenden
+   - Ermöglicht Vergleich zwischen Live-Bild und Referenz</p>
+<ol>
+<li><strong>Transparenz-Slider</strong> (0-100%)</li>
+<li>Vertikaler Slider rechts im Bild</li>
+<li>Prozentanzeige über dem Slider</li>
+<li>
+<p>Feinabstimmung der Sichtbarkeit</p>
+</li>
+<li>
+<p><strong>Hilfetext</strong></p>
+</li>
+<li>"Richte die Kamera aus, bis das Overlay passt"</li>
+<li>Wird angezeigt wenn Overlay aktiv ist</li>
+</ol>
+<h2 id="implementierung">Implementierung</h2>
+<h3 id="1-cameraview-erweiterung">1. CameraView Erweiterung</h3>
+<p><strong>Neue Parameter:</strong></p>
+<pre><code class="language-swift">struct CameraView: View {
+    let referenceImage: UIImage?  // Optional: Vorheriges Bild
+    let onImageCaptured: (UIImage) -&gt; Void
+
+    @State private var overlayOpacity: Double = 0.5
+    @State private var showOverlay: Bool = true
+}
+</code></pre>
+<p><strong>Initialisierung:</strong></p>
+<pre><code class="language-swift">init(referenceImage: UIImage? = nil, onImageCaptured: @escaping (UIImage) -&gt; Void) {
+    self.referenceImage = referenceImage
+    self.onImageCaptured = onImageCaptured
+}
+</code></pre>
+<h3 id="2-ui-komponenten">2. UI-Komponenten</h3>
+<p><strong>Overlay-Bild:</strong></p>
+<pre><code class="language-swift">if showOverlay, let refImage = referenceImage {
+    Image(uiImage: refImage)
+        .resizable()
+        .aspectRatio(contentMode: .fill)
+        .opacity(overlayOpacity)
+        .ignoresSafeArea()
+        .allowsHitTesting(false)  // Keine Interaktion mit Overlay
+}
+</code></pre>
+<p><strong>Steuerelemente (oben rechts):</strong></p>
+<pre><code class="language-swift">VStack(alignment: .trailing, spacing: 12) {
+    // Ein/Aus-Button
+    Button(action: { withAnimation { showOverlay.toggle() } }) {
+        Image(systemName: showOverlay ? &quot;eye.fill&quot; : &quot;eye.slash.fill&quot;)
+            .font(.title2)
+            .foregroundColor(.white)
+            .padding(12)
+            .background(Color.black.opacity(0.6))
+            .clipShape(Circle())
+    }
+
+    // Transparenz-Slider (vertikal)
+    if showOverlay {
+        VStack(spacing: 8) {
+            Text(&quot;\(Int(overlayOpacity * 100))%&quot;)
+                .font(.caption)
+                .foregroundColor(.white)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(Color.black.opacity(0.6))
+                .cornerRadius(8)
+
+            Slider(value: $overlayOpacity, in: 0...1)
+                .frame(width: 150)
+                .rotationEffect(.degrees(-90))
+                .frame(width: 40, height: 150)
+                .tint(.white)
+        }
+    }
+}
+</code></pre>
+<h3 id="3-integration-in-moledetailview">3. Integration in MoleDetailView</h3>
+<p><strong>Automatische Referenzbildauswahl:</strong></p>
+<pre><code class="language-swift">.sheet(isPresented: $showingCamera) {
+    CameraView(
+        referenceImage: mole.images
+            .sorted(by: { $0.captureDate &gt; $1.captureDate })
+            .first?.uiImage
+    ) { image in
+        addImage(image)
+    }
+}
+</code></pre>
+<h2 id="benutzerfuhrung">Benutzerführung</h2>
+<h3 id="erste-aufnahme-kein-overlay">Erste Aufnahme (kein Overlay)</h3>
+<ol>
+<li>Kamera öffnen</li>
+<li>Leberfleck positionieren</li>
+<li>Foto aufnehmen</li>
+</ol>
+<h3 id="folgeaufnahmen-mit-overlay">Folgeaufnahmen (mit Overlay)</h3>
+<ol>
+<li><strong>Kamera öffnen</strong></li>
+<li>Overlay wird automatisch angezeigt (50% Transparenz)</li>
+<li>
+<p>Vorheriges Bild ist sichtbar</p>
+</li>
+<li>
+<p><strong>Grobe Positionierung</strong></p>
+</li>
+<li>Kamera so ausrichten, dass Leberfleck ungefähr passt</li>
+<li>
+<p>Overlay hilft bei der Orientierung</p>
+</li>
+<li>
+<p><strong>Feinabstimmung</strong></p>
+</li>
+<li><strong>Option A</strong>: Transparenz erhöhen (mehr Referenz sichtbar)</li>
+<li><strong>Option B</strong>: Transparenz verringern (mehr Live-Bild sichtbar)</li>
+<li>
+<p><strong>Option C</strong>: Overlay ausblenden für Vergleich</p>
+</li>
+<li>
+<p><strong>Optimale Ausrichtung</strong></p>
+</li>
+<li>Leberfleck sollte genau über dem Overlay liegen</li>
+<li>Größe sollte übereinstimmen</li>
+<li>
+<p>Umgebung sollte ähnlich sein</p>
+</li>
+<li>
+<p><strong>Aufnahme</strong></p>
+</li>
+<li>Foto aufnehmen wenn zufrieden</li>
+<li>Overlay verschwindet automatisch</li>
+</ol>
+<h2 id="vorteile">Vorteile</h2>
+<h3 id="fur-benutzer">Für Benutzer</h3>
+<p>✅ <strong>Intuitive Bedienung</strong> - Visuelles Feedback in Echtzeit
+✅ <strong>Präzise Positionierung</strong> - Pixelgenaue Ausrichtung möglich
+✅ <strong>Flexible Anpassung</strong> - Transparenz individuell einstellbar
+✅ <strong>Schneller Workflow</strong> - Keine manuelle Bildauswahl nötig
+✅ <strong>Bessere Vergleichbarkeit</strong> - Konsistente Aufnahmen</p>
+<h3 id="fur-medizinische-auswertung">Für medizinische Auswertung</h3>
+<p>✅ <strong>Standardisierte Aufnahmen</strong> - Gleiche Position und Größe
+✅ <strong>Verlässliche Vergleiche</strong> - Veränderungen besser erkennbar
+✅ <strong>Dokumentationsqualität</strong> - Professionelle Bildserien
+✅ <strong>Zeitersparnis</strong> - Weniger Wiederholungsaufnahmen nötig</p>
+<h2 id="technische-details">Technische Details</h2>
+<h3 id="performance">Performance</h3>
+<ul>
+<li><strong>Overlay-Rendering</strong>: Effizient durch SwiftUI Image-Caching</li>
+<li><strong>Keine Verzögerung</strong>: Overlay wird sofort angezeigt</li>
+<li><strong>Smooth Slider</strong>: 60 FPS Transparenz-Anpassung</li>
+<li><strong>Speicher</strong>: Referenzbild wird nur temporär geladen</li>
+</ul>
+<h3 id="kompatibilitat">Kompatibilität</h3>
+<ul>
+<li><strong>iOS 17.6+</strong>: Vollständig unterstützt</li>
+<li><strong>Alle iPhone-Modelle</strong>: Funktioniert auf allen Geräten</li>
+<li><strong>Portrait &amp; Landscape</strong>: Automatische Anpassung</li>
+<li><strong>Dark Mode</strong>: Optimierte Kontraste</li>
+</ul>
+<h3 id="einschrankungen">Einschränkungen</h3>
+<ul>
+<li>⚠️ Overlay zeigt nur das neueste Bild</li>
+<li>⚠️ Keine automatische Größenanpassung (Zoom)</li>
+<li>⚠️ Keine Rotation des Overlays</li>
+<li>⚠️ Keine Belichtungsanpassung</li>
+</ul>
+<h2 id="zukunftige-erweiterungen">Zukünftige Erweiterungen</h2>
+<h3 id="phase-2-erweiterte-features">Phase 2: Erweiterte Features</h3>
+<ul>
+<li>[ ] <strong>Bildauswahl</strong>: Beliebiges Bild als Referenz wählen</li>
+<li>[ ] <strong>Zoom-Matching</strong>: Automatische Größenanpassung</li>
+<li>[ ] <strong>Rotation</strong>: Overlay drehen für bessere Ausrichtung</li>
+<li>[ ] <strong>Ausrichtungshilfen</strong>: Gitter und Hilfslinien</li>
+<li>[ ] <strong>Sensor-Feedback</strong>: Neigungswinkel-Anzeige</li>
+</ul>
+<h3 id="phase-3-intelligente-assistenz">Phase 3: Intelligente Assistenz</h3>
+<ul>
+<li>[ ] <strong>Auto-Alignment</strong>: KI-gestützte Positionierung</li>
+<li>[ ] <strong>Qualitäts-Score</strong>: Bewertung der Vergleichbarkeit</li>
+<li>[ ] <strong>Belichtungs-Matching</strong>: Automatische Anpassung</li>
+<li>[ ] <strong>Fokus-Hilfe</strong>: Schärfe-Indikator</li>
+<li>[ ] <strong>Abstandsmessung</strong>: LiDAR-Integration (iPhone 12 Pro+)</li>
+</ul>
+<h3 id="phase-4-ar-integration">Phase 4: AR-Integration</h3>
+<ul>
+<li>[ ] <strong>ARKit-Overlay</strong>: 3D-Positionierung im Raum</li>
+<li>[ ] <strong>Spatial Anchors</strong>: Exakte Wiederholung der Position</li>
+<li>[ ] <strong>Body Tracking</strong>: Automatische Körperregion-Erkennung</li>
+<li>[ ] <strong>Multi-Angle</strong>: Mehrere Referenzbilder gleichzeitig</li>
+</ul>
+<h2 id="verwandte-features">Verwandte Features</h2>
+<h3 id="bereits-implementiert">Bereits implementiert</h3>
+<ul>
+<li>✅ <strong>Sensordaten-Erfassung</strong>: Neigungswinkel, Kompass, etc.</li>
+<li>✅ <strong>Bildvergleich</strong>: Side-by-Side und Overlay-Vergleich</li>
+<li>✅ <strong>Zeitstempel</strong>: Automatische Datierung</li>
+</ul>
+<h3 id="in-planung">In Planung</h3>
+<ul>
+<li>🔄 <strong>Geführter Aufnahmemodus</strong>: Schritt-für-Schritt Anleitung</li>
+<li>🔄 <strong>Vergleichbarkeits-Score</strong>: Qualitätsbewertung</li>
+<li>🔄 <strong>Belichtungswarnung</strong>: Hinweis bei zu großen Unterschieden</li>
+</ul>
+<h2 id="best-practices">Best Practices</h2>
+<h3 id="fur-optimale-ergebnisse">Für optimale Ergebnisse</h3>
+<ol>
+<li><strong>Beleuchtung</strong>: Gleiche Lichtverhältnisse wie bei vorheriger Aufnahme</li>
+<li><strong>Abstand</strong>: Leberfleck sollte gleiche Größe im Bild haben</li>
+<li><strong>Ausrichtung</strong>: Overlay sollte perfekt übereinander liegen</li>
+<li><strong>Stabilität</strong>: Ruhige Hand oder Stativ verwenden</li>
+<li><strong>Fokus</strong>: Auf Leberfleck fokussieren, nicht auf Overlay</li>
+</ol>
+<h3 id="haufige-fehler-vermeiden">Häufige Fehler vermeiden</h3>
+<p>❌ <strong>Zu hohe Transparenz</strong>: Overlay zu dominant, Live-Bild nicht sichtbar
+❌ <strong>Zu niedrige Transparenz</strong>: Overlay nicht sichtbar genug
+❌ <strong>Falsche Größe</strong>: Abstand zur Kamera unterschiedlich
+❌ <strong>Schlechte Beleuchtung</strong>: Schatten oder Reflexionen
+❌ <strong>Bewegung</strong>: Verwackelte Aufnahmen</p>
+<h2 id="datum">Datum</h2>
+<p>Implementiert: 11. Januar 2026</p>
+<h2 id="dateien">Dateien</h2>
+<ul>
+<li><code>Nevus/Views/CameraView.swift</code> - Overlay-Modus UI</li>
+<li><code>Nevus/Views/MoleDetailView.swift</code> - Integration</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

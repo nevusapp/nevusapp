@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Session Cleanup Feature - Implementation Summary - Nevus App</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Nevus App</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../ARCHITECTURE/" class="nav-link">Nevus - iOS App Architektur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IMPLEMENTATION_SUMMARY/" class="nav-link">Nevus - Vollständige Implementierungszusammenfassung</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../INTERNATIONALIZATION/" class="nav-link">Internationalisierung / Internationalization</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IPAD_COMPATIBILITY/" class="nav-link">iPad Compatibility Implementation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../TECHNICAL_SPECIFICATIONS/" class="nav-link">Nevus - Technische Spezifikationen</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Features</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FEATURE/" class="dropdown-item">AirDrop Sync Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FIXES/" class="dropdown-item">AirDrop Sync - File Access Fixes</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_IMPLEMENTATION_COMPLETE/" class="dropdown-item">AirDrop Sync Feature - Complete Implementation Summary</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_SETUP/" class="dropdown-item">AirDrop Sync Feature - Setup Instructions</a>
+</li>
+                                    
+<li>
+    <a href="../ALL_REGIONS_OVERVIEW_FEATURE/" class="dropdown-item">All Regions Overview Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AUTO_DELETE_SYNC_FILES/" class="dropdown-item">Automatic Sync File Deletion Feature</a>
+</li>
+                                    
+<li>
+    <a href="../DELETE_IMAGES_FEATURE/" class="dropdown-item">Bilder Löschen Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_COMPARISON_FEATURE/" class="dropdown-item">Guided Comparison Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_SCANNING_FEATURE/" class="dropdown-item">Guided Scanning Feature</a>
+</li>
+                                    
+<li>
+    <a href="../IMAGE_EXPORT_FEATURE/" class="dropdown-item">Einzelbild-Export Funktion</a>
+</li>
+                                    
+<li>
+    <a href="../MOLE_LOCATION_FEATURE/" class="dropdown-item">Mole Location on Overview Images Feature</a>
+</li>
+                                    
+<li>
+    <a href="../MONTHLY_REMINDER_FEATURE/" class="dropdown-item">Monthly Reminder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_CONTROLS/" class="dropdown-item">Overlay-Steuerelemente - Benutzerführung</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_MODE_FEATURE/" class="dropdown-item">Overlay-Modus für verbesserte Vergleichbarkeit</a>
+</li>
+                                    
+<li>
+    <a href="../PERFORMANCE_DEBUG/" class="dropdown-item">Performance Debugging Guide</a>
+</li>
+                                    
+<li>
+    <a href="../REFERENCE_IMAGE_SELECTION/" class="dropdown-item">Referenzbild-Auswahl für Overlay-Modus</a>
+</li>
+                                    
+<li>
+    <a href="../REGION_OVERVIEW_FEATURE/" class="dropdown-item">Körperregion-Übersichtsbilder Feature</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Session Cleanup Feature - Implementation Summary</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../REGION_OVERVIEW_FEATURE/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#session-cleanup-feature-implementation-summary" class="nav-link">Session Cleanup Feature - Implementation Summary</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#implementation-date" class="nav-link">Implementation Date</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#files-created" class="nav-link">Files Created</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#localization" class="nav-link">Localization</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#user-flow" class="nav-link">User Flow</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#technical-details" class="nav-link">Technical Details</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#testing-recommendations" class="nav-link">Testing Recommendations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#future-enhancements-optional" class="nav-link">Future Enhancements (Optional)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#notes" class="nav-link">Notes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="session-cleanup-feature-implementation-summary">Session Cleanup Feature - Implementation Summary</h1>
+<h2 id="overview">Overview</h2>
+<p>A new storage cleanup feature has been implemented that allows users to select recording sessions (calendar dates) and delete older photos while keeping the most recent photo of each mole. This helps reduce storage space usage.</p>
+<p><strong>Protected Images:</strong> The cleanup feature automatically protects reference images (used for overlay comparisons) and overview images from deletion.</p>
+<h2 id="implementation-date">Implementation Date</h2>
+<p>January 11, 2026
+Last Updated: January 11, 2026 (Added reference image protection)</p>
+<h2 id="files-created">Files Created</h2>
+<h3 id="1-cleanupserviceswift-nevusservicescleanupserviceswift">1. CleanupService.swift (<code>Nevus/Services/CleanupService.swift</code>)</h3>
+<p><strong>Purpose</strong>: Service layer for managing photo cleanup operations</p>
+<p><strong>Key Components</strong>:
+- <code>RecordingSession</code> struct: Represents a recording session with date, photo count, and deletable photo count
+- <code>getRecordingSessions()</code>: Groups all photos by calendar date and calculates deletable photos (includes overview images in count but NOT as deletable)
+- <code>deletePhotosFromSessions()</code>: Deletes photos from selected sessions while preserving the last photo of each mole
+- <code>formatBytes()</code>: Utility function to format byte counts in human-readable format</p>
+<p><strong>Logic</strong>:
+- Groups images by calendar date (ignoring time)
+- For each mole and each date, keeps only the most recent photo
+- <strong>Overview images (BodyRegionOverview) are counted but NEVER marked as deletable</strong>
+- <strong>Reference images (used for overlay comparisons) are NEVER marked as deletable</strong>
+- Calculates storage space freed by deletion
+- Returns statistics about deleted photos and freed space
+- Shows all dates even if they have 0 deletable photos (displayed as disabled/grayed out)</p>
+<h3 id="2-sessioncleanupviewswift-nevusviewssessioncleanupviewswift">2. SessionCleanupView.swift (<code>Nevus/Views/SessionCleanupView.swift</code>)</h3>
+<p><strong>Purpose</strong>: User interface for the cleanup feature</p>
+<p><strong>Key Features</strong>:
+- Lists all recording sessions with photo counts (including overview images)
+- Shows how many photos can be deleted per session
+- <strong>Dates with 0 deletable photos are shown but disabled and grayed out</strong>
+- Multi-select interface with checkboxes
+- Summary section showing selected sessions and total deletable photos
+- Confirmation dialog before deletion
+- Progress indicator during deletion
+- Result dialog showing deleted count and freed space
+- Empty state when no recordings exist</p>
+<p><strong>UI Components</strong>:
+- Session list with selection checkboxes
+- Select All / Deselect All functionality
+- Summary section with statistics
+- Delete button in navigation bar
+- Alert dialogs for confirmation and results</p>
+<h3 id="3-contentviewswift-modified">3. ContentView.swift (Modified)</h3>
+<p><strong>Changes</strong>:
+- Added <code>@State private var showingCleanup = false</code>
+- Modified toolbar menu to include cleanup option
+- Changed menu icon from "square.and.arrow.up" to "ellipsis.circle" for better UX
+- Added sheet presentation for SessionCleanupView</p>
+<h2 id="localization">Localization</h2>
+<p>All strings are fully localized in German and English:</p>
+<h3 id="german-strings">German Strings</h3>
+<ul>
+<li><code>cleanup_title</code>: "Speicherplatz bereinigen"</li>
+<li><code>cleanup_menu_item</code>: "Speicherplatz bereinigen"</li>
+<li><code>cleanup_description</code>: "Wählen Sie Aufnahmedaten aus, um ältere Fotos zu löschen..."</li>
+<li><code>cleanup_empty_title</code>: "Keine Aufnahmen vorhanden"</li>
+<li><code>cleanup_confirm_title</code>: "Fotos löschen?"</li>
+<li><code>cleanup_result_title</code>: "Bereinigung abgeschlossen"</li>
+<li>And more...</li>
+</ul>
+<h3 id="english-strings">English Strings</h3>
+<ul>
+<li><code>cleanup_title</code>: "Clean Up Storage"</li>
+<li><code>cleanup_menu_item</code>: "Clean Up Storage"</li>
+<li><code>cleanup_description</code>: "Select recording dates to delete older photos..."</li>
+<li><code>cleanup_empty_title</code>: "No Recordings Available"</li>
+<li><code>cleanup_confirm_title</code>: "Delete Photos?"</li>
+<li><code>cleanup_result_title</code>: "Cleanup Complete"</li>
+<li>And more...</li>
+</ul>
+<h2 id="user-flow">User Flow</h2>
+<ol>
+<li><strong>Access</strong>: User taps the menu button (ellipsis icon) in the top-left of the main screen</li>
+<li><strong>Select</strong>: User chooses "Speicherplatz bereinigen" / "Clean Up Storage"</li>
+<li><strong>View Sessions</strong>: User sees a list of all recording dates with photo counts</li>
+<li><strong>Select Dates</strong>: User selects one or more dates to clean up</li>
+<li><strong>Review</strong>: Summary shows how many photos will be deleted</li>
+<li><strong>Confirm</strong>: User taps "Löschen" / "Delete" and confirms the action</li>
+<li><strong>Process</strong>: App deletes photos (showing progress indicator)</li>
+<li><strong>Result</strong>: User sees how many photos were deleted and how much space was freed</li>
+</ol>
+<h2 id="technical-details">Technical Details</h2>
+<h3 id="data-preservation">Data Preservation</h3>
+<ul>
+<li><strong>Always keeps</strong>: The most recent photo of each mole for each selected date</li>
+<li><strong>Never deletes</strong>:</li>
+<li>Overview images (BodyRegionOverview) - these are completely excluded from deletion</li>
+<li>Reference images (marked with ⭐ star) - used for overlay comparisons, never deleted</li>
+<li><strong>Deletes</strong>: All older photos from the same mole on the same date (except reference images)</li>
+<li><strong>Safe</strong>: Uses SwiftData's model context for data integrity</li>
+</ul>
+<h3 id="performance">Performance</h3>
+<ul>
+<li>Deletion runs on a background thread (<code>Task.detached</code>)</li>
+<li>Progress indicator prevents user interaction during deletion</li>
+<li>Efficient grouping using Swift's Dictionary grouping</li>
+</ul>
+<h3 id="storage-calculation">Storage Calculation</h3>
+<ul>
+<li>Calculates freed space by summing <code>imageData.count</code> of deleted images</li>
+<li>Formats using <code>ByteCountFormatter</code> for human-readable output (KB, MB, GB)</li>
+</ul>
+<h2 id="testing-recommendations">Testing Recommendations</h2>
+<ol>
+<li><strong>Basic Functionality</strong>:</li>
+<li>Create multiple moles with multiple photos on different dates</li>
+<li>Verify that sessions are correctly grouped by date</li>
+<li>Confirm that only older photos are deleted</li>
+<li><strong>Verify overview images are never deleted</strong></li>
+<li>
+<p><strong>Verify reference images (marked with ⭐) are never deleted</strong></p>
+</li>
+<li>
+<p><strong>Edge Cases</strong>:</p>
+</li>
+<li>Single photo per mole per date (should show 0 deletable, grayed out)</li>
+<li>Multiple photos on same date for same mole</li>
+<li>Photos taken at different times on same calendar date</li>
+<li><strong>Date with only overview images (should show 0 deletable, grayed out)</strong></li>
+<li><strong>Date with mix of mole photos and overview images</strong></li>
+<li><strong>Reference image is older than newest photo on same date (reference should be kept)</strong></li>
+<li>
+<p><strong>Reference image is the only photo on a date (should show 0 deletable)</strong></p>
+</li>
+<li>
+<p><strong>UI/UX</strong>:</p>
+</li>
+<li>Empty state when no recordings exist</li>
+<li>Select/Deselect all functionality</li>
+<li><strong>Dates with 0 deletable photos are shown but disabled</strong></li>
+<li>Confirmation dialog shows correct counts</li>
+<li>
+<p>Result dialog shows accurate statistics</p>
+</li>
+<li>
+<p><strong>Localization</strong>:</p>
+</li>
+<li>Test in German and English</li>
+<li>Verify all strings are properly localized</li>
+<li>Check date formatting in both languages</li>
+</ol>
+<h2 id="future-enhancements-optional">Future Enhancements (Optional)</h2>
+<ol>
+<li><strong>Advanced Filtering</strong>:</li>
+<li>Filter by body region</li>
+<li>Filter by date range</li>
+<li>
+<p>Show preview of photos to be deleted</p>
+</li>
+<li>
+<p><strong>Undo Functionality</strong>:</p>
+</li>
+<li>Temporary backup before deletion</li>
+<li>
+<p>Ability to restore recently deleted photos</p>
+</li>
+<li>
+<p><strong>Automatic Cleanup</strong>:</p>
+</li>
+<li>Schedule automatic cleanup</li>
+<li>
+<p>Set retention policies (e.g., keep last 3 photos per mole)</p>
+</li>
+<li>
+<p><strong>Statistics</strong>:</p>
+</li>
+<li>Show total storage used</li>
+<li>Show storage trends over time</li>
+<li>Recommend cleanup when storage is high</li>
+</ol>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>The feature integrates seamlessly with existing SwiftData models</li>
+<li>No database schema changes required</li>
+<li>Backward compatible with existing data</li>
+<li>Uses existing localization infrastructure</li>
+<li>Follows app's design patterns and coding style</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

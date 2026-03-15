@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>AirDrop Sync - File Access Fixes - Nevus App</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Nevus App</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../ARCHITECTURE/" class="nav-link">Nevus - iOS App Architektur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IMPLEMENTATION_SUMMARY/" class="nav-link">Nevus - Vollständige Implementierungszusammenfassung</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../INTERNATIONALIZATION/" class="nav-link">Internationalisierung / Internationalization</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IPAD_COMPATIBILITY/" class="nav-link">iPad Compatibility Implementation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../TECHNICAL_SPECIFICATIONS/" class="nav-link">Nevus - Technische Spezifikationen</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Features</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FEATURE/" class="dropdown-item">AirDrop Sync Feature</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">AirDrop Sync - File Access Fixes</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_IMPLEMENTATION_COMPLETE/" class="dropdown-item">AirDrop Sync Feature - Complete Implementation Summary</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_SETUP/" class="dropdown-item">AirDrop Sync Feature - Setup Instructions</a>
+</li>
+                                    
+<li>
+    <a href="../ALL_REGIONS_OVERVIEW_FEATURE/" class="dropdown-item">All Regions Overview Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AUTO_DELETE_SYNC_FILES/" class="dropdown-item">Automatic Sync File Deletion Feature</a>
+</li>
+                                    
+<li>
+    <a href="../DELETE_IMAGES_FEATURE/" class="dropdown-item">Bilder Löschen Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_COMPARISON_FEATURE/" class="dropdown-item">Guided Comparison Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_SCANNING_FEATURE/" class="dropdown-item">Guided Scanning Feature</a>
+</li>
+                                    
+<li>
+    <a href="../IMAGE_EXPORT_FEATURE/" class="dropdown-item">Einzelbild-Export Funktion</a>
+</li>
+                                    
+<li>
+    <a href="../MOLE_LOCATION_FEATURE/" class="dropdown-item">Mole Location on Overview Images Feature</a>
+</li>
+                                    
+<li>
+    <a href="../MONTHLY_REMINDER_FEATURE/" class="dropdown-item">Monthly Reminder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_CONTROLS/" class="dropdown-item">Overlay-Steuerelemente - Benutzerführung</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_MODE_FEATURE/" class="dropdown-item">Overlay-Modus für verbesserte Vergleichbarkeit</a>
+</li>
+                                    
+<li>
+    <a href="../PERFORMANCE_DEBUG/" class="dropdown-item">Performance Debugging Guide</a>
+</li>
+                                    
+<li>
+    <a href="../REFERENCE_IMAGE_SELECTION/" class="dropdown-item">Referenzbild-Auswahl für Overlay-Modus</a>
+</li>
+                                    
+<li>
+    <a href="../REGION_OVERVIEW_FEATURE/" class="dropdown-item">Körperregion-Übersichtsbilder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../SESSION_CLEANUP_FEATURE/" class="dropdown-item">Session Cleanup Feature - Implementation Summary</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../AIRDROP_SYNC_FEATURE/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../AIRDROP_SYNC_IMPLEMENTATION_COMPLETE/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#airdrop-sync-file-access-fixes" class="nav-link">AirDrop Sync - File Access Fixes</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#problem-solved" class="nav-link">Problem Solved</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#root-cause" class="nav-link">Root Cause</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#fixes-implemented" class="nav-link">Fixes Implemented</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#how-it-works-now" class="nav-link">How It Works Now</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#testing-steps" class="nav-link">Testing Steps</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#verification-checklist" class="nav-link">Verification Checklist</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#debug-console-output" class="nav-link">Debug Console Output</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#common-issues-and-solutions" class="nav-link">Common Issues and Solutions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#files-modified" class="nav-link">Files Modified</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#privacy-impact" class="nav-link">Privacy Impact</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#performance-impact" class="nav-link">Performance Impact</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#future-improvements" class="nav-link">Future Improvements</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#summary" class="nav-link">Summary</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="airdrop-sync-file-access-fixes">AirDrop Sync - File Access Fixes</h1>
+<h2 id="problem-solved">Problem Solved</h2>
+<p>The original implementation had an issue where .nevus files received via AirDrop would save to Files instead of opening in the app, and when manually opened, would show an error "Die Datei konnte nicht geöffnet werden" (The file could not be opened).</p>
+<h2 id="root-cause">Root Cause</h2>
+<p>iOS requires:
+1. Proper document type registration in Info.plist
+2. Security-scoped resource access for files from external sources
+3. File sharing permissions</p>
+<h2 id="fixes-implemented">Fixes Implemented</h2>
+<h3 id="1-updated-nevusappswift">1. Updated NevusApp.swift</h3>
+<p><strong>Added security-scoped resource handling:</strong>
+- <code>startAccessingSecurityScopedResource()</code> to gain access to external files
+- Copy file to app's temporary directory for safe access
+- <code>stopAccessingSecurityScopedResource()</code> to release the original file
+- Automatic cleanup of temporary files after import</p>
+<p><strong>Key changes:</strong></p>
+<pre><code class="language-swift">private func handleIncomingURL(_ url: URL) {
+    // Start accessing security-scoped resource
+    guard url.startAccessingSecurityScopedResource() else {
+        return
+    }
+
+    // Copy to temp directory
+    let tempURL = fileManager.temporaryDirectory
+        .appendingPathComponent(url.lastPathComponent)
+    try fileManager.copyItem(at: url, to: tempURL)
+
+    // Stop accessing original
+    url.stopAccessingSecurityScopedResource()
+
+    // Use copied file
+    importURL = tempURL
+    showingImportConfirmation = true
+}
+</code></pre>
+<h3 id="2-created-infoplist">2. Created Info.plist</h3>
+<p><strong>Added document type declarations:</strong>
+- <code>CFBundleDocumentTypes</code> - Registers .nevus file type
+- <code>UTExportedTypeDeclarations</code> - Defines the custom UTI
+- File sharing permissions:
+  - <code>UISupportsDocumentBrowser</code> - YES
+  - <code>LSSupportsOpeningDocumentsInPlace</code> - YES
+  - <code>UIFileSharingEnabled</code> - YES</p>
+<p><strong>Document Type Configuration:</strong></p>
+<pre><code class="language-xml">&lt;key&gt;CFBundleDocumentTypes&lt;/key&gt;
+&lt;array&gt;
+    &lt;dict&gt;
+        &lt;key&gt;CFBundleTypeName&lt;/key&gt;
+        &lt;string&gt;Nevus Sync Package&lt;/string&gt;
+        &lt;key&gt;CFBundleTypeRole&lt;/key&gt;
+        &lt;string&gt;Editor&lt;/string&gt;
+        &lt;key&gt;LSHandlerRank&lt;/key&gt;
+        &lt;string&gt;Owner&lt;/string&gt;
+        &lt;key&gt;LSItemContentTypes&lt;/key&gt;
+        &lt;array&gt;
+            &lt;string&gt;com.nevus.sync-package&lt;/string&gt;
+        &lt;/array&gt;
+    &lt;/dict&gt;
+&lt;/array&gt;
+</code></pre>
+<p><strong>UTI Declaration:</strong></p>
+<pre><code class="language-xml">&lt;key&gt;UTExportedTypeDeclarations&lt;/key&gt;
+&lt;array&gt;
+    &lt;dict&gt;
+        &lt;key&gt;UTTypeIdentifier&lt;/key&gt;
+        &lt;string&gt;com.nevus.sync-package&lt;/string&gt;
+        &lt;key&gt;UTTypeConformsTo&lt;/key&gt;
+        &lt;array&gt;
+            &lt;string&gt;public.data&lt;/string&gt;
+            &lt;string&gt;public.content&lt;/string&gt;
+        &lt;/array&gt;
+        &lt;key&gt;UTTypeTagSpecification&lt;/key&gt;
+        &lt;dict&gt;
+            &lt;key&gt;public.filename-extension&lt;/key&gt;
+            &lt;array&gt;
+                &lt;string&gt;nevus&lt;/string&gt;
+            &lt;/array&gt;
+        &lt;/dict&gt;
+    &lt;/dict&gt;
+&lt;/array&gt;
+</code></pre>
+<h3 id="3-added-manual-import-option">3. Added Manual Import Option</h3>
+<p><strong>Added to ContentView:</strong>
+- File importer button in menu: "Import Sync Package"
+- <code>.fileImporter</code> modifier for manual file selection
+- Fallback method if AirDrop has issues</p>
+<p><strong>Benefits:</strong>
+- Works even if AirDrop registration fails
+- User can browse Files app and select .nevus files
+- File picker handles security-scoped access automatically</p>
+<pre><code class="language-swift">.fileImporter(
+    isPresented: $showingFileImporter,
+    allowedContentTypes: [UTType(filenameExtension: &quot;nevus&quot;) ?? .data],
+    allowsMultipleSelection: false
+) { result in
+    switch result {
+    case .success(let urls):
+        if let url = urls.first {
+            importURL = url
+            showingImportConfirmation = true
+        }
+    case .failure(let error):
+        print(&quot;❌ File import error: \(error)&quot;)
+    }
+}
+</code></pre>
+<h2 id="how-it-works-now">How It Works Now</h2>
+<h3 id="method-1-airdrop-automatic">Method 1: AirDrop (Automatic)</h3>
+<ol>
+<li>User AirDrops .nevus file</li>
+<li>iOS recognizes file type and shows "Open in Nevus"</li>
+<li>App receives URL via <code>onOpenURL</code></li>
+<li>App requests security-scoped access</li>
+<li>File is copied to temporary directory</li>
+<li>ImportConfirmationView opens with copied file</li>
+<li>After import, temp file is cleaned up</li>
+</ol>
+<h3 id="method-2-manual-import-fallback">Method 2: Manual Import (Fallback)</h3>
+<ol>
+<li>User saves .nevus file to Files app</li>
+<li>Opens Nevus app</li>
+<li>Menu → "Import Sync Package"</li>
+<li>File picker opens</li>
+<li>User selects .nevus file</li>
+<li>ImportConfirmationView opens</li>
+<li>Import proceeds normally</li>
+</ol>
+<h2 id="testing-steps">Testing Steps</h2>
+<ol>
+<li>
+<p><strong>Clean Build:</strong>
+   <code>⇧⌘K (Clean Build Folder)
+   ⌘B (Build)</code></p>
+</li>
+<li>
+<p><strong>Delete and Reinstall:</strong></p>
+</li>
+<li>Delete app from device/simulator</li>
+<li>Run from Xcode to reinstall</li>
+<li>
+<p>This ensures Info.plist changes take effect</p>
+</li>
+<li>
+<p><strong>Test AirDrop:</strong></p>
+</li>
+<li>Export sync package from device A</li>
+<li>AirDrop to device B</li>
+<li>Should show "Open in Nevus"</li>
+<li>Tap to open</li>
+<li>
+<p>Should see ImportConfirmationView</p>
+</li>
+<li>
+<p><strong>Test Manual Import:</strong></p>
+</li>
+<li>Save .nevus file to Files</li>
+<li>Open Nevus</li>
+<li>Menu → "Import Sync Package"</li>
+<li>Select file</li>
+<li>Should see ImportConfirmationView</li>
+</ol>
+<h2 id="verification-checklist">Verification Checklist</h2>
+<ul>
+<li>[ ] Info.plist added to Xcode project</li>
+<li>[ ] Info.plist included in target</li>
+<li>[ ] Clean build completed</li>
+<li>[ ] App deleted and reinstalled</li>
+<li>[ ] AirDrop shows "Open in Nevus"</li>
+<li>[ ] File opens automatically in app</li>
+<li>[ ] ImportConfirmationView appears</li>
+<li>[ ] Import completes successfully</li>
+<li>[ ] Manual import option works</li>
+<li>[ ] Temp files cleaned up after import</li>
+</ul>
+<h2 id="debug-console-output">Debug Console Output</h2>
+<p>When working correctly, you should see:</p>
+<pre><code>📥 Received URL: file:///...
+✅ File copied to: file:///tmp/...
+🗑️ Cleaned up temp file
+</code></pre>
+<p>If there are issues:</p>
+<pre><code>⚠️ Not a nevus file
+❌ Failed to access security-scoped resource
+❌ Error copying file: ...
+</code></pre>
+<h2 id="common-issues-and-solutions">Common Issues and Solutions</h2>
+<h3 id="issue-open-in-nevus-doesnt-appear">Issue: "Open in Nevus" doesn't appear</h3>
+<p><strong>Solution:</strong> 
+- Ensure Info.plist is added to Xcode project
+- Check Info.plist is included in target
+- Delete app and reinstall</p>
+<h3 id="issue-file-still-cant-be-opened">Issue: File still can't be opened</h3>
+<p><strong>Solution:</strong>
+- Use manual import option (Menu → Import Sync Package)
+- Check console for error messages
+- Verify file is valid .nevus package</p>
+<h3 id="issue-import-fails-after-opening">Issue: Import fails after opening</h3>
+<p><strong>Solution:</strong>
+- Check ImportService for errors
+- Verify package format is correct
+- Ensure sufficient storage space</p>
+<h2 id="files-modified">Files Modified</h2>
+<ol>
+<li><strong>Nevus/Nevus/NevusApp.swift</strong></li>
+<li>Added security-scoped resource handling</li>
+<li>Added file copying to temp directory</li>
+<li>
+<p>Added cleanup on dismiss</p>
+</li>
+<li>
+<p><strong>Nevus/Views/ContentView.swift</strong></p>
+</li>
+<li>Added manual import button</li>
+<li>Added file importer modifier</li>
+<li>
+<p>Added import confirmation sheet</p>
+</li>
+<li>
+<p><strong>Nevus/Nevus/Info.plist</strong> (NEW)</p>
+</li>
+<li>Document type declarations</li>
+<li>UTI declarations</li>
+<li>File sharing permissions</li>
+</ol>
+<h2 id="privacy-impact">Privacy Impact</h2>
+<p>These changes maintain privacy:
+- ✅ Files still transferred locally via AirDrop
+- ✅ No cloud storage involved
+- ✅ Temporary files cleaned up automatically
+- ✅ User has full control over imports
+- ✅ No data sent to third parties</p>
+<h2 id="performance-impact">Performance Impact</h2>
+<p>Minimal performance impact:
+- File copying is fast (typically &lt;1 second)
+- Temp files are small (compressed packages)
+- Cleanup happens automatically
+- No background processing</p>
+<h2 id="future-improvements">Future Improvements</h2>
+<p>Potential enhancements:
+1. Progress indicator during file copy
+2. Batch import of multiple files
+3. Import history tracking
+4. Automatic cleanup of old temp files
+5. Import from iCloud Drive</p>
+<h2 id="summary">Summary</h2>
+<p>The fixes ensure reliable file handling on iOS by:
+1. Properly registering the .nevus file type
+2. Handling security-scoped resources correctly
+3. Providing a fallback manual import method
+4. Cleaning up temporary files automatically</p>
+<p>Users can now seamlessly sync data between devices using AirDrop or manual file selection, with full privacy protection.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

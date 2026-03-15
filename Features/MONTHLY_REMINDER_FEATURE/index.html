@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Monthly Reminder Feature - Nevus App</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Nevus App</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../ARCHITECTURE/" class="nav-link">Nevus - iOS App Architektur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IMPLEMENTATION_SUMMARY/" class="nav-link">Nevus - Vollständige Implementierungszusammenfassung</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../INTERNATIONALIZATION/" class="nav-link">Internationalisierung / Internationalization</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../IPAD_COMPATIBILITY/" class="nav-link">iPad Compatibility Implementation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../TECHNICAL_SPECIFICATIONS/" class="nav-link">Nevus - Technische Spezifikationen</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Features</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FEATURE/" class="dropdown-item">AirDrop Sync Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_FIXES/" class="dropdown-item">AirDrop Sync - File Access Fixes</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_IMPLEMENTATION_COMPLETE/" class="dropdown-item">AirDrop Sync Feature - Complete Implementation Summary</a>
+</li>
+                                    
+<li>
+    <a href="../AIRDROP_SYNC_SETUP/" class="dropdown-item">AirDrop Sync Feature - Setup Instructions</a>
+</li>
+                                    
+<li>
+    <a href="../ALL_REGIONS_OVERVIEW_FEATURE/" class="dropdown-item">All Regions Overview Feature</a>
+</li>
+                                    
+<li>
+    <a href="../AUTO_DELETE_SYNC_FILES/" class="dropdown-item">Automatic Sync File Deletion Feature</a>
+</li>
+                                    
+<li>
+    <a href="../DELETE_IMAGES_FEATURE/" class="dropdown-item">Bilder Löschen Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_COMPARISON_FEATURE/" class="dropdown-item">Guided Comparison Feature</a>
+</li>
+                                    
+<li>
+    <a href="../GUIDED_SCANNING_FEATURE/" class="dropdown-item">Guided Scanning Feature</a>
+</li>
+                                    
+<li>
+    <a href="../IMAGE_EXPORT_FEATURE/" class="dropdown-item">Einzelbild-Export Funktion</a>
+</li>
+                                    
+<li>
+    <a href="../MOLE_LOCATION_FEATURE/" class="dropdown-item">Mole Location on Overview Images Feature</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Monthly Reminder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_CONTROLS/" class="dropdown-item">Overlay-Steuerelemente - Benutzerführung</a>
+</li>
+                                    
+<li>
+    <a href="../OVERLAY_MODE_FEATURE/" class="dropdown-item">Overlay-Modus für verbesserte Vergleichbarkeit</a>
+</li>
+                                    
+<li>
+    <a href="../PERFORMANCE_DEBUG/" class="dropdown-item">Performance Debugging Guide</a>
+</li>
+                                    
+<li>
+    <a href="../REFERENCE_IMAGE_SELECTION/" class="dropdown-item">Referenzbild-Auswahl für Overlay-Modus</a>
+</li>
+                                    
+<li>
+    <a href="../REGION_OVERVIEW_FEATURE/" class="dropdown-item">Körperregion-Übersichtsbilder Feature</a>
+</li>
+                                    
+<li>
+    <a href="../SESSION_CLEANUP_FEATURE/" class="dropdown-item">Session Cleanup Feature - Implementation Summary</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../MOLE_LOCATION_FEATURE/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../OVERLAY_CONTROLS/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#monthly-reminder-feature" class="nav-link">Monthly Reminder Feature</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#implementation-date" class="nav-link">Implementation Date</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#features" class="nav-link">Features</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#technical-implementation" class="nav-link">Technical Implementation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#user-experience" class="nav-link">User Experience</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#localization" class="nav-link">Localization</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#testing" class="nav-link">Testing</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#future-enhancements" class="nav-link">Future Enhancements</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#privacy-data" class="nav-link">Privacy &amp; Data</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#compliance" class="nav-link">Compliance</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#files-modifiedcreated" class="nav-link">Files Modified/Created</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#summary" class="nav-link">Summary</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="monthly-reminder-feature">Monthly Reminder Feature</h1>
+<h2 id="overview">Overview</h2>
+<p>The Monthly Reminder feature automatically sends daily notifications to users one month after their last guided scan, encouraging them to perform regular mole monitoring.</p>
+<h2 id="implementation-date">Implementation Date</h2>
+<p>January 11, 2026</p>
+<h2 id="features">Features</h2>
+<h3 id="1-automatic-tracking">1. Automatic Tracking</h3>
+<ul>
+<li>The app automatically records the date when a guided scan is completed</li>
+<li>Date is stored in UserDefaults for persistence across app launches</li>
+<li>No user action required to enable tracking</li>
+</ul>
+<h3 id="2-smart-notification-scheduling">2. Smart Notification Scheduling</h3>
+<ul>
+<li>Notifications are scheduled to start exactly one month after the last guided scan</li>
+<li>Daily reminders are sent at 10:00 AM local time</li>
+<li>Up to 30 days of notifications are pre-scheduled</li>
+<li>Notifications automatically reschedule when a new guided scan is completed</li>
+</ul>
+<h3 id="3-permission-management">3. Permission Management</h3>
+<ul>
+<li>App requests notification permission on first launch</li>
+<li>Permission status is tracked and can be checked at any time</li>
+<li>Graceful handling if permission is denied</li>
+</ul>
+<h2 id="technical-implementation">Technical Implementation</h2>
+<h3 id="components">Components</h3>
+<h4 id="notificationserviceswift">NotificationService.swift</h4>
+<p>Main service managing all notification functionality:
+- <strong>Singleton pattern</strong>: <code>NotificationService.shared</code>
+- <strong>Permission management</strong>: Request and check notification authorization
+- <strong>Date tracking</strong>: Store and retrieve last guided scan date
+- <strong>Scheduling logic</strong>: Calculate and schedule notifications
+- <strong>Cancellation</strong>: Remove all pending notifications when needed</p>
+<p>Key Methods:</p>
+<pre><code class="language-swift">// Request notification permission
+func requestNotificationPermission() async -&gt; Bool
+
+// Record completion of guided scan
+func recordGuidedScanCompletion()
+
+// Get last scan date
+func getLastGuidedScanDate() -&gt; Date?
+
+// Check if reminders should be shown
+func shouldShowReminder() -&gt; Bool
+
+// Cancel all notifications
+func cancelAllNotifications()
+</code></pre>
+<h4 id="guidedscanningserviceswift">GuidedScanningService.swift</h4>
+<p>Updated to record scan completion:
+- Calls <code>NotificationService.shared.recordGuidedScanCompletion()</code> when scan finishes
+- Automatically triggers notification scheduling</p>
+<h4 id="nevusappswift">NevusApp.swift</h4>
+<p>Updated to request permissions:
+- Requests notification permission on app launch using <code>.task</code> modifier
+- Initializes NotificationService as StateObject</p>
+<h3 id="data-storage">Data Storage</h3>
+<ul>
+<li><strong>Key</strong>: <code>lastGuidedScanDate</code></li>
+<li><strong>Storage</strong>: UserDefaults</li>
+<li><strong>Type</strong>: Date object</li>
+<li><strong>Persistence</strong>: Survives app restarts and updates</li>
+</ul>
+<h3 id="notification-details">Notification Details</h3>
+<ul>
+<li><strong>Title</strong> (German): "Zeit für einen neuen Scan"</li>
+<li><strong>Title</strong> (English): "Time for a New Scan"</li>
+<li><strong>Body</strong> (German): "Es ist ein Monat seit Ihrem letzten geführten Scan vergangen. Führen Sie jetzt einen neuen Scan durch, um Ihre Leberflecke zu überwachen."</li>
+<li><strong>Body</strong> (English): "It's been a month since your last guided scan. Perform a new scan now to monitor your moles."</li>
+<li><strong>Sound</strong>: Default system sound</li>
+<li><strong>Badge</strong>: Shows badge count of 1</li>
+</ul>
+<h3 id="scheduling-logic">Scheduling Logic</h3>
+<ol>
+<li><strong>On Guided Scan Completion</strong>:</li>
+<li>Current date is saved to UserDefaults</li>
+<li>All existing notifications are cancelled</li>
+<li>
+<p>New notifications are scheduled</p>
+</li>
+<li>
+<p><strong>Notification Timing</strong>:</p>
+</li>
+<li>Start date: Exactly 1 month after last scan</li>
+<li>Time: 10:00 AM local time</li>
+<li>Frequency: Daily</li>
+<li>
+<p>Duration: 30 days of pre-scheduled notifications</p>
+</li>
+<li>
+<p><strong>Edge Cases</strong>:</p>
+</li>
+<li>If already past the 1-month mark: Schedule immediate notification (5 seconds) plus ongoing daily reminders</li>
+<li>If no scan recorded: No notifications scheduled</li>
+<li>If permission denied: Notifications not scheduled but tracking continues</li>
+</ol>
+<h2 id="user-experience">User Experience</h2>
+<h3 id="first-time-user">First Time User</h3>
+<ol>
+<li>Opens app for first time</li>
+<li>System prompts for notification permission</li>
+<li>User grants or denies permission</li>
+<li>Completes first guided scan</li>
+<li>System records completion date</li>
+<li>Notifications scheduled for 1 month later</li>
+</ol>
+<h3 id="returning-user">Returning User</h3>
+<ol>
+<li>Completes guided scan</li>
+<li>System automatically updates last scan date</li>
+<li>Previous notifications cancelled</li>
+<li>New notifications scheduled for 1 month later</li>
+<li>User receives daily reminders starting 1 month after scan</li>
+</ol>
+<h3 id="notification-interaction">Notification Interaction</h3>
+<ol>
+<li>User receives notification at 10:00 AM</li>
+<li>Tapping notification opens the app</li>
+<li>User can start a new guided scan</li>
+<li>Completing scan resets the reminder cycle</li>
+</ol>
+<h2 id="localization">Localization</h2>
+<p>The feature is fully localized in:
+- <strong>German (de)</strong>: Primary language
+- <strong>English (en)</strong>: Secondary language</p>
+<p>Localization keys:
+- <code>notification_reminder_title</code>: Notification title
+- <code>notification_reminder_body</code>: Notification body text</p>
+<h2 id="testing">Testing</h2>
+<h3 id="manual-testing-steps">Manual Testing Steps</h3>
+<ol>
+<li><strong>Test Permission Request</strong>:</li>
+<li>Delete app and reinstall</li>
+<li>Launch app</li>
+<li>Verify permission prompt appears</li>
+<li>
+<p>Grant permission</p>
+</li>
+<li>
+<p><strong>Test Scan Completion Recording</strong>:</p>
+</li>
+<li>Complete a guided scan</li>
+<li>Check UserDefaults for <code>lastGuidedScanDate</code></li>
+<li>
+<p>Verify date is current</p>
+</li>
+<li>
+<p><strong>Test Notification Scheduling</strong>:</p>
+</li>
+<li>Complete a guided scan</li>
+<li>Use <code>getPendingNotificationCount()</code> to verify notifications scheduled</li>
+<li>
+<p>Should see 30 pending notifications</p>
+</li>
+<li>
+<p><strong>Test Notification Delivery</strong> (Quick Test):</p>
+</li>
+<li>Modify <code>scheduleImmediateReminder()</code> to use 5-second delay</li>
+<li>Complete a guided scan with past date (modify code temporarily)</li>
+<li>Wait 5 seconds</li>
+<li>
+<p>Verify notification appears</p>
+</li>
+<li>
+<p><strong>Test Notification Rescheduling</strong>:</p>
+</li>
+<li>Complete first guided scan</li>
+<li>Note pending notification count</li>
+<li>Complete second guided scan</li>
+<li>Verify old notifications cancelled and new ones scheduled</li>
+</ol>
+<h3 id="debug-methods">Debug Methods</h3>
+<pre><code class="language-swift">// Get count of pending notifications
+let count = await NotificationService.shared.getPendingNotificationCount()
+print(&quot;Pending notifications: \(count)&quot;)
+
+// Get last scan date
+if let date = NotificationService.shared.getLastGuidedScanDate() {
+    print(&quot;Last scan: \(date)&quot;)
+}
+
+// Check if reminder should show
+let shouldShow = NotificationService.shared.shouldShowReminder()
+print(&quot;Should show reminder: \(shouldShow)&quot;)
+
+// Get days since last scan
+if let days = NotificationService.shared.daysSinceLastScan() {
+    print(&quot;Days since last scan: \(days)&quot;)
+}
+</code></pre>
+<h2 id="future-enhancements">Future Enhancements</h2>
+<p>Potential improvements for future versions:</p>
+<ol>
+<li><strong>Customizable Reminder Time</strong>:</li>
+<li>Allow users to set preferred notification time</li>
+<li>
+<p>Settings screen for notification preferences</p>
+</li>
+<li>
+<p><strong>Reminder Frequency Options</strong>:</p>
+</li>
+<li>Weekly, bi-weekly, or monthly options</li>
+<li>
+<p>Custom interval selection</p>
+</li>
+<li>
+<p><strong>Snooze Functionality</strong>:</p>
+</li>
+<li>"Remind me tomorrow" option</li>
+<li>
+<p>"Remind me in 3 days" option</p>
+</li>
+<li>
+<p><strong>Statistics Integration</strong>:</p>
+</li>
+<li>Show scan frequency in app</li>
+<li>Display last scan date in UI</li>
+<li>
+<p>Reminder countdown timer</p>
+</li>
+<li>
+<p><strong>Rich Notifications</strong>:</p>
+</li>
+<li>Add action buttons ("Start Scan", "Remind Later")</li>
+<li>
+<p>Include scan statistics in notification</p>
+</li>
+<li>
+<p><strong>Smart Scheduling</strong>:</p>
+</li>
+<li>Learn user's preferred scan times</li>
+<li>Adjust notification timing based on user behavior</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="notifications-not-appearing">Notifications Not Appearing</h3>
+<ol>
+<li>
+<p><strong>Check Permission</strong>:
+   <code>swift
+   let settings = await UNUserNotificationCenter.current().notificationSettings()
+   print("Authorization status: \(settings.authorizationStatus)")</code></p>
+</li>
+<li>
+<p><strong>Check Pending Notifications</strong>:
+   <code>swift
+   let count = await NotificationService.shared.getPendingNotificationCount()
+   print("Pending: \(count)")</code></p>
+</li>
+<li>
+<p><strong>Check Last Scan Date</strong>:
+   <code>swift
+   if let date = NotificationService.shared.getLastGuidedScanDate() {
+       print("Last scan: \(date)")
+   } else {
+       print("No scan recorded")
+   }</code></p>
+</li>
+<li>
+<p><strong>Verify System Settings</strong>:</p>
+</li>
+<li>Open iOS Settings &gt; Notifications &gt; Nevus</li>
+<li>Ensure notifications are enabled</li>
+<li>Check that "Allow Notifications" is ON</li>
+</ol>
+<h3 id="notifications-scheduled-but-not-delivered">Notifications Scheduled But Not Delivered</h3>
+<ul>
+<li>iOS may delay or batch notifications to save battery</li>
+<li>Notifications may be suppressed during Focus modes</li>
+<li>Check Do Not Disturb settings</li>
+<li>Verify device is not in Low Power Mode</li>
+</ul>
+<h3 id="reset-notification-state">Reset Notification State</h3>
+<pre><code class="language-swift">// Cancel all notifications and reset
+NotificationService.shared.cancelAllNotifications()
+UserDefaults.standard.removeObject(forKey: &quot;lastGuidedScanDate&quot;)
+</code></pre>
+<h2 id="privacy-data">Privacy &amp; Data</h2>
+<ul>
+<li><strong>Data Stored</strong>: Only the date of last guided scan</li>
+<li><strong>Location</strong>: Local device (UserDefaults)</li>
+<li><strong>Sharing</strong>: No data shared with external services</li>
+<li><strong>Deletion</strong>: Data removed when app is deleted</li>
+<li><strong>User Control</strong>: Users can disable notifications in iOS Settings</li>
+</ul>
+<h2 id="compliance">Compliance</h2>
+<ul>
+<li><strong>iOS Guidelines</strong>: Follows Apple's notification best practices</li>
+<li><strong>User Consent</strong>: Explicit permission requested before scheduling</li>
+<li><strong>Frequency</strong>: Reasonable daily frequency (once per day)</li>
+<li><strong>Value</strong>: Notifications provide clear health monitoring value</li>
+</ul>
+<h2 id="files-modifiedcreated">Files Modified/Created</h2>
+<h3 id="new-files">New Files</h3>
+<ul>
+<li><code>Nevus/Services/NotificationService.swift</code></li>
+<li><code>Nevus/MONTHLY_REMINDER_FEATURE.md</code> (this file)</li>
+</ul>
+<h3 id="modified-files">Modified Files</h3>
+<ul>
+<li><code>Nevus/Services/GuidedScanningService.swift</code></li>
+<li><code>Nevus/Nevus/NevusApp.swift</code></li>
+<li><code>Nevus/Nevus/Localizable.xcstrings</code></li>
+<li><code>Nevus/Nevus.xcodeproj/project.pbxproj</code></li>
+</ul>
+<h2 id="summary">Summary</h2>
+<p>The Monthly Reminder feature provides a seamless, automatic way to encourage users to maintain regular mole monitoring habits. By scheduling notifications one month after each guided scan, the app helps users stay on top of their skin health without requiring manual reminder setup.</p>
+<p>The implementation is robust, handles edge cases gracefully, and respects user preferences and system settings. The feature is fully localized and ready for production use.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
