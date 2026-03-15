@@ -1,6 +1,6 @@
 //
 //  GuidedComparisonService.swift
-//  MoleTracker
+//  Nevus
 //
 //  Created on 11.01.2026.
 //

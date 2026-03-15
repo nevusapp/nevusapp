@@ -3,7 +3,7 @@
 import Foundation
 import AppKit
 
-// Icon Generator for MoleTracker App
+// Icon Generator for Nevus App
 // Creates a brown mole under a magnifying glass
 
 func generateAppIcon() {
@@ -145,7 +145,7 @@ func generateAppIcon() {
        let bitmapImage = NSBitmapImageRep(data: tiffData),
        let pngData = bitmapImage.representation(using: .png, properties: [:]) {
         
-        let outputPath = "MoleTracker/MoleTracker/Assets.xcassets/AppIcon.appiconset/AppIcon.png"
+        let outputPath = "Nevus/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon.png"
         let url = URL(fileURLWithPath: outputPath)
         
         do {

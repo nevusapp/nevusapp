@@ -1,6 +1,6 @@
 //
 //  ExportService.swift
-//  MoleTracker
+//  Nevus
 //
 //  Created on 10.01.2026.
 //

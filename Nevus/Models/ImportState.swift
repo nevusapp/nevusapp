@@ -1,6 +1,6 @@
 //
 //  ImportState.swift
-//  MoleTracker
+//  Nevus
 //
 //  Created on 28.02.2026.
 //
